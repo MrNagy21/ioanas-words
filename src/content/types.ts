@@ -61,3 +61,33 @@ export type LetterContent = Readonly<{
   words: ContentWord[];
   approvedWords: ContentWord[];
 }>;
+
+export type ImageReadinessCounts = Readonly<{
+  total: number;
+  ready: number;
+  placeholder: number;
+}>;
+
+export type LetterCoverageSummary = Readonly<{
+  letter: ContentLetter;
+  startsWithWords: ContentWord[];
+  containsOnlyWords: ContentWord[];
+  mixedWords: ContentWord[];
+  startsWithCount: number;
+  containsOnlyCount: number;
+  mixedCount: number;
+  startsWithImageCounts: ImageReadinessCounts;
+  containsOnlyImageCounts: ImageReadinessCounts;
+  mixedImageCounts: ImageReadinessCounts;
+}>;
+
+export type LocaleCoverageSummary = Readonly<{
+  locale: SupportedLocale;
+  letters: ContentLetter[];
+  approvedWords: ContentWord[];
+  totalApprovedWords: number;
+  totalStartsWithAssignments: number;
+  totalContainsOnlyAssignments: number;
+  imageCounts: ImageReadinessCounts;
+  letterSummaries: LetterCoverageSummary[];
+}>;

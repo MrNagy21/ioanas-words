@@ -4,9 +4,9 @@ Last updated: 2026-05-16
 
 ## Current Phase
 
-Phase: Batch 8 implementation complete; browser verification pending user-running dev server
+Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor spec package drafted
 
-Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. All four pilot sets are background-normalized, marked ready after visual review, and stored as local `256 x 256 px` WebP assets. The user manually verified the updated `M`, `A`, and `P` image batches in the running app and reported they work fine. Batch 8 removed the default word-preview list from the play screen, enlarged and simplified the wheel-first layout, improved the letter selection grid, added modal focus management and focus trapping, improved contrast for primary actions, and added a future-ready word-selection helper for later letter inclusion modes. A hydration warning on the play route was addressed by making SVG wheel numeric transforms deterministic and suppressing known browser-extension mutations on `<body>`. The one-word remaining wheel state draws a full SVG disk instead of a collapsed 360-degree arc, so the last word keeps its segment color.
+Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. All four pilot sets are background-normalized, marked ready after visual review, and stored as local `256 x 256 px` WebP assets. The user manually verified the updated `M`, `A`, and `P` image batches in the running app and reported they work fine. Batch 8 removed the default word-preview list from the play screen, enlarged and simplified the wheel-first layout, improved the letter selection grid, added modal focus management and focus trapping, improved contrast for primary actions, and added a future-ready word-selection helper for later letter inclusion modes. A hydration warning on the play route was addressed by making SVG wheel numeric transforms deterministic and suppressing known browser-extension mutations on `<body>`. The one-word remaining wheel state draws a full SVG disk instead of a collapsed 360-degree arc, so the last word keeps its segment color. The next-phase development trajectory is now captured in `docs/app-development-program/`, including the recommended order: public `/admin/words` inventory, locale-wide content refactor, gameplay inclusion selector, Romanian content expansion, future practice-target architecture for Romanian letter groups, and review/QA workflow. Admin words inventory Batch 4 completed the public read-only `/admin/words` feature with polished dashboard spacing, clearer table and list readability, accessible repeated-link labels, explicit thumbnail/placeholder announcements, and feature acceptance documentation. The Locale-Wide Content Refactor spec package has now been drafted as the next implementation target; no refactor code has been started.
 
 ## Completed
 
@@ -258,6 +258,26 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
   - wrote final `256 x 256 px` lossless WebP assets under `public/images/ro/p/<word-id>.webp`;
   - marked all 10 `P` words as `imageStatus: "ready"` and `license: "app-owned"` in `content/ro/words-p.json`.
 - Kept the `P` pilot free of database, accounts, billing, admin tools, AI pronunciation, and broad Batch 7 content expansion.
+- Created `docs/app-development-program/` as the next-phase planning package.
+- Documented the recommended feature order:
+  - public read-only `/admin/words` inventory;
+  - locale-wide content loader/catalog refactor;
+  - child-facing word inclusion mode selector;
+  - Romanian content expansion driven by coverage reporting;
+  - future practice-target architecture for Romanian letter groups;
+  - larger image production and later protected admin tooling.
+- Documented the content architecture decision to keep every word stored once in its canonical starting-letter file and derive contains-letter pools from the approved locale catalog.
+- Documented the recommendation to reference words by ID only if future manual contains-target overrides are needed.
+- Documented Romanian speech-priority tiers and source links for `R`, `S`, `Ș`, `Z`, `J`, `Ț`, `CE/CI`, `GE/GI`, `F`, and `V` practice planning.
+- Documented review, content QA, image QA, browser verification, and feature spec workflows for future agents.
+- Added the feature spec package convention under `docs/app-development-program/features/`.
+- Created the first feature spec package at `docs/app-development-program/features/admin-words-inventory/` with `spec.md`, `plan.md`, and `status.md`.
+- Started and completed Admin Words Inventory Batch 1:
+  - added reusable content coverage helper types;
+  - added locale-wide approved-word gathering from imported Romanian static manifests;
+  - added exact diacritic-sensitive starts-with, contains-only, and mixed coverage helpers;
+  - added image readiness counts and per-letter/locale coverage summaries;
+  - kept existing child-facing gameplay behavior unchanged.
 - Recorded user manual verification that the updated `P` image batch works fine in the app.
 - Started and completed Batch 8 implementation work:
   - removed the full word preview list from the play screen so the wheel is the clear visual focus;
@@ -272,6 +292,12 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Added future word mode planning in `docs/future-word-modes.md`.
 - Updated `docs/spec.md` and `docs/plan.md` with the future expanded-content and letter-inclusion-mode direction.
 - Added `src/game/word-selection.ts` with a default `starts-with` mode and future mode types for `starts-with-or-contains` and `contains-only`, without exposing the future mode UI yet.
+- Created the Locale-Wide Content Refactor feature spec package:
+  - `docs/app-development-program/features/locale-wide-content-refactor/spec.md`
+  - `docs/app-development-program/features/locale-wide-content-refactor/plan.md`
+  - `docs/app-development-program/features/locale-wide-content-refactor/status.md`
+- Defined the next refactor scope: locale-wide content helpers for all letters, word manifests, approved words, starts-with pools, contains-only pools, mixed pools, and image readiness counts.
+- Documented that the refactor must preserve static JSON files, canonical starting-letter word storage, exact Romanian diacritic matching, existing gameplay behavior, and Admin Words Inventory coverage helper reuse.
 
 ## In Progress
 
@@ -396,10 +422,46 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. A pr
   - `curl -I --max-time 5 http://localhost:3000/ro/play/p` failed after the `P` image pilot because nothing was listening on port `3000`.
   - User manually verified `/ro/play/p` after the `P` image pilot and reported it works fine.
   - `curl -I --max-time 5 http://localhost:3000/ro` failed after Batch 8 implementation because nothing was listening on port `3000`.
+  - `pnpm run validate:content` and `pnpm run lint` could not run for Admin Words Inventory Batch 1 because `pnpm` is unavailable in the Codex desktop environment.
+  - `bun run validate:content` passed for Admin Words Inventory Batch 1, with existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
+  - `bun run lint` passed for Admin Words Inventory Batch 1.
+  - Added `app/admin/words/page.tsx` for Admin Words Inventory Batch 2.
+  - `/admin/words` renders a public read-only Romanian summary dashboard with enabled-letter, approved-word, ready-image, placeholder-image, starts-with assignment, and contains-only assignment counts.
+  - `/admin/words` renders one coverage row per enabled Romanian letter with starts-with, contains-only, mixed, ready starts-with image, placeholder starts-with image, and `/ro/play/<letter>` link columns.
+  - Added compact responsive admin dashboard styles while keeping the route unlinked from child-facing navigation.
+  - `./node_modules/.bin/eslint .` passed for Admin Words Inventory Batch 2.
+  - `./node_modules/.bin/tsc --noEmit` passed for Admin Words Inventory Batch 2.
+  - `./node_modules/.bin/next build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - `curl -I --max-time 3 http://localhost:3000/admin/words` failed because no user-running dev server was listening on port `3000`.
+  - Added starts-with and contains-only word detail lists to `/admin/words` for Admin Words Inventory Batch 3.
+  - Each detail row shows the canonical word display text, stable ID, category, difficulty, and image status.
+  - Ready image thumbnails render from each word's canonical image path.
+  - Placeholder image rows have explicit placeholder thumbnail and badge states for future placeholder records.
+  - Contains-only rows are derived from the canonical approved word records instead of duplicate content records.
+  - Added compact responsive styles for desktop two-column detail pools and single-column mobile detail pools.
+  - `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` could not start for Admin Words Inventory Batch 3 because `pnpm` is unavailable in the Codex desktop shell.
+  - `bun run validate:content` passed for Admin Words Inventory Batch 3, with the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
+  - `bun run lint` passed for Admin Words Inventory Batch 3.
+  - `./node_modules/.bin/tsc --noEmit` passed for Admin Words Inventory Batch 3.
+  - `bun run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - `curl -I --max-time 3 http://localhost:3000/admin/words` failed because no user-running dev server was listening on port `3000`.
+  - Completed Admin Words Inventory Batch 4.
+  - Polished `/admin/words` spacing, coverage table readability, and word detail list row rhythm.
+  - Added accessible labels for repeated `Open wheel` links and word-list count badges.
+  - Kept a single visible `h1` and labelled summary, coverage, letter detail, and word-list sections.
+  - Clarified ready thumbnail alt text and placeholder thumbnail labels while preserving each word record's existing alt text.
+  - Recorded final Admin Words Inventory implementation notes and acceptance status in `docs/app-development-program/features/admin-words-inventory/status.md`.
+  - Marked Admin Words Inventory Batch 4 complete in `docs/app-development-program/features/admin-words-inventory/plan.md`.
+  - `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` could not start for Admin Words Inventory Batch 4 because `pnpm` is unavailable in the Codex desktop shell.
+  - `bun run validate:content` passed for Admin Words Inventory Batch 4, with the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
+  - `bun run lint` passed for Admin Words Inventory Batch 4.
+  - `./node_modules/.bin/tsc --noEmit` passed for Admin Words Inventory Batch 4.
+  - `bun run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - `curl -I --max-time 3 http://localhost:3000/admin/words` failed because no user-running dev server was listening on port `3000`.
 
 ## Next Task
 
-Run browser verification for `/ro`, `/ro/play/a`, `/ro/play/c`, `/ro/play/m`, and `/ro/play/p` after the user starts the dev server on port `3000`, then continue to Batch 9 deployment preparation.
+Admin Words Inventory is implementation-complete. Browser verification for `/admin/words` remains pending after the user starts the dev server on port `3000`. The Locale-Wide Content Refactor spec package is drafted; the next implementation task is Batch 1 from `docs/app-development-program/features/locale-wide-content-refactor/plan.md`.
 
 ## Decisions Made
 
@@ -418,6 +480,7 @@ Run browser verification for `/ro`, `/ro/play/a`, `/ro/play/c`, `/ro/play/m`, an
 - Prefer local repository images for the first pack if optimized and small.
 - Keep Cloudflare R2 as the scale path for thousands of assets or multiple languages.
 - Store public content as JSON manifests plus image assets.
+- Use exact lowercased `word` and `display` values, not folded `normalized`, for admin coverage matching so Romanian diacritics remain distinct.
 - Use stable placeholder image paths until real optimized assets are produced.
 - Treat the user-running dev server on port `3000` as the local verification target.
 - Add AI-assisted content generation, but require human review before publishing substantial content batches.

@@ -192,6 +192,8 @@ Exit criteria:
 
 Status: Future
 
+Planning note: the next-phase feature order is now defined in `docs/app-development-program/roadmap.md`. Start there before writing detailed specs for this area. The recommended immediate order is public `/admin/words` inventory, locale-wide content loader/catalog refactor, gameplay inclusion mode selector, then broad Romanian content expansion.
+
 - Expand every Romanian letter bucket to a useful approved pack.
 - Prefer 20 to 30 approved words per regular letter.
 - Keep at least 15 approved words for harder letters when quality allows.

@@ -39,6 +39,7 @@ The project is currently at 0% implementation. Only documentation exists. No app
 - Do not introduce a database into v1 gameplay.
 - Keep public exercise content loadable from static JSON and image assets.
 - Preserve a free anonymous mode in all future architecture.
+- When completing an implementation batch, provide a ready-to-copy prompt for the next batch. If there is no next batch, explicitly explain that the spec or feature is finalized and list any remaining verification or release steps.
 
 ## First Implementation Task
 
