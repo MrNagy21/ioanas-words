@@ -30,7 +30,7 @@ No build required for spec-only work.
 
 ## Batch 1: Helper Audit And API Contract
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
@@ -61,7 +61,7 @@ bun run lint
 
 ## Batch 2: Locale Manifest Registry Hardening
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
@@ -86,7 +86,7 @@ pnpm run lint
 
 ## Batch 3: Exact Matching And Derived Pool Helpers
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
@@ -119,7 +119,7 @@ If type-level verification is useful:
 
 ## Batch 4: Coverage And Image Readiness Consolidation
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
@@ -151,7 +151,7 @@ http://localhost:3000/admin/words
 
 ## Batch 5: Gameplay Compatibility Pass
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
@@ -186,7 +186,7 @@ If `http://localhost:3000` is not reachable, ask the user to start the dev serve
 
 ## Batch 6: Documentation And Final Acceptance
 
-Status: Not started
+Status: Complete
 
 Tasks:
 

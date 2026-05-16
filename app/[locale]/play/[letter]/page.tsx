@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 import { WordWheelShell } from "@/components/word-wheel-shell";
 import {
+  getDerivedWordPoolsForTarget,
   getEnabledLetters,
-  getLetterContent,
+  getLetter,
   getStarterContentSummary,
 } from "@/content/loaders";
+import type { GameplayContent } from "@/content/types";
 import { isSupportedLocale } from "@/i18n/locales";
 
 type GamePageProps = Readonly<{
@@ -30,11 +32,16 @@ export default async function GamePage({ params }: GamePageProps) {
     notFound();
   }
 
-  const selectedContent = getLetterContent(locale, letter);
+  const selectedLetter = getLetter(locale, letter);
 
-  if (!selectedContent) {
+  if (!selectedLetter?.enabled) {
     notFound();
   }
+
+  const selectedContent: GameplayContent = {
+    letter: selectedLetter,
+    wordPools: getDerivedWordPoolsForTarget(locale, selectedLetter),
+  };
 
   return (
     <WordWheelShell

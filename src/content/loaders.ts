@@ -6,7 +6,10 @@ import wordsPJson from "../../content/ro/words-p.json";
 import type { SupportedLocale } from "@/i18n/locales";
 import type {
   ContentLetter,
+  ContentTarget,
   ContentWord,
+  DerivedWordPoolImageCounts,
+  DerivedWordPools,
   ImageReadinessCounts,
   LetterContent,
   LetterCoverageSummary,
@@ -14,12 +17,27 @@ import type {
   LocaleCoverageSummary,
   WordManifest,
 } from "@/content/types";
+import {
+  getContentTargetValue,
+  LOCALE_LOWERCASE_TAGS,
+  wordContainsTarget,
+  wordStartsWithTarget,
+} from "@/content/matching";
+
+export {
+  getExactWordMatchValues,
+  wordContainsTarget,
+  wordStartsWithTarget,
+} from "@/content/matching";
 
 const letterManifests = {
   ro: lettersRoJson as LetterManifest,
 } satisfies Record<SupportedLocale, LetterManifest>;
 
-const wordManifests: Record<SupportedLocale, Record<string, WordManifest>> = {
+const wordManifestRegistry: Record<
+  SupportedLocale,
+  Partial<Record<string, WordManifest>>
+> = {
   ro: {
     a: wordsAJson as WordManifest,
     c: wordsCJson as WordManifest,
@@ -27,10 +45,6 @@ const wordManifests: Record<SupportedLocale, Record<string, WordManifest>> = {
     p: wordsPJson as WordManifest,
   },
 };
-
-const localeLowercaseTags = {
-  ro: "ro-RO",
-} satisfies Record<SupportedLocale, string>;
 
 export function getLetters(locale: SupportedLocale): ContentLetter[] {
   return [...letterManifests[locale].letters].sort(
@@ -53,26 +67,39 @@ export function getWordsForLetter(
   locale: SupportedLocale,
   letterId: string,
 ): ContentWord[] {
-  return wordManifests[locale][letterId]?.words ?? [];
+  return getWordManifest(locale, letterId)?.words ?? [];
+}
+
+export function getWordManifest(
+  locale: SupportedLocale,
+  letterId: string,
+): WordManifest | null {
+  const targetLetterId = getContentTargetValue(locale, letterId);
+
+  return (
+    getWordManifests(locale).find(
+      (manifest) => manifest.letter === targetLetterId,
+    ) ?? null
+  );
 }
 
 export function getWordManifests(locale: SupportedLocale): WordManifest[] {
-  const manifestsByLetter = wordManifests[locale];
-  const letterSortOrders = new Map(
-    getLetters(locale).map((letter) => [letter.id, letter.sortOrder]),
-  );
+  const manifestsByLetter = wordManifestRegistry[locale];
+  const letters = getLetters(locale);
+  const letterIds = new Set(letters.map((letter) => letter.id));
+  const manifestsInLetterOrder = letters.flatMap((letter) => {
+    const manifest = manifestsByLetter[letter.id];
 
-  return Object.values(manifestsByLetter).sort((first, second) => {
-    const firstSortOrder =
-      letterSortOrders.get(first.letter) ?? Number.MAX_SAFE_INTEGER;
-    const secondSortOrder =
-      letterSortOrders.get(second.letter) ?? Number.MAX_SAFE_INTEGER;
-
-    return (
-      firstSortOrder - secondSortOrder ||
-      first.letter.localeCompare(second.letter, localeLowercaseTags[locale])
-    );
+    return manifest ? [cloneWordManifest(manifest)] : [];
   });
+  const extraImportedManifests = Object.entries(manifestsByLetter)
+    .filter(([letterId]) => !letterIds.has(letterId))
+    .sort(([firstLetter], [secondLetter]) =>
+      firstLetter.localeCompare(secondLetter, LOCALE_LOWERCASE_TAGS[locale]),
+    )
+    .flatMap(([, manifest]) => (manifest ? [cloneWordManifest(manifest)] : []));
+
+  return [...manifestsInLetterOrder, ...extraImportedManifests];
 }
 
 export function getAllWords(locale: SupportedLocale): ContentWord[] {
@@ -81,6 +108,18 @@ export function getAllWords(locale: SupportedLocale): ContentWord[] {
 
 export function getApprovedWords(locale: SupportedLocale): ContentWord[] {
   return getAllWords(locale).filter((word) => word.status === "approved");
+}
+
+export function getLettersMissingWordManifests(
+  locale: SupportedLocale,
+): ContentLetter[] {
+  const importedManifestLetters = new Set(
+    getWordManifests(locale).map((manifest) => manifest.letter),
+  );
+
+  return getEnabledLetters(locale).filter(
+    (letter) => !importedManifestLetters.has(letter.id),
+  );
 }
 
 export function getApprovedWordsForLetter(
@@ -123,7 +162,7 @@ export function getStartsWithWordsForLetter(
   letter: ContentLetter,
   words: readonly ContentWord[] = getApprovedWords(locale),
 ): ContentWord[] {
-  return words.filter((word) => wordStartsWithExactLetter(locale, word, letter));
+  return getWordsStartingWithTarget(locale, letter, words);
 }
 
 export function getContainsOnlyWordsForLetter(
@@ -131,11 +170,7 @@ export function getContainsOnlyWordsForLetter(
   letter: ContentLetter,
   words: readonly ContentWord[] = getApprovedWords(locale),
 ): ContentWord[] {
-  return words.filter(
-    (word) =>
-      wordContainsExactLetter(locale, word, letter) &&
-      !wordStartsWithExactLetter(locale, word, letter),
-  );
+  return getWordsContainingOnlyTarget(locale, letter, words);
 }
 
 export function getMixedWordsForLetter(
@@ -143,10 +178,76 @@ export function getMixedWordsForLetter(
   letter: ContentLetter,
   words: readonly ContentWord[] = getApprovedWords(locale),
 ): ContentWord[] {
-  const startsWithWords = getStartsWithWordsForLetter(locale, letter, words);
-  const containsOnlyWords = getContainsOnlyWordsForLetter(locale, letter, words);
+  return getMixedWordsForTarget(locale, letter, words);
+}
 
-  return [...startsWithWords, ...containsOnlyWords];
+export function getWordsStartingWithTarget(
+  locale: SupportedLocale,
+  target: ContentTarget,
+  words: readonly ContentWord[] = getApprovedWords(locale),
+): ContentWord[] {
+  return uniqueWordsById(
+    words.filter((word) => wordStartsWithTarget(locale, word, target)),
+  );
+}
+
+export function getWordsContainingOnlyTarget(
+  locale: SupportedLocale,
+  target: ContentTarget,
+  words: readonly ContentWord[] = getApprovedWords(locale),
+): ContentWord[] {
+  return uniqueWordsById(
+    words.filter(
+      (word) =>
+        wordContainsTarget(locale, word, target) &&
+        !wordStartsWithTarget(locale, word, target),
+    ),
+  );
+}
+
+export function getMixedWordsForTarget(
+  locale: SupportedLocale,
+  target: ContentTarget,
+  words: readonly ContentWord[] = getApprovedWords(locale),
+): ContentWord[] {
+  const startsWithWords = getWordsStartingWithTarget(locale, target, words);
+  const containsOnlyWords = getWordsContainingOnlyTarget(locale, target, words);
+
+  return uniqueWordsById([...startsWithWords, ...containsOnlyWords]);
+}
+
+export function getDerivedWordPoolsForTarget(
+  locale: SupportedLocale,
+  target: ContentTarget,
+  words: readonly ContentWord[] = getApprovedWords(locale),
+): DerivedWordPools {
+  const targetValue = getContentTargetValue(locale, target);
+  const startsWithWords = getWordsStartingWithTarget(
+    locale,
+    targetValue,
+    words,
+  );
+  const containsOnlyWords = getWordsContainingOnlyTarget(
+    locale,
+    targetValue,
+    words,
+  );
+  const mixedWords = uniqueWordsById([
+    ...startsWithWords,
+    ...containsOnlyWords,
+  ]);
+
+  return {
+    target: targetValue,
+    startsWithWords,
+    containsOnlyWords,
+    mixedWords,
+    imageCounts: getDerivedWordPoolImageCounts({
+      startsWithWords,
+      containsOnlyWords,
+      mixedWords,
+    }),
+  };
 }
 
 export function getImageReadinessCounts(
@@ -165,24 +266,25 @@ export function getImageReadinessCounts(
 
 export function getLetterCoverageSummary(
   locale: SupportedLocale,
-  letter: ContentLetter,
+  letter: ContentTarget,
   words: readonly ContentWord[] = getApprovedWords(locale),
 ): LetterCoverageSummary {
-  const startsWithWords = getStartsWithWordsForLetter(locale, letter, words);
-  const containsOnlyWords = getContainsOnlyWordsForLetter(locale, letter, words);
-  const mixedWords = [...startsWithWords, ...containsOnlyWords];
+  const resolvedLetter = getTargetLetter(locale, letter);
+  const { startsWithWords, containsOnlyWords, mixedWords, imageCounts } =
+    getDerivedWordPoolsForTarget(locale, resolvedLetter, words);
 
   return {
-    letter,
+    letter: resolvedLetter,
     startsWithWords,
     containsOnlyWords,
     mixedWords,
     startsWithCount: startsWithWords.length,
     containsOnlyCount: containsOnlyWords.length,
     mixedCount: mixedWords.length,
-    startsWithImageCounts: getImageReadinessCounts(startsWithWords),
-    containsOnlyImageCounts: getImageReadinessCounts(containsOnlyWords),
-    mixedImageCounts: getImageReadinessCounts(mixedWords),
+    imageCounts,
+    startsWithImageCounts: imageCounts.startsWith,
+    containsOnlyImageCounts: imageCounts.containsOnly,
+    mixedImageCounts: imageCounts.mixed,
   };
 }
 
@@ -213,41 +315,64 @@ export function getLocaleCoverageSummary(
   };
 }
 
-function wordStartsWithExactLetter(
+function getTargetLetter(
   locale: SupportedLocale,
-  word: ContentWord,
-  letter: ContentLetter,
-): boolean {
-  const target = lowerForLocale(locale, letter.id);
+  target: ContentTarget,
+): ContentLetter {
+  if (typeof target !== "string") {
+    return target;
+  }
 
-  return getExactMatchValues(locale, word).some((value) =>
-    value.startsWith(target),
-  );
+  const targetValue = getContentTargetValue(locale, target);
+  const letter = getLetter(locale, targetValue);
+
+  if (letter) {
+    return letter;
+  }
+
+  return {
+    id: targetValue,
+    label: target,
+    enabled: false,
+    wordFile: "",
+    sortOrder: Number.MAX_SAFE_INTEGER,
+  };
 }
 
-function wordContainsExactLetter(
-  locale: SupportedLocale,
-  word: ContentWord,
-  letter: ContentLetter,
-): boolean {
-  const target = lowerForLocale(locale, letter.id);
-
-  return getExactMatchValues(locale, word).some((value) =>
-    value.includes(target),
-  );
+function cloneWordManifest(manifest: WordManifest): WordManifest {
+  return {
+    ...manifest,
+    words: [...manifest.words],
+  };
 }
 
-function getExactMatchValues(
-  locale: SupportedLocale,
-  word: ContentWord,
-): string[] {
-  return Array.from(
-    new Set(
-      [word.word, word.display].map((value) => lowerForLocale(locale, value)),
-    ),
-  );
+function getDerivedWordPoolImageCounts({
+  startsWithWords,
+  containsOnlyWords,
+  mixedWords,
+}: Pick<
+  DerivedWordPools,
+  "startsWithWords" | "containsOnlyWords" | "mixedWords"
+>): DerivedWordPoolImageCounts {
+  return {
+    startsWith: getImageReadinessCounts(startsWithWords),
+    containsOnly: getImageReadinessCounts(containsOnlyWords),
+    mixed: getImageReadinessCounts(mixedWords),
+  };
 }
 
-function lowerForLocale(locale: SupportedLocale, value: string): string {
-  return value.toLocaleLowerCase(localeLowercaseTags[locale]);
+function uniqueWordsById(words: readonly ContentWord[]): ContentWord[] {
+  const seenWordIds = new Set<string>();
+  const uniqueWords: ContentWord[] = [];
+
+  for (const word of words) {
+    if (seenWordIds.has(word.id)) {
+      continue;
+    }
+
+    seenWordIds.add(word.id);
+    uniqueWords.push(word);
+  }
+
+  return uniqueWords;
 }

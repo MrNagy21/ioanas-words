@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { WheelGame } from "@/components/wheel-game";
-import type { ContentLetter, LetterContent } from "@/content/types";
+import type { ContentLetter, GameplayContent } from "@/content/types";
 import type { SupportedLocale } from "@/i18n/locales";
 
 type LetterSummary = ContentLetter &
@@ -11,7 +11,7 @@ type LetterSummary = ContentLetter &
 type WordWheelShellProps = Readonly<{
   locale: SupportedLocale;
   letters: LetterSummary[];
-  selectedContent?: LetterContent;
+  selectedContent?: GameplayContent;
 }>;
 
 export function WordWheelShell({

@@ -48,7 +48,10 @@ export default function AdminWordsPage() {
           </span>
         </header>
 
-        <section className="admin-summary" aria-labelledby="admin-summary-title">
+        <section
+          className="admin-summary"
+          aria-labelledby="admin-summary-title"
+        >
           <h2 id="admin-summary-title">Summary</h2>
           <dl className="admin-summary__grid">
             {summaryLabels.map(([label, key]) => (
@@ -96,8 +99,8 @@ export default function AdminWordsPage() {
                     <td>{summary.startsWithCount}</td>
                     <td>{summary.containsOnlyCount}</td>
                     <td>{summary.mixedCount}</td>
-                    <td>{summary.startsWithImageCounts.ready}</td>
-                    <td>{summary.startsWithImageCounts.placeholder}</td>
+                    <td>{summary.imageCounts.startsWith.ready}</td>
+                    <td>{summary.imageCounts.startsWith.placeholder}</td>
                     <td>
                       <Link
                         aria-label={`Open ${summary.letter.label} wheel`}
@@ -114,7 +117,10 @@ export default function AdminWordsPage() {
           </div>
         </section>
 
-        <section className="admin-details" aria-labelledby="admin-details-title">
+        <section
+          className="admin-details"
+          aria-labelledby="admin-details-title"
+        >
           <div className="admin-section-heading">
             <h2 id="admin-details-title">Word Details</h2>
             <p>Canonical approved records and image states</p>

@@ -16,6 +16,8 @@ export type ContentLetter = Readonly<{
   sortOrder: number;
 }>;
 
+export type ContentTarget = ContentLetter | string;
+
 export type LetterManifest = Readonly<{
   locale: SupportedLocale;
   letters: ContentLetter[];
@@ -62,10 +64,29 @@ export type LetterContent = Readonly<{
   approvedWords: ContentWord[];
 }>;
 
+export type GameplayContent = Readonly<{
+  letter: ContentLetter;
+  wordPools: DerivedWordPools;
+}>;
+
+export type DerivedWordPools = Readonly<{
+  target: string;
+  startsWithWords: ContentWord[];
+  containsOnlyWords: ContentWord[];
+  mixedWords: ContentWord[];
+  imageCounts: DerivedWordPoolImageCounts;
+}>;
+
 export type ImageReadinessCounts = Readonly<{
   total: number;
   ready: number;
   placeholder: number;
+}>;
+
+export type DerivedWordPoolImageCounts = Readonly<{
+  startsWith: ImageReadinessCounts;
+  containsOnly: ImageReadinessCounts;
+  mixed: ImageReadinessCounts;
 }>;
 
 export type LetterCoverageSummary = Readonly<{
@@ -76,6 +97,7 @@ export type LetterCoverageSummary = Readonly<{
   startsWithCount: number;
   containsOnlyCount: number;
   mixedCount: number;
+  imageCounts: DerivedWordPoolImageCounts;
   startsWithImageCounts: ImageReadinessCounts;
   containsOnlyImageCounts: ImageReadinessCounts;
   mixedImageCounts: ImageReadinessCounts;

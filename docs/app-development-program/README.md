@@ -32,6 +32,7 @@ Current packages:
 
 - `features/admin-words-inventory/`
 - `features/locale-wide-content-refactor/`
+- `features/gameplay-inclusion-mode-selector/`
 
 ## Current Strategic Direction
 

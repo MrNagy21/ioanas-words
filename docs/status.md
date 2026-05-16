@@ -4,9 +4,9 @@ Last updated: 2026-05-16
 
 ## Current Phase
 
-Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor spec package drafted
+Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor complete; gameplay inclusion mode selector complete
 
-Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. All four pilot sets are background-normalized, marked ready after visual review, and stored as local `256 x 256 px` WebP assets. The user manually verified the updated `M`, `A`, and `P` image batches in the running app and reported they work fine. Batch 8 removed the default word-preview list from the play screen, enlarged and simplified the wheel-first layout, improved the letter selection grid, added modal focus management and focus trapping, improved contrast for primary actions, and added a future-ready word-selection helper for later letter inclusion modes. A hydration warning on the play route was addressed by making SVG wheel numeric transforms deterministic and suppressing known browser-extension mutations on `<body>`. The one-word remaining wheel state draws a full SVG disk instead of a collapsed 360-degree arc, so the last word keeps its segment color. The next-phase development trajectory is now captured in `docs/app-development-program/`, including the recommended order: public `/admin/words` inventory, locale-wide content refactor, gameplay inclusion selector, Romanian content expansion, future practice-target architecture for Romanian letter groups, and review/QA workflow. Admin words inventory Batch 4 completed the public read-only `/admin/words` feature with polished dashboard spacing, clearer table and list readability, accessible repeated-link labels, explicit thumbnail/placeholder announcements, and feature acceptance documentation. The Locale-Wide Content Refactor spec package has now been drafted as the next implementation target; no refactor code has been started.
+Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. All four pilot sets are background-normalized, marked ready after visual review, and stored as local `256 x 256 px` WebP assets. The user manually verified the updated `M`, `A`, and `P` image batches in the running app and reported they work fine. Batch 8 removed the default word-preview list from the play screen, enlarged and simplified the wheel-first layout, improved the letter selection grid, added modal focus management and focus trapping, improved contrast for primary actions, and added a future-ready word-selection helper for later letter inclusion modes. A hydration warning on the play route was addressed by making SVG wheel numeric transforms deterministic and suppressing known browser-extension mutations on `<body>`. The one-word remaining wheel state draws a full SVG disk instead of a collapsed 360-degree arc, so the last word keeps its segment color. The next-phase development trajectory is now captured in `docs/app-development-program/`, including the recommended order: public `/admin/words` inventory, locale-wide content refactor, gameplay inclusion selector, Romanian content expansion, future practice-target architecture for Romanian letter groups, and review/QA workflow. Admin words inventory Batch 4 completed the public read-only `/admin/words` feature with polished dashboard spacing, clearer table and list readability, accessible repeated-link labels, explicit thumbnail/placeholder announcements, and feature acceptance documentation. Locale-Wide Content Refactor is complete, with stable locale-wide helper APIs for manifests, approved words, exact Romanian derived pools, and image readiness counts. Gameplay Inclusion Mode Selector is complete, with `/ro/play/<letter>` using the mode-ready `GameplayContent` contract, defaulting to starts-with mode, opening a focused setup sheet for starts-with/contains-only/mixed mode and bounded word count, preserving cross-mode remove/reset behavior, and supporting result-modal random replacement from eligible off-wheel words. Post-QA UX polish moved mode/count controls out of the live play surface, removed `Altă literă` from the result modal, made every result modal action close the modal, and changed `Scoate` so removal shrinks the current wheel instead of automatically backfilling to the configured target count. Static QA passed except for documented existing image warning-threshold notices and the local Next SWC code-signature build blocker. Final browser verification for `/ro`, `/ro/play/a`, and `/admin/words` remains pending until the user-running dev server is available on port `3000`. Next recommended feature: Romanian Content Expansion spec package.
 
 ## Completed
 
@@ -298,6 +298,83 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
   - `docs/app-development-program/features/locale-wide-content-refactor/status.md`
 - Defined the next refactor scope: locale-wide content helpers for all letters, word manifests, approved words, starts-with pools, contains-only pools, mixed pools, and image readiness counts.
 - Documented that the refactor must preserve static JSON files, canonical starting-letter word storage, exact Romanian diacritic matching, existing gameplay behavior, and Admin Words Inventory coverage helper reuse.
+- Started and completed Locale-Wide Content Refactor Batch 1: Helper Audit And API Contract.
+- Added `ContentTarget` and `DerivedWordPools` types for the stable locale-wide content API.
+- Added `src/content/matching.ts` as the single exact lowercased `word`/`display` matcher for starts-with and contains checks.
+- Added `getWordManifest(locale, letterId)` for single static word-manifest lookup.
+- Added target-based derived-pool helpers: `getWordsStartingWithTarget`, `getWordsContainingOnlyTarget`, `getMixedWordsForTarget`, and `getDerivedWordPoolsForTarget`.
+- Kept existing letter-based helper names as compatibility wrappers for current Admin Words Inventory consumers.
+- Updated `getLetterCoverageSummary` to accept either a `ContentLetter` or raw target string while preserving the current summary shape.
+- Updated `src/game/word-selection.ts` to use the shared exact matching helper instead of folded `normalized` matching, without exposing gameplay mode UI or changing the current starts-with play route behavior.
+- Passed the current locale from `WheelGame` into `getPlayableWords`.
+- Verified Locale-Wide Content Refactor Batch 1 with the documented fallback because `pnpm` is unavailable in the Codex desktop shell:
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- Browser verification was skipped because `http://localhost:3000/ro` was not reachable and the user owns the dev server on port `3000`.
+- Started and completed Locale-Wide Content Refactor Batch 2: Locale Manifest Registry Hardening.
+- Routed single-letter manifest and word-list helpers through `getWordManifests(locale)`.
+- Ensured `getWordManifests(locale)` returns imported manifests in `letters.json` sort order and clones returned manifest objects plus `words` arrays.
+- Added `getLettersMissingWordManifests(locale)` for reporting enabled letters whose word manifest is not imported.
+- Documented that missing imported manifests return `null` or empty word arrays at runtime, while `validate:content` remains the production guard for enabled letters with missing word files.
+- Verified Locale-Wide Content Refactor Batch 2 with fallback commands because `pnpm` is unavailable in the Codex desktop shell:
+- `bun run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- Browser verification was skipped because Batch 2 did not change route behavior.
+- Started and completed Locale-Wide Content Refactor Batch 3: Exact Matching And Derived Pool Helpers.
+- Exported `getExactWordMatchValues(locale, word)` from `src/content/matching.ts`.
+- Kept starts-with and contains matching based on exact lowercased `word` and `display`, not folded `normalized`.
+- Made starts-with, contains-only, mixed, and derived-pool helper outputs duplicate-safe by stable word ID.
+- Added `src/content/matching.check.ts` with Romanian diacritic-sensitive fixture checks for `s`/`ș`, `t`/`ț`, `a`/`ă`/`â`, and `i`/`î`.
+- Verified contains-only excludes starts-with records and mixed pools do not duplicate word records.
+- Kept current child-facing gameplay as starts-with only; no gameplay mode UI was added.
+- Verified Locale-Wide Content Refactor Batch 3 with fallback commands because `pnpm` is unavailable in the Codex desktop shell:
+- `bun src/content/matching.check.ts` passed.
+- `bun run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- Browser verification was skipped because Batch 3 did not change route behavior.
+- Started and completed Locale-Wide Content Refactor Batch 4: Coverage And Image Readiness Consolidation.
+- Added nested derived-pool image readiness counts to `DerivedWordPools.imageCounts` for starts-with, contains-only, and mixed pools.
+- Routed `getLetterCoverageSummary` image readiness fields through `getDerivedWordPoolsForTarget`, while preserving the existing flat image-count aliases for compatibility.
+- Updated `/admin/words` to consume `summary.imageCounts.startsWith` for ready and placeholder starts-with image counts.
+- Kept ready admin thumbnails tied to the canonical `ContentWord.image` paths.
+- Extended the helper check fixture so duplicate-safe derived pools also assert expected image readiness counts.
+- Verified Locale-Wide Content Refactor Batch 4:
+- `bun src/content/matching.check.ts` passed.
+- `bun run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `git diff --check` passed.
+- `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` passed using the nvm-installed `pnpm` runtime at `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+- Browser verification for `/admin/words` remains pending because no user-running dev server was listening on port `3000`.
+- Started and completed Locale-Wide Content Refactor Batch 5: Gameplay Compatibility Pass.
+- Added `src/game/gameplay-compatibility.check.ts` to assert that the default `/ro/play/<letter>` gameplay pool equals each enabled Romanian letter's approved starts-with words.
+- Confirmed generated Romanian play letter IDs remain `a`, `c`, `m`, and `p`.
+- Confirmed `/ro/play/<letter>` still loads `getLetterContent(locale, letter)` and does not expose a future inclusion selector or locale-wide mixed/contains-only pool.
+- Confirmed remove, reset, and result modal behavior was not changed in Batch 5.
+- Documented compatibility wrappers for the later gameplay inclusion selector feature:
+  - `getLetterContent(locale, letterId)` remains the starts-with-only play-route wrapper to replace or narrow when gameplay receives locale-wide pools.
+  - `WordInclusionMode` constants and default filtering remain hidden implementation scaffolding until the child-facing selector feature exposes them.
+- Verified Locale-Wide Content Refactor Batch 5:
+- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `pnpm run validate:content` passed using the nvm-installed `pnpm`, with existing image warning-threshold notices for some `M` and `P` images.
+- `pnpm run lint` passed using the nvm-installed `pnpm`.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+- Browser verification for `/ro` and `/ro/play/a` remains pending because no user-running dev server was listening on port `3000`.
+- Started and completed Locale-Wide Content Refactor Batch 6: Documentation And Final Acceptance.
+- Finalized `docs/app-development-program/features/locale-wide-content-refactor/status.md` with feature decisions, deferred questions, acceptance status, verification results, and the next ready-to-copy feature prompt.
+- Marked Locale-Wide Content Refactor Batch 6 complete in `docs/app-development-program/features/locale-wide-content-refactor/plan.md`.
+- Confirmed no app-development-program roadmap or architecture document needed changes because the feature order and architecture did not change.
+- Verified Locale-Wide Content Refactor Batch 6:
+- `bun src/content/matching.check.ts` passed.
+- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `pnpm run validate:content` passed using the nvm-installed `pnpm`, with existing image warning-threshold notices for some `M` and `P` images.
+- `pnpm run lint` passed using the nvm-installed `pnpm`.
+- `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed as the required fallback.
+- Browser verification for `/ro`, `/ro/play/a`, and `/admin/words` remains pending because no user-running dev server was listening on port `3000`.
 
 ## In Progress
 
@@ -325,7 +402,7 @@ The package manager is pinned in `package.json`:
 "packageManager": "pnpm@11.1.2"
 ```
 
-Note: use the nvm Node PATH when running local pnpm commands in automation. A previous local build attempt hit a macOS code-signing rejection for the installed Next SWC native binary, but the latest build completed successfully with nvm Node `v24.15.0`.
+Note: use the nvm Node PATH when running local pnpm commands in automation. Some local build attempts still hit a macOS code-signing rejection for the installed Next SWC native binary in the Codex desktop environment; use the normal project/Vercel environment to recheck production build if this local issue persists.
 
 `pnpm run validate:content` was added in Batch 5 and now validates ready local image dimensions and byte sizes. `pnpm run optimize:images` was added in Batch 6.
 
@@ -458,10 +535,134 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. A pr
   - `./node_modules/.bin/tsc --noEmit` passed for Admin Words Inventory Batch 4.
   - `bun run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - `curl -I --max-time 3 http://localhost:3000/admin/words` failed because no user-running dev server was listening on port `3000`.
+  - Created the Gameplay Inclusion Mode Selector feature package:
+    - `docs/app-development-program/features/gameplay-inclusion-mode-selector/spec.md`
+    - `docs/app-development-program/features/gameplay-inclusion-mode-selector/plan.md`
+    - `docs/app-development-program/features/gameplay-inclusion-mode-selector/status.md`
+  - Added the new package to `docs/app-development-program/README.md`.
+  - Defined child-facing behavior for starts-with, contains-only, and mixed gameplay pools.
+  - Confirmed starts-with remains the default mode.
+  - Defined remove, reset, empty-state, and result-modal behavior across all modes.
+  - Documented that implementation should use the completed locale-wide content API and exact Romanian matching helpers.
+  - Kept this package spec-only; no code changes or content expansion were made.
+  - Started and completed Gameplay Inclusion Mode Selector Batch 1: Gameplay Data Contract.
+  - Replaced `/ro/play/<letter>` route data loading from starts-with-only `getLetterContent(locale, letter)` to enabled-letter validation with `getLetter(locale, letter)` and mode-ready `getDerivedWordPoolsForTarget(locale, selectedLetter)`.
+  - Added `GameplayContent` as the client-facing selected-letter plus derived-pools data shape.
+  - Updated `WordWheelShell` and `WheelGame` to receive the mode-ready content contract.
+  - Kept current visible gameplay on `DEFAULT_WORD_INCLUSION_MODE` and the starts-with pool; no selector UI was added in Batch 1.
+  - Kept Romanian generated play params stable for enabled letters `a`, `c`, `m`, and `p`.
+  - Updated `src/game/gameplay-compatibility.check.ts` so it validates the new derived-pool data contract still produces starts-with default gameplay and duplicate-free mixed pools.
+  - Verified Gameplay Inclusion Mode Selector Batch 1:
+  - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for some `M` and `P` ready images.
+  - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - `./node_modules/.bin/tsc --noEmit --incremental false` passed as the required fallback.
+  - `bun src/game/gameplay-compatibility.check.ts` passed.
+  - `bun src/content/matching.check.ts` passed.
+  - Browser reachability checks for `/ro`, `/ro/play/a`, and `/admin/words` failed because no dev server was listening on port `3000`.
+  - Started and completed Gameplay Inclusion Mode Selector Batch 2: Selector UI And Mode State.
+  - Added `WheelGame` selected-mode state initialized from `DEFAULT_WORD_INCLUSION_MODE`.
+  - Added a compact Romanian segmented control for `Încep cu`, `Conțin`, and `Amestecat`.
+  - Made the active mode visually clear and programmatically clear with `aria-pressed`.
+  - Added per-mode counts and compact visible mode/count status text.
+  - Kept visible wheel words sourced from `GameplayContent.wordPools`; `getLetterContent` was not restored as a play route data source.
+  - Kept the wheel-first layout and did not restore the old full word preview list.
+  - Captured the new requirement for a user-selected random wheel word count and result-modal random replacement.
+  - Added Gameplay Inclusion Mode Selector Batch 3.5 for Wheel Word Count And Random Replacement.
+  - Verified Gameplay Inclusion Mode Selector Batch 2:
+  - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+  - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+  - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
+  - Started and completed Gameplay Inclusion Mode Selector Batch 3: Mode-Specific Gameplay Behavior.
+  - Verified starts-with, contains-only, and mixed gameplay against the derived locale-wide pools in `src/game/gameplay-compatibility.check.ts`.
+  - Verified contains-only excludes words that start with the selected target and mixed mode remains duplicate-free by word ID.
+  - Preserved exact Romanian diacritic matching through shared content helpers.
+  - Preserved session-scoped removed word IDs in `WheelGame`.
+  - Confirmed removal applies across all modes because each active mode filters through the same removed word ID list.
+  - Confirmed reset restores all removed words across modes by clearing the shared removed word ID list.
+  - Disabled spin, reset, and mode selector background controls while the result modal is open.
+  - Kept Batch 3.5 deferred: no user-selected wheel word count, random wheel subset, or modal replacement action was added.
+  - Verified Gameplay Inclusion Mode Selector Batch 3:
+  - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for some `M` and `P` ready images.
+  - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+  - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+  - `bun src/game/gameplay-compatibility.check.ts` passed.
+  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
+  - `git diff --check` passed.
+  - Started and completed Gameplay Inclusion Mode Selector Batch 3.5: Wheel Word Count And Random Replacement.
+  - Added `MAX_WHEEL_WORD_COUNT = 16` and shared helper functions for bounded wheel counts, random visible wheel words, off-wheel replacement candidates, and random single-word selection.
+  - Added a compact `Cuvinte` stepper to the play panel, bounded by active mode available words after removals and the 16-word maximum.
+  - Randomized visible wheel subsets from the active mode pool after removed words are excluded, without allowing exact manual word picking.
+  - Preserved stable visible subsets per selected mode and target count while words remain eligible.
+  - Added result-modal `Înlocuiește` when eligible off-wheel words exist.
+  - Replacement now chooses a random off-wheel word from the same active mode pool, avoids duplicates on the wheel, and does not re-add removed words.
+  - Reset clears removed word IDs and visible subset memory, so random subsets may rebuild.
+  - Preserved cross-mode removal/reset, modal focus behavior, canonical image/placeholder rendering, static JSON content, and the no-scroll wheel-first layout.
+  - Verified Gameplay Inclusion Mode Selector Batch 3.5:
+  - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for some `M` and `P` ready images.
+  - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+  - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+  - `bun src/game/gameplay-compatibility.check.ts` passed.
+  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
+  - `git diff --check` passed.
+  - Started and completed Gameplay Inclusion Mode Selector Batch 4: Pool Size, Empty States, And Readability.
+  - Kept the documented maximum wheel size at `MAX_WHEEL_WORD_COUNT = 16`.
+  - Added shared no-content versus all-removed empty-state classification based on the selected mode's original available word count.
+  - Updated empty wheel copy to distinguish `Nu sunt cuvinte aici.` from `Ai scos toate cuvintele din acest mod.`
+  - Kept mode switching available from empty states through the play panel segmented control.
+  - Prevented stale visible subset IDs from producing a temporary empty state when the active mode still has eligible off-wheel words after removal.
+  - Added dense-wheel SVG layout scaling for 11+ and 13+ visible words so image chips shrink, move farther out, and labels use smaller stroked text for the 16-word maximum.
+  - Extended gameplay compatibility checks for small pools, exact 16-word pools, larger pools, off-wheel replacement candidates, unavailable current IDs, empty-state kinds, and canonical ready/placeholder record preservation.
+  - Verified Gameplay Inclusion Mode Selector Batch 4:
+  - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for some `M` and `P` ready images.
+  - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+  - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+  - `bun src/game/gameplay-compatibility.check.ts` passed.
+  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
+  - `git diff --check` passed.
+  - Started and completed Gameplay Inclusion Mode Selector Batch 5: Final QA And Documentation.
+  - Confirmed the play route uses the locale-wide `getDerivedWordPoolsForTarget` helper path through `GameplayContent.wordPools`.
+  - Confirmed starts-with remains the default mode and that contains-only and mixed mode behavior is covered by compatibility checks.
+  - Confirmed `/admin/words` remains public, read-only, backed by static content helpers, and unlinked from the child-facing app.
+  - Marked Gameplay Inclusion Mode Selector Batch 5 complete in `docs/app-development-program/features/gameplay-inclusion-mode-selector/plan.md`.
+  - Finalized `docs/app-development-program/features/gameplay-inclusion-mode-selector/status.md` with final acceptance, verification results, exceptions, and next feature prompt.
+  - Verified Gameplay Inclusion Mode Selector Batch 5:
+  - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for two `M` and three `P` ready images.
+  - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+  - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+  - `bun src/game/gameplay-compatibility.check.ts` passed.
+  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - Browser verification for `/ro`, `/ro/play/a`, and `/admin/words` was skipped because no dev server was listening on port `3000`.
+  - `git diff --check` passed.
+  - Completed a post-Batch 5 result-modal UX adjustment.
+  - Removed the `Altă literă` navigation action from the result modal.
+  - Changed `Înlocuiește` so it replaces the selected wheel word and closes the result modal, matching the dismissal behavior of `Păstrează` and `Scoate`.
+  - Kept choose-another-letter recovery available outside the result modal through the play screen and empty-wheel state.
+  - Completed a post-QA wheel setup UX adjustment.
+  - Moved mode and word-count controls from the live play panel into a focused setup modal opened initially after choosing a letter and later through `Setează`.
+  - Added draft setup state so mode/count changes do not mutate the wheel until applied.
+  - Changed `Scoate` so removing a word shrinks the current wheel rather than automatically backfilling to the configured target count.
+  - Kept deliberate random backfill available through `Înlocuiește`.
+  - Added setup reset behavior that restores removed words and rebuilds the random subset deliberately.
+  - Verified the UX adjustment:
+  - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for two `M` and three `P` ready images.
+  - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
+  - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+  - `bun src/game/gameplay-compatibility.check.ts` passed.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
+  - `git diff --check` passed.
 
 ## Next Task
 
-Admin Words Inventory is implementation-complete. Browser verification for `/admin/words` remains pending after the user starts the dev server on port `3000`. The Locale-Wide Content Refactor spec package is drafted; the next implementation task is Batch 1 from `docs/app-development-program/features/locale-wide-content-refactor/plan.md`.
+Admin Words Inventory, Locale-Wide Content Refactor, and Gameplay Inclusion Mode Selector are implementation-complete and accepted with documented local verification exceptions. Browser verification for `/ro`, `/ro/play/a`, and `/admin/words` remains pending after the user starts the dev server on port `3000`. The next recommended task is a Romanian Content Expansion feature spec package.
 
 ## Decisions Made
 
@@ -481,6 +682,18 @@ Admin Words Inventory is implementation-complete. Browser verification for `/adm
 - Keep Cloudflare R2 as the scale path for thousands of assets or multiple languages.
 - Store public content as JSON manifests plus image assets.
 - Use exact lowercased `word` and `display` values, not folded `normalized`, for admin coverage matching so Romanian diacritics remain distinct.
+- Use a shared exact matching utility in `src/content/matching.ts` for content loader derived pools and future gameplay filtering.
+- Let stable derived-pool helpers accept both raw target strings and `ContentLetter` objects.
+- Preserve deterministic mixed-pool ordering as starts-with words followed by contains-only words; future gameplay can decide whether to shuffle or sample.
+- Keep starts-with as the default child-facing gameplay inclusion mode.
+- Scope removed word IDs to the current target page session for the gameplay inclusion selector; removing a word should remove it from all modes for that target until reset.
+- Cap large active gameplay pools to a readable 16-word wheel subset until expanded-content browser review changes that limit.
+- Treat `getWordManifests(locale)` as the single source for imported static word files; helpers for one letter or all words derive from it.
+- Keep runtime missing-manifest behavior tolerant with `null` or empty word arrays, and rely on `validate:content` to fail production content where enabled letters reference missing word files.
+- Deduplicate derived word pools by stable word ID so mixed pools do not return the same canonical record more than once.
+- Use `GameplayContent` with derived starts-with, contains-only, and mixed pools as the `/ro/play/<letter>` client contract; setup defaults to starts-with and applies mode/count changes deliberately.
+- Keep mode/count controls in the wheel setup modal rather than as live play-time controls.
+- Make `Scoate` shrink the current wheel; use `Înlocuiește` for one-for-one random replacement.
 - Use stable placeholder image paths until real optimized assets are produced.
 - Treat the user-running dev server on port `3000` as the local verification target.
 - Add AI-assisted content generation, but require human review before publishing substantial content batches.
