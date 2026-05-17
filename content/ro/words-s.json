@@ -1,0 +1,114 @@
+{
+  "locale": "ro",
+  "letter": "s",
+  "words": [
+    {
+      "id": "ro-s-soare",
+      "word": "soare",
+      "display": "soare",
+      "normalized": "soare",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/s/ro-s-soare.webp",
+      "imageStatus": "ready",
+      "alt": "Un soare",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-suc",
+      "word": "suc",
+      "display": "suc",
+      "normalized": "suc",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/s/ro-s-suc.webp",
+      "imageStatus": "ready",
+      "alt": "Un pahar cu suc",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sapun",
+      "word": "săpun",
+      "display": "săpun",
+      "normalized": "sapun",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/s/ro-s-sapun.webp",
+      "imageStatus": "ready",
+      "alt": "Un săpun",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sanie",
+      "word": "sanie",
+      "display": "sanie",
+      "normalized": "sanie",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/s/ro-s-sanie.webp",
+      "imageStatus": "ready",
+      "alt": "O sanie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-salata",
+      "word": "salată",
+      "display": "salată",
+      "normalized": "salata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/s/ro-s-salata.webp",
+      "imageStatus": "ready",
+      "alt": "O salată",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sandale",
+      "word": "sandale",
+      "display": "sandale",
+      "normalized": "sandale",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/s/ro-s-sandale.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de sandale",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

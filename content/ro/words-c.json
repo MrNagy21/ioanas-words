@@ -14,7 +14,9 @@
       "image": "/images/ro/c/ro-c-caine.webp",
       "imageStatus": "ready",
       "alt": "Un câine",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -30,7 +32,9 @@
       "image": "/images/ro/c/ro-c-cal.webp",
       "imageStatus": "ready",
       "alt": "Un cal",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -46,7 +50,9 @@
       "image": "/images/ro/c/ro-c-casa.webp",
       "imageStatus": "ready",
       "alt": "O casă",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -62,7 +68,9 @@
       "image": "/images/ro/c/ro-c-cana.webp",
       "imageStatus": "ready",
       "alt": "O cană",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -78,7 +86,9 @@
       "image": "/images/ro/c/ro-c-carte.webp",
       "imageStatus": "ready",
       "alt": "O carte",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -94,7 +104,9 @@
       "image": "/images/ro/c/ro-c-copil.webp",
       "imageStatus": "ready",
       "alt": "Un copil",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -110,7 +122,9 @@
       "image": "/images/ro/c/ro-c-cub.webp",
       "imageStatus": "ready",
       "alt": "Un cub de jucărie",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -126,7 +140,9 @@
       "image": "/images/ro/c/ro-c-creion.webp",
       "imageStatus": "ready",
       "alt": "Un creion",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -142,7 +158,9 @@
       "image": "/images/ro/c/ro-c-copac.webp",
       "imageStatus": "ready",
       "alt": "Un copac",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -158,7 +176,63 @@
       "image": "/images/ro/c/ro-c-castravete.webp",
       "imageStatus": "ready",
       "alt": "Un castravete",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-ceapa",
+      "word": "ceapă",
+      "display": "ceapă",
+      "normalized": "ceapa",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/c/ro-c-ceapa.webp",
+      "imageStatus": "ready",
+      "alt": "O ceapă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cirese",
+      "word": "cireșe",
+      "display": "cireșe",
+      "normalized": "cirese",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/c/ro-c-cirese.webp",
+      "imageStatus": "ready",
+      "alt": "Cireșe",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-ciorap",
+      "word": "ciorap",
+      "display": "ciorap",
+      "normalized": "ciorap",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/c/ro-c-ciorap.webp",
+      "imageStatus": "ready",
+      "alt": "Un ciorap",
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     }

@@ -1,0 +1,42 @@
+{
+  "locale": "ro",
+  "letter": "f",
+  "words": [
+    {
+      "id": "ro-f-fata",
+      "word": "față",
+      "display": "față",
+      "normalized": "fata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/f/ro-f-fata.webp",
+      "imageStatus": "ready",
+      "alt": "O față",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-frunza",
+      "word": "frunză",
+      "display": "frunză",
+      "normalized": "frunza",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/f/ro-f-frunza.webp",
+      "imageStatus": "ready",
+      "alt": "O frunză",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

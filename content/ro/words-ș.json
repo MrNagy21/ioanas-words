@@ -1,0 +1,60 @@
+{
+  "locale": "ro",
+  "letter": "ș",
+  "words": [
+    {
+      "id": "ro-sh-sapca",
+      "word": "șapcă",
+      "display": "șapcă",
+      "normalized": "sapca",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/ș/ro-sh-sapca.webp",
+      "imageStatus": "ready",
+      "alt": "O șapcă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-soseta",
+      "word": "șosetă",
+      "display": "șosetă",
+      "normalized": "soseta",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/ș/ro-sh-soseta.webp",
+      "imageStatus": "ready",
+      "alt": "O șosetă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-soricel",
+      "word": "șoricel",
+      "display": "șoricel",
+      "normalized": "soricel",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/ș/ro-sh-soricel.webp",
+      "imageStatus": "ready",
+      "alt": "Un șoricel",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { WordDetailList } from "./word-detail-list";
 import { getLocaleCoverageSummary } from "@/content/loaders";
-import type { ContentWord } from "@/content/types";
 
 export const metadata: Metadata = {
   title: "Admin Words | Word Wheel",
@@ -176,104 +175,5 @@ export default function AdminWordsPage() {
         </section>
       </div>
     </main>
-  );
-}
-
-function WordDetailList({
-  emptyText,
-  headingId,
-  title,
-  words,
-}: Readonly<{
-  emptyText: string;
-  headingId: string;
-  title: string;
-  words: readonly ContentWord[];
-}>) {
-  return (
-    <section className="admin-word-list" aria-labelledby={headingId}>
-      <div className="admin-word-list__header">
-        <h4 id={headingId}>{title}</h4>
-        <span aria-label={`${words.length} ${title} records`}>
-          {words.length}
-        </span>
-      </div>
-
-      {words.length > 0 ? (
-        <ul
-          aria-label={`${title} word records`}
-          className="admin-word-list__rows"
-        >
-          {words.map((word) => (
-            <li className="admin-word-row" key={word.id}>
-              <WordThumbnail word={word} />
-              <div className="admin-word-row__body">
-                <div className="admin-word-row__title">
-                  <strong>{word.display}</strong>
-                  <code>{word.id}</code>
-                </div>
-                <dl className="admin-word-row__meta">
-                  <div>
-                    <dt>Category</dt>
-                    <dd>{word.category}</dd>
-                  </div>
-                  <div>
-                    <dt>Difficulty</dt>
-                    <dd>{word.difficulty}</dd>
-                  </div>
-                  <div>
-                    <dt>Image</dt>
-                    <dd>
-                      <ImageStatusBadge status={word.imageStatus} />
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="admin-empty-state">{emptyText}</p>
-      )}
-    </section>
-  );
-}
-
-function WordThumbnail({ word }: Readonly<{ word: ContentWord }>) {
-  if (word.imageStatus === "ready") {
-    return (
-      <Image
-        alt={`Ready image thumbnail: ${word.alt}`}
-        className="admin-word-thumb admin-word-thumb--ready"
-        height={48}
-        src={word.image}
-        title={word.image}
-        unoptimized
-        width={48}
-      />
-    );
-  }
-
-  return (
-    <span
-      aria-label={`Placeholder image for ${word.display}: ${word.alt}`}
-      className="admin-word-thumb admin-word-thumb--placeholder"
-      role="img"
-      title={word.image}
-    >
-      {word.display.slice(0, 1).toLocaleUpperCase("ro-RO")}
-    </span>
-  );
-}
-
-function ImageStatusBadge({
-  status,
-}: Readonly<{ status: ContentWord["imageStatus"] }>) {
-  const label = status === "ready" ? "Ready image" : "Placeholder image";
-
-  return (
-    <span className={`admin-image-status admin-image-status--${status}`}>
-      {label}
-    </span>
   );
 }

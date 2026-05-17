@@ -26,13 +26,23 @@ Avoid:
 
 ## Speech Therapy Research Summary
 
-Romanian logopedie sources consistently identify later or harder sounds around:
+Full therapy-informed guidance now lives in `speech-therapy-content-guidance.md`. That document was last researched on 2026-05-16 and should be read before Romanian expansion batches.
+
+Romanian logopedie and speech-language sources consistently identify later or harder targets around:
 
 - `R`;
 - sifflants `S`, `Z`;
 - hushing sounds `Ș`, `J`;
 - affricates and related groups such as `Ț`, `CE/CI`, `GE/GI`;
-- practical parent-facing guidance also flags `F` and `V`.
+- practical parent-facing guidance also flags `T`, `L`, `V`, and related differentiations such as `F/V`, `R/L`, `S/Ș`, `Z/J`, and `C/G`.
+
+For a serious therapy-grade content pack, every high-value target should be reviewed by:
+
+- target sound;
+- target sound position: initial, medial, final, cluster, or repeated;
+- syllable count and complexity;
+- contrast or differentiation value;
+- child familiarity, concreteness, and imageability.
 
 Useful sources:
 
@@ -41,14 +51,18 @@ Useful sources:
 - Logoped.info.ro on dislalie: https://www.logoped.info.ro/post/dislalia
 - Cabinet Logopedic ANDU on rotacism: https://cabinetlogopedic.ro/rotacismul/
 - Dictie.ro on difficult sounds `S`, `Ș`, `J`, `Z`, `CE-CI`, `GE-GI`: https://www.dictie.ro/cum-corectam-sunetele-dificile-la-copii-s-s-j-z-ce-ci-ge-gi/
+- Arcadia on language development at ages 4 to 8: https://www.arcadiamedical.ro/medinfo/dezvoltarea-limbajului-la-copii
+- Regina Maria on when to consult a logoped: https://www.reginamaria.ro/articole-medicale/sanatatea-copiilor/cand-mergem-cu-copilul-la-logoped
+- CMBRAE logopedie materials: https://www.cmbrae.ro/2017/media/materiale-logopedie/
+- ASHA articulation and phonology practice portal: https://www.asha.org/practice-portal/clinical-topics/articulation-and-phonology/
 
-Research should guide prioritization, not override child vocabulary quality.
+Research should guide prioritization, not override child vocabulary quality. Word Wheel should not present itself as diagnostic, medical, or a replacement for a licensed logoped.
 
 ## Priority Tiers
 
 ### Tier 1: Highest Practice Value
 
-Target more examples, usually up to 40 approved starts-with words where quality allows, plus strong contains pools.
+Target more examples, usually up to 40 approved starts-with words where quality allows, plus strong contains pools. Each target should eventually include initial, medial, final, and deliberate advanced examples where Romanian vocabulary quality allows.
 
 - `R`
 - `S`
@@ -66,10 +80,12 @@ Target 30 to 40 approved words where quality allows.
 - `F`
 - `V`
 - `L`
+- `T`
+- `D`
 - `C`
 - `G`
 
-### Tier 3: Common Core Vocabulary
+### Tier 3: Common Core Vocabulary And Warm-Up Targets
 
 Target 25 to 40 approved words depending on available child-friendly vocabulary.
 
@@ -84,8 +100,9 @@ Target 25 to 40 approved words depending on available child-friendly vocabulary.
 - `N`
 - `O`
 - `P`
-- `T`
 - `U`
+
+These buckets are still valuable for vocabulary, attention, turn-taking, and easy practice. They should not be mistaken for the highest-difficulty articulation targets.
 
 ### Tier 4: Quality-Limited Or Rare
 
@@ -156,9 +173,12 @@ For every new word:
 - Is the spelling and diacritic use correct?
 - Is it in the right canonical starting-letter file?
 - Does it improve a priority letter or weak contains pool?
+- Which speech target does it serve?
+- Is the target sound in initial, medial, final, cluster, or repeated position?
+- Is the syllable shape simple enough for the intended use?
+- Does it help a useful contrast pair without becoming abstract or visually unclear?
 - Can one clear image represent it?
 
 ## Source Metadata
 
 Current content supports `source: ["manual"]`. If future batches use external lexical or curriculum references, extend allowed source values deliberately and document them before adding those records.
-

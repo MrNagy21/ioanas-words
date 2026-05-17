@@ -1,12 +1,12 @@
 # Admin Words Inventory Status
 
-Last updated: 2026-05-16
+Last updated: 2026-05-17
 
 ## Current Phase
 
 Phase: Batch 4 complete
 
-Overall status: The feature package has been created under `docs/app-development-program/features/admin-words-inventory/`. Batch 1 added reusable content coverage helpers for Romanian static manifests. Batch 2 added the public read-only `/admin/words` summary route with Romanian locale counts and per-enabled-letter coverage rows. Batch 3 extended `/admin/words` with starts-with and contains-only word detail lists, canonical ready-image thumbnails, placeholder image states, and compact responsive metadata rows. Batch 4 polished spacing and list readability, tightened accessible labels/headings, clarified thumbnail and placeholder image announcements, and recorded final acceptance notes. The feature is implementation-complete; browser verification is still pending a user-running dev server on port `3000`.
+Overall status: The feature package has been created under `docs/app-development-program/features/admin-words-inventory/`. Batch 1 added reusable content coverage helpers for Romanian static manifests. Batch 2 added the public read-only `/admin/words` summary route with Romanian locale counts and per-enabled-letter coverage rows. Batch 3 extended `/admin/words` with starts-with and contains-only word detail lists, canonical ready-image thumbnails, placeholder image states, and compact responsive metadata rows. Batch 4 polished spacing and list readability, tightened accessible labels/headings, clarified thumbnail and placeholder image announcements, and recorded final acceptance notes. A follow-up admin words update now opens a read-only details pop-up when a word row is clicked, showing a larger image and all canonical word fields. The feature is implementation-complete; browser verification is still pending a user-running dev server on port `3000`.
 
 ## Completed
 
@@ -67,6 +67,12 @@ Overall status: The feature package has been created under `docs/app-development
 - Clarified ready thumbnail alt text as image thumbnails while preserving each word record's existing alt text.
 - Clarified placeholder thumbnail labels as placeholder image states tied to the word display and existing alt text.
 - Kept `/admin/words` public, read-only, static-first, and independent from child-facing navigation.
+- Added a client-side `WordDetailList` component for the existing read-only word rows.
+- Made each word row clickable with dialog semantics.
+- Added a word details pop-up with a larger ready image or placeholder image state.
+- The pop-up shows all current canonical word fields: ID, word, display, normalized form, part of speech, difficulty, age band, category, image path, image status, alt text, source, license, and status.
+- Added Escape close, backdrop close, close-button focus, focus return, and focus trapping for the details pop-up.
+- Kept the feature public, read-only, static-first, and free of auth, uploads, edits, database writes, and child-facing navigation changes.
 
 ## Decisions
 
@@ -86,6 +92,7 @@ Overall status: The feature package has been created under `docs/app-development
 - Batch 4 keeps ready thumbnails meaningful to screen readers because image review is part of the inventory task; alt text now prefixes the existing word alt with `Ready image thumbnail`.
 - Placeholder thumbnails are announced as placeholder image states, not as ready artwork, and still expose the expected word alt text.
 - Repeated `Open wheel` links use `aria-label` values with the Romanian letter label while preserving compact visible link text.
+- Word detail pop-ups are client-only UI over server-loaded static content; the canonical content still comes from the existing static JSON manifests.
 
 ## Open Questions
 
@@ -108,6 +115,7 @@ Overall status: The feature package has been created under `docs/app-development
 - Ready image thumbnails use canonical image paths and expose existing word alt text as thumbnail alt text.
 - Placeholder image states remain visible and explicitly labelled.
 - Word rows show display text, ID, category, difficulty, and image status.
+- Clicking a word row opens a details pop-up with the larger image and all current canonical word metadata fields.
 - Each letter section and table row links to the existing `/ro/play/<letter>` route.
 - No child-facing link to `/admin/words` was added.
 
@@ -186,4 +194,25 @@ Results:
 - `bun run lint` passed.
 - `./node_modules/.bin/tsc --noEmit` passed.
 - `bun run build` failed before compilation because Next could not load the installed `@next/swc-darwin-arm64` native binary due macOS code-signature validation.
+- `http://localhost:3000/admin/words` was not reachable because no dev server was listening on port `3000`.
+
+Word detail pop-up follow-up verification:
+
+```txt
+./node_modules/.bin/prettier --check app/admin/words/page.tsx app/admin/words/word-detail-list.tsx app/globals.css docs/status.md docs/app-development-program/features/admin-words-inventory/status.md
+./node_modules/.bin/tsc --noEmit
+./node_modules/.bin/eslint .
+bun run validate:content
+./node_modules/.bin/next build
+curl -I --max-time 3 http://localhost:3000/admin/words
+```
+
+Results:
+
+- Prettier check passed after formatting the touched component and CSS files.
+- `./node_modules/.bin/tsc --noEmit` passed.
+- `./node_modules/.bin/eslint .` passed.
+- `bun run validate:content` passed for 1 locale.
+- Content validation still reports the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images, but no errors.
+- `./node_modules/.bin/next build` failed before compilation because Next could not load the installed `@next/swc-darwin-arm64` native binary due macOS code-signature validation.
 - `http://localhost:3000/admin/words` was not reachable because no dev server was listening on port `3000`.

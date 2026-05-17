@@ -64,6 +64,8 @@ Use the inventory to determine which letters need:
 - more ready images;
 - fewer or no additions because quality would become weak.
 
+Use `speech-therapy-content-guidance.md` to decide which additions have real logopedie value. The expansion target matrix should distinguish alphabet coverage from speech-target coverage, including target sound position, syllable complexity, clusters, and contrast value.
+
 ### 5. Practice Target Architecture For Letter Groups
 
 Prepare the model for Romanian groups such as:

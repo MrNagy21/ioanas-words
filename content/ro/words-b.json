@@ -1,0 +1,60 @@
+{
+  "locale": "ro",
+  "letter": "b",
+  "words": [
+    {
+      "id": "ro-b-brat",
+      "word": "braț",
+      "display": "braț",
+      "normalized": "brat",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/b/ro-b-brat.webp",
+      "imageStatus": "ready",
+      "alt": "Un braț",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-buza",
+      "word": "buză",
+      "display": "buză",
+      "normalized": "buza",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/b/ro-b-buza.webp",
+      "imageStatus": "ready",
+      "alt": "O buză",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-bicicleta",
+      "word": "bicicletă",
+      "display": "bicicletă",
+      "normalized": "bicicleta",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/b/ro-b-bicicleta.webp",
+      "imageStatus": "ready",
+      "alt": "O bicicletă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

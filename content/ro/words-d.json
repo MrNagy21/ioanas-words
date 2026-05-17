@@ -1,0 +1,24 @@
+{
+  "locale": "ro",
+  "letter": "d",
+  "words": [
+    {
+      "id": "ro-d-deget",
+      "word": "deget",
+      "display": "deget",
+      "normalized": "deget",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/d/ro-d-deget.webp",
+      "imageStatus": "ready",
+      "alt": "Un deget",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

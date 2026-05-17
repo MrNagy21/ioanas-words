@@ -1,0 +1,22 @@
+{
+  "locale": "ro",
+  "letter": "u",
+  "words": [
+    {
+      "id": "ro-u-usa",
+      "word": "ușă",
+      "display": "ușă",
+      "normalized": "usa",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/u/ro-u-usa.webp",
+      "imageStatus": "ready",
+      "alt": "O ușă",
+      "source": ["manual"],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

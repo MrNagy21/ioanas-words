@@ -195,6 +195,7 @@ Status: Future
 Planning note: the next-phase feature order is now defined in `docs/app-development-program/roadmap.md`. Start there before writing detailed specs for this area. The recommended immediate order is public `/admin/words` inventory, locale-wide content loader/catalog refactor, gameplay inclusion mode selector, then broad Romanian content expansion.
 
 - Expand every Romanian letter bucket to a useful approved pack.
+- Use `docs/app-development-program/speech-therapy-content-guidance.md` so expansion tracks target sounds, sound positions, syllable complexity, consonant clusters, and contrast value.
 - Prefer 20 to 30 approved words per regular letter.
 - Keep at least 15 approved words for harder letters when quality allows.
 - Allow 30 to 40 approved words for high-value letters if the words remain common, concrete, and child-known.

@@ -1,0 +1,38 @@
+{
+  "locale": "ro",
+  "letter": "j",
+  "words": [
+    {
+      "id": "ro-j-jucarie",
+      "word": "jucărie",
+      "display": "jucărie",
+      "normalized": "jucarie",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/j/ro-j-jucarie.webp",
+      "imageStatus": "ready",
+      "alt": "O jucărie",
+      "source": ["manual"],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jacheta",
+      "word": "jachetă",
+      "display": "jachetă",
+      "normalized": "jacheta",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/j/ro-j-jacheta.webp",
+      "imageStatus": "ready",
+      "alt": "O jachetă",
+      "source": ["manual"],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

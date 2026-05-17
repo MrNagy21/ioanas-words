@@ -15,8 +15,9 @@ The goal is to move from the current pilot to a scalable Romanian content and ga
 7. `admin-words-inventory.md`
 8. `word-inclusion-modes.md`
 9. `romanian-content-program.md`
-10. `review-and-qa.md`
-11. `spec-template.md`
+10. `speech-therapy-content-guidance.md`
+11. `review-and-qa.md`
+12. `spec-template.md`
 
 ## Feature Spec Packages
 
@@ -33,6 +34,7 @@ Current packages:
 - `features/admin-words-inventory/`
 - `features/locale-wide-content-refactor/`
 - `features/gameplay-inclusion-mode-selector/`
+- `features/romanian-content-expansion/`
 
 ## Current Strategic Direction
 
@@ -43,6 +45,7 @@ Current packages:
 - Refactor content loading so the app can see a locale-wide approved word pool.
 - Add the child-facing gameplay mode selector after the inventory and loader refactor.
 - Expand Romanian content after the data model can report starts-with and contains coverage.
+- Make Romanian expansion therapy-informed by tracking target sound, word position, syllable complexity, and contrast value before production words are added.
 - Prepare for Romanian letter groups as practice targets, but do not force the UI before there is enough content.
 
 ## Non-Goals For This Program

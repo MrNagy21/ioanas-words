@@ -80,6 +80,8 @@ Good categories:
 - vehicles;
 - simple everyday actions.
 
+For broad Romanian expansion, also read `docs/app-development-program/speech-therapy-content-guidance.md`. Candidate words should be reviewed not only by starting letter, but also by speech target, target sound position, syllable complexity, consonant clusters, and contrast value. Keep the product language to pronunciation and vocabulary practice unless a future clinical-review spec explicitly changes that boundary.
+
 Avoid:
 
 - business terms;

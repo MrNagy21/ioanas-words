@@ -37,6 +37,32 @@ const sourceValues = new Set(WORD_SOURCE_VALUES);
 const errors = [];
 const warnings = [];
 
+const letterManifestKeys = new Set(["locale", "letters"]);
+const letterKeys = new Set([
+  "id",
+  "label",
+  "enabled",
+  "wordFile",
+  "sortOrder",
+]);
+const wordManifestKeys = new Set(["locale", "letter", "words"]);
+const wordKeys = new Set([
+  "id",
+  "word",
+  "display",
+  "normalized",
+  "partOfSpeech",
+  "difficulty",
+  "ageBand",
+  "category",
+  "image",
+  "imageStatus",
+  "alt",
+  "source",
+  "license",
+  "status",
+]);
+
 function addError(filePath, message) {
   errors.push(`${path.relative(repoRoot, filePath)}: ${message}`);
 }
@@ -102,6 +128,17 @@ function requireArray(record, key, filePath, context) {
   return record[key];
 }
 
+function validateKnownKeys(record, allowedKeys, filePath, context) {
+  const unknownKeys = Object.keys(record).filter((key) => !allowedKeys.has(key));
+
+  if (unknownKeys.length > 0) {
+    addError(
+      filePath,
+      `${context} contains unsupported field(s): ${unknownKeys.join(", ")}`,
+    );
+  }
+}
+
 function foldRomanian(value) {
   return value
     .toLocaleLowerCase("ro")
@@ -111,6 +148,19 @@ function foldRomanian(value) {
     .replace(/ț/g, "t")
     .replace(/ă/g, "a")
     .replace(/[âî]/g, "i");
+}
+
+function getWordIdBucketToken(locale, letterId) {
+  if (locale === "ro") {
+    const romanianAsciiBucketTokens = {
+      ș: "sh",
+      ț: "tz",
+    };
+
+    return romanianAsciiBucketTokens[letterId] ?? letterId;
+  }
+
+  return letterId;
 }
 
 function hasRomanianLetterStart(value, letterId) {
@@ -198,6 +248,8 @@ function validateLetterManifest(locale, manifest, filePath) {
     return [];
   }
 
+  validateKnownKeys(manifest, letterManifestKeys, filePath, "manifest");
+
   const manifestLocale = requireString(
     manifest,
     "locale",
@@ -224,6 +276,8 @@ function validateLetterManifest(locale, manifest, filePath) {
       addError(filePath, `${context} must be an object`);
       continue;
     }
+
+    validateKnownKeys(letter, letterKeys, filePath, context);
 
     const id = requireString(letter, "id", filePath, context);
     const label = requireString(letter, "label", filePath, context);
@@ -278,6 +332,8 @@ function validateWordShape(word, filePath, context) {
     addError(filePath, `${context} must be an object`);
     return null;
   }
+
+  validateKnownKeys(word, wordKeys, filePath, context);
 
   const id = requireString(word, "id", filePath, context);
   const wordText = requireString(word, "word", filePath, context);
@@ -474,12 +530,16 @@ async function validateWordManifest(
   manifest,
   filePath,
   globalWordIds,
+  globalNormalizedWords,
+  globalExactWords,
   globalImagePaths,
 ) {
   if (!isRecord(manifest)) {
     addError(filePath, "word manifest must be an object");
     return;
   }
+
+  validateKnownKeys(manifest, wordManifestKeys, filePath, "manifest");
 
   const manifestLocale = requireString(
     manifest,
@@ -523,15 +583,41 @@ async function validateWordManifest(
     }
     globalWordIds.add(word.id);
 
+    const existingNormalizedWordId = globalNormalizedWords.get(
+      word.normalized,
+    );
+    if (existingNormalizedWordId && existingNormalizedWordId !== word.id) {
+      addError(
+        filePath,
+        `${context}.normalized duplicates ${existingNormalizedWordId}`,
+      );
+    }
+    globalNormalizedWords.set(word.normalized, word.id);
+
+    for (const exactValue of new Set([
+      word.word.toLocaleLowerCase("ro"),
+      word.display.toLocaleLowerCase("ro"),
+    ])) {
+      const existingExactWordId = globalExactWords.get(exactValue);
+      if (existingExactWordId && existingExactWordId !== word.id) {
+        addError(
+          filePath,
+          `${context}.word/display duplicates ${existingExactWordId}`,
+        );
+      }
+      globalExactWords.set(exactValue, word.id);
+    }
+
     if (globalImagePaths.has(word.image)) {
       addError(filePath, `${context}.image duplicates another word image path`);
     }
     globalImagePaths.add(word.image);
 
-    if (!word.id.startsWith(`${locale}-${letter.id}-`)) {
+    const wordIdBucketToken = getWordIdBucketToken(locale, letter.id);
+    if (!word.id.startsWith(`${locale}-${wordIdBucketToken}-`)) {
       addError(
         filePath,
-        `${context}.id must start with "${locale}-${letter.id}-"`,
+        `${context}.id must start with "${locale}-${wordIdBucketToken}-"`,
       );
     }
 
@@ -590,6 +676,8 @@ async function validateLocale(locale) {
   const letters = validateLetterManifest(locale, letterManifest, manifestPath);
   const expectedWordFiles = new Set(letters.map((letter) => letter.wordFile));
   const globalWordIds = new Set();
+  const globalNormalizedWords = new Map();
+  const globalExactWords = new Map();
   const globalImagePaths = new Set();
 
   for (const letter of letters) {
@@ -609,6 +697,8 @@ async function validateLocale(locale) {
       await readJson(wordFilePath),
       wordFilePath,
       globalWordIds,
+      globalNormalizedWords,
+      globalExactWords,
       globalImagePaths,
     );
   }

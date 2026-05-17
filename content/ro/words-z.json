@@ -1,0 +1,60 @@
+{
+  "locale": "ro",
+  "letter": "z",
+  "words": [
+    {
+      "id": "ro-z-zebra",
+      "word": "zebră",
+      "display": "zebră",
+      "normalized": "zebra",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/z/ro-z-zebra.webp",
+      "imageStatus": "ready",
+      "alt": "O zebră",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-z-zapada",
+      "word": "zăpadă",
+      "display": "zăpadă",
+      "normalized": "zapada",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/z/ro-z-zapada.webp",
+      "imageStatus": "ready",
+      "alt": "Zăpadă albă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-z-zar",
+      "word": "zar",
+      "display": "zar",
+      "normalized": "zar",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/z/ro-z-zar.webp",
+      "imageStatus": "ready",
+      "alt": "Un zar",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

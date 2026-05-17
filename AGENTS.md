@@ -30,6 +30,9 @@ The project is currently at 0% implementation. Only documentation exists. No app
 
 - Follow the batches in `docs/plan.md`.
 - Update `docs/status.md` whenever a batch starts, completes, or materially changes.
+- Romanian Content Expansion has completed its pilot audit and worksheet phase. Future Romanian content work is production preparation: do not add words or images unless they are intended to be production-ready, validated, reviewed, and suitable for the child-facing app once implemented.
+- When a production decision depends on current facts, standards, child development guidance, Romanian language usage, safety, licensing, deployment behavior, or framework behavior that may have changed, do internet or source research before deciding and cite or record the source in the relevant docs.
+- Ask the human for critical decisions instead of silently choosing. Critical decisions include production vocabulary acceptance tradeoffs, clinical/speech-therapy claims, child-safety concerns, licensing uncertainty, introducing placeholders into child-facing content, schema changes that affect future content, database/auth/billing architecture, and any change that expands or narrows v1 scope.
 - The user is responsible for running the local dev server on port `3000`.
   Agents should verify against `http://localhost:3000` when the server is already running.
   If the server is not reachable on port `3000`, ask the user to start it instead of starting another port.

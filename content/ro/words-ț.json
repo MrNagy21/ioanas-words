@@ -1,0 +1,24 @@
+{
+  "locale": "ro",
+  "letter": "ț",
+  "words": [
+    {
+      "id": "ro-tz-testoasa",
+      "word": "țestoasă",
+      "display": "țestoasă",
+      "normalized": "testoasa",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/ț/ro-tz-testoasa.webp",
+      "imageStatus": "ready",
+      "alt": "O țestoasă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

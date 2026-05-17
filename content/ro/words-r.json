@@ -1,0 +1,54 @@
+{
+  "locale": "ro",
+  "letter": "r",
+  "words": [
+    {
+      "id": "ro-r-rata",
+      "word": "rață",
+      "display": "rață",
+      "normalized": "rata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/r/ro-r-rata.webp",
+      "imageStatus": "ready",
+      "alt": "O rață",
+      "source": ["manual"],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-roata",
+      "word": "roată",
+      "display": "roată",
+      "normalized": "roata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/r/ro-r-roata.webp",
+      "imageStatus": "ready",
+      "alt": "O roată",
+      "source": ["manual"],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-robot",
+      "word": "robot",
+      "display": "robot",
+      "normalized": "robot",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/r/ro-r-robot.webp",
+      "imageStatus": "ready",
+      "alt": "Un robot de jucărie",
+      "source": ["manual"],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

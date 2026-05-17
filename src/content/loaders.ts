@@ -1,8 +1,19 @@
 import lettersRoJson from "../../content/ro/letters.json";
 import wordsAJson from "../../content/ro/words-a.json";
+import wordsBJson from "../../content/ro/words-b.json";
 import wordsCJson from "../../content/ro/words-c.json";
+import wordsDJson from "../../content/ro/words-d.json";
+import wordsFJson from "../../content/ro/words-f.json";
+import wordsGJson from "../../content/ro/words-g.json";
+import wordsJJson from "../../content/ro/words-j.json";
 import wordsMJson from "../../content/ro/words-m.json";
 import wordsPJson from "../../content/ro/words-p.json";
+import wordsRJson from "../../content/ro/words-r.json";
+import wordsSJson from "../../content/ro/words-s.json";
+import wordsShJson from "../../content/ro/words-ș.json";
+import wordsTzJson from "../../content/ro/words-ț.json";
+import wordsUJson from "../../content/ro/words-u.json";
+import wordsZJson from "../../content/ro/words-z.json";
 import type { SupportedLocale } from "@/i18n/locales";
 import type {
   ContentLetter,
@@ -40,9 +51,20 @@ const wordManifestRegistry: Record<
 > = {
   ro: {
     a: wordsAJson as WordManifest,
+    b: wordsBJson as WordManifest,
     c: wordsCJson as WordManifest,
+    d: wordsDJson as WordManifest,
+    f: wordsFJson as WordManifest,
+    g: wordsGJson as WordManifest,
+    j: wordsJJson as WordManifest,
     m: wordsMJson as WordManifest,
     p: wordsPJson as WordManifest,
+    r: wordsRJson as WordManifest,
+    s: wordsSJson as WordManifest,
+    ș: wordsShJson as WordManifest,
+    ț: wordsTzJson as WordManifest,
+    u: wordsUJson as WordManifest,
+    z: wordsZJson as WordManifest,
   },
 };
 

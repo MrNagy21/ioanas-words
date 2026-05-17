@@ -1,0 +1,78 @@
+{
+  "locale": "ro",
+  "letter": "g",
+  "words": [
+    {
+      "id": "ro-g-geam",
+      "word": "geam",
+      "display": "geam",
+      "normalized": "geam",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/g/ro-g-geam.webp",
+      "imageStatus": "ready",
+      "alt": "Un geam",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-g-gheata",
+      "word": "gheață",
+      "display": "gheață",
+      "normalized": "gheata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/g/ro-g-gheata.webp",
+      "imageStatus": "ready",
+      "alt": "Un cub de gheață",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-g-gem",
+      "word": "gem",
+      "display": "gem",
+      "normalized": "gem",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/g/ro-g-gem.webp",
+      "imageStatus": "ready",
+      "alt": "Un borcan cu gem",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-g-girafa",
+      "word": "girafă",
+      "display": "girafă",
+      "normalized": "girafa",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/g/ro-g-girafa.webp",
+      "imageStatus": "ready",
+      "alt": "O girafă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

@@ -9,25 +9,102 @@
       "sortOrder": 1
     },
     {
+      "id": "b",
+      "label": "B",
+      "enabled": true,
+      "wordFile": "words-b.json",
+      "sortOrder": 4
+    },
+    {
       "id": "c",
       "label": "C",
       "enabled": true,
       "wordFile": "words-c.json",
-      "sortOrder": 2
+      "sortOrder": 5
+    },
+    {
+      "id": "d",
+      "label": "D",
+      "enabled": true,
+      "wordFile": "words-d.json",
+      "sortOrder": 6
+    },
+    {
+      "id": "f",
+      "label": "F",
+      "enabled": true,
+      "wordFile": "words-f.json",
+      "sortOrder": 8
+    },
+    {
+      "id": "g",
+      "label": "G",
+      "enabled": true,
+      "wordFile": "words-g.json",
+      "sortOrder": 9
+    },
+    {
+      "id": "j",
+      "label": "J",
+      "enabled": true,
+      "wordFile": "words-j.json",
+      "sortOrder": 13
     },
     {
       "id": "m",
       "label": "M",
       "enabled": true,
       "wordFile": "words-m.json",
-      "sortOrder": 3
+      "sortOrder": 16
     },
     {
       "id": "p",
       "label": "P",
       "enabled": true,
       "wordFile": "words-p.json",
-      "sortOrder": 4
+      "sortOrder": 19
+    },
+    {
+      "id": "r",
+      "label": "R",
+      "enabled": true,
+      "wordFile": "words-r.json",
+      "sortOrder": 21
+    },
+    {
+      "id": "s",
+      "label": "S",
+      "enabled": true,
+      "wordFile": "words-s.json",
+      "sortOrder": 22
+    },
+    {
+      "id": "ș",
+      "label": "Ș",
+      "enabled": true,
+      "wordFile": "words-ș.json",
+      "sortOrder": 23
+    },
+    {
+      "id": "ț",
+      "label": "Ț",
+      "enabled": true,
+      "wordFile": "words-ț.json",
+      "sortOrder": 25
+    },
+    {
+      "id": "u",
+      "label": "U",
+      "enabled": true,
+      "wordFile": "words-u.json",
+      "sortOrder": 26
+    },
+    {
+      "id": "z",
+      "label": "Z",
+      "enabled": true,
+      "wordFile": "words-z.json",
+      "sortOrder": 31
     }
   ]
 }

@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
 import {
   getDerivedWordPoolsForTarget,
+  getEnabledLetters,
+  getLocaleCoverageSummary,
   getWordsContainingOnlyTarget,
   getWordsStartingWithTarget,
   wordContainsTarget,
   wordStartsWithTarget,
 } from "@/content/loaders";
-import type { ContentWord } from "@/content/types";
+import type { ContentWord, ImageReadinessCounts } from "@/content/types";
 
 const fixtures = [
   makeWord("ro-s-sarpe", "șarpe", "șarpe", "sarpe"),
@@ -60,6 +62,64 @@ assert.deepEqual(pools.imageCounts, {
   mixed: { total: 2, ready: 0, placeholder: 2 },
 });
 
+const enabledRomanianLetters = getEnabledLetters("ro");
+const coverage = getLocaleCoverageSummary("ro");
+
+assert.equal(coverage.locale, "ro");
+assert.deepEqual(
+  coverage.letters.map((letter) => letter.id),
+  enabledRomanianLetters.map((letter) => letter.id),
+);
+assert.equal(coverage.totalApprovedWords, coverage.approvedWords.length);
+assert.equal(
+  coverage.totalStartsWithAssignments,
+  coverage.letterSummaries.reduce(
+    (total, summary) => total + summary.startsWithCount,
+    0,
+  ),
+);
+assert.equal(
+  coverage.totalContainsOnlyAssignments,
+  coverage.letterSummaries.reduce(
+    (total, summary) => total + summary.containsOnlyCount,
+    0,
+  ),
+);
+assertImageCounts(coverage.imageCounts, coverage.approvedWords);
+
+for (const summary of coverage.letterSummaries) {
+  const derivedPools = getDerivedWordPoolsForTarget("ro", summary.letter);
+
+  assert.deepEqual(
+    summary.startsWithWords.map((word) => word.id),
+    derivedPools.startsWithWords.map((word) => word.id),
+    `Expected coverage starts-with words for ${summary.letter.id} to match derived pools`,
+  );
+  assert.deepEqual(
+    summary.containsOnlyWords.map((word) => word.id),
+    derivedPools.containsOnlyWords.map((word) => word.id),
+    `Expected coverage contains-only words for ${summary.letter.id} to match derived pools`,
+  );
+  assert.deepEqual(
+    summary.mixedWords.map((word) => word.id),
+    derivedPools.mixedWords.map((word) => word.id),
+    `Expected coverage mixed words for ${summary.letter.id} to match derived pools`,
+  );
+  assert.equal(summary.startsWithCount, summary.startsWithWords.length);
+  assert.equal(summary.containsOnlyCount, summary.containsOnlyWords.length);
+  assert.equal(summary.mixedCount, summary.mixedWords.length);
+  assert.deepEqual(summary.imageCounts, derivedPools.imageCounts);
+  assert.deepEqual(
+    summary.startsWithImageCounts,
+    summary.imageCounts.startsWith,
+  );
+  assert.deepEqual(
+    summary.containsOnlyImageCounts,
+    summary.imageCounts.containsOnly,
+  );
+  assert.deepEqual(summary.mixedImageCounts, summary.imageCounts.mixed);
+}
+
 function makeWord(
   id: string,
   word: string,
@@ -82,4 +142,19 @@ function makeWord(
     license: "app-owned",
     status: "approved",
   };
+}
+
+function assertImageCounts(
+  counts: ImageReadinessCounts,
+  words: readonly ContentWord[],
+) {
+  assert.equal(counts.total, words.length);
+  assert.equal(
+    counts.ready,
+    words.filter((word) => word.imageStatus === "ready").length,
+  );
+  assert.equal(
+    counts.placeholder,
+    words.filter((word) => word.imageStatus === "placeholder").length,
+  );
 }

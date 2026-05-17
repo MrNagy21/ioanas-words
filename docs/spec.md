@@ -31,6 +31,8 @@ The app should feel like a small mobile game, not a scrolling website. It should
 
 Future work after the starter pilot should expand every Romanian letter bucket to roughly 20 to 30 approved child-friendly words where quality allows, with at least 15 for harder letters and up to 30 to 40 for high-value letters. Do not pad letters with obscure words.
 
+Romanian expansion should also follow the therapy-informed guidance in `docs/app-development-program/speech-therapy-content-guidance.md`. Letter counts are not enough for a serious pronunciation app; review needs to track target sound, sound position inside the word, syllable complexity, consonant clusters, and contrast value. The app should remain framed as pronunciation and vocabulary practice unless a future safety and clinical-review spec explicitly adds diagnostic or treatment claims.
+
 Future gameplay should also support three selected-letter inclusion modes:
 
 - only words that begin with the selected letter;
