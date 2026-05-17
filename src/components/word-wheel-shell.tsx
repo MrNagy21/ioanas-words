@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { WheelGame } from "@/components/wheel-game";
-import type { ContentLetter, GameplayContent } from "@/content/types";
+import { getLetterRouteSegment } from "@/content/loaders";
+import type {
+  ContentLetter,
+  ContentPracticeTarget,
+  GameplayContent,
+} from "@/content/types";
 import type { SupportedLocale } from "@/i18n/locales";
 
 type LetterSummary = ContentLetter &
@@ -8,15 +13,22 @@ type LetterSummary = ContentLetter &
     approvedWordCount: number;
   }>;
 
+type PracticeTargetSummary = ContentPracticeTarget &
+  Readonly<{
+    approvedWordCount: number;
+  }>;
+
 type WordWheelShellProps = Readonly<{
   locale: SupportedLocale;
   letters: LetterSummary[];
+  practiceTargets: PracticeTargetSummary[];
   selectedContent?: GameplayContent;
 }>;
 
 export function WordWheelShell({
   locale,
   letters,
+  practiceTargets,
   selectedContent,
 }: WordWheelShellProps) {
   return (
@@ -35,7 +47,11 @@ export function WordWheelShell({
         {selectedContent ? (
           <WheelGame content={selectedContent} locale={locale} />
         ) : (
-          <LetterSelectionView letters={letters} locale={locale} />
+          <LetterSelectionView
+            letters={letters}
+            locale={locale}
+            practiceTargets={practiceTargets}
+          />
         )}
       </div>
     </main>
@@ -45,7 +61,12 @@ export function WordWheelShell({
 function LetterSelectionView({
   locale,
   letters,
-}: Readonly<{ locale: SupportedLocale; letters: LetterSummary[] }>) {
+  practiceTargets,
+}: Readonly<{
+  locale: SupportedLocale;
+  letters: LetterSummary[];
+  practiceTargets: PracticeTargetSummary[];
+}>) {
   const previewLetters = letters.slice(0, 4);
 
   return (
@@ -60,7 +81,7 @@ function LetterSelectionView({
           <Link
             aria-label={`Litera ${letter.label}`}
             className="letter-tile"
-            href={`/${locale}/play/${encodeURIComponent(letter.id)}`}
+            href={`/${locale}/play/${getLetterRouteSegment(locale, letter.id)}`}
             key={letter.id}
           >
             <span className="letter-tile__label">{letter.label}</span>
@@ -70,6 +91,34 @@ function LetterSelectionView({
           </Link>
         ))}
       </nav>
+
+      <section
+        aria-labelledby="practice-target-title"
+        className="practice-targets"
+      >
+        <div className="practice-targets__heading">
+          <p className="stage-label">Alte sunete</p>
+          <h3 id="practice-target-title">Exersează grupuri</h3>
+        </div>
+        <nav
+          aria-label="Grupuri de sunete românești"
+          className="practice-target-grid"
+        >
+          {practiceTargets.map((target) => (
+            <Link
+              aria-label={`Sunetul ${target.label}`}
+              className="practice-target-tile"
+              href={`/${locale}/play/${target.routeSegment}`}
+              key={target.id}
+            >
+              <span className="letter-tile__label">{target.label}</span>
+              <span className="letter-tile__count">
+                {target.approvedWordCount} cuvinte
+              </span>
+            </Link>
+          ))}
+        </nav>
+      </section>
 
       <div className="wheel-preview" aria-hidden="true">
         <div className="wheel-preview__ring">

@@ -317,10 +317,377 @@ Browser, only if the user-running dev server is already reachable:
 ```txt
 http://localhost:3000/ro
 http://localhost:3000/admin/words
-http://localhost:3000/ro/play/ș
-http://localhost:3000/ro/play/ț
+http://localhost:3000/ro/play/sh
+http://localhost:3000/ro/play/tz
 http://localhost:3000/ro/play/f
 http://localhost:3000/ro/play/d
+```
+
+## Batch 9: Third Production Slice Planning
+
+Status: Complete
+
+Tasks:
+
+- Define a third small Romanian production slice from remaining accepted worksheet rows only.
+- Start from `rochie`, `rachetă`, `iepure`, `scaun`, `nas`, `urs`, `coș`, `cămașă`, `dinți`, `cățel`, and `pijama`.
+- Confirm each planned candidate is still not duplicated in current approved JSON by ID, exact word, or normalized value.
+- Record canonical file, proposed ID, canonical image path, category, alt text direction, expected starts/contains/mixed impact, and image-readiness path.
+- Keep the slice planning-only: no production JSON records and no image assets.
+- Preserve exact Romanian bucket storage and current ASCII public route behavior for `Ș` and `Ț`.
+- Update this feature `status.md` and global `docs/status.md`.
+
+Review checkpoint:
+
+- Every planned word is an accepted worksheet row.
+- No rejected or needs-revision worksheet candidate enters the slice.
+- Planned image paths and IDs match current naming conventions.
+- New `I` and `N` bucket work is identified as an implementation-batch task, not silently introduced in planning.
+- No placeholder-backed approved words are introduced.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Browser verification should use the always-running local server:
+
+```txt
+http://localhost:3000/ro
+http://localhost:3000/admin/words
+http://localhost:3000/ro/play/sh
+http://localhost:3000/ro/play/tz
+http://localhost:3000/ro/play/r
+http://localhost:3000/ro/play/s
+http://localhost:3000/ro/play/c
+http://localhost:3000/ro/play/d
+http://localhost:3000/ro/play/p
+http://localhost:3000/ro/play/u
+```
+
+If a sandboxed localhost check fails, retry outside the sandbox before treating the server as unavailable. Do not start another dev server or use another port.
+
+## Batch 10: Third Production Slice Image Briefs And Implementation
+
+Status: Complete
+
+Tasks:
+
+- Use `third-production-slice-batch-9.md` as the source of planned words, IDs, canonical files, image paths, and readiness requirements.
+- Write production image briefs for the 11 planned words.
+- Generate or assign reviewed pixel-art images using the established image pipeline.
+- Optimize final WebP assets to canonical paths.
+- Add or update canonical word manifests only when metadata and image readiness are clear.
+- Add `I` and `N` letter manifest entries and loader imports only when their planned words are ready for promotion, or use draft-only metadata only if the human explicitly approves that tradeoff.
+- Promote words to approved only with ready reviewed images.
+- Enable new letters only when their approved words and images are ready.
+- Keep speech-target metadata in docs/status only, not production JSON.
+
+Review checkpoint:
+
+- Every implemented word is from an accepted worksheet row and matches the Batch 9 canonical shape.
+- Every approved word has a ready reviewed image.
+- `I` and `N` buckets are introduced deliberately with canonical word files and enabled only after ready content exists.
+- No rejected or needs-revision candidates are added.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Browser verification should use the always-running local server on `http://localhost:3000`, retrying outside the sandbox if sandboxed localhost checks fail.
+
+## Batch 11: Next Romanian Production Scope Decision
+
+Status: Complete
+
+Tasks:
+
+- Review post-Batch 10 `/admin/words` coverage and helper-derived coverage data.
+- Decide whether the next Romanian expansion step should be another production slice, a speech-target reporting tool, a pause for broader app QA, or a split vocabulary-first/image-second pipeline.
+- If another production slice is selected, plan from accepted worksheet rows only and do not add production JSON or image assets in this batch.
+- Resolve any needed conventions before implementation, especially future exact `Ă`, `Â`, and `Î` starting-letter ASCII ID tokens if those buckets enter scope.
+- Ask the human before selecting borderline vocabulary, adding speech-target production metadata, adding clinical claims, or changing v1 scope.
+- Update this feature `status.md` and global `docs/status.md`.
+
+Review checkpoint:
+
+- The next scope is explicit and does not silently add content.
+- Remaining gaps are grounded in helper output and existing review documents.
+- No rejected or needs-revision worksheet candidates are promoted.
+- No production JSON records or image assets are introduced in Batch 11.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Browser verification should use the always-running local server on `http://localhost:3000`, especially:
+
+```txt
+http://localhost:3000/ro
+http://localhost:3000/admin/words
+```
+
+If a sandboxed localhost check fails, retry outside the sandbox before treating the server as unavailable. Do not start another dev server or use another port.
+
+Decision result:
+
+- Batch 11 selected a split vocabulary-first and image-second pipeline as the next Romanian expansion direction.
+- Another small production slice is blocked until a new candidate worksheet is created and accepted by review, because all `43` accepted Batch 2 worksheet rows are already implemented.
+- The next vocabulary work should plan the broader Romanian word set first, then implement approved words with an intentional generic placeholder strategy, then run separate image-focused batches to replace placeholders.
+- `Ă`, `Â`, and `Î` exact starts-with bucket ASCII ID tokens remain unresolved because those buckets do not enter the selected next scope.
+- See `next-scope-decision-batch-11.md`.
+
+## Batch 12: Romanian Vocabulary Scope Spec
+
+Status: Complete
+
+Tasks:
+
+- Research current Romanian child vocabulary, Romanian language usage, and speech/logopedie target guidance before selecting words.
+- Review existing coverage from `/admin/words`, locale helpers, and the exhausted Batch 2 worksheet.
+- Define a broader Romanian target vocabulary list by letter, with target counts that respect quality limits.
+- Track target sound, sound position, syllable complexity, consonant clusters, contrast value, age fit, imageability, safety, and expected coverage impact in a reviewable spec or worksheet.
+- Apply the human-approved placeholder visibility policy: approved placeholder-backed words may be visible in gameplay with a deliberately generic placeholder until final images exist.
+- Resolve exact `Ă`, `Â`, and `Î` ASCII ID tokens if those buckets enter scope.
+- Ask the human before accepting borderline vocabulary, adding clinical/speech-therapy claims, changing the approved placeholder visibility policy, or expanding v1 scope.
+- Do not add production words or image assets in this batch.
+- Update this feature `status.md` and global `docs/status.md`.
+
+Review checkpoint:
+
+- The vocabulary scope is broad enough to avoid word-by-word production batching.
+- Every proposed word has a documented reason, quality review, and speech-target or vocabulary value.
+- The spec distinguishes review metadata from production JSON fields.
+- Placeholder-backed gameplay visibility follows the documented human-approved policy.
+- Production JSON remains ordinary vocabulary content only.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Decision result:
+
+- Batch 12 added `vocabulary-scope-spec-batch-12.md` as the broad Romanian vocabulary scope source for Batch 13.
+- The scope defines `126` new accepted placeholder-ready vocabulary rows across broad Romanian letter coverage, with target sound, sound position, syllable complexity, consonant clusters, contrast value, age fit, imageability, safety, and expected coverage impact recorded in documentation only.
+- No Batch 2 rejected or needs-revision candidates were included.
+- If Batch 13 implements the whole scope, approved Romanian content should move from `83` to `209` words before image replacement.
+- The `Ă`, `Â`, and `Î` convention is now resolved for future implementation:
+  - `Ă`: exact bucket `ă`, route segment `a-breve`, word ID/image prefix `ro-a-breve-`.
+  - `Â`: exact bucket `â`, route segment `a-circ`, word ID/image prefix `ro-a-circ-`.
+  - `Î`: exact bucket `î`, route segment `i-circ`, word ID/image prefix `ro-i-circ-`.
+- Batch 12 selected only `înghețată` for an exact `Î` starts-with bucket; `Ă` and `Â` remain convention-only because no strong child-facing exact starts-with words were accepted.
+- Batch 12 added no production JSON records, image assets, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+## Batch 13: Placeholder-Backed Vocabulary Manifest Implementation
+
+Status: Complete
+
+Tasks:
+
+- Implement the approved Batch 12 vocabulary scope from `vocabulary-scope-spec-batch-12.md` into canonical `content/ro/words-<letter>.json` files.
+- Add any required letter manifest entries and loader imports.
+- Use stable IDs and canonical image paths.
+- Apply the Batch 12 diacritic convention for `Î`: exact bucket `î`, route segment `i-circ`, and `ro-i-circ-...` word ID/image filename prefixes.
+- Add or generate one app-owned generic placeholder image asset for words without final images.
+- Mark placeholder-backed approved records deliberately; they may be visible in gameplay until final images exist.
+- Update validation if needed so intentional placeholder-backed words are allowed without hiding accidental missing-image states.
+- Update `/admin/words` documentation/status so reviewers can see placeholder counts and prioritize image work.
+- Do not add final per-word images in this batch.
+- Do not add speech-target metadata to production JSON unless a separate human-approved schema change exists.
+
+Review checkpoint:
+
+- Every implemented word comes from the approved Batch 12 vocabulary scope.
+- Placeholder-backed words are intentional, easy to audit, and do not pretend to have final art.
+- No rejected, needs-revision, obscure, unsafe, or weak words are added just to fill quotas.
+- Content validation and gameplay compatibility checks pass.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Browser verification should use the always-running local server on `http://localhost:3000`, especially `/ro` and `/admin/words`.
+
+Decision result:
+
+- Batch 13 implemented all `126` accepted rows from `vocabulary-scope-spec-batch-12.md`.
+- Production Romanian content now has `209` approved words: `83` ready-image records and `126` intentional placeholder-backed approved records.
+- Added enabled `E`, `H`, `Î`, `L`, `O`, `T`, and `V` letter manifest entries, canonical word files, and loader imports.
+- Applied the exact `Î` convention with bucket `î`, route segment `i-circ`, and `ro-i-circ-...` word ID prefix.
+- Added the generic app-owned placeholder asset at `/images/ro/placeholders/generic-word-placeholder.webp`.
+- Updated validation so that generic placeholder sharing is explicit and auditable while ordinary duplicate image paths still fail.
+- Kept speech-target review metadata out of production JSON.
+
+## Batch 14: Sound Coverage Scope Spec And Practice Target UI Plan
+
+Status: Complete
+
+Tasks:
+
+- Use `sound-coverage-and-practice-targets-batch-14.md` as the starting scope.
+- Check current online/source material before accepting any new production word or sound-coverage target; prefer Romanian early-education guidance, Romanian child phonology research, Romanian logopedie materials, and Romanian phonetics/phonology references.
+- Record source URLs or explicit internal-review notes for candidate words and sound-coverage decisions.
+- Review helper-derived coverage for priority sound targets, especially `ș`, `j`, `ț`, `z`, `ce`, `ci`, `ge`, `gi`, `che`, `chi`, `ghe`, and `ghi`.
+- Create a candidate worksheet/spec for additional production-quality words that strengthen underfilled important sound targets.
+- Target at least `30` mixed/combined words for important sounds where child-friendly, concrete, safe, imageable vocabulary allows it.
+- Document quality ceilings explicitly where a target cannot reach `30` without weak or obscure words.
+- Define the start-page practice target model for the eight bottom-row options: `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`.
+- Keep these eight options separate from Romanian alphabet letter buckets.
+- Define route, helper, admin, and QA expectations for implementing practice targets before image replacement.
+- Do not add production JSON records, UI code, image assets, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims in this planning batch.
+
+Review checkpoint:
+
+- The sound-coverage target list is grounded in current helper output.
+- The eight bottom-row practice targets have clear route tokens, labels, and matching behavior.
+- Candidate words are reviewed for age fit, concreteness, safety, imageability, and target value before production JSON changes.
+- Candidate words and sound targets cite online/source research where available, or clearly mark internal-review choices where no useful source was found.
+- The plan does not pad targets with obscure or visually weak words.
+
+Suggested verification:
+
+```txt
+Review markdown for consistency and readable handoff quality.
+git diff --check
+```
+
+Decision result:
+
+- Batch 14 added `sound-coverage-scope-spec-batch-14.md` as the accepted documentation-only source for Batch 15.
+- The scope defines `110` unique accepted candidate rows for underfilled priority targets, with source tags or internal-review notes for each row.
+- Expected impact if Batch 15 implements every accepted row as placeholder-backed approved content:
+  - approved Romanian words `209 -> 319`;
+  - ready images unchanged at `83`;
+  - placeholder images `126 -> 236`;
+  - `ș` mixed `22 -> 36`;
+  - `j` mixed `4 -> 14`;
+  - `ț` mixed `14 -> 36`;
+  - `z` mixed `12 -> 31`;
+  - `ce` mixed `2 -> 14`;
+  - `ci` mixed `5 -> 14`;
+  - `ge` mixed `4 -> 10`;
+  - `gi` mixed `1 -> 4`;
+  - `che` mixed `3 -> 10`;
+  - `chi` mixed `1 -> 9`;
+  - `ghe` mixed `2 -> 8`;
+  - `ghi` mixed `2 -> 8`.
+- Batch 14 documented quality ceilings instead of padding weak targets: `J`, `GI`, `GHE`, `GHI`, and several sequence targets remain below `30` mixed words because stronger counts would require obscure, abstract, unsafe, adult, or visually weak words.
+- Batch 14 confirmed the eight bottom-row start-page options must be separate sequence practice targets, not entries in `content/ro/letters.json`.
+- Batch 14 added no production JSON records, UI code, image assets, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+## Batch 15: Sound Coverage Manifest Implementation And Practice Targets
+
+Status: Proposed
+
+Tasks:
+
+- Implement only accepted Batch 14 sound-coverage rows from `sound-coverage-scope-spec-batch-14.md` into canonical word manifests.
+- Use approved placeholder-backed records if final images are not ready, following the Batch 13 placeholder policy.
+- Add the eight bottom-row practice target options on `/ro`: `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`.
+- Add a separate practice-target manifest/helper instead of adding these sequences to `content/ro/letters.json`.
+- Update `/ro/play/[letter]` static params and target resolution so both alphabet letters and practice targets route correctly.
+- Make sequence target play pages use derived pools from exact target matching.
+- Update `/admin/words` or a nearby admin coverage section so practice-target coverage and placeholder counts are visible.
+- Keep production word JSON free of speech-target, syllable, cluster, contrast, therapy, and clinical metadata.
+- Do not add final per-word images in this batch unless the batch scope is explicitly changed after review.
+
+Review checkpoint:
+
+- Every implemented word comes from the accepted Batch 14 sound-coverage scope.
+- The `/ro` start page still shows alphabet letters and now has a separate bottom section for the eight practice targets.
+- Practice-target routes work and do not pretend `ce`, `ci`, `ge`, `gi`, `che`, `chi`, `ghe`, or `ghi` are alphabet buckets.
+- `R`, `S`, and `L` remain stable, while underfilled targets improve.
+- Placeholder-backed words remain visible and auditable.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Browser verification should use the always-running local server on `http://localhost:3000`, especially:
+
+```txt
+http://localhost:3000/ro
+http://localhost:3000/admin/words
+http://localhost:3000/ro/play/ce
+http://localhost:3000/ro/play/ci
+http://localhost:3000/ro/play/ge
+http://localhost:3000/ro/play/gi
+http://localhost:3000/ro/play/che
+http://localhost:3000/ro/play/chi
+http://localhost:3000/ro/play/ghe
+http://localhost:3000/ro/play/ghi
+```
+
+If a sandboxed localhost check fails, retry outside the sandbox before treating the server as unavailable. Do not start another dev server or use another port.
+
+## Batch 16: Placeholder Image Replacement
+
+Status: Proposed
+
+Tasks:
+
+- Use `/admin/words` and production JSON to find Romanian words with placeholder images after the sound-coverage and practice-target work is complete.
+- Generate, review, and optimize final pixel-art images using the established image pipeline.
+- Replace placeholder paths/statuses with canonical ready WebP assets in image-focused batches.
+- Keep image batches large enough to reduce handoff overhead but small enough for visual QA.
+- Do not change vocabulary selection except to fix documented defects.
+
+Review checkpoint:
+
+- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
+- Placeholder counts decrease after each image batch.
+- Child-facing gameplay still works for starts-with, contains-only, mixed, and the eight practice-target routes.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
 ```
 
 ## Exit Criteria

@@ -14,7 +14,9 @@
       "image": "/images/ro/a/ro-a-apa.webp",
       "imageStatus": "ready",
       "alt": "Un pahar cu apă",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -30,7 +32,9 @@
       "image": "/images/ro/a/ro-a-albina.webp",
       "imageStatus": "ready",
       "alt": "O albină",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -46,7 +50,9 @@
       "image": "/images/ro/a/ro-a-avion.webp",
       "imageStatus": "ready",
       "alt": "Un avion",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -62,7 +68,9 @@
       "image": "/images/ro/a/ro-a-ardei.webp",
       "imageStatus": "ready",
       "alt": "Un ardei",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -78,7 +86,9 @@
       "image": "/images/ro/a/ro-a-arici.webp",
       "imageStatus": "ready",
       "alt": "Un arici",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -94,7 +104,9 @@
       "image": "/images/ro/a/ro-a-ananas.webp",
       "imageStatus": "ready",
       "alt": "Un ananas",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -110,7 +122,9 @@
       "image": "/images/ro/a/ro-a-autobuz.webp",
       "imageStatus": "ready",
       "alt": "Un autobuz",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -126,7 +140,9 @@
       "image": "/images/ro/a/ro-a-acvariu.webp",
       "imageStatus": "ready",
       "alt": "Un acvariu cu pești",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -142,7 +158,9 @@
       "image": "/images/ro/a/ro-a-acadea.webp",
       "imageStatus": "ready",
       "alt": "O acadea",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -158,7 +176,117 @@
       "image": "/images/ro/a/ro-a-aluna.webp",
       "imageStatus": "ready",
       "alt": "O alună",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "album",
+      "display": "album",
+      "normalized": "album",
+      "id": "ro-a-album",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul album",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "acoperiș",
+      "display": "acoperiș",
+      "normalized": "acoperis",
+      "id": "ro-a-acoperis",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul acoperiș",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "aripă",
+      "display": "aripă",
+      "normalized": "aripa",
+      "id": "ro-a-aripa",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul aripă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ascuțitoare",
+      "display": "ascuțitoare",
+      "normalized": "ascutitoare",
+      "id": "ro-a-ascutitoare",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul ascuțitoare",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-a-ata",
+      "word": "ață",
+      "display": "ață",
+      "normalized": "ata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul ață",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-a-alge",
+      "word": "alge",
+      "display": "alge",
+      "normalized": "alge",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul alge",
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     }

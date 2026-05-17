@@ -47,6 +47,44 @@ export function getContentTargetValue(
   return lowerForLocale(locale, typeof target === "string" ? target : target.id);
 }
 
+export function getLetterRouteSegment(
+  locale: SupportedLocale,
+  letterId: string,
+): string {
+  const targetValue = getContentTargetValue(locale, letterId);
+
+  return getRomanianLetterRouteAliases()[targetValue] ?? targetValue;
+}
+
+export function getLetterIdFromRouteSegment(
+  locale: SupportedLocale,
+  routeSegment: string,
+): string {
+  const targetValue = getContentTargetValue(locale, safeDecode(routeSegment));
+  const romanianLetterRouteAliases = getRomanianLetterRouteAliases();
+  const exactLetter = Object.entries(romanianLetterRouteAliases).find(
+    ([, alias]) => alias === targetValue,
+  )?.[0];
+
+  return exactLetter ?? targetValue;
+}
+
 function lowerForLocale(locale: SupportedLocale, value: string): string {
   return value.toLocaleLowerCase(LOCALE_LOWERCASE_TAGS[locale]);
+}
+
+function getRomanianLetterRouteAliases(): Record<string, string> {
+  return {
+    î: "i-circ",
+    ș: "sh",
+    ț: "tz",
+  };
+}
+
+function safeDecode(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
 }

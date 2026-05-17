@@ -52,6 +52,12 @@ Important UI constraints:
 - Text must not overlap wheel segments, controls, or modal content.
 - The wheel is the main visual focus.
 
+## Local Verification
+
+The local development server is expected to be running on port `3000`.
+
+Agents should verify browser and route behavior against `http://localhost:3000`. If a sandboxed command cannot reach `localhost:3000`, retry the reachability check outside the sandbox before treating the app as unavailable. Do not start another dev server or switch to another port.
+
 ## Target Child Vocabulary
 
 The Romanian pack is for children around ages 4 to 6.

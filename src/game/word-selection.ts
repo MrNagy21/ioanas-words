@@ -1,4 +1,4 @@
-import type { ContentLetter, ContentWord } from "@/content/types";
+import type { ContentTarget, ContentWord } from "@/content/types";
 import { wordContainsTarget, wordStartsWithTarget } from "@/content/matching";
 import type { SupportedLocale } from "@/i18n/locales";
 
@@ -17,13 +17,13 @@ export const DEFAULT_WHEEL_WORD_COUNT = 10;
 export type WheelEmptyStateKind = "no-content" | "all-removed";
 
 export function getPlayableWords({
-  letter,
+  target,
   locale = "ro",
   mode = DEFAULT_WORD_INCLUSION_MODE,
   removedWordIds,
   words,
 }: Readonly<{
-  letter: ContentLetter;
+  target: ContentTarget;
   locale?: SupportedLocale;
   mode?: WordInclusionMode;
   removedWordIds: readonly string[];
@@ -32,20 +32,20 @@ export function getPlayableWords({
   return words.filter(
     (word) =>
       word.status === "approved" &&
-      isWordEligibleForMode(word, letter, mode, locale) &&
+      isWordEligibleForMode(word, target, mode, locale) &&
       !removedWordIds.includes(word.id),
   );
 }
 
 export function isWordEligibleForMode(
   word: ContentWord,
-  letter: ContentLetter,
+  target: ContentTarget,
   mode: WordInclusionMode,
   locale: SupportedLocale = "ro",
 ) {
-  const startsWithLetter = wordStartsWithTarget(locale, word, letter);
+  const startsWithLetter = wordStartsWithTarget(locale, word, target);
   const containsLetterInside =
-    !startsWithLetter && wordContainsTarget(locale, word, letter);
+    !startsWithLetter && wordContainsTarget(locale, word, target);
 
   if (mode === "starts-with") {
     return startsWithLetter;

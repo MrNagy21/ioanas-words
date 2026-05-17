@@ -14,7 +14,9 @@
       "image": "/images/ro/j/ro-j-jucarie.webp",
       "imageStatus": "ready",
       "alt": "O jucărie",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -30,7 +32,63 @@
       "image": "/images/ro/j/ro-j-jacheta.webp",
       "imageStatus": "ready",
       "alt": "O jachetă",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-joc",
+      "word": "joc",
+      "display": "joc",
+      "normalized": "joc",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul joc",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jeleu",
+      "word": "jeleu",
+      "display": "jeleu",
+      "normalized": "jeleu",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul jeleu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jaluzea",
+      "word": "jaluzea",
+      "display": "jaluzea",
+      "normalized": "jaluzea",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul jaluzea",
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     }

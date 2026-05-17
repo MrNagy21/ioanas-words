@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import {
   getDerivedWordPoolsForTarget,
   getEnabledLetters,
+  getLetterIdFromRouteSegment,
+  getLetterRouteSegment,
   getLocaleCoverageSummary,
   getWordsContainingOnlyTarget,
   getWordsStartingWithTarget,
@@ -35,6 +37,15 @@ assert.equal(wordStartsWithTarget("ro", fixtures[5], "â"), true);
 assert.equal(wordStartsWithTarget("ro", fixtures[6], "i"), true);
 assert.equal(wordStartsWithTarget("ro", fixtures[6], "î"), false);
 assert.equal(wordStartsWithTarget("ro", fixtures[7], "î"), true);
+assert.equal(getLetterRouteSegment("ro", "ș"), "sh");
+assert.equal(getLetterRouteSegment("ro", "ț"), "tz");
+assert.equal(getLetterRouteSegment("ro", "î"), "i-circ");
+assert.equal(getLetterRouteSegment("ro", "s"), "s");
+assert.equal(getLetterIdFromRouteSegment("ro", "sh"), "ș");
+assert.equal(getLetterIdFromRouteSegment("ro", "tz"), "ț");
+assert.equal(getLetterIdFromRouteSegment("ro", "i-circ"), "î");
+assert.equal(getLetterIdFromRouteSegment("ro", "%C8%99"), "ș");
+assert.equal(getLetterIdFromRouteSegment("ro", "s"), "s");
 
 assert.deepEqual(
   getWordsStartingWithTarget("ro", "ș", fixtures).map((word) => word.id),

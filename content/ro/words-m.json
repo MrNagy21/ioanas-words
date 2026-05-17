@@ -14,7 +14,9 @@
       "image": "/images/ro/m/ro-m-mama.webp",
       "imageStatus": "ready",
       "alt": "O mamă",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -30,7 +32,9 @@
       "image": "/images/ro/m/ro-m-mar.webp",
       "imageStatus": "ready",
       "alt": "Un măr",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -46,7 +50,9 @@
       "image": "/images/ro/m/ro-m-masa.webp",
       "imageStatus": "ready",
       "alt": "O masă",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -62,7 +68,9 @@
       "image": "/images/ro/m/ro-m-minge.webp",
       "imageStatus": "ready",
       "alt": "O minge",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -78,7 +86,9 @@
       "image": "/images/ro/m/ro-m-masina.webp",
       "imageStatus": "ready",
       "alt": "O mașină",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -94,7 +104,9 @@
       "image": "/images/ro/m/ro-m-morcov.webp",
       "imageStatus": "ready",
       "alt": "Un morcov",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -110,7 +122,9 @@
       "image": "/images/ro/m/ro-m-mana.webp",
       "imageStatus": "ready",
       "alt": "O mână",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -126,7 +140,9 @@
       "image": "/images/ro/m/ro-m-munte.webp",
       "imageStatus": "ready",
       "alt": "Un munte",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -142,7 +158,9 @@
       "image": "/images/ro/m/ro-m-manusa.webp",
       "imageStatus": "ready",
       "alt": "O mănușă",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     },
@@ -158,7 +176,189 @@
       "image": "/images/ro/m/ro-m-melc.webp",
       "imageStatus": "ready",
       "alt": "Un melc",
-      "source": ["manual"],
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "maimuță",
+      "display": "maimuță",
+      "normalized": "maimuta",
+      "id": "ro-m-maimuta",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul maimuță",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "măgar",
+      "display": "măgar",
+      "normalized": "magar",
+      "id": "ro-m-magar",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul măgar",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "mătură",
+      "display": "mătură",
+      "normalized": "matura",
+      "id": "ro-m-matura",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul mătură",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "miere",
+      "display": "miere",
+      "normalized": "miere",
+      "id": "ro-m-miere",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul miere",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "motan",
+      "display": "motan",
+      "normalized": "motan",
+      "id": "ro-m-motan",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul motan",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-m-musetel",
+      "word": "mușețel",
+      "display": "mușețel",
+      "normalized": "musetel",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul mușețel",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-m-martisor",
+      "word": "mărțișor",
+      "display": "mărțișor",
+      "normalized": "martisor",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul mărțișor",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-m-mazare",
+      "word": "mazăre",
+      "display": "mazăre",
+      "normalized": "mazare",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul mazăre",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-m-miez",
+      "word": "miez",
+      "display": "miez",
+      "normalized": "miez",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul miez",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-m-margele",
+      "word": "mărgele",
+      "display": "mărgele",
+      "normalized": "margele",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul mărgele",
+      "source": [
+        "manual"
+      ],
       "license": "app-owned",
       "status": "approved"
     }

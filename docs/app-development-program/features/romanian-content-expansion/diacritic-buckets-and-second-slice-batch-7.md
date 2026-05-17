@@ -14,12 +14,14 @@ No production words or image assets are added in this batch.
 
 Decision: use the hybrid convention confirmed by the human on 2026-05-17.
 
+Post-Batch 8 route fix: the canonical content bucket remains exact `ș`/`ț`, but public play URLs now use ASCII route segments `/ro/play/sh` and `/ro/play/tz` for browser and deployment compatibility. The app resolves those route segments back to exact `ș` and `ț` internally.
+
 | Layer | `Ș` example | `Ț` example | Rule |
 | --- | --- | --- | --- |
 | Letter ID | `ș` | `ț` | Keep exact lowercase Romanian bucket IDs. |
 | Letter label | `Ș` | `Ț` | Use locale uppercase labels. |
 | Word manifest file | `content/ro/words-ș.json` | `content/ro/words-ț.json` | Keep exact bucket filenames. |
-| Route segment | `/ro/play/ș` | `/ro/play/ț` | Keep exact child-facing route targets. Browsers may percent-encode these characters in transport or display. |
+| Route segment | `/ro/play/sh` | `/ro/play/tz` | Use ASCII public route targets and resolve them internally to exact bucket IDs. |
 | Word ID prefix | `ro-sh-...` | `ro-tz-...` | Keep production word IDs ASCII. |
 | Image folder | `/images/ro/ș/...` | `/images/ro/ț/...` | Keep canonical image ownership under the exact bucket folder. |
 | Image filename | `ro-sh-sapca.webp` | `ro-tz-testoasa.webp` | Match the ASCII word ID exactly. |
@@ -30,31 +32,32 @@ Examples:
 content/ro/words-ș.json
 id: ro-sh-sapca
 image: /images/ro/ș/ro-sh-sapca.webp
-route: /ro/play/ș
+route: /ro/play/sh
 
 content/ro/words-ț.json
 id: ro-tz-testoasa
 image: /images/ro/ț/ro-tz-testoasa.webp
-route: /ro/play/ț
+route: /ro/play/tz
 ```
 
 Rationale:
 
 - Exact bucket IDs preserve Romanian orthography and keep `S` distinct from `Ș`, and `T` distinct from `Ț`.
-- Exact bucket filenames and route segments match the app's existing content model: `letters.json` uses `id` and `wordFile`, and `generateStaticParams` already emits route params from enabled letter IDs.
+- Exact bucket filenames match the app's existing content model: `letters.json` uses `id` and `wordFile`, while play-route generation can use ASCII-safe aliases.
+- ASCII public route segments avoid relying on diacritic characters in generated paths while preserving exact internal content matching.
 - ASCII word IDs and filenames keep IDs stable in JSON, image filenames, tooling, shell commands, and future external references.
 - Canonical image folders remain tied to the exact starting-letter bucket, so image ownership still follows canonical storage.
 
 Route/source notes:
 
 - Next.js App Router dynamic segments receive route values through `params`, and `generateStaticParams` can provide known route params at build time: https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes
-- URL percent-encoding is normal for URL characters outside simple ASCII contexts; links can stay authored as `/ro/play/ș` while clients may encode the path during transport: https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding
+- URL percent-encoding is normal for URL characters outside simple ASCII contexts, but this app now avoids it for `Ș` and `Ț` play routes by authoring ASCII route segments: https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding
 
 Implementation note:
 
 - `scripts/content/validate-content.mjs` now accepts `ro-sh-` as the required ASCII word ID prefix for `ș` manifests and `ro-tz-` for `ț` manifests.
 - The validator still requires exact `word`, `display`, manifest letter, image folder, and canonical starting-letter placement.
-- No alias routes such as `/ro/play/sh` or `/ro/play/tz` are introduced.
+- Public route aliases `/ro/play/sh` and `/ro/play/tz` are now introduced and are the generated child-facing routes for `Ș` and `Ț`.
 - No broader convention for future `Ă`, `Â`, or `Î` word ID tokens is implemented in this batch. Resolve those deliberately before adding production starting-letter files for those buckets.
 
 ## Planned Second Production Slice

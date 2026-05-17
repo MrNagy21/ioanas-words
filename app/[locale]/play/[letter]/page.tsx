@@ -2,8 +2,9 @@ import { notFound } from "next/navigation";
 import { WordWheelShell } from "@/components/word-wheel-shell";
 import {
   getDerivedWordPoolsForTarget,
-  getEnabledLetters,
-  getLetter,
+  getGameplayRouteTargets,
+  getGameplayTargetFromRouteSegment,
+  getPracticeTargetContentSummary,
   getStarterContentSummary,
 } from "@/content/loaders";
 import type { GameplayContent } from "@/content/types";
@@ -19,9 +20,9 @@ type GamePageProps = Readonly<{
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getEnabledLetters("ro").map((letter) => ({
-    locale: "ro",
-    letter: letter.id,
+  return getGameplayRouteTargets("ro").map((target) => ({
+    locale: target.locale,
+    letter: target.target,
   }));
 }
 
@@ -32,21 +33,22 @@ export default async function GamePage({ params }: GamePageProps) {
     notFound();
   }
 
-  const selectedLetter = getLetter(locale, letter);
+  const selectedTarget = getGameplayTargetFromRouteSegment(locale, letter);
 
-  if (!selectedLetter?.enabled) {
+  if (!selectedTarget) {
     notFound();
   }
 
   const selectedContent: GameplayContent = {
-    letter: selectedLetter,
-    wordPools: getDerivedWordPoolsForTarget(locale, selectedLetter),
+    target: selectedTarget,
+    wordPools: getDerivedWordPoolsForTarget(locale, selectedTarget),
   };
 
   return (
     <WordWheelShell
       letters={getStarterContentSummary(locale)}
       locale={locale}
+      practiceTargets={getPracticeTargetContentSummary(locale)}
       selectedContent={selectedContent}
     />
   );

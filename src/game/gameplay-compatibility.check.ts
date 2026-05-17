@@ -23,7 +23,32 @@ const enabledRomanianLetters = getEnabledLetters("ro");
 
 assert.deepEqual(
   enabledRomanianLetters.map((letter) => letter.id),
-  ["a", "b", "c", "d", "f", "g", "j", "m", "p", "r", "s", "ș", "ț", "u", "z"],
+  [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "î",
+    "j",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "r",
+    "s",
+    "ș",
+    "t",
+    "ț",
+    "u",
+    "v",
+    "z",
+  ],
 );
 assert.equal(getBoundedWheelWordCount(20, 30), MAX_WHEEL_WORD_COUNT);
 assert.equal(getBoundedWheelWordCount(DEFAULT_WHEEL_WORD_COUNT, 7), 7);

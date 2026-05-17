@@ -62,7 +62,7 @@ For content expansion:
 
 Do not turn worksheet examples from logopedie sources into production content automatically. A word can be clinically useful in a therapist worksheet and still be rejected for Word Wheel if it is abstract, visually unclear, frightening, shaming, too old for ages 4 to 6, or not culturally strong.
 
-Romanian Content Expansion has completed its pilot coverage audit and candidate worksheet. Forward work should be treated as production preparation, not exploratory pilot work. Once a Romanian word or image is implemented in production manifests or public assets, it must be production-ready: canonical, deduplicated, validated, child-safe, imageable, reviewed, and suitable for the child-facing app. Do not add placeholder-only production words unless a later production plan explicitly accepts that tradeoff and documents how the app will avoid showing unfinished content.
+Romanian Content Expansion has completed its pilot coverage audit and candidate worksheet. Forward work should be treated as production preparation, not exploratory pilot work. Once a Romanian word is implemented in production manifests, it must be canonical, deduplicated, validated, child-safe, imageable, reviewed, and suitable for the child-facing app. Batch 11 explicitly accepted a split vocabulary-first and image-second pipeline: approved placeholder-backed words may be visible in gameplay with a deliberately generic app-owned placeholder until final per-word images exist, and `/admin/words` must keep those placeholder states easy to audit.
 
 ## Code QA Commands
 
@@ -78,7 +78,7 @@ In the current Codex desktop environment, `pnpm` may not be on `PATH`; `bun run 
 
 ## Browser Verification
 
-The user is responsible for running the local dev server on port `3000`.
+The local dev server is expected to be running on port `3000`.
 
 Agents should verify against:
 
@@ -86,7 +86,7 @@ Agents should verify against:
 http://localhost:3000
 ```
 
-If port `3000` is not reachable, ask the user to start the server. Do not start a different dev server port.
+If a sandboxed command cannot reach `localhost:3000`, retry the reachability check outside the sandbox before concluding the server is unavailable. Do not start a different dev server port.
 
 ## Admin Inventory QA
 
@@ -158,6 +158,6 @@ When a batch completes, the final response should include a prompt that the user
 - explicit non-goals;
 - required status/documentation updates;
 - required QA commands;
-- browser verification instructions, including the rule that the user owns the dev server on port `3000`.
+- browser verification instructions, including the rule that the local dev server is expected on port `3000` and sandbox reachability failures should be retried outside the sandbox.
 
 If the completed batch is the last batch in a feature spec, replace the next-batch prompt with a short finalization note that says the spec is complete, identifies any deferred work, and lists the remaining production/release checks.

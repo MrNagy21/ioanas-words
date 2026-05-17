@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WordDetailList } from "./word-detail-list";
-import { getLocaleCoverageSummary } from "@/content/loaders";
+import {
+  getLetterRouteSegment,
+  getLocaleCoverageSummary,
+} from "@/content/loaders";
 
 export const metadata: Metadata = {
   title: "Admin Words | Word Wheel",
@@ -104,7 +107,10 @@ export default function AdminWordsPage() {
                       <Link
                         aria-label={`Open ${summary.letter.label} wheel`}
                         className="admin-link"
-                        href={`/ro/play/${summary.letter.id}`}
+                        href={`/ro/play/${getLetterRouteSegment(
+                          locale,
+                          summary.letter.id,
+                        )}`}
                       >
                         Open wheel
                       </Link>
@@ -149,7 +155,10 @@ export default function AdminWordsPage() {
                   <Link
                     aria-label={`Open ${summary.letter.label} wheel`}
                     className="admin-link"
-                    href={`/ro/play/${summary.letter.id}`}
+                    href={`/ro/play/${getLetterRouteSegment(
+                      locale,
+                      summary.letter.id,
+                    )}`}
                   >
                     Open wheel
                   </Link>

@@ -63,6 +63,10 @@ const wordKeys = new Set([
   "status",
 ]);
 
+const approvedPlaceholderImagePaths = new Set([
+  "/images/ro/placeholders/generic-word-placeholder.webp",
+]);
+
 function addError(filePath, message) {
   errors.push(`${path.relative(repoRoot, filePath)}: ${message}`);
 }
@@ -153,6 +157,7 @@ function foldRomanian(value) {
 function getWordIdBucketToken(locale, letterId) {
   if (locale === "ro") {
     const romanianAsciiBucketTokens = {
+      î: "i-circ",
       ș: "sh",
       ț: "tz",
     };
@@ -450,6 +455,63 @@ function validateWordShape(word, filePath, context) {
 }
 
 async function validateImagePath(word, locale, letterId, filePath, context) {
+  const isApprovedPlaceholderImagePath = approvedPlaceholderImagePaths.has(
+    word.image,
+  );
+
+  if (word.imageStatus === "placeholder" && isApprovedPlaceholderImagePath) {
+    const imagePath = path.join(publicRoot, word.image.slice(1));
+    if (!existsSync(imagePath)) {
+      addError(
+        filePath,
+        `${context}.image uses approved placeholder path but ${path.relative(repoRoot, imagePath)} does not exist`,
+      );
+      return;
+    }
+
+    const imageExtension = path.extname(word.image).slice(1);
+    if (!localImageExtensionValues.has(imageExtension)) {
+      addError(
+        filePath,
+        `${context}.image extension "${imageExtension}" is not allowed for the approved placeholder asset`,
+      );
+    }
+
+    const imageStats = await stat(imagePath);
+    if (imageStats.size > LOCAL_IMAGE_MAX_BYTES) {
+      addError(
+        filePath,
+        `${context}.approved placeholder image is ${imageStats.size} bytes, above the ${LOCAL_IMAGE_MAX_BYTES} byte hard maximum`,
+      );
+    } else if (imageStats.size > LOCAL_IMAGE_WARN_BYTES) {
+      addWarning(
+        filePath,
+        `${context}.approved placeholder image is ${imageStats.size} bytes, above the ${LOCAL_IMAGE_WARN_BYTES} byte warning threshold`,
+      );
+    }
+
+    try {
+      const dimensions = readWebpDimensions(await readFile(imagePath));
+      if (
+        dimensions.width !== LOCAL_IMAGE_WIDTH_PX ||
+        dimensions.height !== LOCAL_IMAGE_HEIGHT_PX
+      ) {
+        addError(
+          filePath,
+          `${context}.approved placeholder image must be ${LOCAL_IMAGE_WIDTH_PX} x ${LOCAL_IMAGE_HEIGHT_PX} px, got ${dimensions.width} x ${dimensions.height} px`,
+        );
+      }
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      addError(
+        filePath,
+        `${context}.approved placeholder image could not be validated as WebP (${detail})`,
+      );
+    }
+
+    return;
+  }
+
   const imageExtensions = LOCAL_IMAGE_EXTENSION_VALUES.join("|");
   const imagePattern = new RegExp(
     `^/images/${locale}/${letterId}/${word.id}\\.(${imageExtensions})$`,
@@ -608,7 +670,10 @@ async function validateWordManifest(
       globalExactWords.set(exactValue, word.id);
     }
 
-    if (globalImagePaths.has(word.image)) {
+    if (
+      !approvedPlaceholderImagePaths.has(word.image) &&
+      globalImagePaths.has(word.image)
+    ) {
       addError(filePath, `${context}.image duplicates another word image path`);
     }
     globalImagePaths.add(word.image);

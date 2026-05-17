@@ -33,9 +33,10 @@ The project is currently at 0% implementation. Only documentation exists. No app
 - Romanian Content Expansion has completed its pilot audit and worksheet phase. Future Romanian content work is production preparation: do not add words or images unless they are intended to be production-ready, validated, reviewed, and suitable for the child-facing app once implemented.
 - When a production decision depends on current facts, standards, child development guidance, Romanian language usage, safety, licensing, deployment behavior, or framework behavior that may have changed, do internet or source research before deciding and cite or record the source in the relevant docs.
 - Ask the human for critical decisions instead of silently choosing. Critical decisions include production vocabulary acceptance tradeoffs, clinical/speech-therapy claims, child-safety concerns, licensing uncertainty, introducing placeholders into child-facing content, schema changes that affect future content, database/auth/billing architecture, and any change that expands or narrows v1 scope.
-- The user is responsible for running the local dev server on port `3000`.
-  Agents should verify against `http://localhost:3000` when the server is already running.
-  If the server is not reachable on port `3000`, ask the user to start it instead of starting another port.
+- The local dev server is expected to be running on port `3000`.
+  Agents should verify browser and route behavior against `http://localhost:3000`.
+  If a sandboxed command cannot reach `localhost:3000`, retry the reachability check outside the sandbox before concluding the server is unavailable.
+  Do not start another dev server or use another port.
 - Do not skip content validation when adding real content.
 - Do not add obscure Romanian words just to fill letter quotas.
 - Do not store large unoptimized image assets in the repository.

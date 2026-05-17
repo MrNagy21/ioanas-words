@@ -16,11 +16,28 @@ export type ContentLetter = Readonly<{
   sortOrder: number;
 }>;
 
-export type ContentTarget = ContentLetter | string;
+export type ContentPracticeTarget = Readonly<{
+  id: string;
+  label: string;
+  locale: SupportedLocale;
+  kind: "sequence";
+  routeSegment: string;
+  sortOrder: number;
+  enabled: boolean;
+}>;
+
+export type GameplayTarget = ContentLetter | ContentPracticeTarget;
+
+export type ContentTarget = GameplayTarget | string;
 
 export type LetterManifest = Readonly<{
   locale: SupportedLocale;
   letters: ContentLetter[];
+}>;
+
+export type PracticeTargetManifest = Readonly<{
+  locale: SupportedLocale;
+  targets: ContentPracticeTarget[];
 }>;
 
 export type PartOfSpeech = (typeof PART_OF_SPEECH_VALUES)[number];
@@ -65,7 +82,7 @@ export type LetterContent = Readonly<{
 }>;
 
 export type GameplayContent = Readonly<{
-  letter: ContentLetter;
+  target: GameplayTarget;
   wordPools: DerivedWordPools;
 }>;
 
@@ -112,4 +129,18 @@ export type LocaleCoverageSummary = Readonly<{
   totalContainsOnlyAssignments: number;
   imageCounts: ImageReadinessCounts;
   letterSummaries: LetterCoverageSummary[];
+}>;
+
+export type PracticeTargetCoverageSummary = Readonly<{
+  target: ContentPracticeTarget;
+  startsWithWords: ContentWord[];
+  containsOnlyWords: ContentWord[];
+  mixedWords: ContentWord[];
+  startsWithCount: number;
+  containsOnlyCount: number;
+  mixedCount: number;
+  imageCounts: DerivedWordPoolImageCounts;
+  startsWithImageCounts: ImageReadinessCounts;
+  containsOnlyImageCounts: ImageReadinessCounts;
+  mixedImageCounts: ImageReadinessCounts;
 }>;

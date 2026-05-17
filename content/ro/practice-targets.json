@@ -1,0 +1,77 @@
+{
+  "locale": "ro",
+  "targets": [
+    {
+      "id": "ce",
+      "label": "CE",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "ce",
+      "sortOrder": 1,
+      "enabled": true
+    },
+    {
+      "id": "ci",
+      "label": "CI",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "ci",
+      "sortOrder": 2,
+      "enabled": true
+    },
+    {
+      "id": "ge",
+      "label": "GE",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "ge",
+      "sortOrder": 3,
+      "enabled": true
+    },
+    {
+      "id": "gi",
+      "label": "GI",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "gi",
+      "sortOrder": 4,
+      "enabled": true
+    },
+    {
+      "id": "che",
+      "label": "CHE",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "che",
+      "sortOrder": 5,
+      "enabled": true
+    },
+    {
+      "id": "chi",
+      "label": "CHI",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "chi",
+      "sortOrder": 6,
+      "enabled": true
+    },
+    {
+      "id": "ghe",
+      "label": "GHE",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "ghe",
+      "sortOrder": 7,
+      "enabled": true
+    },
+    {
+      "id": "ghi",
+      "label": "GHI",
+      "locale": "ro",
+      "kind": "sequence",
+      "routeSegment": "ghi",
+      "sortOrder": 8,
+      "enabled": true
+    }
+  ]
+}

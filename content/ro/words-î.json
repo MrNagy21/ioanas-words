@@ -1,0 +1,24 @@
+{
+  "locale": "ro",
+  "letter": "î",
+  "words": [
+    {
+      "word": "înghețată",
+      "display": "înghețată",
+      "normalized": "inghetata",
+      "id": "ro-i-circ-inghetata",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul înghețată",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

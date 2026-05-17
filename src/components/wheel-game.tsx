@@ -10,7 +10,12 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import type { GameplayContent, ContentWord } from "@/content/types";
+import type {
+  ContentPracticeTarget,
+  ContentWord,
+  GameplayContent,
+  GameplayTarget,
+} from "@/content/types";
 import {
   DEFAULT_WORD_INCLUSION_MODE,
   DEFAULT_WHEEL_WORD_COUNT,
@@ -67,12 +72,12 @@ const modeOptions = [
   {
     mode: "starts-with",
     label: "Încep cu",
-    statusLabel: "Încep cu litera",
+    statusLabel: "Încep cu",
   },
   {
     mode: "contains-only",
     label: "Conțin",
-    statusLabel: "Conțin litera",
+    statusLabel: "Conțin",
   },
   {
     mode: "starts-with-or-contains",
@@ -99,8 +104,14 @@ const segmentColors = [
 ] as const;
 
 export function WheelGame({ content, locale }: WheelGameProps) {
+  const defaultMode = isPracticeTarget(content.target)
+    ? "starts-with-or-contains"
+    : DEFAULT_WORD_INCLUSION_MODE;
+  const targetKindLabel = isPracticeTarget(content.target)
+    ? "Sunetul"
+    : "Litera";
   const [selectedMode, setSelectedMode] = useState<WordInclusionMode>(
-    DEFAULT_WORD_INCLUSION_MODE,
+    defaultMode,
   );
   const [targetWordCounts, setTargetWordCounts] = useState<
     Record<WordInclusionMode, number>
@@ -116,7 +127,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   const [isResultOpen, setIsResultOpen] = useState(false);
   const [isSetupOpen, setIsSetupOpen] = useState(true);
   const [draftMode, setDraftMode] = useState<WordInclusionMode>(
-    DEFAULT_WORD_INCLUSION_MODE,
+    defaultMode,
   );
   const [draftWordCount, setDraftWordCount] = useState(
     DEFAULT_WHEEL_WORD_COUNT,
@@ -132,7 +143,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         modeOptions.map((option) => [
           option.mode,
           getPlayableWords({
-            letter: content.letter,
+            target: content.target,
             locale,
             mode: option.mode,
             removedWordIds: EMPTY_REMOVED_WORD_IDS,
@@ -147,7 +158,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   const activeWords = useMemo(
     () =>
       getPlayableWords({
-        letter: content.letter,
+        target: content.target,
         locale,
         mode: selectedMode,
         removedWordIds,
@@ -411,10 +422,10 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     <section className="app-stage game-stage" aria-labelledby="game-title">
       <div className="game-topline">
         <Link className="quiet-link" href={`/${locale}`}>
-          Schimbă litera
+          Schimbă alegerea
         </Link>
-        <div className="selected-letter" aria-label="Litera aleasă">
-          {content.letter.label}
+        <div className="selected-letter" aria-label="Alegerea curentă">
+          {content.target.label}
         </div>
       </div>
 
@@ -426,7 +437,9 @@ export function WheelGame({ content, locale }: WheelGameProps) {
               aria-label={
                 isSpinning
                   ? "Roata se învârte"
-                  : `Învârte roata pentru litera ${content.letter.label}`
+                  : `Învârte roata pentru ${targetKindLabel.toLocaleLowerCase(
+                      "ro",
+                    )} ${content.target.label}`
               }
               className="wheel-button"
               disabled={!hasWords || isInteractionBlocked}
@@ -530,7 +543,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
                     x="160"
                     y="162"
                   >
-                    {content.letter.label}
+                    {content.target.label}
                   </text>
                   <g
                     className="word-wheel__surface word-wheel__label-surface"
@@ -588,13 +601,15 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         )}
 
         <div className="game-panel">
-          <p className="stage-label">Litera {content.letter.label}</p>
+          <p className="stage-label">
+            {targetKindLabel} {content.target.label}
+          </p>
           <h2 id="game-title">
             {hasWords ? "Învârte roata" : "Roata este goală"}
           </h2>
           <p className="mode-status">
             <span>
-              {selectedModeOption.statusLabel} {content.letter.label}
+              {selectedModeOption.statusLabel} {content.target.label}
             </span>
             <strong>{words.length}</strong>
             <span>
@@ -671,7 +686,8 @@ export function WheelGame({ content, locale }: WheelGameProps) {
           boundedWordCount={boundedDraftWordCount}
           draftMode={draftMode}
           hasRemovedWords={removedWordCount > 0}
-          letterLabel={content.letter.label}
+          targetLabel={content.target.label}
+          targetKindLabel={targetKindLabel}
           modeWordCounts={modeWordCounts}
           onApply={() => applySetup({ resetRemovedWords: false })}
           onClose={closeSetup}
@@ -816,7 +832,8 @@ function SetupModal({
   boundedWordCount,
   draftMode,
   hasRemovedWords,
-  letterLabel,
+  targetKindLabel,
+  targetLabel,
   modeWordCounts,
   onApply,
   onClose,
@@ -829,7 +846,8 @@ function SetupModal({
   boundedWordCount: number;
   draftMode: WordInclusionMode;
   hasRemovedWords: boolean;
-  letterLabel: string;
+  targetKindLabel: string;
+  targetLabel: string;
   modeWordCounts: Record<WordInclusionMode, number>;
   onApply: () => void;
   onClose: () => void;
@@ -909,7 +927,9 @@ function SetupModal({
         role="dialog"
       >
         <div className="setup-modal__header">
-          <p className="stage-label">Litera {letterLabel}</p>
+          <p className="stage-label">
+            {targetKindLabel} {targetLabel}
+          </p>
           <h2 id="setup-title">Setează roata</h2>
         </div>
 
@@ -923,7 +943,7 @@ function SetupModal({
 
             return (
               <button
-                aria-label={`${option.statusLabel} ${letterLabel}, ${modeWordCounts[option.mode]} ${getWordCountLabel(modeWordCounts[option.mode])}`}
+                aria-label={`${option.statusLabel} ${targetLabel}, ${modeWordCounts[option.mode]} ${getWordCountLabel(modeWordCounts[option.mode])}`}
                 aria-pressed={isSelected}
                 className="mode-selector__button"
                 data-active={isSelected ? "true" : undefined}
@@ -940,7 +960,7 @@ function SetupModal({
 
         <p className="mode-status">
           <span>
-            {activeModeOption.statusLabel} {letterLabel}
+            {activeModeOption.statusLabel} {targetLabel}
           </span>
           <strong>{boundedWordCount}</strong>
           <span>
@@ -1039,10 +1059,10 @@ function EmptyWheelState({
         onClick={onReset}
         type="button"
       >
-        Resetează litera
+        Resetează roata
       </button>
       <Link className="secondary-button" href={`/${locale}`}>
-        Alege altă literă
+        Alege altceva
       </Link>
     </div>
   );
@@ -1054,6 +1074,12 @@ function hasReadyImage(word: ContentWord) {
 
 function getModeOption(mode: WordInclusionMode) {
   return modeOptions.find((option) => option.mode === mode) ?? modeOptions[0];
+}
+
+function isPracticeTarget(
+  target: GameplayTarget,
+): target is ContentPracticeTarget {
+  return "kind" in target && target.kind === "sequence";
 }
 
 function getModePool(content: GameplayContent, mode: WordInclusionMode) {
@@ -1080,7 +1106,7 @@ function getAvailableWordCountForMode({
   removedWordIds: readonly string[];
 }>) {
   return getPlayableWords({
-    letter: content.letter,
+    target: content.target,
     locale,
     mode,
     removedWordIds,

@@ -30,6 +30,13 @@
       "sortOrder": 6
     },
     {
+      "id": "e",
+      "label": "E",
+      "enabled": true,
+      "wordFile": "words-e.json",
+      "sortOrder": 7
+    },
+    {
       "id": "f",
       "label": "F",
       "enabled": true,
@@ -44,6 +51,27 @@
       "sortOrder": 9
     },
     {
+      "id": "h",
+      "label": "H",
+      "enabled": true,
+      "wordFile": "words-h.json",
+      "sortOrder": 10
+    },
+    {
+      "id": "i",
+      "label": "I",
+      "enabled": true,
+      "wordFile": "words-i.json",
+      "sortOrder": 11
+    },
+    {
+      "id": "î",
+      "label": "Î",
+      "enabled": true,
+      "wordFile": "words-î.json",
+      "sortOrder": 12
+    },
+    {
       "id": "j",
       "label": "J",
       "enabled": true,
@@ -51,11 +79,32 @@
       "sortOrder": 13
     },
     {
+      "id": "l",
+      "label": "L",
+      "enabled": true,
+      "wordFile": "words-l.json",
+      "sortOrder": 15
+    },
+    {
       "id": "m",
       "label": "M",
       "enabled": true,
       "wordFile": "words-m.json",
       "sortOrder": 16
+    },
+    {
+      "id": "n",
+      "label": "N",
+      "enabled": true,
+      "wordFile": "words-n.json",
+      "sortOrder": 17
+    },
+    {
+      "id": "o",
+      "label": "O",
+      "enabled": true,
+      "wordFile": "words-o.json",
+      "sortOrder": 18
     },
     {
       "id": "p",
@@ -86,6 +135,13 @@
       "sortOrder": 23
     },
     {
+      "id": "t",
+      "label": "T",
+      "enabled": true,
+      "wordFile": "words-t.json",
+      "sortOrder": 24
+    },
+    {
       "id": "ț",
       "label": "Ț",
       "enabled": true,
@@ -98,6 +154,13 @@
       "enabled": true,
       "wordFile": "words-u.json",
       "sortOrder": 26
+    },
+    {
+      "id": "v",
+      "label": "V",
+      "enabled": true,
+      "wordFile": "words-v.json",
+      "sortOrder": 27
     },
     {
       "id": "z",

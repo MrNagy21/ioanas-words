@@ -1,22 +1,33 @@
 import lettersRoJson from "../../content/ro/letters.json";
+import practiceTargetsRoJson from "../../content/ro/practice-targets.json";
 import wordsAJson from "../../content/ro/words-a.json";
 import wordsBJson from "../../content/ro/words-b.json";
 import wordsCJson from "../../content/ro/words-c.json";
 import wordsDJson from "../../content/ro/words-d.json";
+import wordsEJson from "../../content/ro/words-e.json";
 import wordsFJson from "../../content/ro/words-f.json";
 import wordsGJson from "../../content/ro/words-g.json";
+import wordsHJson from "../../content/ro/words-h.json";
+import wordsIJson from "../../content/ro/words-i.json";
+import wordsICircJson from "../../content/ro/words-î.json";
 import wordsJJson from "../../content/ro/words-j.json";
+import wordsLJson from "../../content/ro/words-l.json";
 import wordsMJson from "../../content/ro/words-m.json";
+import wordsNJson from "../../content/ro/words-n.json";
+import wordsOJson from "../../content/ro/words-o.json";
 import wordsPJson from "../../content/ro/words-p.json";
 import wordsRJson from "../../content/ro/words-r.json";
 import wordsSJson from "../../content/ro/words-s.json";
 import wordsShJson from "../../content/ro/words-ș.json";
+import wordsTJson from "../../content/ro/words-t.json";
 import wordsTzJson from "../../content/ro/words-ț.json";
 import wordsUJson from "../../content/ro/words-u.json";
+import wordsVJson from "../../content/ro/words-v.json";
 import wordsZJson from "../../content/ro/words-z.json";
 import type { SupportedLocale } from "@/i18n/locales";
 import type {
   ContentLetter,
+  ContentPracticeTarget,
   ContentTarget,
   ContentWord,
   DerivedWordPoolImageCounts,
@@ -26,6 +37,8 @@ import type {
   LetterCoverageSummary,
   LetterManifest,
   LocaleCoverageSummary,
+  PracticeTargetCoverageSummary,
+  PracticeTargetManifest,
   WordManifest,
 } from "@/content/types";
 import {
@@ -37,6 +50,8 @@ import {
 
 export {
   getExactWordMatchValues,
+  getLetterIdFromRouteSegment,
+  getLetterRouteSegment,
   wordContainsTarget,
   wordStartsWithTarget,
 } from "@/content/matching";
@@ -44,6 +59,10 @@ export {
 const letterManifests = {
   ro: lettersRoJson as LetterManifest,
 } satisfies Record<SupportedLocale, LetterManifest>;
+
+const practiceTargetManifests = {
+  ro: practiceTargetsRoJson as PracticeTargetManifest,
+} satisfies Record<SupportedLocale, PracticeTargetManifest>;
 
 const wordManifestRegistry: Record<
   SupportedLocale,
@@ -54,16 +73,25 @@ const wordManifestRegistry: Record<
     b: wordsBJson as WordManifest,
     c: wordsCJson as WordManifest,
     d: wordsDJson as WordManifest,
+    e: wordsEJson as WordManifest,
     f: wordsFJson as WordManifest,
     g: wordsGJson as WordManifest,
+    h: wordsHJson as WordManifest,
+    i: wordsIJson as WordManifest,
+    î: wordsICircJson as WordManifest,
     j: wordsJJson as WordManifest,
+    l: wordsLJson as WordManifest,
     m: wordsMJson as WordManifest,
+    n: wordsNJson as WordManifest,
+    o: wordsOJson as WordManifest,
     p: wordsPJson as WordManifest,
     r: wordsRJson as WordManifest,
     s: wordsSJson as WordManifest,
     ș: wordsShJson as WordManifest,
+    t: wordsTJson as WordManifest,
     ț: wordsTzJson as WordManifest,
     u: wordsUJson as WordManifest,
+    v: wordsVJson as WordManifest,
     z: wordsZJson as WordManifest,
   },
 };
@@ -76,6 +104,61 @@ export function getLetters(locale: SupportedLocale): ContentLetter[] {
 
 export function getEnabledLetters(locale: SupportedLocale): ContentLetter[] {
   return getLetters(locale).filter((letter) => letter.enabled);
+}
+
+export function getPracticeTargets(
+  locale: SupportedLocale,
+): ContentPracticeTarget[] {
+  return [...practiceTargetManifests[locale].targets].sort(
+    (first, second) => first.sortOrder - second.sortOrder,
+  );
+}
+
+export function getEnabledPracticeTargets(
+  locale: SupportedLocale,
+): ContentPracticeTarget[] {
+  return getPracticeTargets(locale).filter((target) => target.enabled);
+}
+
+export function getPracticeTarget(
+  locale: SupportedLocale,
+  targetId: string,
+): ContentPracticeTarget | null {
+  const targetValue = getContentTargetValue(locale, targetId);
+
+  return (
+    getPracticeTargets(locale).find((target) => target.id === targetValue) ??
+    null
+  );
+}
+
+export function getGameplayTargetFromRouteSegment(
+  locale: SupportedLocale,
+  routeSegment: string,
+): ContentLetter | ContentPracticeTarget | null {
+  const letter = getLetter(locale, getLetterIdFromRouteSegment(locale, routeSegment));
+
+  if (letter?.enabled) {
+    return letter;
+  }
+
+  const targetValue = getContentTargetValue(locale, routeSegment);
+  const practiceTarget = getPracticeTarget(locale, targetValue);
+
+  return practiceTarget?.enabled ? practiceTarget : null;
+}
+
+export function getGameplayRouteTargets(locale: SupportedLocale) {
+  return [
+    ...getEnabledLetters(locale).map((letter) => ({
+      locale,
+      target: getLetterRouteSegment(locale, letter.id),
+    })),
+    ...getEnabledPracticeTargets(locale).map((target) => ({
+      locale,
+      target: target.routeSegment,
+    })),
+  ];
 }
 
 export function getLetter(
@@ -176,6 +259,14 @@ export function getStarterContentSummary(locale: SupportedLocale) {
   return getEnabledLetters(locale).map((letter) => ({
     ...letter,
     approvedWordCount: getApprovedWordsForLetter(locale, letter.id).length,
+  }));
+}
+
+export function getPracticeTargetContentSummary(locale: SupportedLocale) {
+  return getEnabledPracticeTargets(locale).map((target) => ({
+    ...target,
+    approvedWordCount: getDerivedWordPoolsForTarget(locale, target).mixedWords
+      .length,
   }));
 }
 
@@ -335,6 +426,31 @@ export function getLocaleCoverageSummary(
     imageCounts: getImageReadinessCounts(approvedWords),
     letterSummaries,
   };
+}
+
+export function getPracticeTargetCoverageSummaries(
+  locale: SupportedLocale,
+): PracticeTargetCoverageSummary[] {
+  const approvedWords = getApprovedWords(locale);
+
+  return getEnabledPracticeTargets(locale).map((target) => {
+    const { startsWithWords, containsOnlyWords, mixedWords, imageCounts } =
+      getDerivedWordPoolsForTarget(locale, target, approvedWords);
+
+    return {
+      target,
+      startsWithWords,
+      containsOnlyWords,
+      mixedWords,
+      startsWithCount: startsWithWords.length,
+      containsOnlyCount: containsOnlyWords.length,
+      mixedCount: mixedWords.length,
+      imageCounts,
+      startsWithImageCounts: imageCounts.startsWith,
+      containsOnlyImageCounts: imageCounts.containsOnly,
+      mixedImageCounts: imageCounts.mixed,
+    };
+  });
 }
 
 function getTargetLetter(
