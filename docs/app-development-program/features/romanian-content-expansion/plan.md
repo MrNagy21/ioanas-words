@@ -611,7 +611,7 @@ Decision result:
 
 ## Batch 15: Sound Coverage Manifest Implementation And Practice Targets
 
-Status: Proposed
+Status: Complete
 
 Tasks:
 
@@ -661,9 +661,20 @@ http://localhost:3000/ro/play/ghi
 
 If a sandboxed localhost check fails, retry outside the sandbox before treating the server as unavailable. Do not start another dev server or use another port.
 
+Decision result:
+
+- Batch 15 implemented all `110` accepted rows from `sound-coverage-scope-spec-batch-14.md` as approved placeholder-backed production word records.
+- Production Romanian content now has `319` approved words: `83` ready-image records and `236` placeholder-backed records.
+- Added `content/ro/practice-targets.json` and helper APIs for enabled sequence practice targets.
+- Kept `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` out of `content/ro/letters.json`.
+- Added a separate bottom section on `/ro` for the eight sequence targets.
+- Updated `/ro/play/[letter]` static params and target resolution so both enabled letter buckets and practice targets work.
+- Updated `/admin/words` so practice-target coverage and placeholder counts are visible and auditable.
+- Kept speech-target metadata out of production JSON and added no final per-word images.
+
 ## Batch 16: Placeholder Image Replacement
 
-Status: Proposed
+Status: Complete for the first CE/CI image-replacement slice
 
 Tasks:
 
@@ -678,6 +689,270 @@ Review checkpoint:
 - Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
 - Placeholder counts decrease after each image batch.
 - Child-facing gameplay still works for starts-with, contains-only, mixed, and the eight practice-target routes.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Decision result:
+
+- Batch 16 implemented the first image-focused replacement slice for `12` placeholder-backed `C` words that strengthen `CE` and `CI` practice targets: `ceas`, `cerb`, `cerc`, `cercel`, `ceai`, `ceașcă`, `cereale`, `cearșaf`, `ciocolată`, `ciocan`, `ciupercă`, and `ciorbă`.
+- Added `image-briefs-batch-16.md` with target words, image briefs, review decisions, and final asset paths.
+- Generated reviewed child-safe pixel-art images, rejected the first `ciupercă` source because it included a face on an object, regenerated a clean mushroom icon, palette-reduced the accepted source PNGs, and optimized final canonical WebP assets under `public/images/ro/c/`.
+- Updated the 12 canonical production records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `319` approved words; ready images move from `83` to `95`, and placeholders move from `236` to `224`.
+- Kept vocabulary scope unchanged and kept speech-target metadata out of production JSON.
+
+## Batch 17: Placeholder Image Replacement Slice 2
+
+Status: Complete
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 16.
+- Prioritize remaining high-value practice-target placeholders, especially `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`, while keeping the batch small enough for visual QA.
+- Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add new vocabulary or speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and image-brief documentation.
+
+Review checkpoint:
+
+- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
+- Placeholder counts decrease and ready-image counts increase after the slice.
+- `/admin/words` and affected `/ro/play/<target-or-letter>` routes show the new ready thumbnails/images.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Decision result:
+
+- Batch 17 implemented a 12-word `G`-sequence image-replacement slice for `geacă`, `geantă`, `genunchi`, `ghete`, `ghetuță`, `ghem`, `ghepard`, `ghiozdan`, `ghiveci`, `ghindă`, `ghiocel`, and `ghidon`.
+- Added `image-briefs-batch-17.md` with target words, image briefs, review decisions, final asset paths, and target-readiness impact.
+- Generated and visually reviewed one child-safe pixel-art sprite sheet, cropped and palette-reduced the accepted source cells, and optimized final canonical WebP assets under `public/images/ro/g/`.
+- Updated the 12 canonical `words-g.json` records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `319` approved words; ready images move from `95` to `107`, and placeholders move from `224` to `212`.
+- Target ready-image coverage improves for `GE` (`4 -> 7`), `CHI` (`1 -> 2`), `GHE` (`1 -> 5`), and `GHI` (`0 -> 5`), with incidental `CE`/`CI` improvements from `ghiocel` and `ghiveci`.
+- Kept vocabulary scope unchanged and kept speech-target metadata out of production JSON.
+
+## Batch 18: Placeholder Image Replacement Slice 3
+
+Status: Complete
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 17.
+- Prioritize remaining high-value practice-target placeholders, especially `CHE`, remaining `CHI`, remaining `GE/GI`, and any still-placeholder `GHE/GHI` words that are visually straightforward.
+- Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add new vocabulary or speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and image-brief documentation.
+
+Review checkpoint:
+
+- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
+- Placeholder counts decrease and ready-image counts increase after the slice.
+- `/admin/words` and affected `/ro/play/<target-or-letter>` routes show the new ready thumbnails/images.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Decision result:
+
+- Batch 18 implemented a 15-word `CHE`/`CHI` image-replacement slice for `cheie`, `chec`, `buchet`, `caschetă`, `ochelari`, `pachet`, `ridiche`, `ureche`, `chitară`, `chiflă`, `chiftea`, `chioșc`, `cochilie`, `ochi`, and `unchi`.
+- Added `image-briefs-batch-18.md` with target words, image briefs, review decisions, final asset paths, and target-readiness impact.
+- Regenerated the initial contact sheet with larger gutters after cropability review, then cropped, background-normalized, palette-reduced, and optimized final canonical WebP assets under `public/images/ro/`.
+- Updated the 15 canonical word records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `319` approved words; ready images move from `107` to `122`, and placeholders move from `212` to `197`.
+- `CHE` and `CHI` practice target placeholder counts are now `0`.
+- Kept vocabulary scope unchanged and kept speech-target metadata out of production JSON.
+
+Browser QA:
+
+- In-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/che`, `/ro/play/chi`, `/ro/play/b`, `/ro/play/c`, `/ro/play/o`, `/ro/play/p`, `/ro/play/r`, and `/ro/play/u`.
+- `/admin/words` exposed the Batch 18 ready image refs.
+- `/ro/play/che` and `/ro/play/chi` loaded with ready image refs from the slice.
+- Affected canonical letter routes loaded successfully; some route wheels use bounded/random subsets, so route QA confirms page render and gameplay surface availability rather than guaranteed inclusion of every new image in a single load.
+
+## Batch 19: Placeholder Image Replacement Slice 4
+
+Status: Complete
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 18.
+- Prioritize remaining high-value `GE`, `GI`, `GHE`, and `GHI` practice-target placeholders.
+- Proposed 12-word target set:
+  - `alge`
+  - `fulger`
+  - `mărgele`
+  - `frigider`
+  - `pagină`
+  - `regină`
+  - `înghețată`
+  - `lighean`
+  - `spaghete`
+  - `ghirlandă`
+  - `ghiuvetă`
+  - `unghie`
+- Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add new vocabulary or speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and image-brief documentation.
+
+Review checkpoint:
+
+- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
+- `GE`, `GI`, `GHE`, and `GHI` placeholder counts decrease after the slice.
+- `/admin/words` and affected `/ro/play/<target-or-letter>` routes show the new ready thumbnails/images.
+- Image generation uses generous gutters or individual generations so cropability problems do not recur.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Decision result:
+
+- Batch 19 implemented a 12-word `GE`/`GI`/`GHE`/`GHI` image-replacement slice for `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghiuvetă`, and `unghie`.
+- Added `image-briefs-batch-19.md` with target words, image briefs, review decisions, final asset paths, and target-readiness impact.
+- Generated one cropable contact sheet with generous gutters, then cropped, background-normalized, palette-reduced, and optimized final canonical WebP assets under `public/images/ro/`.
+- Updated the 12 canonical word records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `319` approved words; ready images move from `122` to `134`, and placeholders move from `197` to `185`.
+- `GE`, `GI`, `GHE`, and `GHI` practice target placeholder counts are now `0`.
+- `CHE` and `CHI` practice target placeholder counts remain `0`.
+- Kept vocabulary scope unchanged and kept speech-target metadata out of production JSON.
+
+## Batch 20: Placeholder Image Replacement Slice 5
+
+Status: Complete
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 19.
+- Prioritize remaining high-value sequence-target placeholders, especially the still-placeholder `CE` and `CI` words, while keeping `CHE`, `CHI`, `GE`, `GI`, `GHE`, and `GHI` at `0` placeholders.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and image-brief documentation.
+
+Review checkpoint:
+
+- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
+- Remaining high-value sequence-target placeholder counts decrease after the slice.
+- `/admin/words` and affected `/ro/play/<target-or-letter>` routes show the new ready thumbnails/images.
+- Image generation uses generous gutters or individual generations so cropability problems do not recur.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Decision result:
+
+- Batch 20 implemented an 8-word `CE`/`CI` image-replacement slice for `ceară`, `cetate`, `purcel`, `căciulă`, `cizmă`, `cioc`, `ciucure`, and `rădăcină`.
+- Added `image-briefs-batch-20.md` with target words, image briefs, review decisions, final asset paths, and target-readiness impact.
+- Generated one cropable contact sheet with generous gutters, then cropped, background-normalized, palette-reduced, and optimized final canonical WebP assets under `public/images/ro/`.
+- Updated the 8 canonical word records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `319` approved words; ready images move from `134` to `142`, and placeholders move from `185` to `177`.
+- `CE` and `CI` practice target placeholder counts are now `0`.
+- `CHE`, `CHI`, `GE`, `GI`, `GHE`, and `GHI` practice target placeholder counts remain `0`.
+- Kept vocabulary scope unchanged and kept speech-target metadata out of production JSON.
+
+## Batch 21: General Placeholder Image Replacement Slice 6
+
+Status: Complete
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 20.
+- Prioritize common, concrete, visually straightforward placeholder-backed records from active child-facing buckets now that all eight sequence practice targets have `0` placeholders.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and image-brief documentation.
+
+Review checkpoint:
+
+- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
+- Overall placeholder counts decrease and ready-image counts increase after the slice.
+- `/admin/words` and affected `/ro/play/<target-or-letter>` routes show the new ready thumbnails/images.
+- Image generation uses generous gutters or individual generations so cropability problems do not recur.
+
+Suggested verification:
+
+```txt
+bun run validate:content
+bun run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+bun src/game/gameplay-compatibility.check.ts
+bun src/content/matching.check.ts
+git diff --check
+```
+
+Decision result:
+
+- Batch 21 implemented a 12-word general `B` image-replacement slice for `balon`, `banană`, `barcă`, `bec`, `biscuit`, `broască`, `brânză`, `băț`, `buburuză`, `bagaj`, `barză`, and `buzunar`.
+- Added `image-briefs-batch-21.md` with target words, image briefs, review decisions, final asset paths, and image-readiness impact.
+- Generated and visually reviewed one child-safe pixel-art contact sheet with generous gutters, then cropped, background-normalized, palette-reduced, and optimized final canonical WebP assets under `public/images/ro/b/`.
+- Updated the 12 canonical `words-b.json` records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `319` approved words; ready images move from `142` to `154`, and placeholders move from `177` to `165`.
+- `B` mixed-pool image readiness improves from `11` ready / `26` placeholder to `23` ready / `14` placeholder.
+- `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` practice targets remain at `0` placeholders.
+- Kept vocabulary scope unchanged and kept speech-target metadata out of production JSON.
+
+## Batch 22: General Placeholder Image Replacement Slice 7
+
+Status: Proposed
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 21.
+- Prioritize common, concrete, visually straightforward placeholder-backed records from active child-facing buckets with high gameplay value.
+- Preserve all eight sequence practice targets at `0` placeholders.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and image-brief documentation.
+
+Review checkpoint:
+
+- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
+- Overall placeholder counts decrease and ready-image counts increase after the slice.
+- `/admin/words` and affected `/ro/play/<target-or-letter>` routes show the new ready thumbnails/images.
+- Image generation uses generous gutters or individual generations so cropability problems do not recur.
 
 Suggested verification:
 

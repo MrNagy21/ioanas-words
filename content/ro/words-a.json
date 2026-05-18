@@ -281,9 +281,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul alge",
+      "image": "/images/ro/a/ro-a-alge.webp",
+      "imageStatus": "ready",
+      "alt": "Alge verzi simple",
       "source": [
         "manual"
       ],

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   getDerivedWordPoolsForTarget,
   getEnabledLetters,
+  getEnabledPracticeTargets,
   wordContainsTarget,
   wordStartsWithTarget,
 } from "@/content/loaders";
@@ -20,6 +21,7 @@ import {
 import type { ContentWord } from "@/content/types";
 
 const enabledRomanianLetters = getEnabledLetters("ro");
+const enabledRomanianPracticeTargets = getEnabledPracticeTargets("ro");
 
 assert.deepEqual(
   enabledRomanianLetters.map((letter) => letter.id),
@@ -67,6 +69,10 @@ assert.equal(
 assert.equal(
   getWheelEmptyStateKind({ availableWordCount: 5, visibleWordCount: 1 }),
   null,
+);
+assert.deepEqual(
+  enabledRomanianPracticeTargets.map((target) => target.id),
+  ["ce", "ci", "ge", "gi", "che", "chi", "ghe", "ghi"],
 );
 
 const smallPool = makeSyntheticWords(3);
@@ -151,7 +157,7 @@ for (const letter of enabledRomanianLetters) {
 
   const startsWithWordIds = wordPools.startsWithWords.map((word) => word.id);
   const defaultPlayableWordIds = getPlayableWords({
-    letter,
+    target: letter,
     locale: "ro",
     mode: DEFAULT_WORD_INCLUSION_MODE,
     removedWordIds: [],
@@ -288,6 +294,50 @@ for (const letter of enabledRomanianLetters) {
   }
 }
 
+const expectedPracticeTargetMixedCounts = {
+  ce: 14,
+  ci: 14,
+  ge: 10,
+  gi: 4,
+  che: 10,
+  chi: 9,
+  ghe: 8,
+  ghi: 8,
+} as const;
+
+for (const target of enabledRomanianPracticeTargets) {
+  const wordPools = getDerivedWordPoolsForTarget("ro", target);
+  const mixedWordIds = wordPools.mixedWords.map((word) => word.id);
+
+  assert.equal(
+    mixedWordIds.length,
+    expectedPracticeTargetMixedCounts[
+      target.id as keyof typeof expectedPracticeTargetMixedCounts
+    ],
+    `Expected practice target ${target.id} to match the Batch 15 mixed pool target`,
+  );
+  assert.deepEqual(
+    getPlayableWords({
+      target,
+      locale: "ro",
+      mode: "starts-with-or-contains",
+      removedWordIds: [],
+      words: wordPools.mixedWords,
+    }).map((word) => word.id),
+    mixedWordIds,
+    `Expected mixed gameplay for practice target ${target.id} to use its derived pool`,
+  );
+  assert.ok(
+    wordPools.mixedWords.every((word) => wordContainsTarget("ro", word, target)),
+    `Expected every mixed word for practice target ${target.id} to contain the sequence`,
+  );
+  assert.equal(
+    mixedWordIds.length,
+    new Set(mixedWordIds).size,
+    `Expected practice target ${target.id} mixed pool to be duplicate-free`,
+  );
+}
+
 function getPlayableWordIds(
   letter: (typeof enabledRomanianLetters)[number],
   mode: WordInclusionMode,
@@ -295,7 +345,7 @@ function getPlayableWordIds(
   removedWordIds: readonly string[],
 ) {
   return getPlayableWords({
-    letter,
+    target: letter,
     locale: "ro",
     mode,
     removedWordIds,

@@ -353,9 +353,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul mărgele",
+      "image": "/images/ro/m/ro-m-margele.webp",
+      "imageStatus": "ready",
+      "alt": "Mărgele colorate",
       "source": [
         "manual"
       ],

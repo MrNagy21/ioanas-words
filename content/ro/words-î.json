@@ -11,9 +11,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul înghețată",
+      "image": "/images/ro/î/ro-i-circ-inghetata.webp",
+      "imageStatus": "ready",
+      "alt": "O înghețată la cornet",
       "source": [
         "manual"
       ],

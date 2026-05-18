@@ -4,6 +4,7 @@ import { WordDetailList } from "./word-detail-list";
 import {
   getLetterRouteSegment,
   getLocaleCoverageSummary,
+  getPracticeTargetCoverageSummaries,
 } from "@/content/loaders";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ const summaryLabels = [
 
 export default function AdminWordsPage() {
   const coverage = getLocaleCoverageSummary(locale);
+  const practiceTargetSummaries = getPracticeTargetCoverageSummaries(locale);
   const summaryValues = {
     enabledLetters: coverage.letters.length,
     approvedWords: coverage.totalApprovedWords,
@@ -101,8 +103,8 @@ export default function AdminWordsPage() {
                     <td>{summary.startsWithCount}</td>
                     <td>{summary.containsOnlyCount}</td>
                     <td>{summary.mixedCount}</td>
-                    <td>{summary.imageCounts.startsWith.ready}</td>
-                    <td>{summary.imageCounts.startsWith.placeholder}</td>
+                    <td>{summary.imageCounts.mixed.ready}</td>
+                    <td>{summary.imageCounts.mixed.placeholder}</td>
                     <td>
                       <Link
                         aria-label={`Open ${summary.letter.label} wheel`}
@@ -111,6 +113,63 @@ export default function AdminWordsPage() {
                           locale,
                           summary.letter.id,
                         )}`}
+                      >
+                        Open wheel
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section
+          className="admin-coverage"
+          aria-labelledby="admin-practice-coverage-title"
+        >
+          <div className="admin-section-heading">
+            <h2 id="admin-practice-coverage-title">
+              Romanian Practice Target Coverage
+            </h2>
+            <p>{practiceTargetSummaries.length} sequence targets</p>
+          </div>
+
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <caption>
+                Coverage counts for sequence practice targets derived from
+                approved Romanian word manifests.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Target</th>
+                  <th scope="col">Starts</th>
+                  <th scope="col">Contains</th>
+                  <th scope="col">Mixed</th>
+                  <th scope="col">Ready images</th>
+                  <th scope="col">Placeholder images</th>
+                  <th scope="col">Play</th>
+                </tr>
+              </thead>
+              <tbody>
+                {practiceTargetSummaries.map((summary) => (
+                  <tr key={summary.target.id}>
+                    <th scope="row">
+                      <span className="admin-letter">
+                        {summary.target.label}
+                      </span>
+                    </th>
+                    <td>{summary.startsWithCount}</td>
+                    <td>{summary.containsOnlyCount}</td>
+                    <td>{summary.mixedCount}</td>
+                    <td>{summary.imageCounts.mixed.ready}</td>
+                    <td>{summary.imageCounts.mixed.placeholder}</td>
+                    <td>
+                      <Link
+                        aria-label={`Open ${summary.target.label} practice wheel`}
+                        className="admin-link"
+                        href={`/ro/play/${summary.target.routeSegment}`}
                       >
                         Open wheel
                       </Link>

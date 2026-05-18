@@ -353,9 +353,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul căciulă",
+      "image": "/images/ro/c/ro-c-caciula.webp",
+      "imageStatus": "ready",
+      "alt": "O căciulă albastră",
       "source": [
         "manual"
       ],
@@ -533,9 +533,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cizmă",
+      "image": "/images/ro/c/ro-c-cizma.webp",
+      "imageStatus": "ready",
+      "alt": "O cizmă verde",
       "source": [
         "manual"
       ],
@@ -569,9 +569,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ceas",
+      "image": "/images/ro/c/ro-c-ceas.webp",
+      "imageStatus": "ready",
+      "alt": "Un ceas",
       "source": [
         "manual"
       ],
@@ -587,9 +587,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cerb",
+      "image": "/images/ro/c/ro-c-cerb.webp",
+      "imageStatus": "ready",
+      "alt": "Un cerb",
       "source": [
         "manual"
       ],
@@ -605,9 +605,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cerc",
+      "image": "/images/ro/c/ro-c-cerc.webp",
+      "imageStatus": "ready",
+      "alt": "Un cerc de jucărie",
       "source": [
         "manual"
       ],
@@ -623,9 +623,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cercel",
+      "image": "/images/ro/c/ro-c-cercel.webp",
+      "imageStatus": "ready",
+      "alt": "Un cercel",
       "source": [
         "manual"
       ],
@@ -641,9 +641,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ceai",
+      "image": "/images/ro/c/ro-c-ceai.webp",
+      "imageStatus": "ready",
+      "alt": "O cană cu ceai",
       "source": [
         "manual"
       ],
@@ -659,9 +659,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ceașcă",
+      "image": "/images/ro/c/ro-c-ceasca.webp",
+      "imageStatus": "ready",
+      "alt": "O ceașcă",
       "source": [
         "manual"
       ],
@@ -677,9 +677,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cereale",
+      "image": "/images/ro/c/ro-c-cereale.webp",
+      "imageStatus": "ready",
+      "alt": "Un bol cu cereale",
       "source": [
         "manual"
       ],
@@ -695,9 +695,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cearșaf",
+      "image": "/images/ro/c/ro-c-cearsaf.webp",
+      "imageStatus": "ready",
+      "alt": "Un cearșaf împăturit",
       "source": [
         "manual"
       ],
@@ -713,9 +713,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ceară",
+      "image": "/images/ro/c/ro-c-ceara.webp",
+      "imageStatus": "ready",
+      "alt": "O bucată de ceară galbenă",
       "source": [
         "manual"
       ],
@@ -731,9 +731,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cetate",
+      "image": "/images/ro/c/ro-c-cetate.webp",
+      "imageStatus": "ready",
+      "alt": "O cetate de piatră",
       "source": [
         "manual"
       ],
@@ -749,9 +749,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ciocolată",
+      "image": "/images/ro/c/ro-c-ciocolata.webp",
+      "imageStatus": "ready",
+      "alt": "O tabletă de ciocolată",
       "source": [
         "manual"
       ],
@@ -767,9 +767,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ciocan",
+      "image": "/images/ro/c/ro-c-ciocan.webp",
+      "imageStatus": "ready",
+      "alt": "Un ciocan",
       "source": [
         "manual"
       ],
@@ -785,9 +785,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ciupercă",
+      "image": "/images/ro/c/ro-c-ciuperca.webp",
+      "imageStatus": "ready",
+      "alt": "O ciupercă",
       "source": [
         "manual"
       ],
@@ -803,9 +803,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cioc",
+      "image": "/images/ro/c/ro-c-cioc.webp",
+      "imageStatus": "ready",
+      "alt": "Un cioc de pasăre",
       "source": [
         "manual"
       ],
@@ -821,9 +821,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ciorbă",
+      "image": "/images/ro/c/ro-c-ciorba.webp",
+      "imageStatus": "ready",
+      "alt": "Un bol cu ciorbă",
       "source": [
         "manual"
       ],
@@ -839,9 +839,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ciucure",
+      "image": "/images/ro/c/ro-c-ciucure.webp",
+      "imageStatus": "ready",
+      "alt": "Un ciucure colorat",
       "source": [
         "manual"
       ],
@@ -857,9 +857,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cheie",
+      "image": "/images/ro/c/ro-c-cheie.webp",
+      "imageStatus": "ready",
+      "alt": "O cheie",
       "source": [
         "manual"
       ],
@@ -875,9 +875,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul chec",
+      "image": "/images/ro/c/ro-c-chec.webp",
+      "imageStatus": "ready",
+      "alt": "Un chec feliat",
       "source": [
         "manual"
       ],
@@ -893,9 +893,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul caschetă",
+      "image": "/images/ro/c/ro-c-cascheta.webp",
+      "imageStatus": "ready",
+      "alt": "O caschetă",
       "source": [
         "manual"
       ],
@@ -911,9 +911,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul chitară",
+      "image": "/images/ro/c/ro-c-chitara.webp",
+      "imageStatus": "ready",
+      "alt": "O chitară",
       "source": [
         "manual"
       ],
@@ -929,9 +929,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul chiflă",
+      "image": "/images/ro/c/ro-c-chifla.webp",
+      "imageStatus": "ready",
+      "alt": "O chiflă",
       "source": [
         "manual"
       ],
@@ -947,9 +947,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul chiftea",
+      "image": "/images/ro/c/ro-c-chiftea.webp",
+      "imageStatus": "ready",
+      "alt": "O chiftea",
       "source": [
         "manual"
       ],
@@ -965,9 +965,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul chioșc",
+      "image": "/images/ro/c/ro-c-chiosc.webp",
+      "imageStatus": "ready",
+      "alt": "Un chioșc",
       "source": [
         "manual"
       ],
@@ -983,9 +983,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cochilie",
+      "image": "/images/ro/c/ro-c-cochilie.webp",
+      "imageStatus": "ready",
+      "alt": "O cochilie",
       "source": [
         "manual"
       ],

@@ -515,9 +515,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul purcel",
+      "image": "/images/ro/p/ro-p-purcel.webp",
+      "imageStatus": "ready",
+      "alt": "Un purcel",
       "source": [
         "manual"
       ],
@@ -551,9 +551,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pagină",
+      "image": "/images/ro/p/ro-p-pagina.webp",
+      "imageStatus": "ready",
+      "alt": "O pagină goală de caiet",
       "source": [
         "manual"
       ],
@@ -569,9 +569,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pachet",
+      "image": "/images/ro/p/ro-p-pachet.webp",
+      "imageStatus": "ready",
+      "alt": "Un pachet",
       "source": [
         "manual"
       ],

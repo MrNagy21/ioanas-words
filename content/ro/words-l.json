@@ -191,9 +191,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lighean",
+      "image": "/images/ro/l/ro-l-lighean.webp",
+      "imageStatus": "ready",
+      "alt": "Un lighean albastru",
       "source": [
         "manual"
       ],

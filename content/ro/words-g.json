@@ -155,9 +155,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghiozdan",
+      "image": "/images/ro/g/ro-g-ghiozdan.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghiozdan",
       "source": [
         "manual"
       ],
@@ -227,9 +227,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghiveci",
+      "image": "/images/ro/g/ro-g-ghiveci.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghiveci cu plantă",
       "source": [
         "manual"
       ],
@@ -245,9 +245,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul geacă",
+      "image": "/images/ro/g/ro-g-geaca.webp",
+      "imageStatus": "ready",
+      "alt": "O geacă",
       "source": [
         "manual"
       ],
@@ -263,9 +263,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul geantă",
+      "image": "/images/ro/g/ro-g-geanta.webp",
+      "imageStatus": "ready",
+      "alt": "O geantă",
       "source": [
         "manual"
       ],
@@ -281,9 +281,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "body",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul genunchi",
+      "image": "/images/ro/g/ro-g-genunchi.webp",
+      "imageStatus": "ready",
+      "alt": "Un genunchi",
       "source": [
         "manual"
       ],
@@ -299,9 +299,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghete",
+      "image": "/images/ro/g/ro-g-ghete.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de ghete",
       "source": [
         "manual"
       ],
@@ -317,9 +317,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghetuță",
+      "image": "/images/ro/g/ro-g-ghetuta.webp",
+      "imageStatus": "ready",
+      "alt": "O ghetuță",
       "source": [
         "manual"
       ],
@@ -335,9 +335,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghem",
+      "image": "/images/ro/g/ro-g-ghem.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghem de ață",
       "source": [
         "manual"
       ],
@@ -353,9 +353,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghepard",
+      "image": "/images/ro/g/ro-g-ghepard.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghepard",
       "source": [
         "manual"
       ],
@@ -371,9 +371,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghindă",
+      "image": "/images/ro/g/ro-g-ghinda.webp",
+      "imageStatus": "ready",
+      "alt": "O ghindă",
       "source": [
         "manual"
       ],
@@ -389,9 +389,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghiocel",
+      "image": "/images/ro/g/ro-g-ghiocel.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghiocel",
       "source": [
         "manual"
       ],
@@ -407,9 +407,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "vehicle",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghidon",
+      "image": "/images/ro/g/ro-g-ghidon.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghidon de bicicletă",
       "source": [
         "manual"
       ],
@@ -425,9 +425,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghirlandă",
+      "image": "/images/ro/g/ro-g-ghirlanda.webp",
+      "imageStatus": "ready",
+      "alt": "O ghirlandă colorată",
       "source": [
         "manual"
       ],
@@ -443,9 +443,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ghiuvetă",
+      "image": "/images/ro/g/ro-g-ghiuveta.webp",
+      "imageStatus": "ready",
+      "alt": "O ghiuvetă cu robinet",
       "source": [
         "manual"
       ],

@@ -299,9 +299,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul spaghete",
+      "image": "/images/ro/s/ro-s-spaghete.webp",
+      "imageStatus": "ready",
+      "alt": "O farfurie cu spaghete",
       "source": [
         "manual"
       ],

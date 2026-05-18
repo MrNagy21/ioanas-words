@@ -227,9 +227,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul fulger",
+      "image": "/images/ro/f/ro-f-fulger.webp",
+      "imageStatus": "ready",
+      "alt": "Un fulger galben",
       "source": [
         "manual"
       ],
@@ -245,9 +245,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul frigider",
+      "image": "/images/ro/f/ro-f-frigider.webp",
+      "imageStatus": "ready",
+      "alt": "Un frigider albastru",
       "source": [
         "manual"
       ],

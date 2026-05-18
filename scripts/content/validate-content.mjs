@@ -38,12 +38,22 @@ const errors = [];
 const warnings = [];
 
 const letterManifestKeys = new Set(["locale", "letters"]);
+const practiceTargetManifestKeys = new Set(["locale", "targets"]);
 const letterKeys = new Set([
   "id",
   "label",
   "enabled",
   "wordFile",
   "sortOrder",
+]);
+const practiceTargetKeys = new Set([
+  "id",
+  "label",
+  "locale",
+  "kind",
+  "routeSegment",
+  "sortOrder",
+  "enabled",
 ]);
 const wordManifestKeys = new Set(["locale", "letter", "words"]);
 const wordKeys = new Set([
@@ -330,6 +340,141 @@ function validateLetterManifest(locale, manifest, filePath) {
   }
 
   return validLetters;
+}
+
+function validatePracticeTargetManifest(locale, manifest, filePath, letters) {
+  if (!isRecord(manifest)) {
+    addError(filePath, "practice target manifest must be an object");
+    return [];
+  }
+
+  validateKnownKeys(
+    manifest,
+    practiceTargetManifestKeys,
+    filePath,
+    "manifest",
+  );
+
+  const manifestLocale = requireString(
+    manifest,
+    "locale",
+    filePath,
+    "manifest",
+  );
+  if (manifestLocale && manifestLocale !== locale) {
+    addError(filePath, `manifest.locale must be "${locale}"`);
+  }
+
+  const targets =
+    requireArray(manifest, "targets", filePath, "manifest") ?? [];
+  const letterIds = new Set(letters.map((letter) => letter.id));
+  const seenTargetIds = new Set();
+  const seenRouteSegments = new Set();
+  const seenSortOrders = new Set();
+  const validTargets = [];
+
+  for (const [index, target] of targets.entries()) {
+    const context = `targets[${index}]`;
+
+    if (!isRecord(target)) {
+      addError(filePath, `${context} must be an object`);
+      continue;
+    }
+
+    validateKnownKeys(target, practiceTargetKeys, filePath, context);
+
+    const id = requireString(target, "id", filePath, context);
+    const label = requireString(target, "label", filePath, context);
+    const targetLocale = requireString(target, "locale", filePath, context);
+    const kind = requireString(target, "kind", filePath, context);
+    const routeSegment = requireString(
+      target,
+      "routeSegment",
+      filePath,
+      context,
+    );
+    const sortOrder = requireInteger(target, "sortOrder", filePath, context);
+    const enabled = requireBoolean(target, "enabled", filePath, context);
+
+    if (
+      !id ||
+      !label ||
+      !targetLocale ||
+      !kind ||
+      !routeSegment ||
+      sortOrder === null ||
+      enabled === null
+    ) {
+      continue;
+    }
+
+    if (!/^[a-z]+$/.test(id)) {
+      addError(filePath, `${context}.id must be a lowercase ASCII sequence`);
+    }
+
+    if (label !== id.toLocaleUpperCase("ro")) {
+      addError(
+        filePath,
+        `${context}.label must be the uppercase form of "${id}"`,
+      );
+    }
+
+    if (targetLocale !== locale) {
+      addError(filePath, `${context}.locale must be "${locale}"`);
+    }
+
+    if (kind !== "sequence") {
+      addError(filePath, `${context}.kind must be "sequence"`);
+    }
+
+    if (routeSegment !== id) {
+      addError(filePath, `${context}.routeSegment must match ${context}.id`);
+    }
+
+    if (letterIds.has(id)) {
+      addError(
+        filePath,
+        `${context}.id must not duplicate a Romanian alphabet letter bucket`,
+      );
+    }
+
+    if (sortOrder < 1) {
+      addError(filePath, `${context}.sortOrder must be positive`);
+    }
+
+    if (seenTargetIds.has(id)) {
+      addError(filePath, `${context}.id duplicates target "${id}"`);
+    }
+    seenTargetIds.add(id);
+
+    if (seenRouteSegments.has(routeSegment)) {
+      addError(
+        filePath,
+        `${context}.routeSegment duplicates route "${routeSegment}"`,
+      );
+    }
+    seenRouteSegments.add(routeSegment);
+
+    if (seenSortOrders.has(sortOrder)) {
+      addError(
+        filePath,
+        `${context}.sortOrder duplicates sort order ${sortOrder}`,
+      );
+    }
+    seenSortOrders.add(sortOrder);
+
+    validTargets.push({
+      id,
+      label,
+      locale: targetLocale,
+      kind,
+      routeSegment,
+      sortOrder,
+      enabled,
+    });
+  }
+
+  return validTargets;
 }
 
 function validateWordShape(word, filePath, context) {
@@ -732,6 +877,7 @@ async function validateWordManifest(
 async function validateLocale(locale) {
   const localeDir = path.join(contentRoot, locale);
   const manifestPath = path.join(localeDir, "letters.json");
+  const practiceTargetsPath = path.join(localeDir, "practice-targets.json");
   const letterManifest = await readJson(manifestPath);
 
   if (!letterManifest) {
@@ -739,6 +885,14 @@ async function validateLocale(locale) {
   }
 
   const letters = validateLetterManifest(locale, letterManifest, manifestPath);
+  if (existsSync(practiceTargetsPath)) {
+    validatePracticeTargetManifest(
+      locale,
+      await readJson(practiceTargetsPath),
+      practiceTargetsPath,
+      letters,
+    );
+  }
   const expectedWordFiles = new Set(letters.map((letter) => letter.wordFile));
   const globalWordIds = new Set();
   const globalNormalizedWords = new Map();

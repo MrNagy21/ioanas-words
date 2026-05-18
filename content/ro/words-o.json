@@ -47,9 +47,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ochelari",
+      "image": "/images/ro/o/ro-o-ochelari.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de ochelari",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "body",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ochi",
+      "image": "/images/ro/o/ro-o-ochi.webp",
+      "imageStatus": "ready",
+      "alt": "Un ochi",
       "source": [
         "manual"
       ],

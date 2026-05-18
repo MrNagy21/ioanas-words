@@ -4,9 +4,9 @@ Last updated: 2026-05-17
 
 ## Current Phase
 
-Phase: Batch 14 complete
+Phase: Batch 21 general placeholder image replacement slice complete
 
-Overall status: Batch 13 implemented the full accepted Batch 12 placeholder-backed vocabulary scope. Production Romanian content now has 209 approved words: 83 ready-image words and 126 intentionally placeholder-backed approved words. Helper-derived coverage now reports 24 enabled letters, 209 starts-with assignments, and 744 contains-only assignments. The new exact `Î` bucket is enabled with route segment `i-circ` and `ro-i-circ-...` word ID prefix. The deliberately generic app-owned placeholder asset is stored at `/images/ro/placeholders/generic-word-placeholder.webp`, and all placeholder-backed records use `imageStatus: "placeholder"` with alt text that marks the image as temporary/generic. Speech-target, syllable, cluster, contrast, and therapy review fields remain documentation-only in `vocabulary-scope-spec-batch-12.md`; production JSON still uses ordinary vocabulary fields only. After user review, placeholder image replacement was paused for one more sound-coverage pass. Batch 14 completed that planning pass with `sound-coverage-scope-spec-batch-14.md`: `110` unique accepted candidate rows, source tags or internal-review notes for each candidate, explicit quality ceilings for targets that cannot honestly reach `30` mixed words, and a separate practice-target model for the eight bottom-row start-page options (`CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, `GHI`). If Batch 15 implements all accepted rows as placeholder-backed approved records, approved Romanian content should move from `209 -> 319` words, placeholders from `126 -> 236`, and mixed coverage should reach `ș 36`, `j 14`, `ț 36`, `z 31`, `ce 14`, `ci 14`, `ge 10`, `gi 4`, `che 10`, `chi 9`, `ghe 8`, and `ghi 8`. Batch 15 should implement accepted sound-coverage words plus the start-page practice targets, and placeholder image replacement moves to Batch 16.
+Overall status: Batch 21 completed the sixth placeholder image replacement slice. The completed image-only slice replaced 12 general high-value `B` placeholder-backed records: `balon`, `banană`, `barcă`, `bec`, `biscuit`, `broască`, `brânză`, `băț`, `buburuză`, `bagaj`, `barză`, and `buzunar`. Production Romanian content still has `319` approved words, and ready-image records moved from `142` to `154` while intentional placeholder-backed records moved from `177` to `165`. All eight sequence practice targets `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` remain at `0` placeholders. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only. The eight sequence practice targets remain separate from `content/ro/letters.json` and stay auditable in `/admin/words`.
 
 ## Completed
 
@@ -325,6 +325,41 @@ Overall status: Batch 13 implemented the full accepted Batch 12 placeholder-back
 - Selected only `înghețată` for exact `Î`; kept `Ă` and `Â` convention-only because no strong child-facing exact starts-with words were accepted.
 - Updated this feature plan with Batch 12 completion and Batch 13 as the next proposed step.
 
+- Completed Batch 16: Placeholder Image Replacement first CE/CI slice.
+- Added `image-briefs-batch-16.md` with production image briefs, review decisions, final paths, and impact.
+- Replaced 12 generic placeholder image records in `content/ro/words-c.json` with canonical ready image paths and meaningful alt text.
+- Added final reviewed WebP assets for:
+   - `ro-c-ceas`
+   - `ro-c-cerb`
+   - `ro-c-cerc`
+   - `ro-c-cercel`
+   - `ro-c-ceai`
+   - `ro-c-ceasca`
+   - `ro-c-cereale`
+   - `ro-c-cearsaf`
+   - `ro-c-ciocolata`
+   - `ro-c-ciocan`
+   - `ro-c-ciuperca`
+   - `ro-c-ciorba`
+- Confirmed the first Batch 16 slice changes production image readiness from 83 ready / 236 placeholder to 95 ready / 224 placeholder, with 319 approved words unchanged.
+- Completed Batch 17: Placeholder Image Replacement Slice 2.
+- Added `image-briefs-batch-17.md` with production image briefs, review decisions, final paths, and target-readiness impact.
+- Replaced 12 generic placeholder image records in `content/ro/words-g.json` with canonical ready image paths and meaningful alt text.
+- Added final reviewed WebP assets for:
+  - `ro-g-geaca`
+  - `ro-g-geanta`
+  - `ro-g-genunchi`
+  - `ro-g-ghete`
+  - `ro-g-ghetuta`
+  - `ro-g-ghem`
+  - `ro-g-ghepard`
+  - `ro-g-ghiozdan`
+  - `ro-g-ghiveci`
+  - `ro-g-ghinda`
+  - `ro-g-ghiocel`
+  - `ro-g-ghidon`
+- Confirmed the second Batch 17 slice changes production image readiness from 95 ready / 224 placeholder to 107 ready / 212 placeholder, with 319 approved words unchanged.
+
 ## In Progress
 
 - No implementation is currently in progress.
@@ -394,6 +429,23 @@ Overall status: Batch 13 implemented the full accepted Batch 12 placeholder-back
 - Batch 12 source note: Romanian logopedie materials support practice by initial/medial/final position and differentiation for targets such as `S`, `Z`, `Ț`, `Ș`, and `J`: https://cjrae-ab.ro/wp-content/uploads/2020/03/C%C3%AEmpean-Lucia-EMITEREA-CORECTA-A-SUNETELOR.pdf
 - Batch 12 source note: Romanian alphabet guidance preserves `Ă`, `Â`, `Î`, `Ș`, and `Ț` as distinct letters and treats `ce`, `ci`, `ge`, `gi`, `che`, `chi`, `ghe`, and `ghi` as sequences outside the alphabet: https://limbaromana.net/fonetica/fonologia/ortografia-si-ortoepia/alfabetul-limbii-romane/
 - Batch 12 source note: Academia Română orthography guidance supports `î` at the beginning/end of ordinary words and `â` inside words, so exact `Â` starts-with child vocabulary should remain convention-only unless a strong reviewed exception appears: https://academiaromana.ro/grafieLimbaRomana/pag_grafieLR_norme.htm
+- Batch 15 decision: implement every accepted Batch 14 row as an approved placeholder-backed production vocabulary record because the rows were already reviewed in `sound-coverage-scope-spec-batch-14.md` and the Batch 11/13 placeholder policy allows child-facing placeholder-backed words.
+- Batch 15 decision: keep `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` in `content/ro/practice-targets.json` and helper APIs, not in `content/ro/letters.json`, because they are sequence practice targets rather than Romanian alphabet buckets.
+- Batch 15 decision: sequence practice target routes reuse `/ro/play/<target>` and resolve after exact/alias letter routes; sequence targets default the wheel setup to mixed mode because starts-with pools are naturally small.
+- Batch 15 decision: `/admin/words` should show practice-target starts, contains, mixed, ready-image, and placeholder counts so image replacement can be audited before Batch 16.
+- Batch 16 decision: start placeholder replacement with a small CE/CI-focused slice because those practice targets had high-value placeholder-backed rows and all selected concepts were visually clear enough for one QA batch.
+- Batch 16 decision: reject and regenerate any image that violates the image-review rules even if the rest of a generated sprite sheet is accepted; the first `ciupercă` cell was rejected because it added a face to an object.
+- Batch 16 decision: palette reduction is acceptable as a post-processing step before the documented WebP optimizer when reviewed AI sources are visually good but exceed the image-size targets.
+- Batch 16 decision: the next placeholder image replacement slice should prioritize remaining sequence targets, especially `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`, without adding new vocabulary or production speech-target metadata.
+- Batch 17 decision: use a focused `G`-bucket sequence slice to improve `GE`, `GHE`, and `GHI` ready-image coverage while keeping JSON edits localized and visual QA manageable.
+- Batch 17 decision: `genunchi` can be illustrated as a neutral bent-knee body-part icon, with no injury, medical scene, or full-person context.
+- Batch 17 decision: the next placeholder image replacement slice should prioritize `CHE`, remaining `CHI`, remaining `GE/GI`, and any remaining visually straightforward `GHE/GHI` placeholders without adding new vocabulary or production speech-target metadata.
+- Batch 18 decision: regenerate the contact sheet when icons are too close for clean cropping; future image sheets should use generous gutters or individual generations before cropping.
+- Batch 18 decision: the next placeholder image replacement slice should prioritize the remaining `GE`, `GI`, `GHE`, and `GHI` placeholders: `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghiuvetă`, and `unghie`.
+- Batch 19 decision: the next placeholder image replacement slice should prioritize remaining high-value sequence target placeholders, especially the remaining `CE` and `CI` rows, while preserving `CHE`, `CHI`, `GE`, `GI`, `GHE`, and `GHI` at `0` placeholders.
+- Batch 20 decision: replace all remaining `CE` and `CI` sequence-target placeholders in one 8-word slice because the concepts were visually straightforward and the batch size stayed manageable for visual QA.
+- Batch 20 decision: after this slice, the next Romanian image work can move to general high-value placeholder-backed records because all eight sequence practice targets are now at `0` placeholders.
+- Batch 21 decision: start general placeholder replacement with a focused `B` slice because `/admin/words` showed many remaining `B` placeholders and the selected records were common, concrete, visually straightforward, and useful in child-facing gameplay.
 - Batch 3 source note: ASHA's Speech Sound Disorders Practice Portal keeps assessment, diagnosis, target selection, and treatment planning in the speech-language professional domain, so Word Wheel should avoid production clinical metadata and claims until a dedicated review exists: https://www.asha.org/practice-portal/clinical-topics/articulation-and-phonology/
 - Batch 3 source note: ASHA's 4-to-5 communication milestones and CDC's 4-year milestones support keeping the app framed as age-appropriate vocabulary/pronunciation practice, not screening or treatment: https://www.asha.org/public/developmental-milestones/communication-milestones-4-to-5-years/ and https://www.cdc.gov/act-early/milestones/4-years.html
 - Batch 3 source note: Romanian diacritics should stay exact because Romanian orthography includes `Ă`, `Â`, `Î`, `Ș`, and `Ț`, with comma-below `Ș/Ț` as the modern standard form: https://european-language-equality.eu/wp-content/uploads/2022/03/ELE___Deliverable_D1_29__Language_Report_Romanian_.pdf
@@ -403,7 +455,6 @@ Overall status: Batch 13 implemented the full accepted Batch 12 placeholder-back
 
 ## Open Questions
 
-- Should Batch 13 implement all 126 Batch 12 accepted rows in one manifest batch, or split them into large letter groups for easier review?
 - Should a later practice-target architecture add optional production metadata for speech targets after human and clinical-safety review?
 
 ## Exceptions
@@ -437,6 +488,9 @@ Overall status: Batch 13 implemented the full accepted Batch 12 placeholder-back
 - Batch 10 content validation still reports existing warning-threshold notices for 5 older `M` and `P` images; all are below the `20 KB` hard maximum and none belong to the new 11-word production expansion slice.
 - Batch 11 added documentation only. No production JSON records, image assets, schema changes, child-facing UI, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
 - Batch 11 intentionally did not resolve `Ă`, `Â`, or `Î` ASCII ID tokens because those exact starts-with buckets do not enter the selected next scope.
+- Batch 17 visual Browser automation could not be run because the in-app Browser execution tool was not exposed in that session and no local Playwright/Chromium binary was available. The required localhost route checks were retried outside the sandbox and passed for `/ro`, `/admin/words`, `/ro/play/g`, `/ro/play/ge`, `/ro/play/ghe`, `/ro/play/ghi`, and `/ro/play/chi`.
+- Batch 18 in-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/che`, `/ro/play/chi`, `/ro/play/b`, `/ro/play/c`, `/ro/play/o`, `/ro/play/p`, `/ro/play/r`, and `/ro/play/u`. `/admin/words`, `/ro/play/che`, and `/ro/play/chi` exposed Batch 18 ready image refs; affected canonical letter routes loaded successfully, with bounded/random wheel subsets noted where a single load does not guarantee every new word is visible.
+- Batch 19 preserved the existing dirty worktree from prior batches and added only image assets, placeholder-to-ready image metadata changes, and documentation updates for the new slice.
 
 ## Acceptance Status
 
@@ -513,6 +567,49 @@ Overall status: Batch 13 implemented the full accepted Batch 12 placeholder-back
 - Batch 14 quality ceilings for `J`, `GI`, `GHE`, `GHI`, and other underfilled sequence targets: complete.
 - Batch 14 start-page practice-target model for `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`: complete.
 - Batch 14 confirmation that no production JSON records, UI code, image assets, rejected or held candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
+- Batch 15 accepted sound-coverage manifest implementation: complete; all 110 accepted Batch 14 rows are approved placeholder-backed production records.
+- Batch 15 practice-target manifest/helper implementation: complete; `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` are separate enabled sequence targets outside `letters.json`.
+- Batch 15 `/ro` start-page practice target section: complete.
+- Batch 15 `/ro/play/<target>` route generation and target resolution for letters plus practice targets: complete.
+- Batch 15 `/admin/words` practice-target coverage and placeholder-count audit surface: complete.
+- Batch 15 confirmation that no rejected, held, or needs-revision candidates, final per-word images, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
+- Batch 16 first CE/CI placeholder replacement slice: complete.
+- Batch 16 image briefs and review record: complete; see `image-briefs-batch-16.md`.
+- Batch 16 generated and visually reviewed 12 child-safe, text-free, logo-free, brand-free pixel-art images for `ceas`, `cerb`, `cerc`, `cercel`, `ceai`, `ceașcă`, `cereale`, `cearșaf`, `ciocolată`, `ciocan`, `ciupercă`, and `ciorbă`.
+- Batch 16 rejected the first `ciupercă` sprite-sheet cell because it added a face to an object, then regenerated and accepted a clean mushroom icon.
+- Batch 16 palette-reduced the accepted source PNGs, optimized final canonical WebP assets under `public/images/ro/c/`, and confirmed all 12 final assets are `256 x 256 px` and below the `20 KB` hard maximum.
+- Batch 16 promoted the 12 affected `words-c.json` records from the generic placeholder to ready app-owned image paths with meaningful alt text.
+- Batch 16 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
+- Batch 17 second `G`-sequence placeholder replacement slice: complete.
+- Batch 17 image briefs and review record: complete; see `image-briefs-batch-17.md`.
+- Batch 17 generated and visually reviewed 12 child-safe, text-free, logo-free, brand-free pixel-art images for `geacă`, `geantă`, `genunchi`, `ghete`, `ghetuță`, `ghem`, `ghepard`, `ghiozdan`, `ghiveci`, `ghindă`, `ghiocel`, and `ghidon`.
+- Batch 17 palette-reduced the accepted source PNGs, optimized final canonical WebP assets under `public/images/ro/g/`, and confirmed all 12 final assets are `256 x 256 px` and below the `20 KB` hard maximum.
+- Batch 17 promoted the 12 affected `words-g.json` records from the generic placeholder to ready app-owned image paths with meaningful alt text.
+- Batch 17 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
+- Batch 18 third `CHE`/`CHI` placeholder replacement slice: complete.
+- Batch 18 image briefs and review record: complete; see `image-briefs-batch-18.md`.
+- Batch 18 generated and visually reviewed 15 child-safe, text-free, logo-free, brand-free pixel-art images for `cheie`, `chec`, `buchet`, `caschetă`, `ochelari`, `pachet`, `ridiche`, `ureche`, `chitară`, `chiflă`, `chiftea`, `chioșc`, `cochilie`, `ochi`, and `unchi`.
+- Batch 18 regenerated the contact sheet with larger gutters after cropability review, then cropped, background-normalized, palette-reduced, optimized final canonical WebP assets under `public/images/ro/`, and confirmed all 15 final assets are below the `20 KB` hard maximum.
+- Batch 18 promoted the 15 affected production records from the generic placeholder to ready app-owned image paths with meaningful alt text.
+- Batch 18 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
+- Batch 19 fourth `GE`/`GI`/`GHE`/`GHI` placeholder replacement slice: complete.
+- Batch 19 image briefs and review record: complete; see `image-briefs-batch-19.md`.
+- Batch 19 generated and visually reviewed 12 child-safe, text-free, logo-free, brand-free pixel-art images for `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghiuvetă`, and `unghie`.
+- Batch 19 cropped the generated contact sheet with generous gutters, background-normalized the accepted source cells, palette-reduced them, optimized final canonical WebP assets under `public/images/ro/`, and confirmed all 12 final assets are `256 x 256 px` and below the `20 KB` hard maximum.
+- Batch 19 promoted the 12 affected production records from the generic placeholder to ready app-owned image paths with meaningful alt text.
+- Batch 19 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
+- Batch 20 fifth `CE`/`CI` placeholder replacement slice: complete.
+- Batch 20 image briefs and review record: complete; see `image-briefs-batch-20.md`.
+- Batch 20 generated and visually reviewed 8 child-safe, text-free, logo-free, brand-free pixel-art images for `ceară`, `cetate`, `purcel`, `căciulă`, `cizmă`, `cioc`, `ciucure`, and `rădăcină`.
+- Batch 20 cropped the generated contact sheet with generous gutters, background-normalized the accepted source cells, palette-reduced them, optimized final canonical WebP assets under `public/images/ro/`, and confirmed all 8 final assets are `256 x 256 px` and below the `20 KB` hard maximum.
+- Batch 20 promoted the 8 affected production records from the generic placeholder to ready app-owned image paths with meaningful alt text.
+- Batch 20 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
+- Batch 21 sixth general placeholder replacement slice: complete.
+- Batch 21 image briefs and review record: complete; see `image-briefs-batch-21.md`.
+- Batch 21 generated and visually reviewed 12 child-safe, text-free, logo-free, brand-free pixel-art images for `balon`, `banană`, `barcă`, `bec`, `biscuit`, `broască`, `brânză`, `băț`, `buburuză`, `bagaj`, `barză`, and `buzunar`.
+- Batch 21 cropped the generated contact sheet with generous gutters, background-normalized the accepted source cells, palette-reduced them, optimized final canonical WebP assets under `public/images/ro/b/`, and confirmed all 12 final assets are `256 x 256 px` and below the `20 KB` hard maximum.
+- Batch 21 promoted the 12 affected `words-b.json` records from the generic placeholder to ready app-owned image paths with meaningful alt text.
+- Batch 21 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
 
 ## Batch 5 Production Impact
 
@@ -1299,21 +1396,240 @@ Production count impact if fully implemented:
 - Ready images: unchanged at `83`.
 - Placeholder images: `126 -> 236`.
 
+## Batch 15 Result
+
+Batch 15 implemented the accepted sound-coverage scope and practice-target UI path.
+
+Implemented content:
+
+- Added all `110` accepted rows from `sound-coverage-scope-spec-batch-14.md` to canonical `content/ro/words-<letter>.json` manifests.
+- Added them as `status: "approved"` and `imageStatus: "placeholder"` under the existing placeholder policy.
+- Used the existing app-owned generic placeholder image for every new row.
+- Kept production word records limited to ordinary vocabulary fields.
+- Added no rejected, held, or needs-revision candidates.
+
+Implemented practice targets:
+
+- Added `content/ro/practice-targets.json` with enabled `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` sequence targets.
+- Added helper APIs for enabled practice targets, route targets, start-page summaries, and admin coverage summaries.
+- Added a separate bottom `Alte sunete` section on `/ro`.
+- Updated `/ro/play/[letter]` static params and route resolution so enabled letters and sequence practice targets both work.
+- Sequence targets use derived exact-match pools and default the wheel setup to mixed mode.
+- Updated `/admin/words` to show practice-target starts, contains, mixed, ready-image, and placeholder counts.
+
+Helper-derived production totals after Batch 15:
+
+- Approved Romanian words: `319`.
+- Ready images: `83`.
+- Placeholder images: `236`.
+- Starts-with assignments: `319`.
+- Contains-only assignments across enabled letters: `1175`.
+
+Helper-derived target coverage after Batch 15:
+
+| Target | Starts | Contains | Mixed | Ready | Placeholder |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `ș` | 12 | 24 | 36 | 11 | 25 |
+| `j` | 5 | 9 | 14 | 3 | 11 |
+| `ț` | 5 | 31 | 36 | 7 | 29 |
+| `z` | 8 | 23 | 31 | 6 | 25 |
+| `ce` | 11 | 3 | 14 | 2 | 12 |
+| `ci` | 9 | 5 | 14 | 4 | 10 |
+| `ge` | 5 | 5 | 10 | 4 | 6 |
+| `gi` | 1 | 3 | 4 | 1 | 3 |
+| `che` | 2 | 8 | 10 | 2 | 8 |
+| `chi` | 4 | 5 | 9 | 1 | 8 |
+| `ghe` | 5 | 3 | 8 | 1 | 7 |
+| `ghi` | 7 | 1 | 8 | 0 | 8 |
+
+Batch 15 QA:
+
+- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `bun src/content/matching.check.ts` passed.
+- `git diff --check` passed.
+- Sandboxed localhost checks were blocked, then outside-sandbox route checks returned `200 OK` for `/ro`, `/admin/words`, and all eight sequence play routes. The in-app browser session was interrupted before a full visual pass could be completed.
+
+## Batch 19 Result
+
+Batch 19 completed the fourth placeholder image replacement slice without changing approved vocabulary.
+
+Updated image records:
+
+- `ro-a-alge`
+- `ro-f-fulger`
+- `ro-m-margele`
+- `ro-f-frigider`
+- `ro-p-pagina`
+- `ro-r-regina`
+- `ro-i-circ-inghetata`
+- `ro-l-lighean`
+- `ro-s-spaghete`
+- `ro-g-ghirlanda`
+- `ro-g-ghiuveta`
+- `ro-u-unghie`
+
+Helper-derived production totals after Batch 19:
+
+- Approved Romanian words: `319`.
+- Ready images: `134`.
+- Placeholder images: `185`.
+
+Helper-derived target image readiness after Batch 19:
+
+| Target | Ready | Placeholder | Total |
+| --- | ---: | ---: | ---: |
+| `ge` | 10 | 0 | 10 |
+| `gi` | 4 | 0 | 4 |
+| `ghe` | 8 | 0 | 8 |
+| `ghi` | 8 | 0 | 8 |
+| `che` | 10 | 0 | 10 |
+| `chi` | 9 | 0 | 9 |
+
+Batch 19 QA:
+
+- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `bun src/content/matching.check.ts` passed.
+- `git diff --check` passed after final QA status notes.
+- Sandboxed localhost checks failed for `/ro` and `/admin/words`, then the required outside-sandbox retry returned `200 OK` for both routes.
+- In-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/ge`, `/ro/play/gi`, `/ro/play/ghe`, `/ro/play/ghi`, `/ro/play/a`, `/ro/play/f`, `/ro/play/m`, `/ro/play/p`, `/ro/play/r`, `/ro/play/i-circ`, `/ro/play/l`, `/ro/play/s`, `/ro/play/g`, and `/ro/play/u`.
+- `/admin/words` exposed all 12 Batch 19 ready image refs and reported `319` approved words, `134` ready images, and `185` placeholders.
+- The four affected sequence target routes exposed the new ready image refs for their target pools; affected canonical letter routes loaded successfully, with bounded/random wheel subsets noted where a single load does not guarantee every new word is visible.
+
+## Batch 20 Result
+
+Batch 20 completed the fifth placeholder image replacement slice without changing approved vocabulary.
+
+Updated image records:
+
+- `ro-c-ceara`
+- `ro-c-cetate`
+- `ro-p-purcel`
+- `ro-c-caciula`
+- `ro-c-cizma`
+- `ro-c-cioc`
+- `ro-c-ciucure`
+- `ro-r-radacina`
+
+Helper-derived production totals after Batch 20:
+
+- Approved Romanian words: `319`.
+- Ready images: `142`.
+- Placeholder images: `177`.
+
+Helper-derived target image readiness after Batch 20:
+
+| Target | Ready | Placeholder | Total |
+| --- | ---: | ---: | ---: |
+| `ce` | 14 | 0 | 14 |
+| `ci` | 14 | 0 | 14 |
+| `ge` | 10 | 0 | 10 |
+| `gi` | 4 | 0 | 4 |
+| `che` | 10 | 0 | 10 |
+| `chi` | 9 | 0 | 9 |
+| `ghe` | 8 | 0 | 8 |
+| `ghi` | 8 | 0 | 8 |
+
+Batch 20 QA:
+
+- `bun run optimize:images -- --source /private/tmp/word-wheel-batch20-sources` was attempted first; it failed under `node` because Sharp hit the known local macOS code-signature issue.
+- `bun scripts/images/optimize-images.mjs --source /private/tmp/word-wheel-batch20-sources` passed and optimized the 8 reviewed source crops with the repository optimizer settings.
+- All 8 final WebP assets are `256 x 256 px` and below the `20 KB` hard maximum.
+- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `bun src/content/matching.check.ts` passed.
+- `git diff --check` passed.
+- Sandboxed localhost check failed for `/ro`, then the required outside-sandbox retry returned `200 OK`.
+- In-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/ce`, `/ro/play/ci`, `/ro/play/ge`, `/ro/play/gi`, `/ro/play/che`, `/ro/play/chi`, `/ro/play/ghe`, `/ro/play/ghi`, `/ro/play/c`, `/ro/play/p`, and `/ro/play/r`.
+- `/admin/words` exposed all 8 Batch 20 ready image refs and reported `319` approved words, `142` ready images, and `177` placeholders.
+- `/admin/words` reported every sequence practice target at `0` placeholders: `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`.
+- `/ro/play/ce` exposed the new ready image refs for `ceară`, `cetate`, and `purcel`; `/ro/play/ci` exposed the new ready image refs for `căciulă`, `cizmă`, `cioc`, `ciucure`, and `rădăcină`.
+
+## Batch 21 Result
+
+Batch 21 completed the sixth placeholder image replacement slice without changing approved vocabulary.
+
+Updated image records:
+
+- `ro-b-balon`
+- `ro-b-banana`
+- `ro-b-barca`
+- `ro-b-bec`
+- `ro-b-biscuit`
+- `ro-b-broasca`
+- `ro-b-branza`
+- `ro-b-bat`
+- `ro-b-buburuza`
+- `ro-b-bagaj`
+- `ro-b-barza`
+- `ro-b-buzunar`
+
+Helper-derived production totals after Batch 21:
+
+- Approved Romanian words: `319`.
+- Ready images: `154`.
+- Placeholder images: `165`.
+
+Helper-derived `B` image readiness after Batch 21:
+
+- Starts-with: `21`.
+- Contains-only: `16`.
+- Mixed: `37`.
+- Ready images in mixed pool: `23`.
+- Placeholder images in mixed pool: `14`.
+
+Helper-derived sequence target image readiness after Batch 21:
+
+| Target | Ready | Placeholder | Total |
+| --- | ---: | ---: | ---: |
+| `ce` | 14 | 0 | 14 |
+| `ci` | 14 | 0 | 14 |
+| `ge` | 10 | 0 | 10 |
+| `gi` | 4 | 0 | 4 |
+| `che` | 10 | 0 | 10 |
+| `chi` | 9 | 0 | 9 |
+| `ghe` | 8 | 0 | 8 |
+| `ghi` | 8 | 0 | 8 |
+
+Batch 21 QA:
+
+- Generated a 4-by-3 contact sheet with generous gutters through the built-in image generation workflow.
+- Used the bundled Codex Node runtime for Sharp-based cropping/background normalization because the repo-local Sharp install still hits the known local macOS code-signature issue.
+- Used local `cwebp` for lossless WebP output.
+- All 12 final WebP assets are `256 x 256 px` and below the `20 KB` hard maximum.
+- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `bun src/content/matching.check.ts` passed.
+- `git diff --check` passed.
+- Sandboxed localhost check failed for `/admin/words`, then the required outside-sandbox retry returned `200 OK`.
+- In-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/b`, `/ro/play/ce`, `/ro/play/ci`, `/ro/play/ge`, `/ro/play/gi`, `/ro/play/che`, `/ro/play/chi`, `/ro/play/ghe`, and `/ro/play/ghi`.
+- `/admin/words` exposed all 12 Batch 21 ready image refs and reported `319` approved words, `154` ready images, and `165` placeholders.
+- `/admin/words` reported every sequence practice target at `0` placeholders: `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`.
+- `/ro/play/b` exposed all 12 new ready image refs with no broken images.
+
 ## Next Batch
 
-Batch 15: Sound Coverage Manifest Implementation And Practice Targets.
+Batch 22: General Placeholder Image Replacement Slice 7.
 
-Use this status file, `plan.md`, `sound-coverage-and-practice-targets-batch-14.md`, `sound-coverage-scope-spec-batch-14.md`, `/admin/words`, helper-derived coverage, and current production JSON as the source for implementation.
+Use this status file, `plan.md`, `/admin/words`, helper-derived coverage, and current production JSON as the source for implementation.
 
-Batch 15 should:
+Batch 22 should:
 
-- Implement only accepted rows from `sound-coverage-scope-spec-batch-14.md`.
-- Add production-quality placeholder-backed approved word records where final images are not ready.
-- Keep production word JSON to the established ordinary vocabulary fields only.
-- Add a separate practice-target manifest/helper for `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`.
-- Add the eight practice target options in a separate bottom section on `/ro`.
-- Update `/ro/play/[letter]` static params and target resolution so letter buckets and practice targets both work.
-- Use derived pools for exact sequence matching.
-- Update admin coverage so practice-target counts and placeholder counts are visible/auditable.
+- Continue from the Batch 21 baseline: `319` approved words, `154` ready images, and `165` placeholders.
+- Use `/admin/words` and production JSON to find high-value Romanian words with placeholder images.
+- Prioritize common, concrete, visually straightforward placeholder-backed records from active child-facing buckets; all eight sequence practice targets already have `0` placeholders, so do not regress them.
+- Generate, review, and optimize final pixel-art images using the established image pipeline.
+- Replace only placeholder image paths/statuses with canonical ready WebP assets.
+- Keep image batches large enough to reduce handoff overhead but small enough for visual QA.
+- Do not change vocabulary selection except to fix documented defects.
 - Update this feature status, this feature plan if implementation details materially change, and global `docs/status.md`.
-- Keep Batch 15 free of rejected or held candidates, final per-word images unless explicitly approved in a changed scope, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.
+- Keep Batch 22 free of new vocabulary scope, rejected or held candidates, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.

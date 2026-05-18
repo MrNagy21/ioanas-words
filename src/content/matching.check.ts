@@ -2,9 +2,11 @@ import assert from "node:assert/strict";
 import {
   getDerivedWordPoolsForTarget,
   getEnabledLetters,
+  getEnabledPracticeTargets,
   getLetterIdFromRouteSegment,
   getLetterRouteSegment,
   getLocaleCoverageSummary,
+  getPracticeTargetCoverageSummaries,
   getWordsContainingOnlyTarget,
   getWordsStartingWithTarget,
   wordContainsTarget,
@@ -74,7 +76,14 @@ assert.deepEqual(pools.imageCounts, {
 });
 
 const enabledRomanianLetters = getEnabledLetters("ro");
+const enabledRomanianPracticeTargets = getEnabledPracticeTargets("ro");
 const coverage = getLocaleCoverageSummary("ro");
+const practiceCoverage = getPracticeTargetCoverageSummaries("ro");
+
+assert.deepEqual(
+  enabledRomanianPracticeTargets.map((target) => target.routeSegment),
+  ["ce", "ci", "ge", "gi", "che", "chi", "ghe", "ghi"],
+);
 
 assert.equal(coverage.locale, "ro");
 assert.deepEqual(
@@ -129,6 +138,35 @@ for (const summary of coverage.letterSummaries) {
     summary.imageCounts.containsOnly,
   );
   assert.deepEqual(summary.mixedImageCounts, summary.imageCounts.mixed);
+}
+
+assert.deepEqual(
+  practiceCoverage.map((summary) => summary.target.id),
+  enabledRomanianPracticeTargets.map((target) => target.id),
+);
+
+for (const summary of practiceCoverage) {
+  const derivedPools = getDerivedWordPoolsForTarget("ro", summary.target);
+
+  assert.deepEqual(
+    summary.startsWithWords.map((word) => word.id),
+    derivedPools.startsWithWords.map((word) => word.id),
+    `Expected practice target starts-with words for ${summary.target.id} to match derived pools`,
+  );
+  assert.deepEqual(
+    summary.containsOnlyWords.map((word) => word.id),
+    derivedPools.containsOnlyWords.map((word) => word.id),
+    `Expected practice target contains-only words for ${summary.target.id} to match derived pools`,
+  );
+  assert.deepEqual(
+    summary.mixedWords.map((word) => word.id),
+    derivedPools.mixedWords.map((word) => word.id),
+    `Expected practice target mixed words for ${summary.target.id} to match derived pools`,
+  );
+  assert.equal(summary.startsWithCount, summary.startsWithWords.length);
+  assert.equal(summary.containsOnlyCount, summary.containsOnlyWords.length);
+  assert.equal(summary.mixedCount, summary.mixedWords.length);
+  assert.deepEqual(summary.imageCounts, derivedPools.imageCounts);
 }
 
 function makeWord(

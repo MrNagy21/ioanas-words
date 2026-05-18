@@ -43,6 +43,8 @@ import type {
 } from "@/content/types";
 import {
   getContentTargetValue,
+  getLetterIdFromRouteSegment,
+  getLetterRouteSegment,
   LOCALE_LOWERCASE_TAGS,
   wordContainsTarget,
   wordStartsWithTarget,
@@ -457,7 +459,7 @@ function getTargetLetter(
   locale: SupportedLocale,
   target: ContentTarget,
 ): ContentLetter {
-  if (typeof target !== "string") {
+  if (typeof target !== "string" && !("kind" in target)) {
     return target;
   }
 
@@ -470,7 +472,7 @@ function getTargetLetter(
 
   return {
     id: targetValue,
-    label: target,
+    label: typeof target === "string" ? target : target.label,
     enabled: false,
     wordFile: "",
     sortOrder: Number.MAX_SAFE_INTEGER,

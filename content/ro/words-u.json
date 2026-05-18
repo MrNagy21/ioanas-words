@@ -65,9 +65,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "body",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul unghie",
+      "image": "/images/ro/u/ro-u-unghie.webp",
+      "imageStatus": "ready",
+      "alt": "O unghie curată",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "body",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ureche",
+      "image": "/images/ro/u/ro-u-ureche.webp",
+      "imageStatus": "ready",
+      "alt": "O ureche",
       "source": [
         "manual"
       ],
@@ -155,9 +155,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "family",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul unchi",
+      "image": "/images/ro/u/ro-u-unchi.webp",
+      "imageStatus": "ready",
+      "alt": "Un unchi",
       "source": [
         "manual"
       ],
