@@ -74,7 +74,7 @@ pnpm run lint
 pnpm run build
 ```
 
-In the current Codex desktop environment, `pnpm` may not be on `PATH`; `bun run validate:content` and `bun run lint` have worked as substitutes. Production build should still be verified in the normal project/Vercel environment.
+If `pnpm` is not on `PATH`, fix the Node/Corepack or nvm shell setup before treating verification as complete. Do not substitute another package manager in new handoff docs.
 
 ## Browser Verification
 

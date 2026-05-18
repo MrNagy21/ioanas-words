@@ -21,6 +21,8 @@ pnpm install
 
 This project is pinned to `pnpm@11.1.2` through `packageManager` in
 `package.json`. Use nvm-managed Node with Corepack enabled before installing.
+Do not substitute another package manager for project scripts; if `pnpm` is not
+on PATH, fix the Node/Corepack or nvm shell setup first.
 
 ## Commands
 

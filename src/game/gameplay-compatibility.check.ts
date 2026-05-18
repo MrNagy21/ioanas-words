@@ -295,14 +295,14 @@ for (const letter of enabledRomanianLetters) {
 }
 
 const expectedPracticeTargetMixedCounts = {
-  ce: 14,
-  ci: 14,
-  ge: 10,
-  gi: 4,
-  che: 10,
-  chi: 9,
-  ghe: 8,
-  ghi: 8,
+  ce: 16,
+  ci: 19,
+  ge: 15,
+  gi: 15,
+  che: 15,
+  chi: 15,
+  ghe: 15,
+  ghi: 15,
 } as const;
 
 for (const target of enabledRomanianPracticeTargets) {
@@ -314,7 +314,7 @@ for (const target of enabledRomanianPracticeTargets) {
     expectedPracticeTargetMixedCounts[
       target.id as keyof typeof expectedPracticeTargetMixedCounts
     ],
-    `Expected practice target ${target.id} to match the Batch 15 mixed pool target`,
+    `Expected practice target ${target.id} to match the current mixed pool target`,
   );
   assert.deepEqual(
     getPlayableWords({

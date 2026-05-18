@@ -18,8 +18,8 @@ Status: Complete
 
 Exit criteria:
 
-- `npm run dev` starts the app.
-- `npm run build` succeeds.
+- `pnpm run dev` starts the app.
+- `pnpm run build` succeeds.
 - The repo has a clear project structure.
 
 ## Batch 1: Core App Shell
@@ -127,7 +127,7 @@ Status: Complete
 Exit criteria:
 
 - Content errors fail locally before deployment.
-- `npm run validate:content` or equivalent reports actionable issues.
+- `pnpm run validate:content` or equivalent reports actionable issues.
 
 ## Batch 6: Image Pipeline
 

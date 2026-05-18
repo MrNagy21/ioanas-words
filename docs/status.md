@@ -4,12 +4,61 @@ Last updated: 2026-05-18
 
 ## Current Phase
 
-Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor complete; gameplay inclusion mode selector complete; Romanian content expansion Batch 21 complete
+Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor complete; gameplay inclusion mode selector complete; Romanian content expansion Batch 26 placeholder image replacement complete; Batch 27 general placeholder image replacement proposed
 
-Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. Locale-Wide Content Refactor and Gameplay Inclusion Mode Selector are complete. The Romanian Content Expansion package now includes completed coverage, worksheet, production, sound-target, and placeholder-image replacement batches through Batch 21. Batch 21 replaced 12 general high-value `B` placeholders for `balon`, `banană`, `barcă`, `bec`, `biscuit`, `broască`, `brânză`, `băț`, `buburuză`, `bagaj`, `barză`, and `buzunar` with reviewed canonical WebP assets. Production Romanian content now reports 319 approved words, 154 ready images, and 165 placeholders, with all eight sequence practice targets `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` at 0 placeholders.
+Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. Locale-Wide Content Refactor and Gameplay Inclusion Mode Selector are complete. The Romanian Content Expansion package now includes completed coverage, worksheet, production, sound-target, placeholder-image replacement, diacritic/sequence top-up planning, Batch 23 top-up manifest implementation, and Batch 26 image replacement. Batch 26 replaced `11` approved placeholder-backed records with reviewed final pixel-art WebP assets. Production Romanian content now has `370` approved words, `189` ready images, and `181` placeholders. The eight bottom-row sequence practice targets remain at or above the `15` mixed-word floor where quality allowed, with `CE` and `CHE` now fully ready at `0` placeholders. Exact `Î` starts-with depth remains `8`, now with `6` ready / `2` placeholder; `Ă` and `Â` remain disabled/convention-only. The `/ro` start page continues to show separate starts-with and contains-only counts on letter and sequence tiles, and the mobile selection surface now scrolls instead of compressing tiles on short phones. Project handoff docs now state that `pnpm` is the required package manager for project commands.
 
 ## Completed
 
+- Audited post-test sequence and exact-diacritic coverage after user testing on 2026-05-18:
+  - `CE`: 11 starts-with, 3 contains-only, 14 mixed;
+  - `CI`: 9 starts-with, 5 contains-only, 14 mixed;
+  - `GE`: 5 starts-with, 5 contains-only, 10 mixed;
+  - `GI`: 1 starts-with, 3 contains-only, 4 mixed;
+  - `CHE`: 2 starts-with, 8 contains-only, 10 mixed;
+  - `CHI`: 4 starts-with, 5 contains-only, 9 mixed;
+  - `GHE`: 5 starts-with, 3 contains-only, 8 mixed;
+  - `GHI`: 7 starts-with, 1 contains-only, 8 mixed.
+- Confirmed `Ă` and `Â` exact bucket conventions exist but the buckets are not enabled; `Î` is enabled with 1 approved starts-with word.
+- Updated `/ro` start-page letter and sequence tiles to show separate starts-with and contains-only counts instead of a single ambiguous word count.
+- Re-scoped Romanian Content Expansion Batch 22 from general placeholder replacement to diacritic and sequence coverage top-up planning; the next batch should be worksheet-first before any new production words or images are added.
+- Completed Romanian Content Expansion Batch 22: Diacritic And Sequence Coverage Top-Up Planning.
+- Created `docs/app-development-program/features/romanian-content-expansion/diacritic-and-sequence-top-up-worksheet-batch-22.md`.
+- Kept Batch 22 worksheet-only with no production JSON records, image assets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Recorded quality-gated top-up candidates that would bring `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` to at least `15` mixed words if accepted in the next implementation batch.
+- Confirmed `Ă` and `Â` remain convention-only for now, while `Î` should receive a small exact starts-with top-up without forcing a `15`-word quota.
+- Completed Romanian Content Expansion Batch 23: Diacritic And Sequence Top-Up Manifest Implementation.
+- Added `51` accepted Batch 22 worksheet rows as approved placeholder-backed production records in canonical starting-letter manifests.
+- Updated gameplay compatibility expectations for the expanded sequence practice target mixed pools.
+- Confirmed helper-derived sequence mixed-pool counts after Batch 23:
+  - `CE`: `16`;
+  - `CI`: `19`;
+  - `GE`: `15`;
+  - `GI`: `15`;
+  - `CHE`: `15`;
+  - `CHI`: `15`;
+  - `GHE`: `15`;
+  - `GHI`: `15`.
+- Confirmed exact `Î` now has `8` approved starts-with words while `Ă` and `Â` remain disabled/convention-only.
+- Confirmed production Romanian content now has `370` approved words, `154` ready images, and `216` placeholders.
+- Completed Romanian Content Expansion Batch 24: General Placeholder Image Replacement Slice 7.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-24.md`.
+- Replaced 12 newly added approved placeholder-backed records with reviewed final pixel-art WebP assets: `centură`, `covrigi`, `chiuvetă`, `geamantan`, `gelatină`, `frânghie`, `triunghi`, `dreptunghi`, `înot`, `încălțăminte`, `îmbrăcăminte`, and `încuietoare`.
+- Confirmed production Romanian content now has `370` approved words, `166` ready images, and `204` placeholders.
+- Confirmed exact `Î` image readiness improved to `5` ready / `3` placeholder while `Ă` and `Â` remain disabled/convention-only.
+- Completed Romanian Content Expansion Batch 25: General Placeholder Image Replacement Slice 8.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-25.md`.
+- Replaced 12 approved placeholder-backed records with reviewed final pixel-art WebP assets: `licurici`, `piscină`, `cerneală`, `fulgi`, `fragi`, `ghemotoc`, `ghețar`, `baghetă`, `parchet`, `echer`, `ochean`, and `chipiu`.
+- Confirmed production Romanian content now has `370` approved words, `178` ready images, and `192` placeholders.
+- Confirmed sequence image readiness improved for `CE`, `CI`, `GI`, `CHE`, `CHI`, and `GHE`; `CE` is now fully ready with `0` placeholders.
+- Completed Romanian Content Expansion Batch 26: General Placeholder Image Replacement Slice 9.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-26.md`.
+- Replaced 11 approved placeholder-backed records with reviewed final pixel-art WebP assets: `înger`, `gibon`, `giroscop`, `mochetă`, `machetă`, `gheară`, `ghețuș`, `argint`, `chimen`, `unghi`, and `ghișeu`.
+- Confirmed production Romanian content now has `370` approved words, `189` ready images, and `181` placeholders.
+- Confirmed sequence image readiness improved for `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`; `CHE` is now fully ready with `0` placeholders.
+- Improved `/ro` start-page mobile layout so the letter selection stage owns vertical scrolling on short phones.
+- Normalized letter and sequence tiles to the same base shape, larger vertical padding, and consistent mobile heights.
+- Updated agent-facing docs to keep `pnpm` as the required project command runner and to avoid recommending package-manager substitutions.
 - Created initial product specification.
 - Created initial implementation plan.
 - Created initial status tracker.
@@ -310,7 +359,7 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Updated `src/game/word-selection.ts` to use the shared exact matching helper instead of folded `normalized` matching, without exposing gameplay mode UI or changing the current starts-with play route behavior.
 - Passed the current locale from `WheelGame` into `getPlayableWords`.
 - Verified Locale-Wide Content Refactor Batch 1 with the documented fallback because `pnpm` is unavailable in the Codex desktop shell:
-- `bun run lint` passed.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
 - Browser verification was skipped because `http://localhost:3000/ro` was not reachable and the user owns the dev server on port `3000`.
 - Started and completed Locale-Wide Content Refactor Batch 2: Locale Manifest Registry Hardening.
@@ -319,8 +368,8 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Added `getLettersMissingWordManifests(locale)` for reporting enabled letters whose word manifest is not imported.
 - Documented that missing imported manifests return `null` or empty word arrays at runtime, while `validate:content` remains the production guard for enabled letters with missing word files.
 - Verified Locale-Wide Content Refactor Batch 2 with fallback commands because `pnpm` is unavailable in the Codex desktop shell:
-- `bun run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
 - Browser verification was skipped because Batch 2 did not change route behavior.
 - Started and completed Locale-Wide Content Refactor Batch 3: Exact Matching And Derived Pool Helpers.
@@ -331,9 +380,9 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Verified contains-only excludes starts-with records and mixed pools do not duplicate word records.
 - Kept current child-facing gameplay as starts-with only; no gameplay mode UI was added.
 - Verified Locale-Wide Content Refactor Batch 3 with fallback commands because `pnpm` is unavailable in the Codex desktop shell:
-- `bun src/content/matching.check.ts` passed.
-- `bun run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
-- `bun run lint` passed.
+- `pnpm run check:matching` passed.
+- `pnpm run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
 - Browser verification was skipped because Batch 3 did not change route behavior.
 - Started and completed Locale-Wide Content Refactor Batch 4: Coverage And Image Readiness Consolidation.
@@ -343,9 +392,9 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Kept ready admin thumbnails tied to the canonical `ContentWord.image` paths.
 - Extended the helper check fixture so duplicate-safe derived pools also assert expected image readiness counts.
 - Verified Locale-Wide Content Refactor Batch 4:
-- `bun src/content/matching.check.ts` passed.
-- `bun run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
-- `bun run lint` passed.
+- `pnpm run check:matching` passed.
+- `pnpm run validate:content` passed with existing image warning-threshold notices for some `M` and `P` images.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
 - `git diff --check` passed.
 - `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` passed using the nvm-installed `pnpm` runtime at `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
@@ -359,7 +408,7 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
   - `getLetterContent(locale, letterId)` remains the starts-with-only play-route wrapper to replace or narrow when gameplay receives locale-wide pools.
   - `WordInclusionMode` constants and default filtering remain hidden implementation scaffolding until the child-facing selector feature exposes them.
 - Verified Locale-Wide Content Refactor Batch 5:
-- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `pnpm run check:gameplay` passed.
 - `pnpm run validate:content` passed using the nvm-installed `pnpm`, with existing image warning-threshold notices for some `M` and `P` images.
 - `pnpm run lint` passed using the nvm-installed `pnpm`.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
@@ -370,8 +419,8 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Marked Locale-Wide Content Refactor Batch 6 complete in `docs/app-development-program/features/locale-wide-content-refactor/plan.md`.
 - Confirmed no app-development-program roadmap or architecture document needed changes because the feature order and architecture did not change.
 - Verified Locale-Wide Content Refactor Batch 6:
-- `bun src/content/matching.check.ts` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `pnpm run check:matching` passed.
+- `pnpm run check:gameplay` passed.
 - `pnpm run validate:content` passed using the nvm-installed `pnpm`, with existing image warning-threshold notices for some `M` and `P` images.
 - `pnpm run lint` passed using the nvm-installed `pnpm`.
 - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
@@ -410,6 +459,23 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
 
 ## Verification
 
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content`: passes after the start-page mobile scroll and pnpm-doc update, with the existing five image warning-threshold notices below the hard maximum.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint`: passes after the start-page mobile scroll and pnpm-doc update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:matching`: passes after the pnpm-doc update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:gameplay`: passes after the pnpm-doc update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm exec tsc --noEmit --incremental false`: passes after the start-page mobile scroll and pnpm-doc update.
+- `git diff --check`: passes after the start-page mobile scroll and pnpm-doc update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build`: still blocked locally by the existing Next SWC darwin/arm64 code-signature error before app compilation.
+- `curl -I --max-time 3 http://localhost:3000/ro`: failed inside the sandbox, then passed outside the sandbox with `200 OK`.
+- In-app browser verification at `375 x 667` confirmed the `/ro` start page has no body scroll, `.letter-stage` has `overflow-y: auto`, the stage scroll height exceeds the viewport, letter tiles use a consistent `79px` rendered height, sequence tiles use a consistent `78px` rendered height, and the bottom sequence tiles are reachable by scrolling.
+- The shell default PATH still lacks `pnpm`; use the nvm pnpm path above or fix Corepack/nvm PATH setup before treating future verification as complete.
+- `pnpm run validate:content`: passes after the start-page count display update, with the existing five image warning-threshold notices below the hard maximum.
+- `pnpm run lint`: passes after the start-page count display update.
+- `./node_modules/.bin/tsc --noEmit --incremental false`: passes after the start-page count display update.
+- `pnpm run check:matching`: passes after the post-test coverage audit.
+- `pnpm run check:gameplay`: passes after the post-test coverage audit.
+- `curl -I --max-time 3 http://localhost:3000/ro`: failed inside the sandbox, then passed outside the sandbox with `200 OK`.
+- In-app browser verification for `/ro` confirmed letter and sequence tiles show separate `încep` and `conțin` counts.
 - `pnpm run validate:content`: passes with nvm Node `v24.15.0` after Batch 6 image validation changes.
 - `pnpm run lint`: passes with nvm Node `v24.15.0` after Batch 6 image pipeline changes.
 - `pnpm run format`: passes with nvm Node `v24.15.0` after Batch 6 image pipeline changes.
@@ -429,22 +495,22 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
 - `pnpm run lint`: passes with nvm Node `v24.15.0` after adding `copil` and polishing image UX.
 - `pnpm run format`: passes with nvm Node `v24.15.0` after adding `copil` and polishing image UX.
 - `pnpm run build`: passes with nvm Node `v24.15.0` after adding `copil` and polishing image UX.
-- `bun run optimize:images --dry-run --source /private/tmp/word-wheel-m-sources`: passes for 10 staged `M` source images.
-- `bun run optimize:images --source /private/tmp/word-wheel-m-sources`: fails locally because the installed Sharp native module is rejected by macOS code signing (`mapping process and mapped file (non-platform) have different Team IDs`).
+- `pnpm run optimize:images --dry-run --source /private/tmp/word-wheel-m-sources`: passes for 10 staged `M` source images.
+- `pnpm run optimize:images --source /private/tmp/word-wheel-m-sources`: fails locally because the installed Sharp native module is rejected by macOS code signing (`mapping process and mapped file (non-platform) have different Team IDs`).
 - Bundled Python/Pillow WebP export wrote 10 final `M` images as `256 x 256 px` lossless WebP files under `public/images/ro/m/`.
 - Final `M` WebP verification confirmed all 10 files are `256 x 256 px`, below the `20 KB` hard maximum, and have `rgb(253, 247, 230)` corner backgrounds.
-- `bun run validate:content`: passes after marking all 10 `M` images ready; it reports warning-threshold notices for `ro-m-mama.webp` at `13,740` bytes and `ro-m-mana.webp` at `12,388` bytes, both below the `20 KB` hard maximum.
+- `pnpm run validate:content`: passes after marking all 10 `M` images ready; it reports warning-threshold notices for `ro-m-mama.webp` at `13,740` bytes and `ro-m-mana.webp` at `12,388` bytes, both below the `20 KB` hard maximum.
 - `pnpm run lint`: passes with nvm Node `v24.15.0` after the image pilot.
 - `pnpm run format`: passes with nvm Node `v24.15.0` after the image pilot.
 - `pnpm run build`: passes with nvm Node `v24.15.0` after the image pilot.
-- `bun run optimize:images --dry-run --source /private/tmp/word-wheel-a-sources`: passes for 10 staged `A` source images.
-- `bun run optimize:images --source /private/tmp/word-wheel-a-sources`: fails locally because the installed Sharp native module is rejected by macOS code signing (`mapping process and mapped file (non-platform) have different Team IDs`).
+- `pnpm run optimize:images --dry-run --source /private/tmp/word-wheel-a-sources`: passes for 10 staged `A` source images.
+- `pnpm run optimize:images --source /private/tmp/word-wheel-a-sources`: fails locally because the installed Sharp native module is rejected by macOS code signing (`mapping process and mapped file (non-platform) have different Team IDs`).
 - Bundled Python/Pillow WebP export wrote 10 final `A` images as `256 x 256 px` lossless WebP files under `public/images/ro/a/`.
 - Final `A` WebP verification confirmed all 10 files are `256 x 256 px`, below the `20 KB` hard maximum, and have `rgb(253, 247, 230)` corner backgrounds.
-- `bun run validate:content`: passes after marking all 10 `A` images ready; it reports the existing warning-threshold notices for `ro-m-mama.webp` and `ro-m-mana.webp`, both below the `20 KB` hard maximum.
-- `bun run lint`: passes after the `A` image pilot.
-- `bun run format`: passes after the `A` image pilot.
-- `bun run build`: still fails locally after the `A` image pilot because the local Next SWC native binary is rejected by macOS code signing (`mapping process and mapped file (non-platform) have different Team IDs`).
+- `pnpm run validate:content`: passes after marking all 10 `A` images ready; it reports the existing warning-threshold notices for `ro-m-mama.webp` and `ro-m-mana.webp`, both below the `20 KB` hard maximum.
+- `pnpm run lint`: passes after the `A` image pilot.
+- `pnpm run format`: passes after the `A` image pilot.
+- `pnpm run build`: still fails locally after the `A` image pilot because the local Next SWC native binary is rejected by macOS code signing (`mapping process and mapped file (non-platform) have different Team IDs`).
 - `pnpm exec tsc --noEmit`: passes with nvm Node `v24.15.0` after Batch 6 image pipeline changes.
 - `/Users/darius/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/content/validate-content.mjs`: passes after marking all 10 `P` images ready; it reports existing warning-threshold notices for `ro-m-mama.webp` and `ro-m-mana.webp`, plus `ro-p-papusa.webp`, `ro-p-porc.webp`, and `ro-p-perna.webp`, all below the `20 KB` hard maximum.
 - P image sanity check confirmed all 10 final `P` WebP files are `256 x 256 px`, below the `20 KB` hard maximum, and have exact `rgb(253, 247, 230)` corner backgrounds.
@@ -502,8 +568,8 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - User manually verified `/ro/play/p` after the `P` image pilot and reported it works fine.
   - `curl -I --max-time 5 http://localhost:3000/ro` failed after Batch 8 implementation because nothing was listening on port `3000`.
   - `pnpm run validate:content` and `pnpm run lint` could not run for Admin Words Inventory Batch 1 because `pnpm` is unavailable in the Codex desktop environment.
-  - `bun run validate:content` passed for Admin Words Inventory Batch 1, with existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
-  - `bun run lint` passed for Admin Words Inventory Batch 1.
+  - `pnpm run validate:content` passed for Admin Words Inventory Batch 1, with existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
+  - `pnpm run lint` passed for Admin Words Inventory Batch 1.
   - Added `app/admin/words/page.tsx` for Admin Words Inventory Batch 2.
   - `/admin/words` renders a public read-only Romanian summary dashboard with enabled-letter, approved-word, ready-image, placeholder-image, starts-with assignment, and contains-only assignment counts.
   - `/admin/words` renders one coverage row per enabled Romanian letter with starts-with, contains-only, mixed, ready starts-with image, placeholder starts-with image, and `/ro/play/<letter>` link columns.
@@ -519,10 +585,10 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - Contains-only rows are derived from the canonical approved word records instead of duplicate content records.
   - Added compact responsive styles for desktop two-column detail pools and single-column mobile detail pools.
   - `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` could not start for Admin Words Inventory Batch 3 because `pnpm` is unavailable in the Codex desktop shell.
-  - `bun run validate:content` passed for Admin Words Inventory Batch 3, with the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
-  - `bun run lint` passed for Admin Words Inventory Batch 3.
+  - `pnpm run validate:content` passed for Admin Words Inventory Batch 3, with the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
+  - `pnpm run lint` passed for Admin Words Inventory Batch 3.
   - `./node_modules/.bin/tsc --noEmit` passed for Admin Words Inventory Batch 3.
-  - `bun run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - `curl -I --max-time 3 http://localhost:3000/admin/words` failed because no user-running dev server was listening on port `3000`.
   - Completed Admin Words Inventory Batch 4.
   - Polished `/admin/words` spacing, coverage table readability, and word detail list row rhythm.
@@ -532,10 +598,10 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - Recorded final Admin Words Inventory implementation notes and acceptance status in `docs/app-development-program/features/admin-words-inventory/status.md`.
   - Marked Admin Words Inventory Batch 4 complete in `docs/app-development-program/features/admin-words-inventory/plan.md`.
   - `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` could not start for Admin Words Inventory Batch 4 because `pnpm` is unavailable in the Codex desktop shell.
-  - `bun run validate:content` passed for Admin Words Inventory Batch 4, with the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
-  - `bun run lint` passed for Admin Words Inventory Batch 4.
+  - `pnpm run validate:content` passed for Admin Words Inventory Batch 4, with the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images.
+  - `pnpm run lint` passed for Admin Words Inventory Batch 4.
   - `./node_modules/.bin/tsc --noEmit` passed for Admin Words Inventory Batch 4.
-  - `bun run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
+  - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - `curl -I --max-time 3 http://localhost:3000/admin/words` failed because no user-running dev server was listening on port `3000`.
   - Created the Gameplay Inclusion Mode Selector feature package:
     - `docs/app-development-program/features/gameplay-inclusion-mode-selector/spec.md`
@@ -559,8 +625,8 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
   - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - `./node_modules/.bin/tsc --noEmit --incremental false` passed as the required fallback.
-  - `bun src/game/gameplay-compatibility.check.ts` passed.
-  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run check:gameplay` passed.
+  - `pnpm run check:matching` passed.
   - Browser reachability checks for `/ro`, `/ro/play/a`, and `/admin/words` failed because no dev server was listening on port `3000`.
   - Started and completed Gameplay Inclusion Mode Selector Batch 2: Selector UI And Mode State.
   - Added `WheelGame` selected-mode state initialized from `DEFAULT_WORD_INCLUSION_MODE`.
@@ -588,8 +654,8 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for some `M` and `P` ready images.
   - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
   - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-  - `bun src/game/gameplay-compatibility.check.ts` passed.
-  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run check:gameplay` passed.
+  - `pnpm run check:matching` passed.
   - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
   - `git diff --check` passed.
@@ -606,8 +672,8 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for some `M` and `P` ready images.
   - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
   - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-  - `bun src/game/gameplay-compatibility.check.ts` passed.
-  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run check:gameplay` passed.
+  - `pnpm run check:matching` passed.
   - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
   - `git diff --check` passed.
@@ -623,8 +689,8 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for some `M` and `P` ready images.
   - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
   - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-  - `bun src/game/gameplay-compatibility.check.ts` passed.
-  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run check:gameplay` passed.
+  - `pnpm run check:matching` passed.
   - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
   - `git diff --check` passed.
@@ -638,8 +704,8 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for two `M` and three `P` ready images.
   - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
   - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-  - `bun src/game/gameplay-compatibility.check.ts` passed.
-  - `bun src/content/matching.check.ts` passed.
+  - `pnpm run check:gameplay` passed.
+  - `pnpm run check:matching` passed.
   - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - Browser verification for `/ro`, `/ro/play/a`, and `/admin/words` was skipped because no dev server was listening on port `3000`.
   - `git diff --check` passed.
@@ -657,7 +723,7 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - `pnpm run validate:content` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`, with existing image warning-threshold notices for two `M` and three `P` ready images.
   - `pnpm run lint` passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm`.
   - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-  - `bun src/game/gameplay-compatibility.check.ts` passed.
+  - `pnpm run check:gameplay` passed.
   - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
   - Browser verification for `/ro/play/a` was skipped because no dev server was listening on port `3000`.
   - `git diff --check` passed.
@@ -712,7 +778,7 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - Updated content validation so exact `ș` and `ț` manifests can validate with ASCII word ID prefixes.
   - Added `docs/app-development-program/features/romanian-content-expansion/diacritic-buckets-and-second-slice-batch-7.md`.
   - Planned the next 17 accepted worksheet rows with canonical files, stable IDs, image paths, expected coverage impact, and readiness path.
-  - Verified Batch 7 with `bun run validate:content`, `bun run lint`, `./node_modules/.bin/tsc --noEmit --incremental false`, `bun src/game/gameplay-compatibility.check.ts`, `bun src/content/matching.check.ts`, and `git diff --check`; `pnpm` was unavailable and `http://localhost:3000` was not reachable for browser verification.
+  - Verified Batch 7 with `pnpm run validate:content`, `pnpm run lint`, `./node_modules/.bin/tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check`; `pnpm` was unavailable and `http://localhost:3000` was not reachable for browser verification.
   - Confirmed Batch 7 added no approved child-facing words, image assets, placeholder-backed approved content, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
   - Completed Romanian Content Expansion Batch 8: Second Production Slice Image Briefs And Implementation.
   - Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-8.md` for the 17 Batch 7 planned words.
@@ -722,7 +788,7 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - Added canonical `D`, `F`, `Ș`, and `Ț` word manifests, imported them into `src/content/loaders.ts`, and enabled those letters only after ready reviewed images existed.
   - Updated gameplay compatibility expectations for the expanded enabled Romanian letter set.
   - Confirmed helper-derived `/admin/words` coverage now reports 72 approved words, 72 ready images, 0 placeholders, 15 enabled letters, 72 starts-with assignments, and 120 contains-only assignments.
-  - Verified Batch 8 with `bun run validate:content`, `bun run lint`, `./node_modules/.bin/tsc --noEmit --incremental false`, `bun src/game/gameplay-compatibility.check.ts`, `bun src/content/matching.check.ts`, and `git diff --check`; `pnpm` was unavailable and sandboxed `http://localhost:3000` reachability failed before the later guidance update.
+  - Verified Batch 8 with `pnpm run validate:content`, `pnpm run lint`, `./node_modules/.bin/tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check`; `pnpm` was unavailable and sandboxed `http://localhost:3000` reachability failed before the later guidance update.
   - Confirmed Batch 8 added no rejected or needs-revision candidates, placeholder-backed approved words, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
   - Fixed the post-Batch 8 diacritic play-route issue by generating `/ro/play/sh` and `/ro/play/tz` for `Ș` and `Ț`, resolving them internally to canonical `ș` and `ț`, and updating letter-selection and admin play links.
   - Completed Romanian Content Expansion Batch 9: Third Production Slice Planning.
@@ -739,7 +805,7 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
   - Added canonical `I` and `N` word manifests, imported them into `src/content/loaders.ts`, and enabled those letters only after ready reviewed images existed.
   - Updated gameplay compatibility expectations for the expanded enabled Romanian letter set.
   - Confirmed helper-derived `/admin/words` coverage now reports 83 approved words, 83 ready images, 0 placeholders, 17 enabled letters, 83 starts-with assignments, and 186 contains-only assignments.
-  - Verified Batch 10 with `bun run validate:content`, `bun run lint`, `./node_modules/.bin/tsc --noEmit --incremental false`, `bun src/game/gameplay-compatibility.check.ts`, and `bun src/content/matching.check.ts`; browser verification and final whitespace check are recorded in the feature status.
+  - Verified Batch 10 with `pnpm run validate:content`, `pnpm run lint`, `./node_modules/.bin/tsc --noEmit --incremental false`, `pnpm run check:gameplay`, and `pnpm run check:matching`; browser verification and final whitespace check are recorded in the feature status.
   - Kept Batch 10 free of rejected or needs-revision candidates, placeholder-backed approved words, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.
   - Completed Romanian Content Expansion Batch 11: Next Romanian Production Scope Decision.
   - Added `docs/app-development-program/features/romanian-content-expansion/next-scope-decision-batch-11.md`.
@@ -760,10 +826,15 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
     - Batch 15 implemented approved placeholder-backed sound-coverage records and the `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` practice target routes.
     - Batches 16 through 20 replaced reviewed placeholder images for high-value sequence targets while keeping vocabulary fixed and speech-target metadata out of production JSON.
     - Batch 21 started general placeholder replacement with 12 reviewed `B` images, bringing production Romanian content to 319 approved words, 154 ready images, and 165 placeholders.
+  - Completed Romanian Content Expansion Batch 22:
+    - Created `diacritic-and-sequence-top-up-worksheet-batch-22.md` for underfilled bottom-row sequence targets and exact diacritic buckets.
+    - Planned quality-gated candidate rows that would bring all eight bottom-row sequence targets to at least 15 mixed words if accepted.
+    - Kept `Ă` and `Â` convention-only and proposed only a small exact-`Î` top-up.
+    - Kept the batch free of production JSON records, image assets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.
 
 ## Next Task
 
-Admin Words Inventory, Locale-Wide Content Refactor, Gameplay Inclusion Mode Selector, and Romanian Content Expansion Batch 21 are complete. The next Romanian content step is Batch 22: General Placeholder Image Replacement Slice 7. It should continue from `/admin/words`, current production JSON, and `docs/app-development-program/features/romanian-content-expansion/plan.md`; keep the approved vocabulary fixed at 319 words; replace only reviewed placeholder image paths/statuses with canonical ready WebP assets; prioritize common, concrete, visually straightforward placeholder-backed records from active child-facing buckets; keep all eight sequence practice targets `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` at 0 placeholders; and avoid new vocabulary, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims. Browser verification should target the always-running local dev server on port `3000`; if sandboxed `localhost:3000` checks fail, agents should retry outside the sandbox before treating the app as unavailable.
+Admin Words Inventory, Locale-Wide Content Refactor, Gameplay Inclusion Mode Selector, and Romanian Content Expansion Batch 26 are complete. The next Romanian content step is Batch 27: General Placeholder Image Replacement Slice 10. It should continue from `/admin/words`, helper-derived coverage, current production JSON, `docs/image-pipeline.md`, `docs/app-development-program/features/romanian-content-expansion/plan.md`, and `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-26.md`; replace another focused slice of approved placeholder images with reviewed final pixel-art WebP assets; prioritize common, concrete, visually clear remaining placeholders such as `capră`, `căpșună`, `clopoțel`, `colac`, `cort`, `cocoș`, `căruță`, `căsuță`, `cozonac`, `delfin`, `dovleac`, `dulap`, `elefant`, `elicopter`, `floare`, `fluture`, `fular`, `furculiță`, `umbrelă`, `ursuleț`, `vacă`, `vapor`, `vulpe`, `șopârlă`, `șarpe`, and `țânțar` if visual review succeeds; defer concepts that remain too abstract, broad, low-familiarity, unsafe, cluttered, or visually ambiguous; use existing production records only; keep `Ă` and `Â` disabled unless the human explicitly changes the quality ceiling decision; keep sequence targets separate from alphabet letters; and avoid new vocabulary, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims. Browser verification should target the always-running local dev server on port `3000`; if sandboxed `localhost:3000` checks fail, agents should retry outside the sandbox before treating the app as unavailable.
 
 ## Decisions Made
 

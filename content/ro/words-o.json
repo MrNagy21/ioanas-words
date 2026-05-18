@@ -145,6 +145,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "ochean",
+      "display": "ochean",
+      "normalized": "ochean",
+      "id": "ro-o-ochean",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/o/ro-o-ochean.webp",
+      "imageStatus": "ready",
+      "alt": "Un ochean albastru și auriu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

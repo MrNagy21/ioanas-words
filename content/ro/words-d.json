@@ -145,6 +145,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "dreptunghi",
+      "display": "dreptunghi",
+      "normalized": "dreptunghi",
+      "id": "ro-d-dreptunghi",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/d/ro-d-dreptunghi.webp",
+      "imageStatus": "ready",
+      "alt": "Un dreptunghi albastru",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

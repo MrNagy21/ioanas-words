@@ -199,6 +199,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "licurici",
+      "display": "licurici",
+      "normalized": "licurici",
+      "id": "ro-l-licurici",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/l/ro-l-licurici.webp",
+      "imageStatus": "ready",
+      "alt": "Un licurici cu lumină galbenă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

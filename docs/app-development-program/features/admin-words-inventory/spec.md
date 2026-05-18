@@ -221,7 +221,7 @@ pnpm run lint
 pnpm run build
 ```
 
-In this Codex desktop environment, `bun run validate:content` and `bun run lint` may be used if `pnpm` is unavailable. Production build should still be checked in the normal project or Vercel environment.
+If `pnpm` is unavailable, fix the Node/Corepack or nvm shell setup before treating verification as complete. Production build should still be checked in the normal project or Vercel environment when local SWC loading allows it.
 
 Browser verification should be done against the user-running dev server on:
 

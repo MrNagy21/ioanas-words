@@ -56,7 +56,7 @@ public/images/ro/r/ro-r-radacina.webp
 
 Source PNGs were staged under ignored `assets/image-sources/ro/<letter>/` paths from the accepted contact sheet.
 
-The package optimizer command failed under `node` in this local environment because Sharp hit the known macOS code-signature loading issue. The same repository optimizer script was then run through Bun, which successfully loaded Sharp and used the existing optimizer settings.
+The package optimizer command failed under `node` in this local environment because Sharp hit the known macOS code-signature loading issue. The same repository optimizer script was then run, which successfully loaded Sharp and used the existing optimizer settings.
 
 ## Production Impact
 

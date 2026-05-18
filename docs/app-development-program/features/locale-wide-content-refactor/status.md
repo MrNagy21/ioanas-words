@@ -118,8 +118,8 @@ Overall status: Locale-Wide Content Refactor is implementation-complete and fina
 Batch 6 helper checks:
 
 ```txt
-bun src/content/matching.check.ts
-bun src/game/gameplay-compatibility.check.ts
+pnpm run check:matching
+pnpm run check:gameplay
 ```
 
 Results:

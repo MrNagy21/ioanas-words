@@ -231,8 +231,8 @@ Batch 1 verification:
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 curl -I --max-time 3 http://localhost:3000/ro
 curl -I --max-time 3 http://localhost:3000/ro/play/a
 curl -I --max-time 3 http://localhost:3000/admin/words
@@ -244,8 +244,8 @@ Results:
 - `pnpm run lint` passed.
 - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - Browser reachability checks for `/ro`, `/ro/play/a`, and `/admin/words` failed because no dev server was listening on port `3000`.
 
 Batch 2 verification:
@@ -268,8 +268,8 @@ Batch 3 verification:
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build
 curl -I --max-time 3 http://localhost:3000/ro/play/a
 git diff --check
@@ -280,8 +280,8 @@ Results:
 - `pnpm run validate:content` passed with existing image warning-threshold notices for some `M` and `P` ready images.
 - `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
 - Browser verification was skipped because `curl` could not connect to `http://localhost:3000/ro/play/a`; no user-running dev server was listening on port `3000`.
 - `git diff --check` passed.
@@ -292,8 +292,8 @@ Batch 3.5 verification:
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build
 curl -I --max-time 3 http://localhost:3000/ro/play/a
 git diff --check
@@ -304,8 +304,8 @@ Results:
 - `pnpm run validate:content` passed with existing image warning-threshold notices for some `M` and `P` ready images.
 - `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
 - Browser verification was skipped because `curl` could not connect to `http://localhost:3000/ro/play/a`; no user-running dev server was listening on port `3000`.
 - `git diff --check` passed.
@@ -316,8 +316,8 @@ Batch 4 verification:
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build
 curl -I --max-time 3 http://localhost:3000/ro/play/a
 git diff --check
@@ -328,8 +328,8 @@ Results:
 - `pnpm run validate:content` passed with existing image warning-threshold notices for some `M` and `P` ready images.
 - `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
 - Browser verification was skipped because `curl` could not connect to `http://localhost:3000/ro/play/a`; no user-running dev server was listening on port `3000`.
 - `git diff --check` passed.
@@ -340,8 +340,8 @@ Batch 5 verification:
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build
 curl -I --max-time 3 http://localhost:3000/ro
 git diff --check
@@ -352,8 +352,8 @@ Results:
 - `pnpm run validate:content` passed with existing image warning-threshold notices for two `M` images and three `P` images. All warned files remain below the `20 KB` hard maximum.
 - `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
 - Browser verification for `/ro`, `/ro/play/a`, and `/admin/words` was skipped because `curl` could not connect to `http://localhost:3000/ro`; no user-running dev server was listening on port `3000`.
 - `git diff --check` passed.
@@ -364,7 +364,7 @@ Post-QA setup modal and removal UX verification:
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
+pnpm run check:gameplay
 /Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build
 curl -I --max-time 3 http://localhost:3000/ro/play/a
 git diff --check
@@ -375,7 +375,7 @@ Results:
 - `pnpm run validate:content` passed with existing image warning-threshold notices for two `M` images and three `P` images. All warned files remain below the `20 KB` hard maximum.
 - `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `pnpm run check:gameplay` passed.
 - `pnpm run build` failed before app compilation because the installed Next SWC native binary failed macOS code-signature validation in the Codex desktop environment.
 - Browser verification for `/ro/play/a` was skipped because `curl` could not connect to `http://localhost:3000/ro/play/a`; no user-running dev server was listening on port `3000`.
 - `git diff --check` passed.
@@ -429,6 +429,6 @@ Non-goals:
 
 QA:
 - Documentation-only spec work requires markdown consistency review.
-- If code or content changes are made unexpectedly, run pnpm run validate:content, pnpm run lint, ./node_modules/.bin/tsc --noEmit --incremental false, bun src/game/gameplay-compatibility.check.ts, bun src/content/matching.check.ts, and git diff --check.
+- If code or content changes are made unexpectedly, run pnpm run validate:content, pnpm run lint, ./node_modules/.bin/tsc --noEmit --incremental false, pnpm run check:gameplay, pnpm run check:matching, and git diff --check.
 - Browser verification is only needed if http://localhost:3000 is already running and a UI change was made; otherwise ask the user to start the dev server on port 3000.
 ```

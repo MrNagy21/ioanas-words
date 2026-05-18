@@ -289,8 +289,8 @@ Content or image batches:
 pnpm run validate:content
 pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 

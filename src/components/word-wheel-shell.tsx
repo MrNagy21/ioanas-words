@@ -10,12 +10,16 @@ import type { SupportedLocale } from "@/i18n/locales";
 
 type LetterSummary = ContentLetter &
   Readonly<{
-    approvedWordCount: number;
+    startsWithCount: number;
+    containsOnlyCount: number;
+    mixedCount: number;
   }>;
 
 type PracticeTargetSummary = ContentPracticeTarget &
   Readonly<{
-    approvedWordCount: number;
+    startsWithCount: number;
+    containsOnlyCount: number;
+    mixedCount: number;
   }>;
 
 type WordWheelShellProps = Readonly<{
@@ -85,8 +89,9 @@ function LetterSelectionView({
             key={letter.id}
           >
             <span className="letter-tile__label">{letter.label}</span>
-            <span className="letter-tile__count">
-              {letter.approvedWordCount} cuvinte
+            <span className="letter-tile__counts">
+              <span>{letter.startsWithCount} încep</span>
+              <span>{letter.containsOnlyCount} conțin</span>
             </span>
           </Link>
         ))}
@@ -112,8 +117,9 @@ function LetterSelectionView({
               key={target.id}
             >
               <span className="letter-tile__label">{target.label}</span>
-              <span className="letter-tile__count">
-                {target.approvedWordCount} cuvinte
+              <span className="letter-tile__counts">
+                <span>{target.startsWithCount} încep</span>
+                <span>{target.containsOnlyCount} conțin</span>
               </span>
             </Link>
           ))}

@@ -138,7 +138,10 @@ export function getGameplayTargetFromRouteSegment(
   locale: SupportedLocale,
   routeSegment: string,
 ): ContentLetter | ContentPracticeTarget | null {
-  const letter = getLetter(locale, getLetterIdFromRouteSegment(locale, routeSegment));
+  const letter = getLetter(
+    locale,
+    getLetterIdFromRouteSegment(locale, routeSegment),
+  );
 
   if (letter?.enabled) {
     return letter;
@@ -260,15 +263,14 @@ export function getLetterContent(
 export function getStarterContentSummary(locale: SupportedLocale) {
   return getEnabledLetters(locale).map((letter) => ({
     ...letter,
-    approvedWordCount: getApprovedWordsForLetter(locale, letter.id).length,
+    ...getCoverageCountsForTarget(locale, letter),
   }));
 }
 
 export function getPracticeTargetContentSummary(locale: SupportedLocale) {
   return getEnabledPracticeTargets(locale).map((target) => ({
     ...target,
-    approvedWordCount: getDerivedWordPoolsForTarget(locale, target).mixedWords
-      .length,
+    ...getCoverageCountsForTarget(locale, target),
   }));
 }
 
@@ -498,6 +500,20 @@ function getDerivedWordPoolImageCounts({
     startsWith: getImageReadinessCounts(startsWithWords),
     containsOnly: getImageReadinessCounts(containsOnlyWords),
     mixed: getImageReadinessCounts(mixedWords),
+  };
+}
+
+function getCoverageCountsForTarget(
+  locale: SupportedLocale,
+  target: ContentTarget,
+) {
+  const { startsWithWords, containsOnlyWords, mixedWords } =
+    getDerivedWordPoolsForTarget(locale, target);
+
+  return {
+    startsWithCount: startsWithWords.length,
+    containsOnlyCount: containsOnlyWords.length,
+    mixedCount: mixedWords.length,
   };
 }
 

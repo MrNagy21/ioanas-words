@@ -124,7 +124,7 @@ Suggested verification:
 pnpm run validate:content
 pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/content/matching.check.ts
+pnpm run check:matching
 git diff --check
 ```
 
@@ -157,8 +157,8 @@ Suggested verification:
 pnpm run validate:content
 pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -195,8 +195,8 @@ Suggested verification:
 pnpm run validate:content
 pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -233,8 +233,8 @@ Suggested verification:
 pnpm run validate:content
 pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -272,8 +272,8 @@ Suggested verification:
 pnpm run validate:content
 pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -307,8 +307,8 @@ Suggested verification:
 pnpm run validate:content
 pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -348,11 +348,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -399,11 +399,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -432,11 +432,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -484,11 +484,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -532,11 +532,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -636,11 +636,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -693,11 +693,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -731,11 +731,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -770,11 +770,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -830,11 +830,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -872,11 +872,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -914,11 +914,11 @@ Review checkpoint:
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 
@@ -933,35 +933,245 @@ Decision result:
 - `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` practice targets remain at `0` placeholders.
 - Kept vocabulary scope unchanged and kept speech-target metadata out of production JSON.
 
-## Batch 22: General Placeholder Image Replacement Slice 7
+## Batch 22: Diacritic And Sequence Coverage Top-Up Planning
 
-Status: Proposed
+Status: Complete
 
 Tasks:
 
-- Continue from `/admin/words` and production JSON placeholder counts after Batch 21.
-- Prioritize common, concrete, visually straightforward placeholder-backed records from active child-facing buckets with high gameplay value.
-- Preserve all eight sequence practice targets at `0` placeholders.
-- Use only existing approved placeholder-backed production records; do not add vocabulary.
-- Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
-- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
-- Update this feature `status.md`, global `docs/status.md`, and image-brief documentation.
+- Use `/admin/words`, helper-derived coverage, production JSON, and user testing feedback to audit underfilled exact diacritic buckets and bottom-row sequence targets.
+- Record the current diacritic-bucket state:
+  - `Ă` and `Â` have resolved route/ID conventions from Batch 12 but are not currently enabled because no strong child-facing exact starts-with words were accepted.
+  - `Î` is enabled but currently has only `1` approved starts-with word.
+- Record the current sequence mixed-pool counts:
+  - `CE`: `14`;
+  - `CI`: `14`;
+  - `GE`: `10`;
+  - `GI`: `4`;
+  - `CHE`: `10`;
+  - `CHI`: `9`;
+  - `GHE`: `8`;
+  - `GHI`: `8`.
+- Define a candidate worksheet to bring every bottom-row sequence target to at least `15` total mixed words, with `20` as a stretch target only where common, concrete, imageable Romanian child vocabulary allows it.
+- Prioritize `GI`, `GHE`, `GHI`, `CHI`, `GE`, and `CHE`; top off `CE` and `CI` without adding weak words.
+- Revisit exact `Ă`, `Â`, and `Î` content scope. Do not force `Ă` or `Â` if strong child-facing starts-with options are too weak; document quality ceilings explicitly.
+- Use current source research when vocabulary familiarity, Romanian usage, child safety, or speech/logopedie value depends on external facts.
+- Ask the human before accepting borderline vocabulary, enabling `Ă` or `Â`, changing route/schema conventions, adding clinical claims, or introducing placeholder tradeoffs beyond existing policy.
+- Keep this batch planning/worksheet-only unless a later explicit implementation batch is approved.
+- Update this feature `status.md` and global `docs/status.md`.
 
 Review checkpoint:
 
-- Final images are recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the hard maximum size.
-- Overall placeholder counts decrease and ready-image counts increase after the slice.
-- `/admin/words` and affected `/ro/play/<target-or-letter>` routes show the new ready thumbnails/images.
-- Image generation uses generous gutters or individual generations so cropability problems do not recur.
+- Current gaps are recorded with starts-with, contains-only, mixed, ready-image, and placeholder counts where relevant.
+- The worksheet separates accepted, needs-revision, and rejected candidates.
+- No obscure, abstract, adult, unsafe, visually weak, or too-specialized words are proposed just to satisfy numeric targets.
+- Exact diacritic bucket handling remains deliberate and documented.
+- No production JSON records, image assets, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are added.
 
 Suggested verification:
 
 ```txt
-bun run validate:content
-bun run lint
+Review markdown for consistency and readable handoff quality.
+git diff --check
+```
+
+Decision result:
+
+- Created `diacritic-and-sequence-top-up-worksheet-batch-22.md` as the planning source for the next implementation batch.
+- Kept the batch worksheet-only: no production JSON records, image assets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+- Recorded the current bottom-row sequence coverage as starts-with, contains-only, and mixed counts, then planned a quality-gated top-up toward at least `15` mixed words per `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` target, with `20` left as a stretch target only where vocabulary quality allows.
+- Prioritized the weakest and highest-impact targets first: `GI`, `GHE`, `GHI`, `CHI`, `GE`, and `CHE`; `CE` and `CI` only need small top-ups.
+- Revisited exact `Ă`, `Â`, and `Î` starts-with scope:
+  - `Ă` remains convention-only because proposed exact starts-with options are demonstratives or weak child-facing production vocabulary.
+  - `Â` remains convention-only because standard Romanian orthography makes exact starts-with options unsuitable for this child-facing v1 scope.
+  - `Î` should receive a small quality-gated exact starts-with top-up, but not a forced `15`-word quota.
+- Projected sequence coverage if all accepted worksheet rows pass the next implementation batch:
+  - `CE`: `13` starts-with, `3` contains-only, `16` mixed;
+  - `CI`: `9` starts-with, `8` contains-only, `17` mixed;
+  - `GE`: `9` starts-with, `6` contains-only, `15` mixed;
+  - `GI`: `6` starts-with, `9` contains-only, `15` mixed;
+  - `CHE`: `2` starts-with, `13` contains-only, `15` mixed;
+  - `CHI`: `8` starts-with, `7` contains-only, `15` mixed;
+  - `GHE`: `11` starts-with, `4` contains-only, `15` mixed;
+  - `GHI`: `9` starts-with, `6` contains-only, `15` mixed.
+
+## Batch 23: Diacritic And Sequence Top-Up Manifest Implementation
+
+Status: Complete
+
+Tasks:
+
+- Start from `diacritic-and-sequence-top-up-worksheet-batch-22.md`, not from ad hoc word generation.
+- Re-check accepted worksheet rows against current production JSON before adding anything, including duplicate `word`, `display`, `normalized`, ID, route, and image-path checks.
+- Implement only production-ready, reviewed rows from the worksheet; keep rejected and held rows out of production manifests.
+- Preserve the existing decision that `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` are sequence practice targets, not alphabet letters.
+- Keep `Ă` and `Â` disabled unless the human explicitly changes the quality ceiling decision; add only the accepted exact-`Î` scope.
+- Use the existing placeholder policy for any approved words whose final canonical images are not produced in the same batch, and document image status explicitly.
+- Keep speech/logopedie observations documentation-only; do not add speech-target, syllable, therapy, clinical-review, or claim fields to production JSON.
+- Update helper-derived coverage notes, this feature `status.md`, and global `docs/status.md`.
+
+Review checkpoint:
+
+- Every added word is common enough, concrete enough, imageable, child-safe, and suitable for children around ages 4 to 6.
+- Sequence targets reach at least `15` mixed words where quality allows, without padding with obscure or weak vocabulary.
+- Exact `Î` improves from the current single starts-with word without forcing a quota.
+- `Ă` and `Â` remain documented quality ceilings unless an explicit human decision changes scope.
+- `/admin/words` and the `/ro` start page show separate starts-with and contains-only counts for the affected targets.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 23 implemented all `51` accepted rows from `diacritic-and-sequence-top-up-worksheet-batch-22.md` as approved placeholder-backed production records.
+- Production Romanian content now has `370` approved words: `154` ready-image records and `216` intentional placeholder-backed records.
+- The eight bottom-row sequence targets remain separate practice targets, not alphabet letters.
+- Helper-derived sequence mixed-pool counts now meet or exceed the `15`-word floor where the worksheet quality review allowed it:
+  - `CE`: `13` starts-with, `3` contains-only, `16` mixed;
+  - `CI`: `9` starts-with, `10` contains-only, `19` mixed;
+  - `GE`: `9` starts-with, `6` contains-only, `15` mixed;
+  - `GI`: `6` starts-with, `9` contains-only, `15` mixed;
+  - `CHE`: `2` starts-with, `13` contains-only, `15` mixed;
+  - `CHI`: `8` starts-with, `7` contains-only, `15` mixed;
+  - `GHE`: `11` starts-with, `4` contains-only, `15` mixed;
+  - `GHI`: `9` starts-with, `6` contains-only, `15` mixed.
+- Exact `Î` starts-with depth improved from `1` to `8` approved words; exact `Ă` and `Â` remain disabled/convention-only.
+- Updated gameplay compatibility expectations for the expanded sequence practice target pools.
+- Kept speech/logopedie metadata documentation-only and added no route/schema changes, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+## Batch 24: General Placeholder Image Replacement Slice 7
+
+Status: Complete
+
+Continue the general placeholder image replacement work after the diacritic and sequence coverage top-up implementation scope is completed, unless the human explicitly prioritizes image completion first.
+
+Decision result:
+
+- Batch 24 implemented a 12-word image-only replacement slice for newly added high-value sequence and exact-`Î` placeholders: `centură`, `covrigi`, `chiuvetă`, `geamantan`, `gelatină`, `frânghie`, `triunghi`, `dreptunghi`, `înot`, `încălțăminte`, `îmbrăcăminte`, and `încuietoare`.
+- Added `image-briefs-batch-24.md` with target words, image briefs, review decisions, final paths, and image-readiness impact.
+- Updated the 12 canonical production records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `370` approved words; ready images move from `154` to `166`, and placeholders move from `216` to `204`.
+- Kept `Ă` and `Â` disabled/convention-only and added no new vocabulary, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+## Batch 25: General Placeholder Image Replacement Slice 8
+
+Status: Complete
+
+Continue the general placeholder image replacement work after Batch 24.
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 24.
+- Prioritize remaining high-value sequence placeholders where image clarity is strongest, especially `licurici`, `piscină`, `cerneală`, `fulgi`, `fragi`, `ghemotoc`, `ghețar`, `baghetă`, `parchet`, `echer`, `ochean`, and `chipiu` if visual review succeeds.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Decision result:
+
+- Batch 25 implemented a 12-word image-only replacement slice for remaining high-value sequence placeholders: `licurici`, `piscină`, `cerneală`, `fulgi`, `fragi`, `ghemotoc`, `ghețar`, `baghetă`, `parchet`, `echer`, `ochean`, and `chipiu`.
+- Added `image-briefs-batch-25.md` with target words, image briefs, review decisions, final paths, file sizes, and image-readiness impact.
+- Updated the 12 canonical production records from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Production Romanian content remains `370` approved words; ready images move from `166` to `178`, and placeholders move from `204` to `192`.
+- Kept `Ă` and `Â` disabled/convention-only and added no new vocabulary, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+## Batch 26: General Placeholder Image Replacement Slice 9
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 25.
+
+Tasks:
+
+- Continue from `/admin/words` and production JSON placeholder counts after Batch 25.
+- Prioritize remaining sequence placeholders only where image clarity is strong, especially `înger`, `gibon`, `giroscop`, `argint`, `chimen`, `mochetă`, `machetă`, `gheară`, `ghețuș`, `unghi`, and `ghișeu` if visual review succeeds.
+- Defer or reject concepts that remain too abstract, broad, low-familiarity, or visually ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 26 implemented an 11-word image-only replacement slice for `înger`, `gibon`, `giroscop`, `mochetă`, `machetă`, `gheară`, `ghețuș`, `argint`, `chimen`, `unghi`, and `ghișeu`.
+- All selected words already existed as approved placeholder-backed production records.
+- Batch 26 added `image-briefs-batch-26.md`, generated reviewed pixel-art assets, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 27: General Placeholder Image Replacement Slice 10
+
+Status: Proposed
+
+Continue general placeholder image replacement after Batch 26.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-26.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `capră`, `căpșună`, `clopoțel`, `colac`, `cort`, `cocoș`, `căruță`, `căsuță`, `cozonac`, `delfin`, `dovleac`, `dulap`, `elefant`, `elicopter`, `floare`, `fluture`, `fular`, `furculiță`, `umbrelă`, `ursuleț`, `vacă`, `vapor`, `vulpe`, `șopârlă`, `șarpe`, and `țânțar`.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 ```
 

@@ -451,6 +451,312 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "gemeni",
+      "display": "gemeni",
+      "normalized": "gemeni",
+      "id": "ro-g-gemeni",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul gemeni",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "geamantan",
+      "display": "geamantan",
+      "normalized": "geamantan",
+      "id": "ro-g-geamantan",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/g/ro-g-geamantan.webp",
+      "imageStatus": "ready",
+      "alt": "Un geamantan albastru cu mâner",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ger",
+      "display": "ger",
+      "normalized": "ger",
+      "id": "ro-g-ger",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul ger",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gelatină",
+      "display": "gelatină",
+      "normalized": "gelatina",
+      "id": "ro-g-gelatina",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/g/ro-g-gelatina.webp",
+      "imageStatus": "ready",
+      "alt": "O gelatină roșie pe o farfurie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gimnastică",
+      "display": "gimnastică",
+      "normalized": "gimnastica",
+      "id": "ro-g-gimnastica",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul gimnastică",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gimnast",
+      "display": "gimnast",
+      "normalized": "gimnast",
+      "id": "ro-g-gimnast",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul gimnast",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gibon",
+      "display": "gibon",
+      "normalized": "gibon",
+      "id": "ro-g-gibon",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/g/ro-g-gibon.webp",
+      "imageStatus": "ready",
+      "alt": "Un gibon prietenos cu brațe lungi",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gigant",
+      "display": "gigant",
+      "normalized": "gigant",
+      "id": "ro-g-gigant",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul gigant",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "giroscop",
+      "display": "giroscop",
+      "normalized": "giroscop",
+      "id": "ro-g-giroscop",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/g/ro-g-giroscop.webp",
+      "imageStatus": "ready",
+      "alt": "Un giroscop colorat de jucărie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ghemotoc",
+      "display": "ghemotoc",
+      "normalized": "ghemotoc",
+      "id": "ro-g-ghemotoc",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/g/ro-g-ghemotoc.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghemotoc de hârtie albă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ghețar",
+      "display": "ghețar",
+      "normalized": "ghetar",
+      "id": "ro-g-ghetar",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/g/ro-g-ghetar.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghețar albastru",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gheretă",
+      "display": "gheretă",
+      "normalized": "ghereta",
+      "id": "ro-g-ghereta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul gheretă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gheruță",
+      "display": "gheruță",
+      "normalized": "gheruta",
+      "id": "ro-g-gheruta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul gheruță",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "gheară",
+      "display": "gheară",
+      "normalized": "gheara",
+      "id": "ro-g-gheara",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/g/ro-g-gheara.webp",
+      "imageStatus": "ready",
+      "alt": "O labă de animal cu gheare",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ghețuș",
+      "display": "ghețuș",
+      "normalized": "ghetus",
+      "id": "ro-g-ghetus",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/g/ro-g-ghetus.webp",
+      "imageStatus": "ready",
+      "alt": "O porțiune mică de ghețuș albastru",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ghicitoare",
+      "display": "ghicitoare",
+      "normalized": "ghicitoare",
+      "id": "ro-g-ghicitoare",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul ghicitoare",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ghișeu",
+      "display": "ghișeu",
+      "normalized": "ghiseu",
+      "id": "ro-g-ghiseu",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/g/ro-g-ghiseu.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghișeu mic cu tejghea și clopoțel",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

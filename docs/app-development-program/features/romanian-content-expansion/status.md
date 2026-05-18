@@ -1,12 +1,12 @@
 # Romanian Content Expansion Status
 
-Last updated: 2026-05-17
+Last updated: 2026-05-18
 
 ## Current Phase
 
-Phase: Batch 21 general placeholder image replacement slice complete
+Phase: Batch 26 general placeholder image replacement complete; Batch 27 general placeholder image replacement proposed
 
-Overall status: Batch 21 completed the sixth placeholder image replacement slice. The completed image-only slice replaced 12 general high-value `B` placeholder-backed records: `balon`, `banană`, `barcă`, `bec`, `biscuit`, `broască`, `brânză`, `băț`, `buburuză`, `bagaj`, `barză`, and `buzunar`. Production Romanian content still has `319` approved words, and ready-image records moved from `142` to `154` while intentional placeholder-backed records moved from `177` to `165`. All eight sequence practice targets `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` remain at `0` placeholders. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only. The eight sequence practice targets remain separate from `content/ro/letters.json` and stay auditable in `/admin/words`.
+Overall status: Batch 26 replaced `11` approved placeholder-backed records with reviewed final pixel-art WebP assets. Production Romanian content now has `370` approved words, `189` ready images, and `181` intentional placeholders. The slice prioritized remaining exact-`Î` and sequence-related placeholders whose generated visuals passed thumbnail review: `înger`, `gibon`, `giroscop`, `mochetă`, `machetă`, `gheară`, `ghețuș`, `argint`, `chimen`, `unghi`, and `ghișeu`. `CE` and `CHE` are now fully ready at `0` placeholders, and exact `Î` improved to `6` ready / `2` placeholder. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only. The eight sequence practice targets remain separate from `content/ro/letters.json` and stay auditable in `/admin/words`.
 
 ## Completed
 
@@ -34,6 +34,35 @@ Overall status: Batch 21 completed the sixth placeholder image replacement slice
 - Updated the app development program reading order.
 - Updated the app development program package list.
 - Updated global `docs/status.md`.
+- Completed Batch 22: Diacritic And Sequence Coverage Top-Up Planning.
+- Created `diacritic-and-sequence-top-up-worksheet-batch-22.md`.
+- Kept Batch 22 worksheet-only with no production JSON records, image assets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Recorded accepted, held, and rejected candidate rows for underfilled `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, `GHI`, and exact `Ă`/`Â`/`Î` coverage.
+- Confirmed `Ă` and `Â` remain convention-only for now, while `Î` should receive a small quality-gated exact starts-with top-up.
+- Completed Batch 23: Diacritic And Sequence Top-Up Manifest Implementation.
+- Implemented all `51` accepted Batch 22 worksheet rows as approved placeholder-backed records in their canonical starting-letter manifests.
+- Updated gameplay compatibility expectations for the expanded sequence practice target mixed pools.
+- Kept `Ă` and `Â` disabled/convention-only and added only the accepted exact-`Î` scope.
+- Kept `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI` as sequence practice targets outside `content/ro/letters.json`.
+- Kept speech-target, syllable, cluster, contrast, therapy, and clinical metadata out of production JSON.
+- Completed Batch 24: General Placeholder Image Replacement Slice 7.
+- Added `image-briefs-batch-24.md` with production image briefs, review decisions, final paths, and image-readiness impact.
+- Replaced 12 newly added Batch 23 placeholder-backed records with reviewed final pixel-art WebP assets.
+- Updated canonical records for `centură`, `covrigi`, `chiuvetă`, `geamantan`, `gelatină`, `frânghie`, `triunghi`, `dreptunghi`, `înot`, `încălțăminte`, `îmbrăcăminte`, and `încuietoare` from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Confirmed helper-derived production totals after Batch 24: `370` approved Romanian words, `166` ready images, and `204` placeholders.
+- Confirmed exact `Î` image readiness improved to `5` ready / `3` placeholder while `Ă` and `Â` remain disabled/convention-only.
+- Completed Batch 25: General Placeholder Image Replacement Slice 8.
+- Added `image-briefs-batch-25.md` with production image briefs, review decisions, final paths, file sizes, and image-readiness impact.
+- Replaced 12 approved placeholder-backed records with reviewed final pixel-art WebP assets.
+- Updated canonical records for `licurici`, `piscină`, `cerneală`, `fulgi`, `fragi`, `ghemotoc`, `ghețar`, `baghetă`, `parchet`, `echer`, `ochean`, and `chipiu` from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Confirmed helper-derived production totals after Batch 25: `370` approved Romanian words, `178` ready images, and `192` placeholders.
+- Confirmed sequence readiness improvements after Batch 25: `CE` `16` ready / `0` placeholder, `CI` `16` ready / `3` placeholder, `GI` `7` ready / `8` placeholder, `CHE` `13` ready / `2` placeholder, `CHI` `11` ready / `4` placeholder, and `GHE` `11` ready / `4` placeholder.
+- Completed Batch 26: General Placeholder Image Replacement Slice 9.
+- Added `image-briefs-batch-26.md` with production image briefs, review decisions, final paths, file sizes, and image-readiness impact.
+- Replaced 11 approved placeholder-backed records with reviewed final pixel-art WebP assets.
+- Updated canonical records for `înger`, `gibon`, `giroscop`, `mochetă`, `machetă`, `gheară`, `ghețuș`, `argint`, `chimen`, `unghi`, and `ghișeu` from the generic placeholder to ready app-owned image paths and meaningful alt text.
+- Confirmed helper-derived production totals after Batch 26: `370` approved Romanian words, `189` ready images, and `181` placeholders.
+- Confirmed sequence readiness improvements after Batch 26: `GE` `13` ready / `2` placeholder, `GI` `10` ready / `5` placeholder, `CHE` `15` ready / `0` placeholder, `CHI` `12` ready / `3` placeholder, `GHE` `13` ready / `2` placeholder, and `GHI` `13` ready / `2` placeholder.
 - Completed Batch 1: Coverage Audit And Expansion Targets.
 - Created `coverage-audit-and-targets.md`.
 - Recorded current alphabet coverage:
@@ -329,18 +358,18 @@ Overall status: Batch 21 completed the sixth placeholder image replacement slice
 - Added `image-briefs-batch-16.md` with production image briefs, review decisions, final paths, and impact.
 - Replaced 12 generic placeholder image records in `content/ro/words-c.json` with canonical ready image paths and meaningful alt text.
 - Added final reviewed WebP assets for:
-   - `ro-c-ceas`
-   - `ro-c-cerb`
-   - `ro-c-cerc`
-   - `ro-c-cercel`
-   - `ro-c-ceai`
-   - `ro-c-ceasca`
-   - `ro-c-cereale`
-   - `ro-c-cearsaf`
-   - `ro-c-ciocolata`
-   - `ro-c-ciocan`
-   - `ro-c-ciuperca`
-   - `ro-c-ciorba`
+  - `ro-c-ceas`
+  - `ro-c-cerb`
+  - `ro-c-cerc`
+  - `ro-c-cercel`
+  - `ro-c-ceai`
+  - `ro-c-ceasca`
+  - `ro-c-cereale`
+  - `ro-c-cearsaf`
+  - `ro-c-ciocolata`
+  - `ro-c-ciocan`
+  - `ro-c-ciuperca`
+  - `ro-c-ciorba`
 - Confirmed the first Batch 16 slice changes production image readiness from 83 ready / 236 placeholder to 95 ready / 224 placeholder, with 319 approved words unchanged.
 - Completed Batch 17: Placeholder Image Replacement Slice 2.
 - Added `image-briefs-batch-17.md` with production image briefs, review decisions, final paths, and target-readiness impact.
@@ -446,6 +475,13 @@ Overall status: Batch 21 completed the sixth placeholder image replacement slice
 - Batch 20 decision: replace all remaining `CE` and `CI` sequence-target placeholders in one 8-word slice because the concepts were visually straightforward and the batch size stayed manageable for visual QA.
 - Batch 20 decision: after this slice, the next Romanian image work can move to general high-value placeholder-backed records because all eight sequence practice targets are now at `0` placeholders.
 - Batch 21 decision: start general placeholder replacement with a focused `B` slice because `/admin/words` showed many remaining `B` placeholders and the selected records were common, concrete, visually straightforward, and useful in child-facing gameplay.
+- Batch 23 decision: implement every accepted Batch 22 worksheet row as approved placeholder-backed production vocabulary because the rows were already source/review checked and the existing placeholder policy allows child-facing placeholder-backed words.
+- Batch 23 decision: do not enable exact `Ă` or `Â`; keep those buckets convention-only because Batch 22 did not accept strong child-facing exact starts-with vocabulary.
+- Batch 23 decision: exact `Î` top-up should remain small and quality-gated; the implemented scope improves starts-with depth to `8` without forcing a `15`-word exact-`Î` quota.
+- Batch 23 decision: the next Romanian content step should return to image replacement, prioritizing newly added sequence and exact-`Î` placeholders where final-image clarity is strongest.
+- Batch 24 decision: use a 12-word image-only slice because the selected newly added sequence and exact-`Î` concepts were visually clear enough for one QA batch; defer weaker fantasy, people-group, frost, booth, riddle, and low-familiarity concepts to later stricter review.
+- Batch 25 decision: use a 12-word image-only slice because the selected remaining sequence placeholders were concrete and visually clear enough for one QA batch; defer more abstract, people-group, broad equipment, and lower-familiarity concepts to later stricter review.
+- Batch 26 decision: use an 11-word image-only slice because every prioritized candidate generated a recognizable, child-safe, text-free thumbnail; simplify the accepted contact-sheet cells to a lower pixel grid before lossless WebP encoding so the final assets stay below the `20 KB` hard maximum.
 - Batch 3 source note: ASHA's Speech Sound Disorders Practice Portal keeps assessment, diagnosis, target selection, and treatment planning in the speech-language professional domain, so Word Wheel should avoid production clinical metadata and claims until a dedicated review exists: https://www.asha.org/practice-portal/clinical-topics/articulation-and-phonology/
 - Batch 3 source note: ASHA's 4-to-5 communication milestones and CDC's 4-year milestones support keeping the app framed as age-appropriate vocabulary/pronunciation practice, not screening or treatment: https://www.asha.org/public/developmental-milestones/communication-milestones-4-to-5-years/ and https://www.cdc.gov/act-early/milestones/4-years.html
 - Batch 3 source note: Romanian diacritics should stay exact because Romanian orthography includes `Ă`, `Â`, `Î`, `Ș`, and `Ț`, with comma-below `Ș/Ț` as the modern standard form: https://european-language-equality.eu/wp-content/uploads/2022/03/ELE___Deliverable_D1_29__Language_Report_Romanian_.pdf
@@ -468,10 +504,10 @@ Overall status: Batch 21 completed the sixth placeholder image replacement slice
 - Batch 4 added production-bound draft metadata but intentionally added 0 approved child-facing words and 0 images.
 - Batch 4 did not change approved coverage counts because draft records are excluded from `getApprovedWords`.
 - Batch 4 deferred `Ș` and `Ț` starting-letter files to avoid silently choosing a diacritic-bucket ID convention.
-- Batch 5 could not use the Sharp-backed `bun run optimize:images -- --locale ro` execution path because local Sharp loading failed with the known macOS code-signature error. The documented optimizer dry run passed, then final Batch 5 assets were written with local `cwebp` from reviewed 256 px staged PNG sources.
+- Batch 5 could not use the Sharp-backed `pnpm run optimize:images -- --locale ro` execution path because local Sharp loading failed with the known macOS code-signature error. The documented optimizer dry run passed, then final Batch 5 assets were written with local `cwebp` from reviewed 256 px staged PNG sources.
 - Batch 5 browser verification was skipped because no user-running dev server was listening at `http://localhost:3000`.
-- Batch 6 could not run `pnpm run validate:content` or `pnpm run lint` because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- Batch 6 `bun run build` was attempted and remains blocked by the local Next SWC darwin/arm64 code-signature error.
+- Batch 6 could not run `pnpm run validate:content` or `pnpm run lint` because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- Batch 6 `pnpm run build` was attempted and remains blocked by the local Next SWC darwin/arm64 code-signature error.
 - Batch 6 content validation still reports existing warning-threshold notices for 5 older `M` and `P` images; all are below the `20 KB` hard maximum and none belong to the new 15-word production expansion slice.
 - Batch 6 browser verification for `/ro`, `/admin/words`, and affected `/ro/play/<letter>` routes was skipped because no user-running dev server was listening at `http://localhost:3000`.
 - Browser verification for `/admin/words` was skipped in Batch 3 because no visual admin changes were made and `http://localhost:3000` was not reachable.
@@ -479,12 +515,12 @@ Overall status: Batch 21 completed the sixth placeholder image replacement slice
 - No dev server was started.
 - Batch 7 added validator support for the `Ș`/`Ț` ASCII word ID convention, but added no production word manifests or image assets.
 - Batch 7 browser verification was skipped because no child-facing content or UI changed and no words were promoted to approved.
-- Batch 8 could not run `pnpm run validate:content` or `pnpm run lint` because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
+- Batch 8 could not run `pnpm run validate:content` or `pnpm run lint` because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
 - Batch 8 did not use the Sharp-backed optimizer path because local Sharp loading still fails with the known macOS code-signature error; final Batch 8 assets were written with local `cwebp` from reviewed 256 px staged PNG sources.
 - Batch 8 content validation still reports existing warning-threshold notices for 5 older `M` and `P` images; all are below the `20 KB` hard maximum and none belong to the new 17-word production expansion slice.
 - Batch 8 browser verification for `/ro`, `/admin/words`, `/ro/play/sh`, `/ro/play/tz`, `/ro/play/f`, and `/ro/play/d` was skipped because no user-running dev server was listening at `http://localhost:3000`.
 - Batch 9 added no production JSON records or image assets.
-- Batch 10 used the Sharp-backed repository optimizer successfully through `bun scripts/images/optimize-images.mjs --locale ro --source /private/tmp/batch10-image-sources`; direct `node` Sharp loading still fails locally with the known macOS code-signature error.
+- Batch 10 used the Sharp-backed repository optimizer successfully through `pnpm run optimize:images -- --locale ro --source /private/tmp/batch10-image-sources`; direct `node` Sharp loading still fails locally with the known macOS code-signature error.
 - Batch 10 content validation still reports existing warning-threshold notices for 5 older `M` and `P` images; all are below the `20 KB` hard maximum and none belong to the new 11-word production expansion slice.
 - Batch 11 added documentation only. No production JSON records, image assets, schema changes, child-facing UI, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
 - Batch 11 intentionally did not resolve `Ă`, `Â`, or `Î` ASCII ID tokens because those exact starts-with buckets do not enter the selected next scope.
@@ -615,23 +651,23 @@ Overall status: Batch 21 completed the sixth placeholder image replacement slice
 
 Batch 5 promoted the 15 Batch 4 draft records after image review and validation. Approved gameplay and `/admin/words` coverage now include these words.
 
-| Word | Canonical file | Worksheet row | Status now | Starts-with impact | Contains and speech-target impact |
-| --- | --- | ---: | --- | --- | --- |
-| `braț` | `words-b.json` | 40 | approved, ready image | `B` +1 | final `Ț`; contains-only `R`; complex `br` cluster |
-| `buză` | `words-b.json` | 51 | approved, ready image | `B` +1 | medial `Z` |
-| `geam` | `words-g.json` | 66 | approved, ready image | `G` +1 | initial watchlist `GE/GI` |
-| `gheață` | `words-g.json` | 41 | approved, ready image | `G` +1 | medial `Ț` |
-| `jucărie` | `words-j.json` | 54 | approved, ready image | `J` +1 | initial `J`; medial `R` |
-| `jachetă` | `words-j.json` | 55 | approved, ready image | `J` +1 | initial `J` |
-| `rață` | `words-r.json` | 1 | approved, ready image | `R` +1 | initial `R`; medial `Ț` |
-| `roată` | `words-r.json` | 2 | approved, ready image | `R` +1 | initial `R` |
-| `robot` | `words-r.json` | 3 | approved, ready image | `R` +1 | initial `R` |
-| `soare` | `words-s.json` | 14 | approved, ready image | `S` +1 | initial `S`; medial `R` |
-| `suc` | `words-s.json` | 15 | approved, ready image | `S` +1 | initial short `S` |
-| `săpun` | `words-s.json` | 22 | approved, ready image | `S` +1 | initial `S` |
-| `ușă` | `words-u.json` | 30 | approved, ready image | `U` +1 | medial `Ș`; improves contains-only `Ș` |
-| `zebră` | `words-z.json` | 45 | approved, ready image | `Z` +1 | initial `Z`; medial `R`; `br` cluster |
-| `zăpadă` | `words-z.json` | 46 | approved, ready image | `Z` +1 | initial `Z`; medial `D` |
+| Word      | Canonical file | Worksheet row | Status now            | Starts-with impact | Contains and speech-target impact                  |
+| --------- | -------------- | ------------: | --------------------- | ------------------ | -------------------------------------------------- |
+| `braț`    | `words-b.json` |            40 | approved, ready image | `B` +1             | final `Ț`; contains-only `R`; complex `br` cluster |
+| `buză`    | `words-b.json` |            51 | approved, ready image | `B` +1             | medial `Z`                                         |
+| `geam`    | `words-g.json` |            66 | approved, ready image | `G` +1             | initial watchlist `GE/GI`                          |
+| `gheață`  | `words-g.json` |            41 | approved, ready image | `G` +1             | medial `Ț`                                         |
+| `jucărie` | `words-j.json` |            54 | approved, ready image | `J` +1             | initial `J`; medial `R`                            |
+| `jachetă` | `words-j.json` |            55 | approved, ready image | `J` +1             | initial `J`                                        |
+| `rață`    | `words-r.json` |             1 | approved, ready image | `R` +1             | initial `R`; medial `Ț`                            |
+| `roată`   | `words-r.json` |             2 | approved, ready image | `R` +1             | initial `R`                                        |
+| `robot`   | `words-r.json` |             3 | approved, ready image | `R` +1             | initial `R`                                        |
+| `soare`   | `words-s.json` |            14 | approved, ready image | `S` +1             | initial `S`; medial `R`                            |
+| `suc`     | `words-s.json` |            15 | approved, ready image | `S` +1             | initial short `S`                                  |
+| `săpun`   | `words-s.json` |            22 | approved, ready image | `S` +1             | initial `S`                                        |
+| `ușă`     | `words-u.json` |            30 | approved, ready image | `U` +1             | medial `Ș`; improves contains-only `Ș`             |
+| `zebră`   | `words-z.json` |            45 | approved, ready image | `Z` +1             | initial `Z`; medial `R`; `br` cluster              |
+| `zăpadă`  | `words-z.json` |            46 | approved, ready image | `Z` +1             | initial `Z`; medial `D`                            |
 
 Aggregate target impact:
 
@@ -657,18 +693,18 @@ Current helper-derived `/admin/words` summary:
 Current enabled-letter coverage:
 
 | Letter | Starts-with | Contains-only | Mixed | Ready starts | Ready contains | Placeholder images |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `A` | 10 | 20 | 30 | 10 | 20 | 0 |
-| `B` | 2 | 5 | 7 | 2 | 5 | 0 |
-| `C` | 10 | 10 | 20 | 10 | 10 | 0 |
-| `G` | 2 | 1 | 3 | 2 | 1 | 0 |
-| `J` | 2 | 0 | 2 | 2 | 0 | 0 |
-| `M` | 10 | 1 | 11 | 10 | 1 | 0 |
-| `P` | 10 | 5 | 15 | 10 | 5 | 0 |
-| `R` | 3 | 16 | 19 | 3 | 16 | 0 |
-| `S` | 3 | 5 | 8 | 3 | 5 | 0 |
-| `U` | 1 | 11 | 12 | 1 | 11 | 0 |
-| `Z` | 2 | 2 | 4 | 2 | 2 | 0 |
+| ------ | ----------: | ------------: | ----: | -----------: | -------------: | -----------------: |
+| `A`    |          10 |            20 |    30 |           10 |             20 |                  0 |
+| `B`    |           2 |             5 |     7 |            2 |              5 |                  0 |
+| `C`    |          10 |            10 |    20 |           10 |             10 |                  0 |
+| `G`    |           2 |             1 |     3 |            2 |              1 |                  0 |
+| `J`    |           2 |             0 |     2 |            2 |              0 |                  0 |
+| `M`    |          10 |             1 |    11 |           10 |              1 |                  0 |
+| `P`    |          10 |             5 |    15 |           10 |              5 |                  0 |
+| `R`    |           3 |            16 |    19 |            3 |             16 |                  0 |
+| `S`    |           3 |             5 |     8 |            3 |              5 |                  0 |
+| `U`    |           1 |            11 |    12 |            1 |             11 |                  0 |
+| `Z`    |           2 |             2 |     4 |            2 |              2 |                  0 |
 
 Current high-value target coverage after the slice:
 
@@ -729,17 +765,17 @@ Planned second production slice:
 Expected coverage if all 17 later pass image review and validation:
 
 | Target | Batch 6 starts/contains/mixed | Planned starts/contains/mixed |
-| --- | ---: | ---: |
-| `Ș` | `0 / 5 / 5` | `3 / 6 / 9` |
-| `Ț` | `0 / 3 / 3` | `1 / 4 / 5` |
-| `S` | `3 / 5 / 8` | `6 / 7 / 13` |
-| `Z` | `2 / 2 / 4` | `3 / 3 / 6` |
-| `GE` | `1 / 1 / 2` | `2 / 2 / 4` |
-| `GI` | `0 / 0 / 0` | `1 / 0 / 1` |
-| `CE` | `0 / 0 / 0` | `1 / 1 / 2` |
-| `CI` | `0 / 1 / 1` | `2 / 2 / 4` |
-| `F` | `0 / 1 / 1` | `2 / 2 / 4` |
-| `D` | `0 / 3 / 3` | `1 / 4 / 5` |
+| ------ | ----------------------------: | ----------------------------: |
+| `Ș`    |                   `0 / 5 / 5` |                   `3 / 6 / 9` |
+| `Ț`    |                   `0 / 3 / 3` |                   `1 / 4 / 5` |
+| `S`    |                   `3 / 5 / 8` |                  `6 / 7 / 13` |
+| `Z`    |                   `2 / 2 / 4` |                   `3 / 3 / 6` |
+| `GE`   |                   `1 / 1 / 2` |                   `2 / 2 / 4` |
+| `GI`   |                   `0 / 0 / 0` |                   `1 / 0 / 1` |
+| `CE`   |                   `0 / 0 / 0` |                   `1 / 1 / 2` |
+| `CI`   |                   `0 / 1 / 1` |                   `2 / 2 / 4` |
+| `F`    |                   `0 / 1 / 1` |                   `2 / 2 / 4` |
+| `D`    |                   `0 / 3 / 3` |                   `1 / 4 / 5` |
 
 Batch 8 implemented this planned second slice. No Batch 7 planned row remains pending.
 
@@ -747,25 +783,25 @@ Batch 8 implemented this planned second slice. No Batch 7 planned row remains pe
 
 Batch 8 promoted the 17 Batch 7 planned rows after image brief review, source image review, WebP optimization, and automated validation. Approved gameplay and `/admin/words` coverage now include these words.
 
-| Word | Canonical file | Worksheet row | Status now | Starts-with impact | Contains and speech-target impact |
-| --- | --- | ---: | --- | --- | --- |
-| `șapcă` | `words-ș.json` | 25 | approved, ready image | `Ș` +1 | initial `Ș`; `S/Ș` contrast context |
-| `șosetă` | `words-ș.json` | 27 | approved, ready image | `Ș` +1 | initial `Ș`; medial `S` |
-| `șoricel` | `words-ș.json` | 29 | approved, ready image | `Ș` +1 | initial `Ș`; medial `R` |
-| `țestoasă` | `words-ț.json` | 36 | approved, ready image | `Ț` +1 | initial `Ț`; medial/final `S` |
-| `sanie` | `words-s.json` | 13 | approved, ready image | `S` +1 | simple initial `S` |
-| `salată` | `words-s.json` | 17 | approved, ready image | `S` +1 | simple initial `S` |
-| `sandale` | `words-s.json` | 23 | approved, ready image | `S` +1 | simple initial `S` |
-| `zar` | `words-z.json` | 47 | approved, ready image | `Z` +1 | initial `Z`; final `R` |
-| `gem` | `words-g.json` | 67 | approved, ready image | `G` +1 | initial watchlist `GE` |
-| `girafă` | `words-g.json` | 68 | approved, ready image | `G` +1 | initial watchlist `GI`; medial `R` and `F` |
-| `ceapă` | `words-c.json` | 60 | approved, ready image | `C` +1 | initial watchlist `CE` |
-| `cireșe` | `words-c.json` | 62 | approved, ready image | `C` +1 | initial watchlist `CI`; medial `Ș` |
-| `ciorap` | `words-c.json` | 63 | approved, ready image | `C` +1 | initial watchlist `CI`; medial `R` |
-| `față` | `words-f.json` | 39 | approved, ready image | `F` +1 | medial `Ț`; first `F` starts-with candidate |
-| `frunză` | `words-f.json` | 52 | approved, ready image | `F` +1 | medial `Z`; `F/R` cluster context |
-| `bicicletă` | `words-b.json` | 65 | approved, ready image | `B` +1 | contains `CI`; final-ish `Ț`; later-practice complexity |
-| `deget` | `words-d.json` | 69 | approved, ready image | `D` +1 | medial `GE`; first `D` starts-with candidate |
+| Word        | Canonical file | Worksheet row | Status now            | Starts-with impact | Contains and speech-target impact                       |
+| ----------- | -------------- | ------------: | --------------------- | ------------------ | ------------------------------------------------------- |
+| `șapcă`     | `words-ș.json` |            25 | approved, ready image | `Ș` +1             | initial `Ș`; `S/Ș` contrast context                     |
+| `șosetă`    | `words-ș.json` |            27 | approved, ready image | `Ș` +1             | initial `Ș`; medial `S`                                 |
+| `șoricel`   | `words-ș.json` |            29 | approved, ready image | `Ș` +1             | initial `Ș`; medial `R`                                 |
+| `țestoasă`  | `words-ț.json` |            36 | approved, ready image | `Ț` +1             | initial `Ț`; medial/final `S`                           |
+| `sanie`     | `words-s.json` |            13 | approved, ready image | `S` +1             | simple initial `S`                                      |
+| `salată`    | `words-s.json` |            17 | approved, ready image | `S` +1             | simple initial `S`                                      |
+| `sandale`   | `words-s.json` |            23 | approved, ready image | `S` +1             | simple initial `S`                                      |
+| `zar`       | `words-z.json` |            47 | approved, ready image | `Z` +1             | initial `Z`; final `R`                                  |
+| `gem`       | `words-g.json` |            67 | approved, ready image | `G` +1             | initial watchlist `GE`                                  |
+| `girafă`    | `words-g.json` |            68 | approved, ready image | `G` +1             | initial watchlist `GI`; medial `R` and `F`              |
+| `ceapă`     | `words-c.json` |            60 | approved, ready image | `C` +1             | initial watchlist `CE`                                  |
+| `cireșe`    | `words-c.json` |            62 | approved, ready image | `C` +1             | initial watchlist `CI`; medial `Ș`                      |
+| `ciorap`    | `words-c.json` |            63 | approved, ready image | `C` +1             | initial watchlist `CI`; medial `R`                      |
+| `față`      | `words-f.json` |            39 | approved, ready image | `F` +1             | medial `Ț`; first `F` starts-with candidate             |
+| `frunză`    | `words-f.json` |            52 | approved, ready image | `F` +1             | medial `Z`; `F/R` cluster context                       |
+| `bicicletă` | `words-b.json` |            65 | approved, ready image | `B` +1             | contains `CI`; final-ish `Ț`; later-practice complexity |
+| `deget`     | `words-d.json` |            69 | approved, ready image | `D` +1             | medial `GE`; first `D` starts-with candidate            |
 
 Aggregate impact:
 
@@ -831,20 +867,20 @@ All 11 planned rows are accepted worksheet candidates and were confirmed not dup
 Expected coverage if all 11 later pass image review and validation:
 
 | Target | Current starts/contains/mixed | Planned starts/contains/mixed |
-| --- | ---: | ---: |
-| `R` | `3 / 22 / 25` | `5 / 24 / 29` |
-| `I` | `0 / 20 / 20` | `1 / 23 / 24` |
-| `S` | `6 / 7 / 13` | `7 / 9 / 16` |
-| `N` | `0 / 19 / 19` | `1 / 21 / 22` |
-| `U` | `1 / 12 / 13` | `2 / 14 / 16` |
-| `C` | `13 / 13 / 26` | `16 / 16 / 32` |
-| `D` | `1 / 4 / 5` | `2 / 4 / 6` |
-| `P` | `10 / 8 / 18` | `11 / 9 / 20` |
-| `Ș` | `3 / 6 / 9` | `3 / 8 / 11` |
-| `Ț` | `1 / 4 / 5` | `1 / 6 / 7` |
-| `J` | `2 / 0 / 2` | `2 / 1 / 3` |
-| `M` | `10 / 2 / 12` | `10 / 4 / 14` |
-| `A` | `10 / 30 / 40` | `10 / 35 / 45` |
+| ------ | ----------------------------: | ----------------------------: |
+| `R`    |                 `3 / 22 / 25` |                 `5 / 24 / 29` |
+| `I`    |                 `0 / 20 / 20` |                 `1 / 23 / 24` |
+| `S`    |                  `6 / 7 / 13` |                  `7 / 9 / 16` |
+| `N`    |                 `0 / 19 / 19` |                 `1 / 21 / 22` |
+| `U`    |                 `1 / 12 / 13` |                 `2 / 14 / 16` |
+| `C`    |                `13 / 13 / 26` |                `16 / 16 / 32` |
+| `D`    |                   `1 / 4 / 5` |                   `2 / 4 / 6` |
+| `P`    |                 `10 / 8 / 18` |                 `11 / 9 / 20` |
+| `Ș`    |                   `3 / 6 / 9` |                  `3 / 8 / 11` |
+| `Ț`    |                   `1 / 4 / 5` |                   `1 / 6 / 7` |
+| `J`    |                   `2 / 0 / 2` |                   `2 / 1 / 3` |
+| `M`    |                 `10 / 2 / 12` |                 `10 / 4 / 14` |
+| `A`    |                `10 / 30 / 40` |                `10 / 35 / 45` |
 
 Expected aggregate impact:
 
@@ -867,19 +903,19 @@ Batch 10 implemented this planned third slice. No Batch 9 planned row remains pe
 
 Batch 10 promoted the 11 Batch 9 planned rows after image brief review, source image review, WebP optimization, and automated validation. Approved gameplay and `/admin/words` coverage now include these words.
 
-| Word | Canonical file | Worksheet row | Status now | Starts-with impact | Contains and speech-target impact |
-| --- | --- | ---: | --- | --- | --- |
-| `rochie` | `words-r.json` | 4 | approved, ready image | `R` +1 | contains `C` and `I`; initial `R` context |
-| `rachetă` | `words-r.json` | 5 | approved, ready image | `R` +1 | contains `A` and `C`; toy-rocket image constrained as child-safe |
-| `iepure` | `words-i.json` | 8 | approved, ready image | `I` +1 | contains `P`, `R`, and `U`; first `I` starts-with candidate |
-| `scaun` | `words-s.json` | 18 | approved, ready image | `S` +1 | contains `A`, `C`, `N`, and `U` |
-| `nas` | `words-n.json` | 20 | approved, ready image | `N` +1 | contains `A` and final `S`; first `N` starts-with candidate |
-| `urs` | `words-u.json` | 21 | approved, ready image | `U` +1 | contains `R` and final `S` |
-| `coș` | `words-c.json` | 31 | approved, ready image | `C` +1 | final `Ș`; improves contains-only `Ș` |
-| `cămașă` | `words-c.json` | 32 | approved, ready image | `C` +1 | contains `A`, `M`, and medial `Ș` |
-| `dinți` | `words-d.json` | 43 | approved, ready image | `D` +1 | contains `I`, `N`, and final `Ț` |
-| `cățel` | `words-c.json` | 44 | approved, ready image | `C` +1 | medial `Ț`; puppy image distinct from existing `câine` |
-| `pijama` | `words-p.json` | 56 | approved, ready image | `P` +1 | contains `A`, `I`, `J`, and `M` |
+| Word      | Canonical file | Worksheet row | Status now            | Starts-with impact | Contains and speech-target impact                                |
+| --------- | -------------- | ------------: | --------------------- | ------------------ | ---------------------------------------------------------------- |
+| `rochie`  | `words-r.json` |             4 | approved, ready image | `R` +1             | contains `C` and `I`; initial `R` context                        |
+| `rachetă` | `words-r.json` |             5 | approved, ready image | `R` +1             | contains `A` and `C`; toy-rocket image constrained as child-safe |
+| `iepure`  | `words-i.json` |             8 | approved, ready image | `I` +1             | contains `P`, `R`, and `U`; first `I` starts-with candidate      |
+| `scaun`   | `words-s.json` |            18 | approved, ready image | `S` +1             | contains `A`, `C`, `N`, and `U`                                  |
+| `nas`     | `words-n.json` |            20 | approved, ready image | `N` +1             | contains `A` and final `S`; first `N` starts-with candidate      |
+| `urs`     | `words-u.json` |            21 | approved, ready image | `U` +1             | contains `R` and final `S`                                       |
+| `coș`     | `words-c.json` |            31 | approved, ready image | `C` +1             | final `Ș`; improves contains-only `Ș`                            |
+| `cămașă`  | `words-c.json` |            32 | approved, ready image | `C` +1             | contains `A`, `M`, and medial `Ș`                                |
+| `dinți`   | `words-d.json` |            43 | approved, ready image | `D` +1             | contains `I`, `N`, and final `Ț`                                 |
+| `cățel`   | `words-c.json` |            44 | approved, ready image | `C` +1             | medial `Ț`; puppy image distinct from existing `câine`           |
+| `pijama`  | `words-p.json` |            56 | approved, ready image | `P` +1             | contains `A`, `I`, `J`, and `M`                                  |
 
 Aggregate impact:
 
@@ -893,20 +929,20 @@ Aggregate impact:
 Affected target coverage:
 
 | Target | Starts-with | Contains-only | Mixed |
-| --- | ---: | ---: | ---: |
-| `A` | 10 | 35 | 45 |
-| `C` | 16 | 16 | 32 |
-| `D` | 2 | 4 | 6 |
-| `I` | 1 | 23 | 24 |
-| `J` | 2 | 1 | 3 |
-| `M` | 10 | 4 | 14 |
-| `N` | 1 | 21 | 22 |
-| `P` | 11 | 9 | 20 |
-| `R` | 5 | 24 | 29 |
-| `S` | 7 | 9 | 16 |
-| `Ș` | 3 | 8 | 11 |
-| `Ț` | 1 | 6 | 7 |
-| `U` | 2 | 14 | 16 |
+| ------ | ----------: | ------------: | ----: |
+| `A`    |          10 |            35 |    45 |
+| `C`    |          16 |            16 |    32 |
+| `D`    |           2 |             4 |     6 |
+| `I`    |           1 |            23 |    24 |
+| `J`    |           2 |             1 |     3 |
+| `M`    |          10 |             4 |    14 |
+| `N`    |           1 |            21 |    22 |
+| `P`    |          11 |             9 |    20 |
+| `R`    |           5 |            24 |    29 |
+| `S`    |           7 |             9 |    16 |
+| `Ș`    |           3 |             8 |    11 |
+| `Ț`    |           1 |             6 |     7 |
+| `U`    |           2 |            14 |    16 |
 
 Image readiness:
 
@@ -1010,24 +1046,24 @@ Batch 3 verification:
 
 ```txt
 pnpm run validate:content
-bun run validate:content
+pnpm run validate:content
 pnpm run lint
-bun run lint
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 curl -I --max-time 2 http://localhost:3000/admin/words
 ```
 
 Result:
 
-- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `bun run lint` passed.
+- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - `http://localhost:3000/admin/words` was not reachable because no dev server was listening on port `3000`.
 
@@ -1035,25 +1071,25 @@ Batch 4 verification:
 
 ```txt
 pnpm run validate:content
-bun run validate:content
+pnpm run validate:content
 pnpm run lint
-bun run lint
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 curl -I --max-time 2 http://localhost:3000/admin/words
 ```
 
 Result:
 
-- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run lint` passed.
+- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Browser verification against `http://localhost:3000/admin/words` was skipped because no user-running dev server was listening on port `3000`.
 
@@ -1061,28 +1097,28 @@ Batch 5 verification:
 
 ```txt
 pnpm run validate:content
-bun run validate:content
+pnpm run validate:content
 pnpm run lint
-bun run lint
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 curl -I --max-time 2 http://localhost:3000/admin/words
 ```
 
 Result:
 
-- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run lint` passed.
+- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed after updating its enabled-letter expectation for the new approved letter set.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed after updating its enabled-letter expectation for the new approved letter set.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed after final documentation updates.
 - The documented image optimizer dry run passed for staged sources.
-- `bun run optimize:images -- --locale ro` was blocked by the local Sharp code-signature error, so Batch 5 final assets were optimized with local `cwebp` from reviewed staged PNG sources.
+- `pnpm run optimize:images -- --locale ro` was blocked by the local Sharp code-signature error, so Batch 5 final assets were optimized with local `cwebp` from reviewed staged PNG sources.
 - `http://localhost:3000/admin/words` was not reachable because no user-running dev server was listening on port `3000`; browser verification was skipped and no dev server was started.
 
 Batch 6 verification:
@@ -1090,28 +1126,28 @@ Batch 6 verification:
 ```txt
 pnpm run validate:content
 pnpm run lint
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
-bun run optimize:images -- --locale ro --dry-run
-bun run build
+pnpm run check:gameplay
+pnpm run check:matching
+pnpm run optimize:images -- --locale ro --dry-run
+pnpm run build
 git diff --check
 curl -I --max-time 2 http://localhost:3000
 ```
 
 Result:
 
-- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `bun run lint` passed.
+- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
-- `bun run optimize:images -- --locale ro --dry-run` passed and found 55 staged source images.
-- `bun run build` remains blocked by the known local Next SWC darwin/arm64 code-signature error.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
+- `pnpm run optimize:images -- --locale ro --dry-run` passed and found 55 staged source images.
+- `pnpm run build` remains blocked by the known local Next SWC darwin/arm64 code-signature error.
 - `git diff --check` passed before final documentation updates.
 - `http://localhost:3000` was not reachable because no user-running dev server was listening on port `3000`; browser verification was skipped and no dev server was started.
 
@@ -1119,25 +1155,25 @@ Batch 7 verification:
 
 ```txt
 pnpm run validate:content
-bun run validate:content
+pnpm run validate:content
 pnpm run lint
-bun run lint
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 curl -I --max-time 2 http://localhost:3000
 ```
 
 Result:
 
-- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run lint` passed.
+- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - `http://localhost:3000` was not reachable because no user-running dev server was listening on port `3000`; browser verification was skipped and no dev server was started.
 
@@ -1145,48 +1181,48 @@ Batch 8 verification:
 
 ```txt
 pnpm run validate:content
-bun run validate:content
+pnpm run validate:content
 pnpm run lint
-bun run lint
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 curl -I --max-time 3 http://localhost:3000/ro
 ```
 
 Result:
 
-- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; `bun` was used for project scripts instead.
-- `bun run lint` passed.
+- `pnpm run validate:content` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` could not run because `pnpm` is not installed on PATH in this environment; the documented pnpm commands should be rerun in an environment with pnpm on PATH.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed after updating its enabled-letter expectation for the new approved letter set.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed after updating its enabled-letter expectation for the new approved letter set.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - `http://localhost:3000/ro` was not reachable because no user-running dev server was listening on port `3000`; browser verification was skipped and no dev server was started.
 
 Post-Batch 8 diacritic route fix verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
-bun -e 'import { generateStaticParams } from "./app/[locale]/play/[letter]/page.tsx"; console.log(JSON.stringify(generateStaticParams().filter((p)=>p.letter==="sh"||p.letter==="tz"||p.letter==="ș"||p.letter==="ț")));'
+pnpm run check:gameplay
+pnpm run check:matching
+node -e 'import { generateStaticParams } from "./app/[locale]/play/[letter]/page.tsx"; console.log(JSON.stringify(generateStaticParams().filter((p)=>p.letter==="sh"||p.letter==="tz"||p.letter==="ș"||p.letter==="ț")));'
 git diff --check
 curl -I --max-time 3 http://localhost:3000/ro/play/sh
 ```
 
 Result:
 
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed, including route alias assertions.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed, including route alias assertions.
 - Play route static params now include `sh` and `tz`, not raw `ș` or `ț`.
 - `git diff --check` passed.
 - A sandboxed `http://localhost:3000/ro/play/sh` reachability check failed. The user later clarified the app is always running on port `3000`, so future agents should retry localhost checks outside the sandbox before treating the server as unavailable.
@@ -1194,11 +1230,11 @@ Result:
 Batch 9 verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 Browser checks:
   http://localhost:3000/ro
@@ -1215,11 +1251,11 @@ Browser checks:
 
 Result:
 
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Browser verification passed against the local server on port `3000` for `/ro`, `/admin/words`, `/ro/play/sh`, `/ro/play/tz`, `/ro/play/r`, `/ro/play/s`, `/ro/play/c`, `/ro/play/d`, `/ro/play/p`, and `/ro/play/u`.
 - `/ro` and `/admin/words` both expose ASCII `Ș`/`Ț` play links (`/ro/play/sh` and `/ro/play/tz`).
@@ -1227,11 +1263,11 @@ Result:
 Batch 10 verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 Browser checks:
   http://localhost:3000/ro
@@ -1250,11 +1286,11 @@ Browser checks:
 
 Result:
 
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed after updating its enabled-letter expectation for the new approved letter set.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed after updating its enabled-letter expectation for the new approved letter set.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Browser verification passed against the local server on port `3000` for `/ro`, `/admin/words`, `/ro/play/r`, `/ro/play/i`, `/ro/play/n`, `/ro/play/s`, `/ro/play/c`, `/ro/play/d`, `/ro/play/p`, `/ro/play/u`, `/ro/play/sh`, and `/ro/play/tz`.
 - `/admin/words` shows the post-Batch 10 summary: 17 enabled letters, 83 approved words, 83 ready images, 0 placeholder images, 83 starts-with assignments, and 186 contains-only assignments.
@@ -1263,11 +1299,11 @@ Result:
 Batch 11 verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 Browser checks:
   http://localhost:3000/ro
@@ -1276,11 +1312,11 @@ Browser checks:
 
 Result:
 
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Browser verification passed against the local server on port `3000` for `/ro` and `/admin/words`.
 - `/ro` shows the expanded 17-letter Romanian selector.
@@ -1290,11 +1326,11 @@ Result:
 Batch 13 verification:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit --incremental false
-bun src/game/gameplay-compatibility.check.ts
-bun src/content/matching.check.ts
+pnpm run check:gameplay
+pnpm run check:matching
 git diff --check
 Browser checks:
   http://localhost:3000/ro
@@ -1303,11 +1339,11 @@ Browser checks:
 
 Result:
 
-- `bun run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed for 1 locale with the existing ready-image warning-threshold notices in `words-m.json` and `words-p.json`.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Browser verification passed against the local server on port `3000` for `/ro` and `/admin/words`.
 - Implemented all 126 accepted Batch 12 rows and no rejected or needs-revision rows.
@@ -1336,22 +1372,22 @@ Document added:
 Current helper-derived baseline after Batch 13:
 
 | Target | Starts-with | Contains-only | Mixed | Gap to 30 mixed |
-| --- | ---: | ---: | ---: | ---: |
-| `ș` | 7 | 15 | 22 | 8 |
-| `s` | 14 | 19 | 33 | 0 |
-| `r` | 10 | 72 | 82 | 0 |
-| `j` | 2 | 2 | 4 | 26 |
-| `l` | 8 | 48 | 56 | 0 |
-| `ț` | 1 | 13 | 14 | 16 |
-| `z` | 4 | 8 | 12 | 18 |
-| `ce` | 1 | 1 | 2 | 28 |
-| `ci` | 2 | 3 | 5 | 25 |
-| `ge` | 2 | 2 | 4 | 26 |
-| `gi` | 1 | 0 | 1 | 29 |
-| `che` | 0 | 3 | 3 | 27 |
-| `chi` | 0 | 1 | 1 | 29 |
-| `ghe` | 1 | 1 | 2 | 28 |
-| `ghi` | 1 | 1 | 2 | 28 |
+| ------ | ----------: | ------------: | ----: | --------------: |
+| `ș`    |           7 |            15 |    22 |               8 |
+| `s`    |          14 |            19 |    33 |               0 |
+| `r`    |          10 |            72 |    82 |               0 |
+| `j`    |           2 |             2 |     4 |              26 |
+| `l`    |           8 |            48 |    56 |               0 |
+| `ț`    |           1 |            13 |    14 |              16 |
+| `z`    |           4 |             8 |    12 |              18 |
+| `ce`   |           1 |             1 |     2 |              28 |
+| `ci`   |           2 |             3 |     5 |              25 |
+| `ge`   |           2 |             2 |     4 |              26 |
+| `gi`   |           1 |             0 |     1 |              29 |
+| `che`  |           0 |             3 |     3 |              27 |
+| `chi`  |           0 |             1 |     1 |              29 |
+| `ghe`  |           1 |             1 |     2 |              28 |
+| `ghi`  |           1 |             1 |     2 |              28 |
 
 ## Batch 14 Result
 
@@ -1375,20 +1411,20 @@ Accepted scope:
 
 Expected helper-derived impact if Batch 15 implements all accepted rows:
 
-| Target | Current mixed | Expected mixed | Decision |
-| --- | ---: | ---: | --- |
-| `ș` | 22 | 36 | Clears the `30` target. |
-| `j` | 4 | 14 | Quality ceiling; do not pad to `30`. |
-| `ț` | 14 | 36 | Clears the `30` target. |
-| `z` | 12 | 31 | Clears the `30` target. |
-| `ce` | 2 | 14 | Improves sequence pool; below `30` by quality ceiling. |
-| `ci` | 5 | 14 | Improves sequence pool; below `30` by quality ceiling. |
-| `ge` | 4 | 10 | Improves sequence pool; below `30` by quality ceiling. |
-| `gi` | 1 | 4 | Severe quality ceiling; do not pad. |
-| `che` | 3 | 10 | Improves sequence pool; below `30` by quality ceiling. |
-| `chi` | 1 | 9 | Improves sequence pool; below `30` by quality ceiling. |
-| `ghe` | 2 | 8 | Quality ceiling; do not pad. |
-| `ghi` | 2 | 8 | Quality ceiling; do not pad. |
+| Target | Current mixed | Expected mixed | Decision                                               |
+| ------ | ------------: | -------------: | ------------------------------------------------------ |
+| `ș`    |            22 |             36 | Clears the `30` target.                                |
+| `j`    |             4 |             14 | Quality ceiling; do not pad to `30`.                   |
+| `ț`    |            14 |             36 | Clears the `30` target.                                |
+| `z`    |            12 |             31 | Clears the `30` target.                                |
+| `ce`   |             2 |             14 | Improves sequence pool; below `30` by quality ceiling. |
+| `ci`   |             5 |             14 | Improves sequence pool; below `30` by quality ceiling. |
+| `ge`   |             4 |             10 | Improves sequence pool; below `30` by quality ceiling. |
+| `gi`   |             1 |              4 | Severe quality ceiling; do not pad.                    |
+| `che`  |             3 |             10 | Improves sequence pool; below `30` by quality ceiling. |
+| `chi`  |             1 |              9 | Improves sequence pool; below `30` by quality ceiling. |
+| `ghe`  |             2 |              8 | Quality ceiling; do not pad.                           |
+| `ghi`  |             2 |              8 | Quality ceiling; do not pad.                           |
 
 Production count impact if fully implemented:
 
@@ -1428,27 +1464,27 @@ Helper-derived production totals after Batch 15:
 Helper-derived target coverage after Batch 15:
 
 | Target | Starts | Contains | Mixed | Ready | Placeholder |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| `ș` | 12 | 24 | 36 | 11 | 25 |
-| `j` | 5 | 9 | 14 | 3 | 11 |
-| `ț` | 5 | 31 | 36 | 7 | 29 |
-| `z` | 8 | 23 | 31 | 6 | 25 |
-| `ce` | 11 | 3 | 14 | 2 | 12 |
-| `ci` | 9 | 5 | 14 | 4 | 10 |
-| `ge` | 5 | 5 | 10 | 4 | 6 |
-| `gi` | 1 | 3 | 4 | 1 | 3 |
-| `che` | 2 | 8 | 10 | 2 | 8 |
-| `chi` | 4 | 5 | 9 | 1 | 8 |
-| `ghe` | 5 | 3 | 8 | 1 | 7 |
-| `ghi` | 7 | 1 | 8 | 0 | 8 |
+| ------ | -----: | -------: | ----: | ----: | ----------: |
+| `ș`    |     12 |       24 |    36 |    11 |          25 |
+| `j`    |      5 |        9 |    14 |     3 |          11 |
+| `ț`    |      5 |       31 |    36 |     7 |          29 |
+| `z`    |      8 |       23 |    31 |     6 |          25 |
+| `ce`   |     11 |        3 |    14 |     2 |          12 |
+| `ci`   |      9 |        5 |    14 |     4 |          10 |
+| `ge`   |      5 |        5 |    10 |     4 |           6 |
+| `gi`   |      1 |        3 |     4 |     1 |           3 |
+| `che`  |      2 |        8 |    10 |     2 |           8 |
+| `chi`  |      4 |        5 |     9 |     1 |           8 |
+| `ghe`  |      5 |        3 |     8 |     1 |           7 |
+| `ghi`  |      7 |        1 |     8 |     0 |           8 |
 
 Batch 15 QA:
 
-- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Sandboxed localhost checks were blocked, then outside-sandbox route checks returned `200 OK` for `/ro`, `/admin/words`, and all eight sequence play routes. The in-app browser session was interrupted before a full visual pass could be completed.
 
@@ -1480,21 +1516,21 @@ Helper-derived production totals after Batch 19:
 Helper-derived target image readiness after Batch 19:
 
 | Target | Ready | Placeholder | Total |
-| --- | ---: | ---: | ---: |
-| `ge` | 10 | 0 | 10 |
-| `gi` | 4 | 0 | 4 |
-| `ghe` | 8 | 0 | 8 |
-| `ghi` | 8 | 0 | 8 |
-| `che` | 10 | 0 | 10 |
-| `chi` | 9 | 0 | 9 |
+| ------ | ----: | ----------: | ----: |
+| `ge`   |    10 |           0 |    10 |
+| `gi`   |     4 |           0 |     4 |
+| `ghe`  |     8 |           0 |     8 |
+| `ghi`  |     8 |           0 |     8 |
+| `che`  |    10 |           0 |    10 |
+| `chi`  |     9 |           0 |     9 |
 
 Batch 19 QA:
 
-- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed after final QA status notes.
 - Sandboxed localhost checks failed for `/ro` and `/admin/words`, then the required outside-sandbox retry returned `200 OK` for both routes.
 - In-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/ge`, `/ro/play/gi`, `/ro/play/ghe`, `/ro/play/ghi`, `/ro/play/a`, `/ro/play/f`, `/ro/play/m`, `/ro/play/p`, `/ro/play/r`, `/ro/play/i-circ`, `/ro/play/l`, `/ro/play/s`, `/ro/play/g`, and `/ro/play/u`.
@@ -1525,26 +1561,26 @@ Helper-derived production totals after Batch 20:
 Helper-derived target image readiness after Batch 20:
 
 | Target | Ready | Placeholder | Total |
-| --- | ---: | ---: | ---: |
-| `ce` | 14 | 0 | 14 |
-| `ci` | 14 | 0 | 14 |
-| `ge` | 10 | 0 | 10 |
-| `gi` | 4 | 0 | 4 |
-| `che` | 10 | 0 | 10 |
-| `chi` | 9 | 0 | 9 |
-| `ghe` | 8 | 0 | 8 |
-| `ghi` | 8 | 0 | 8 |
+| ------ | ----: | ----------: | ----: |
+| `ce`   |    14 |           0 |    14 |
+| `ci`   |    14 |           0 |    14 |
+| `ge`   |    10 |           0 |    10 |
+| `gi`   |     4 |           0 |     4 |
+| `che`  |    10 |           0 |    10 |
+| `chi`  |     9 |           0 |     9 |
+| `ghe`  |     8 |           0 |     8 |
+| `ghi`  |     8 |           0 |     8 |
 
 Batch 20 QA:
 
-- `bun run optimize:images -- --source /private/tmp/word-wheel-batch20-sources` was attempted first; it failed under `node` because Sharp hit the known local macOS code-signature issue.
-- `bun scripts/images/optimize-images.mjs --source /private/tmp/word-wheel-batch20-sources` passed and optimized the 8 reviewed source crops with the repository optimizer settings.
+- `pnpm run optimize:images -- --source /private/tmp/word-wheel-batch20-sources` was attempted first; it failed under `node` because Sharp hit the known local macOS code-signature issue.
+- `pnpm run optimize:images -- --source /private/tmp/word-wheel-batch20-sources` passed and optimized the 8 reviewed source crops with the repository optimizer settings.
 - All 8 final WebP assets are `256 x 256 px` and below the `20 KB` hard maximum.
-- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Sandboxed localhost check failed for `/ro`, then the required outside-sandbox retry returned `200 OK`.
 - In-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/ce`, `/ro/play/ci`, `/ro/play/ge`, `/ro/play/gi`, `/ro/play/che`, `/ro/play/chi`, `/ro/play/ghe`, `/ro/play/ghi`, `/ro/play/c`, `/ro/play/p`, and `/ro/play/r`.
@@ -1588,15 +1624,15 @@ Helper-derived `B` image readiness after Batch 21:
 Helper-derived sequence target image readiness after Batch 21:
 
 | Target | Ready | Placeholder | Total |
-| --- | ---: | ---: | ---: |
-| `ce` | 14 | 0 | 14 |
-| `ci` | 14 | 0 | 14 |
-| `ge` | 10 | 0 | 10 |
-| `gi` | 4 | 0 | 4 |
-| `che` | 10 | 0 | 10 |
-| `chi` | 9 | 0 | 9 |
-| `ghe` | 8 | 0 | 8 |
-| `ghi` | 8 | 0 | 8 |
+| ------ | ----: | ----------: | ----: |
+| `ce`   |    14 |           0 |    14 |
+| `ci`   |    14 |           0 |    14 |
+| `ge`   |    10 |           0 |    10 |
+| `gi`   |     4 |           0 |     4 |
+| `che`  |    10 |           0 |    10 |
+| `chi`  |     9 |           0 |     9 |
+| `ghe`  |     8 |           0 |     8 |
+| `ghi`  |     8 |           0 |     8 |
 
 Batch 21 QA:
 
@@ -1604,11 +1640,11 @@ Batch 21 QA:
 - Used the bundled Codex Node runtime for Sharp-based cropping/background normalization because the repo-local Sharp install still hits the known local macOS code-signature issue.
 - Used local `cwebp` for lossless WebP output.
 - All 12 final WebP assets are `256 x 256 px` and below the `20 KB` hard maximum.
-- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
-- `bun run lint` passed.
+- `pnpm run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit --incremental false` passed.
-- `bun src/game/gameplay-compatibility.check.ts` passed.
-- `bun src/content/matching.check.ts` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
 - `git diff --check` passed.
 - Sandboxed localhost check failed for `/admin/words`, then the required outside-sandbox retry returned `200 OK`.
 - In-app Browser route checks passed for `/ro`, `/admin/words`, `/ro/play/b`, `/ro/play/ce`, `/ro/play/ci`, `/ro/play/ge`, `/ro/play/gi`, `/ro/play/che`, `/ro/play/chi`, `/ro/play/ghe`, and `/ro/play/ghi`.
@@ -1616,20 +1652,272 @@ Batch 21 QA:
 - `/admin/words` reported every sequence practice target at `0` placeholders: `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`.
 - `/ro/play/b` exposed all 12 new ready image refs with no broken images.
 
+## Post-Test Coverage Audit
+
+User testing on 2026-05-18 found that `0` placeholders on sequence targets is not the same as sufficient sequence depth. The current helper-derived sequence mixed-pool counts are:
+
+| Target | Starts | Contains | Mixed | Ready | Placeholder |
+| ------ | -----: | -------: | ----: | ----: | ----------: |
+| `ce`   |     11 |        3 |    14 |    14 |           0 |
+| `ci`   |      9 |        5 |    14 |    14 |           0 |
+| `ge`   |      5 |        5 |    10 |    10 |           0 |
+| `gi`   |      1 |        3 |     4 |     4 |           0 |
+| `che`  |      2 |        8 |    10 |    10 |           0 |
+| `chi`  |      4 |        5 |     9 |     9 |           0 |
+| `ghe`  |      5 |        3 |     8 |     8 |           0 |
+| `ghi`  |      7 |        1 |     8 |     8 |           0 |
+
+Exact diacritic bucket state:
+
+- `A`: enabled with `16` approved starts-with words.
+- `Ă`: convention resolved as exact bucket `ă`, route `a-breve`, and `ro-a-breve-` ID/image prefix, but not enabled because no strong exact starts-with words were accepted in Batch 12.
+- `Â`: convention resolved as exact bucket `â`, route `a-circ`, and `ro-a-circ-` ID/image prefix, but not enabled because no strong exact starts-with words were accepted in Batch 12.
+- `I`: enabled with `8` approved starts-with words.
+- `Î`: enabled with `1` approved starts-with word, `înghețată`.
+
+## Batch 22 Result
+
+Batch 22 created `diacritic-and-sequence-top-up-worksheet-batch-22.md` as the planning source for the next implementation batch. It did not add production JSON records, image assets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+Projected helper-derived sequence coverage if all accepted worksheet rows pass the next implementation batch:
+
+| Target | Projected starts | Projected contains | Projected mixed |
+| ------ | ---------------: | -----------------: | --------------: |
+| `ce`   |               13 |                  3 |              16 |
+| `ci`   |                9 |                  8 |              17 |
+| `ge`   |                9 |                  6 |              15 |
+| `gi`   |                6 |                  9 |              15 |
+| `che`  |                2 |                 13 |              15 |
+| `chi`  |                8 |                  7 |              15 |
+| `ghe`  |               11 |                  4 |              15 |
+| `ghi`  |                9 |                  6 |              15 |
+
+Exact diacritic scope decisions:
+
+- `Ă`: keep convention-only for now; do not enable with demonstratives or weak child-facing vocabulary.
+- `Â`: keep convention-only for now; do not force an exact starts-with bucket against standard Romanian orthographic constraints.
+- `Î`: add a small quality-gated exact starts-with scope in the next implementation batch, but do not force a `15`-word quota.
+
+## Batch 23 Result
+
+Batch 23 completed the diacritic and sequence top-up manifest implementation.
+
+Added approved placeholder-backed records:
+
+- `A`: `argint`
+- `B`: `baghetă`
+- `C`: `cerneală`, `centură`, `covrigi`, `chiuvetă`, `chipiu`, `chimen`, `chiciură`
+- `D`: `dreptunghi`
+- `E`: `echer`, `echipă`, `echipament`
+- `F`: `fulgi`, `fragi`, `frânghie`
+- `G`: `gemeni`, `geamantan`, `ger`, `gelatină`, `gimnastică`, `gimnast`, `gibon`, `gigant`, `giroscop`, `ghemotoc`, `ghețar`, `gheretă`, `gheruță`, `gheară`, `ghețuș`, `ghicitoare`, `ghișeu`
+- `Î`: `înger`, `înot`, `încălțăminte`, `îmbrăcăminte`, `îmbrățișare`, `împărat`, `încuietoare`
+- `L`: `licurici`
+- `M`: `magie`, `magician`, `mochetă`, `machetă`
+- `O`: `ochean`
+- `P`: `piscină`, `parchet`
+- `S`: `stinghie`
+- `T`: `triunghi`
+- `U`: `unghi`
+
+Helper-derived production totals after Batch 23:
+
+- Approved Romanian words: `370`.
+- Ready images: `154`.
+- Placeholder images: `216`.
+
+Helper-derived sequence target coverage after Batch 23:
+
+| Target | Starts | Contains | Mixed | Ready | Placeholder |
+| ------ | -----: | -------: | ----: | ----: | ----------: |
+| `ce`   |     13 |        3 |    16 |    14 |           2 |
+| `ci`   |      9 |       10 |    19 |    14 |           5 |
+| `ge`   |      9 |        6 |    15 |    10 |           5 |
+| `gi`   |      6 |        9 |    15 |     4 |          11 |
+| `che`  |      2 |       13 |    15 |    10 |           5 |
+| `chi`  |      8 |        7 |    15 |     9 |           6 |
+| `ghe`  |     11 |        4 |    15 |     8 |           7 |
+| `ghi`  |      9 |        6 |    15 |     8 |           7 |
+
+Exact diacritic result:
+
+- `Î`: `8` starts-with, `0` contains-only, `8` mixed.
+- `Ă`: still not enabled.
+- `Â`: still not enabled.
+
+Batch 23 QA:
+
+- `pnpm run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `pnpm run check:gameplay` passed after updating the expected sequence mixed-pool counts.
+- `pnpm run check:matching` passed.
+- `git diff --check` passed.
+- Sandboxed localhost checks failed for `/ro` and `/admin/words`, then the required outside-sandbox retry returned `200 OK` for both routes.
+- Outside-sandbox route checks returned `200 OK` for `/ro/play/ce`, `/ro/play/ci`, `/ro/play/ge`, `/ro/play/gi`, `/ro/play/che`, `/ro/play/chi`, `/ro/play/ghe`, `/ro/play/ghi`, and `/ro/play/i-circ`.
+
+## Batch 24 Result
+
+Batch 24 completed the seventh placeholder image replacement slice without changing approved vocabulary.
+
+Replaced approved placeholder-backed records:
+
+- `C`: `centură`, `covrigi`, `chiuvetă`
+- `D`: `dreptunghi`
+- `F`: `frânghie`
+- `G`: `geamantan`, `gelatină`
+- `Î`: `înot`, `încălțăminte`, `îmbrăcăminte`, `încuietoare`
+- `T`: `triunghi`
+
+Helper-derived production totals after Batch 24:
+
+- Approved Romanian words: `370`.
+- Ready images: `166`.
+- Placeholder images: `204`.
+
+Helper-derived sequence target coverage after Batch 24:
+
+| Target | Starts | Contains | Mixed | Ready | Placeholder |
+| ------ | -----: | -------: | ----: | ----: | ----------: |
+| `ce`   |     13 |        3 |    16 |    15 |           1 |
+| `ci`   |      9 |       10 |    19 |    14 |           5 |
+| `ge`   |      9 |        6 |    15 |    12 |           3 |
+| `gi`   |      6 |        9 |    15 |     5 |          10 |
+| `che`  |      2 |       13 |    15 |    10 |           5 |
+| `chi`  |      8 |        7 |    15 |    10 |           5 |
+| `ghe`  |     11 |        4 |    15 |     8 |           7 |
+| `ghi`  |      9 |        6 |    15 |    11 |           4 |
+
+Exact diacritic image-readiness result:
+
+- `Î`: `8` starts-with, `0` contains-only, `8` mixed, `5` ready, `3` placeholder.
+- `Ă`: still not enabled.
+- `Â`: still not enabled.
+
+Batch 24 QA:
+
+- `pnpm run validate:content` could not run because `pnpm` was not on this shell's PATH.
+- `bun run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` could not run because `pnpm` was not on this shell's PATH.
+- `bun run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
+- `git diff --check` passed.
+- Sandboxed localhost checks failed for `/ro`, `/admin/words`, `/ro/play/i-circ`, and `/ro/play/ge`, then the required outside-sandbox retry returned `200 OK` for all four routes.
+- Outside-sandbox route checks also returned `200 OK` for `/ro/play/ce`, `/ro/play/gi`, `/ro/play/chi`, and `/ro/play/ghi`.
+
+## Batch 25 Result
+
+Batch 25 completed the eighth placeholder image replacement slice without changing approved vocabulary.
+
+Replaced approved placeholder-backed records:
+
+- `B`: `baghetă`
+- `C`: `cerneală`, `chipiu`
+- `E`: `echer`
+- `F`: `fulgi`, `fragi`
+- `G`: `ghemotoc`, `ghețar`
+- `L`: `licurici`
+- `O`: `ochean`
+- `P`: `piscină`, `parchet`
+
+Helper-derived production totals after Batch 25:
+
+- Approved Romanian words: `370`.
+- Ready images: `178`.
+- Placeholder images: `192`.
+
+Helper-derived sequence target coverage after Batch 25:
+
+| Target | Starts | Contains | Mixed | Ready | Placeholder |
+| ------ | -----: | -------: | ----: | ----: | ----------: |
+| `ce`   |     13 |        3 |    16 |    16 |           0 |
+| `ci`   |      9 |       10 |    19 |    16 |           3 |
+| `ge`   |      9 |        6 |    15 |    12 |           3 |
+| `gi`   |      6 |        9 |    15 |     7 |           8 |
+| `che`  |      2 |       13 |    15 |    13 |           2 |
+| `chi`  |      8 |        7 |    15 |    11 |           4 |
+| `ghe`  |     11 |        4 |    15 |    11 |           4 |
+| `ghi`  |      9 |        6 |    15 |    11 |           4 |
+
+Exact diacritic image-readiness result:
+
+- `Î`: unchanged at `8` starts-with, `0` contains-only, `8` mixed, `5` ready, `3` placeholder.
+- `Ă`: still not enabled.
+- `Â`: still not enabled.
+
+Batch 25 QA:
+
+- `pnpm run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `bun src/game/gameplay-compatibility.check.ts` passed.
+- `bun src/content/matching.check.ts` passed.
+- `git diff --check` passed.
+- Sandboxed localhost checks failed for `/ro` and `/admin/words`, then the required outside-sandbox retry returned `200 OK` for both routes.
+- Outside-sandbox route checks also returned `200 OK` for `/ro/play/ce` and `/ro/play/ghe`.
+
+## Batch 26 Result
+
+Batch 26 completed the ninth placeholder image replacement slice without changing approved vocabulary.
+
+Replaced approved placeholder-backed records:
+
+- `A`: `argint`
+- `C`: `chimen`
+- `G`: `gibon`, `giroscop`, `gheară`, `ghețuș`, `ghișeu`
+- `M`: `mochetă`, `machetă`
+- `U`: `unghi`
+- `Î`: `înger`
+
+Helper-derived production totals after Batch 26:
+
+- Approved Romanian words: `370`.
+- Ready images: `189`.
+- Placeholder images: `181`.
+
+Helper-derived sequence target coverage after Batch 26:
+
+| Target | Starts | Contains | Mixed | Ready | Placeholder |
+| ------ | -----: | -------: | ----: | ----: | ----------: |
+| `ce`   |     13 |        3 |    16 |    16 |           0 |
+| `ci`   |      9 |       10 |    19 |    16 |           3 |
+| `ge`   |      9 |        6 |    15 |    13 |           2 |
+| `gi`   |      6 |        9 |    15 |    10 |           5 |
+| `che`  |      2 |       13 |    15 |    15 |           0 |
+| `chi`  |      8 |        7 |    15 |    12 |           3 |
+| `ghe`  |     11 |        4 |    15 |    13 |           2 |
+| `ghi`  |      9 |        6 |    15 |    13 |           2 |
+
+Exact diacritic image-readiness result:
+
+- `Î`: `8` starts-with, `0` contains-only, `8` mixed, `6` ready, `2` placeholder.
+- `Ă`: still not enabled.
+- `Â`: still not enabled.
+
+Batch 26 QA:
+
+- `pnpm run validate:content` passed with the pre-existing five older `M`/`P` image warning-threshold notices.
+- `pnpm run lint` passed.
+- `./node_modules/.bin/tsc --noEmit --incremental false` passed.
+- `pnpm run check:gameplay` passed.
+- `pnpm run check:matching` passed.
+- `pnpm run build` passed after retrying with the nvm Node path first on `PATH`; the initial Codex-bundled Node attempt could not load the signed Next.js SWC binary.
+- `git diff --check` passed.
+- Sandboxed localhost checks failed for `/ro`, `/ro/play/ghi`, `/ro/play/i-circ`, and the new `ghișeu` asset path; required outside-sandbox retries returned `200 OK`.
+
 ## Next Batch
 
-Batch 22: General Placeholder Image Replacement Slice 7.
+Batch 27: General Placeholder Image Replacement Slice 10.
 
-Use this status file, `plan.md`, `/admin/words`, helper-derived coverage, and current production JSON as the source for implementation.
+Use this status file, `plan.md`, `/admin/words`, helper-derived coverage, current production JSON, `image-briefs-batch-26.md`, the image pipeline docs, and the remaining placeholder-backed words as the source for implementation.
 
-Batch 22 should:
+Batch 27 should:
 
-- Continue from the Batch 21 baseline: `319` approved words, `154` ready images, and `165` placeholders.
-- Use `/admin/words` and production JSON to find high-value Romanian words with placeholder images.
-- Prioritize common, concrete, visually straightforward placeholder-backed records from active child-facing buckets; all eight sequence practice targets already have `0` placeholders, so do not regress them.
-- Generate, review, and optimize final pixel-art images using the established image pipeline.
-- Replace only placeholder image paths/statuses with canonical ready WebP assets.
-- Keep image batches large enough to reduce handoff overhead but small enough for visual QA.
-- Do not change vocabulary selection except to fix documented defects.
-- Update this feature status, this feature plan if implementation details materially change, and global `docs/status.md`.
-- Keep Batch 22 free of new vocabulary scope, rejected or held candidates, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.
+- Replace another focused slice of approved placeholder images with reviewed final pixel-art WebP assets.
+- Prioritize common, concrete, visually clear remaining placeholders such as `capră`, `căpșună`, `clopoțel`, `colac`, `cort`, `cocoș`, `căruță`, `căsuță`, `cozonac`, `delfin`, `dovleac`, `dulap`, `elefant`, `elicopter`, `floare`, `fluture`, `fular`, `furculiță`, `umbrelă`, `ursuleț`, `vacă`, `vapor`, `vulpe`, `șopârlă`, `șarpe`, and `țânțar` if visual review succeeds.
+- Defer or reject concepts that remain too abstract, broad, low-familiarity, unsafe, cluttered, or visually ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use existing production records only; do not add new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Keep final assets recognizable, child-safe, text-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- Update image briefs/status docs and run the standard validation checks.

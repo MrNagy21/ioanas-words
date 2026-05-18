@@ -91,18 +91,18 @@ Create a stable locale-wide content contract in `src/content/loaders.ts` and `sr
 The exact function names may change during implementation, but the capability set must include:
 
 ```ts
-getLetters(locale)
-getEnabledLetters(locale)
-getWordManifest(locale, letterId)
-getWordManifests(locale)
-getAllWords(locale)
-getApprovedWords(locale)
-getWordsStartingWithTarget(locale, target)
-getWordsContainingOnlyTarget(locale, target)
-getMixedWordsForTarget(locale, target)
-getImageReadinessCounts(words)
-getLetterCoverageSummary(locale, letterOrTarget)
-getLocaleCoverageSummary(locale)
+getLetters(locale);
+getEnabledLetters(locale);
+getWordManifest(locale, letterId);
+getWordManifests(locale);
+getAllWords(locale);
+getApprovedWords(locale);
+getWordsStartingWithTarget(locale, target);
+getWordsContainingOnlyTarget(locale, target);
+getMixedWordsForTarget(locale, target);
+getImageReadinessCounts(words);
+getLetterCoverageSummary(locale, letterOrTarget);
+getLocaleCoverageSummary(locale);
 ```
 
 The implementation may keep the current static import registry while Romanian content remains small:
@@ -260,11 +260,9 @@ pnpm run lint
 pnpm run build
 ```
 
-If `pnpm` is unavailable in the Codex desktop shell, use documented local fallbacks only for partial verification:
+If `pnpm` is unavailable in the Codex desktop shell, fix the Node/Corepack or nvm shell setup before treating verification as complete. For type checking, keep this additional command:
 
 ```txt
-bun run validate:content
-bun run lint
 ./node_modules/.bin/tsc --noEmit
 ```
 

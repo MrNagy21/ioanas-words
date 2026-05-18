@@ -163,6 +163,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "triunghi",
+      "display": "triunghi",
+      "normalized": "triunghi",
+      "id": "ro-t-triunghi",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/t/ro-t-triunghi.webp",
+      "imageStatus": "ready",
+      "alt": "Un triunghi verde",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

@@ -19,6 +19,132 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "înger",
+      "display": "înger",
+      "normalized": "inger",
+      "id": "ro-i-circ-inger",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/î/ro-i-circ-inger.webp",
+      "imageStatus": "ready",
+      "alt": "Un înger prietenos cu aripi și aureolă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "înot",
+      "display": "înot",
+      "normalized": "inot",
+      "id": "ro-i-circ-inot",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/î/ro-i-circ-inot.webp",
+      "imageStatus": "ready",
+      "alt": "Un copil înoată în apă albastră",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "încălțăminte",
+      "display": "încălțăminte",
+      "normalized": "incaltaminte",
+      "id": "ro-i-circ-incaltaminte",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/î/ro-i-circ-incaltaminte.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de pantofi și cizme",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "îmbrăcăminte",
+      "display": "îmbrăcăminte",
+      "normalized": "imbracaminte",
+      "id": "ro-i-circ-imbracaminte",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/î/ro-i-circ-imbracaminte.webp",
+      "imageStatus": "ready",
+      "alt": "Un teanc de haine împăturite",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "îmbrățișare",
+      "display": "îmbrățișare",
+      "normalized": "imbratisare",
+      "id": "ro-i-circ-imbratisare",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "family",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul îmbrățișare",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "împărat",
+      "display": "împărat",
+      "normalized": "imparat",
+      "id": "ro-i-circ-imparat",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul împărat",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "încuietoare",
+      "display": "încuietoare",
+      "normalized": "incuietoare",
+      "id": "ro-i-circ-incuietoare",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/î/ro-i-circ-incuietoare.webp",
+      "imageStatus": "ready",
+      "alt": "O încuietoare aurie cu zăvor",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

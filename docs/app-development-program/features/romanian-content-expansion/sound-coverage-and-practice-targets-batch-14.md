@@ -276,11 +276,11 @@ Non-goals:
 - No admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
 
 QA:
-- bun run validate:content
-- bun run lint
+- pnpm run validate:content
+- pnpm run lint
 - ./node_modules/.bin/tsc --noEmit --incremental false
-- bun src/game/gameplay-compatibility.check.ts
-- bun src/content/matching.check.ts
+- pnpm run check:gameplay
+- pnpm run check:matching
 - git diff --check
 - Browser-check http://localhost:3000/ro, http://localhost:3000/admin/words, and /ro/play/ce, /ro/play/ci, /ro/play/ge, /ro/play/gi, /ro/play/che, /ro/play/chi, /ro/play/ghe, /ro/play/ghi. If sandboxed localhost checks fail, retry outside the sandbox before treating the server as unavailable. Do not start another dev server or use another port.
 ```

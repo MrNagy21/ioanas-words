@@ -124,15 +124,15 @@ Overall status: The feature package has been created under `docs/app-development
 Batch 1 verification used the documented fallback because `pnpm` was unavailable in the Codex desktop environment:
 
 ```txt
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ```
 
 Results:
 
-- `bun run validate:content` passed for 1 locale.
+- `pnpm run validate:content` passed for 1 locale.
 - Content validation reported existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images, but no errors.
-- `bun run lint` passed.
+- `pnpm run lint` passed.
 
 Batch 2 verification:
 
@@ -156,21 +156,21 @@ Batch 3 verification:
 pnpm run validate:content
 pnpm run lint
 pnpm run build
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit
-bun run build
+pnpm run build
 curl -I --max-time 3 http://localhost:3000/admin/words
 ```
 
 Results:
 
 - `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` could not start because `pnpm` is not available on `PATH` in this shell.
-- `bun run validate:content` passed for 1 locale.
+- `pnpm run validate:content` passed for 1 locale.
 - Content validation still reports the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images, but no errors.
-- `bun run lint` passed.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit` passed.
-- `bun run build` failed before compilation because Next could not load the installed `@next/swc-darwin-arm64` native binary due macOS code-signature validation.
+- `pnpm run build` failed before compilation because Next could not load the installed `@next/swc-darwin-arm64` native binary due macOS code-signature validation.
 - `http://localhost:3000/admin/words` was not reachable because no dev server was listening on port `3000`.
 
 Batch 4 verification:
@@ -179,21 +179,21 @@ Batch 4 verification:
 pnpm run validate:content
 pnpm run lint
 pnpm run build
-bun run validate:content
-bun run lint
+pnpm run validate:content
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit
-bun run build
+pnpm run build
 curl -I --max-time 3 http://localhost:3000/admin/words
 ```
 
 Results:
 
 - `pnpm run validate:content`, `pnpm run lint`, and `pnpm run build` could not start because `pnpm` is not available on `PATH` in this shell.
-- `bun run validate:content` passed for 1 locale.
+- `pnpm run validate:content` passed for 1 locale.
 - Content validation still reports the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images, but no errors.
-- `bun run lint` passed.
+- `pnpm run lint` passed.
 - `./node_modules/.bin/tsc --noEmit` passed.
-- `bun run build` failed before compilation because Next could not load the installed `@next/swc-darwin-arm64` native binary due macOS code-signature validation.
+- `pnpm run build` failed before compilation because Next could not load the installed `@next/swc-darwin-arm64` native binary due macOS code-signature validation.
 - `http://localhost:3000/admin/words` was not reachable because no dev server was listening on port `3000`.
 
 Word detail pop-up follow-up verification:
@@ -202,7 +202,7 @@ Word detail pop-up follow-up verification:
 ./node_modules/.bin/prettier --check app/admin/words/page.tsx app/admin/words/word-detail-list.tsx app/globals.css docs/status.md docs/app-development-program/features/admin-words-inventory/status.md
 ./node_modules/.bin/tsc --noEmit
 ./node_modules/.bin/eslint .
-bun run validate:content
+pnpm run validate:content
 ./node_modules/.bin/next build
 curl -I --max-time 3 http://localhost:3000/admin/words
 ```
@@ -212,7 +212,7 @@ Results:
 - Prettier check passed after formatting the touched component and CSS files.
 - `./node_modules/.bin/tsc --noEmit` passed.
 - `./node_modules/.bin/eslint .` passed.
-- `bun run validate:content` passed for 1 locale.
+- `pnpm run validate:content` passed for 1 locale.
 - Content validation still reports the existing image-size warnings above the 12 KB warning threshold for some `M` and `P` ready images, but no errors.
 - `./node_modules/.bin/next build` failed before compilation because Next could not load the installed `@next/swc-darwin-arm64` native binary due macOS code-signature validation.
 - `http://localhost:3000/admin/words` was not reachable because no dev server was listening on port `3000`.

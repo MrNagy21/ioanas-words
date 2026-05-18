@@ -55,7 +55,7 @@ pnpm run lint
 If `pnpm` is unavailable:
 
 ```txt
-bun run lint
+pnpm run lint
 ./node_modules/.bin/tsc --noEmit
 ```
 

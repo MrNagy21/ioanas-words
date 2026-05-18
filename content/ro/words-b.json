@@ -379,6 +379,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "baghetă",
+      "display": "baghetă",
+      "normalized": "bagheta",
+      "id": "ro-b-bagheta",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/b/ro-b-bagheta.webp",
+      "imageStatus": "ready",
+      "alt": "O baghetă magică cu stea galbenă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

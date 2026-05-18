@@ -73,6 +73,60 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "echer",
+      "display": "echer",
+      "normalized": "echer",
+      "id": "ro-e-echer",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/e/ro-e-echer.webp",
+      "imageStatus": "ready",
+      "alt": "Un echer albastru",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "echipă",
+      "display": "echipă",
+      "normalized": "echipa",
+      "id": "ro-e-echipa",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul echipă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "echipament",
+      "display": "echipament",
+      "normalized": "echipament",
+      "id": "ro-e-echipament",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul echipament",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

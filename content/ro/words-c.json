@@ -991,6 +991,132 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "cerneală",
+      "display": "cerneală",
+      "normalized": "cerneala",
+      "id": "ro-c-cerneala",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/c/ro-c-cerneala.webp",
+      "imageStatus": "ready",
+      "alt": "O sticlă cu cerneală albastră",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "centură",
+      "display": "centură",
+      "normalized": "centura",
+      "id": "ro-c-centura",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/c/ro-c-centura.webp",
+      "imageStatus": "ready",
+      "alt": "O centură maro cu cataramă aurie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "covrigi",
+      "display": "covrigi",
+      "normalized": "covrigi",
+      "id": "ro-c-covrigi",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/c/ro-c-covrigi.webp",
+      "imageStatus": "ready",
+      "alt": "Trei covrigi aurii",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "chiuvetă",
+      "display": "chiuvetă",
+      "normalized": "chiuveta",
+      "id": "ro-c-chiuveta",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/c/ro-c-chiuveta.webp",
+      "imageStatus": "ready",
+      "alt": "O chiuvetă albă cu robinet",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "chipiu",
+      "display": "chipiu",
+      "normalized": "chipiu",
+      "id": "ro-c-chipiu",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/c/ro-c-chipiu.webp",
+      "imageStatus": "ready",
+      "alt": "Un chipiu albastru",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "chimen",
+      "display": "chimen",
+      "normalized": "chimen",
+      "id": "ro-c-chimen",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/c/ro-c-chimen.webp",
+      "imageStatus": "ready",
+      "alt": "Semințe de chimen lângă o crenguță verde",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "chiciură",
+      "display": "chiciură",
+      "normalized": "chiciura",
+      "id": "ro-c-chiciura",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul chiciură",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

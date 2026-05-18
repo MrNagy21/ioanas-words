@@ -301,8 +301,8 @@ Immediate next task is Batch 0:
 - scaffold Next.js App Router with TypeScript;
 - add linting/build scripts;
 - add baseline README;
-- confirm `npm run dev`;
-- confirm `npm run build`;
+- confirm `pnpm run dev`;
+- confirm `pnpm run build`;
 - update `docs/status.md`.
 
 Do not jump directly to content generation before the app foundation and content validation path exist.

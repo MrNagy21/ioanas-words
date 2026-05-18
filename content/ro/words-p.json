@@ -577,6 +577,42 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "piscină",
+      "display": "piscină",
+      "normalized": "piscina",
+      "id": "ro-p-piscina",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/p/ro-p-piscina.webp",
+      "imageStatus": "ready",
+      "alt": "O piscină mică cu apă albastră",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "parchet",
+      "display": "parchet",
+      "normalized": "parchet",
+      "id": "ro-p-parchet",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/p/ro-p-parchet.webp",
+      "imageStatus": "ready",
+      "alt": "Bucăți de parchet din lemn",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

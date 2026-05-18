@@ -11,8 +11,8 @@ This audit uses the current static Romanian content and the locale-wide helper a
 Commands used:
 
 ```txt
-bun -e 'import { getLocaleCoverageSummary } from "./src/content/loaders.ts"; ...'
-bun -e 'import { getApprovedWords, getDerivedWordPoolsForTarget } from "./src/content/loaders.ts"; ...'
+node -e 'import { getLocaleCoverageSummary } from "./src/content/loaders.ts"; ...'
+node -e 'import { getApprovedWords, getDerivedWordPoolsForTarget } from "./src/content/loaders.ts"; ...'
 ```
 
 Browser inspection of `/admin/words` was not performed because `http://localhost:3000` was not reachable. No dev server was started because the user owns port `3000`.
@@ -135,7 +135,7 @@ No blocker prevents Batch 2 from creating a worksheet. The current system is suf
 
 Useful improvements before or during Batch 3:
 
-- Add a generated coverage-report script so future agents do not have to use ad hoc `bun -e` snippets.
+- Add a generated coverage-report script so future agents do not have to use ad hoc `node -e` snippets.
 - Add a speech-target coverage report that can scan arbitrary targets and letter groups, not just enabled letters.
 - Consider adding a non-production worksheet format under the feature folder for candidate review.
 - Decide whether therapy metadata stays worksheet-only for the first pilot or becomes optional production metadata.

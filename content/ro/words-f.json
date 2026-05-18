@@ -253,6 +253,60 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "fulgi",
+      "display": "fulgi",
+      "normalized": "fulgi",
+      "id": "ro-f-fulgi",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/f/ro-f-fulgi.webp",
+      "imageStatus": "ready",
+      "alt": "Trei fulgi de zăpadă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "fragi",
+      "display": "fragi",
+      "normalized": "fragi",
+      "id": "ro-f-fragi",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/f/ro-f-fragi.webp",
+      "imageStatus": "ready",
+      "alt": "Un mănunchi de fragi roșii",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "frânghie",
+      "display": "frânghie",
+      "normalized": "franghie",
+      "id": "ro-f-franghie",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/f/ro-f-franghie.webp",
+      "imageStatus": "ready",
+      "alt": "O frânghie făcută colac",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

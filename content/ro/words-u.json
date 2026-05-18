@@ -163,6 +163,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "unghi",
+      "display": "unghi",
+      "normalized": "unghi",
+      "id": "ro-u-unghi",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/u/ro-u-unghi.webp",
+      "imageStatus": "ready",
+      "alt": "Două bețe colorate care formează un unghi",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

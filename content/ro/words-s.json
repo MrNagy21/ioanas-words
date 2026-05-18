@@ -307,6 +307,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "stinghie",
+      "display": "stinghie",
+      "normalized": "stinghie",
+      "id": "ro-s-stinghie",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul stinghie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

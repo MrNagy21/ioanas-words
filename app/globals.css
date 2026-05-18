@@ -133,6 +133,9 @@ h2 {
   grid-template-rows: auto 1fr auto;
   column-gap: 28px;
   row-gap: 14px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 .stage-copy {
@@ -149,11 +152,13 @@ h2 {
   min-height: 0;
 }
 
-.letter-tile {
+.letter-tile,
+.practice-target-tile {
   display: grid;
-  gap: 4px;
+  grid-template-rows: auto auto;
+  gap: 7px;
   min-width: 0;
-  min-height: 58px;
+  min-height: 76px;
   place-items: center;
   border: 2px solid rgb(23 32 51 / 8%);
   border-radius: var(--radius);
@@ -163,18 +168,30 @@ h2 {
   font-size: 1.5rem;
   font-weight: 900;
   line-height: 1;
+  padding: 10px 8px;
   text-decoration: none;
+}
+
+.practice-target-tile {
+  border-color: rgb(207 63 48 / 14%);
+  background: #fff7e0;
+  box-shadow: 0 6px 14px rgb(23 32 51 / 7%);
+  font-size: 1.22rem;
 }
 
 .letter-tile__label {
   line-height: 1;
 }
 
-.letter-tile__count {
+.letter-tile__counts {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
   color: var(--color-muted);
   font-size: 0.7rem;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.05;
+  text-align: center;
 }
 
 .letter-tile:focus-visible,
@@ -220,23 +237,6 @@ h2 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-}
-
-.practice-target-tile {
-  display: grid;
-  gap: 4px;
-  min-width: 0;
-  min-height: 58px;
-  place-items: center;
-  border: 2px solid rgb(207 63 48 / 14%);
-  border-radius: var(--radius);
-  background: #fff7e0;
-  box-shadow: 0 6px 14px rgb(23 32 51 / 7%);
-  color: var(--color-ink);
-  font-size: 1.1rem;
-  font-weight: 900;
-  line-height: 1;
-  text-decoration: none;
 }
 
 .practice-target-tile:hover {
@@ -1408,9 +1408,7 @@ h2 {
   }
 
   .letter-stage {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    row-gap: 10px;
+    display: block;
   }
 
   .stage-copy h2 {
@@ -1418,14 +1416,13 @@ h2 {
   }
 
   .letter-grid {
-    grid-column: 1;
-    grid-row: 2;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
+    margin-top: 10px;
   }
 
   .letter-tile {
-    min-height: 70px;
+    min-height: 78px;
     font-size: 1.38rem;
   }
 
@@ -1434,9 +1431,13 @@ h2 {
     gap: 7px;
   }
 
+  .practice-targets {
+    margin-top: 12px;
+  }
+
   .practice-target-tile {
-    min-height: 52px;
-    font-size: 0.98rem;
+    min-height: 78px;
+    font-size: 1.12rem;
   }
 
   .wheel-preview {
@@ -1637,8 +1638,9 @@ h2 {
   }
 
   .letter-tile {
-    min-height: 52px;
-    font-size: 1.1rem;
+    min-height: 72px;
+    padding-block: 9px;
+    font-size: 1.22rem;
   }
 
   .practice-targets {
@@ -1650,8 +1652,9 @@ h2 {
   }
 
   .practice-target-tile {
-    min-height: 44px;
-    font-size: 0.88rem;
+    min-height: 72px;
+    padding-block: 9px;
+    font-size: 1.02rem;
   }
 
   .wheel-preview__ring {

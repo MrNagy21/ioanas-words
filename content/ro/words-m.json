@@ -361,6 +361,78 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "magie",
+      "display": "magie",
+      "normalized": "magie",
+      "id": "ro-m-magie",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul magie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "magician",
+      "display": "magician",
+      "normalized": "magician",
+      "id": "ro-m-magician",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
+      "imageStatus": "placeholder",
+      "alt": "Imagine generică temporară pentru cuvântul magician",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "mochetă",
+      "display": "mochetă",
+      "normalized": "mocheta",
+      "id": "ro-m-mocheta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/m/ro-m-mocheta.webp",
+      "imageStatus": "ready",
+      "alt": "O mochetă rulată cu model colorat",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "machetă",
+      "display": "machetă",
+      "normalized": "macheta",
+      "id": "ro-m-macheta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/m/ro-m-macheta.webp",
+      "imageStatus": "ready",
+      "alt": "O machetă de casă pe o bază mică",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }
