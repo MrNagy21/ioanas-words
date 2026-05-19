@@ -1,6 +1,6 @@
 # Word Wheel Image Pipeline Decisions
 
-Last updated: 2026-05-16
+Last updated: 2026-05-18
 
 This document locks the first production image direction before Batch 6 implementation.
 
@@ -82,7 +82,7 @@ Create a high-clarity pixel art icon for a children's Romanian vocabulary game.
 Subject: <plain English object description for WORD_ID>.
 Style: cheerful handcrafted pixel art, clean silhouette, rounded friendly shapes, simple readable details, soft playful colors, consistent game icon style.
 Composition: one centered subject only, square canvas, subject fills 70% to 85% of the image, clear margin around the subject, transparent background or very simple pale background.
-Technical: no text, no letters, no numbers, no logo, no watermark, no brand, no copyrighted character, no photorealism, no 3D render, no complex scene, no scary mood, no clutter.
+Technical: no text, no letters, no numbers, no logo, no watermark, no brand, no copyrighted character, no photorealism, no smooth CGI/realistic 3D render, no complex scene, no scary mood, no clutter.
 Audience: children ages 4 to 6.
 ```
 
@@ -109,6 +109,8 @@ Overall look:
 Pixel style:
 
 - visible pixel-art construction;
+- polished dimensional pixel-art volume, not flat sticker art and not smooth CGI;
+- apparent source density should feel close to a refined `96 x 96` to `128 x 128` pixel icon upscaled to the final `256 x 256 px` asset;
 - clean silhouette first;
 - limited internal detail;
 - no noisy dithering;
@@ -183,6 +185,76 @@ An image can be marked production-ready only if:
 - there are no AI artifacts that change the meaning;
 - it can be optimized under the file-size target.
 
+## Brand Consistency Review
+
+Before accepting any generated or locally authored replacement image, compare it against the existing production pack. Do not judge a new asset only in isolation.
+
+Required agent workflow:
+
+1. Open or create a contact sheet for the new batch.
+2. Create a second comparison sheet that mixes representative existing ready images from recent accepted batches with a sample of the new images.
+3. Check silhouette clarity, subject scale, outline weight, palette, internal detail level, contact shadow style, and apparent pixel density.
+4. Regenerate or revise images that look noticeably coarser, flatter, lower-detail, more emoji-like, more vector-like, or otherwise off-brand compared with the established pack.
+5. Record in the batch image-brief document that the comparison review happened.
+
+Use at least 8 to 12 existing production references when the slice has more than a few images. Choose references from nearby categories when possible, for example food against food, animals against animals, clothing against clothing, and household objects against household objects.
+
+### Production Style Reference Set
+
+Use these existing approved images as the primary on-brand references for future image generation and review. They are not concept requirements for a new batch; they are style anchors for pixel density, dimensionality, object scale, background treatment, outline weight, and thumbnail readability.
+
+| Word         | Public image path                   | Why it is useful                                                                          |
+| ------------ | ----------------------------------- | ----------------------------------------------------------------------------------------- |
+| `autobuz`    | `/images/ro/a/ro-a-autobuz.webp`    | clear vehicle silhouette, friendly dimensional lighting, fits the square without crowding |
+| `acvariu`    | `/images/ro/a/ro-a-acvariu.webp`    | transparent/glass subject with readable contents and soft pale background                 |
+| `cal`        | `/images/ro/c/ro-c-cal.webp`        | natural animal pose with enough body visible for recognition                              |
+| `castravete` | `/images/ro/c/ro-c-castravete.webp` | simple food object with strong silhouette and controlled texture detail                   |
+| `copac`      | `/images/ro/c/ro-c-copac.webp`      | organic shape with clear trunk/canopy separation and no scene clutter                     |
+| `cadă`       | `/images/ro/c/ro-c-cada.webp`       | household object with gentle perspective and child-safe details                           |
+| `cozonac`    | `/images/ro/c/ro-c-cozonac.webp`    | food texture kept readable without becoming noisy                                         |
+| `cetate`     | `/images/ro/c/ro-c-cetate.webp`     | symmetric object/building icon that stays legible in the wheel                            |
+| `chitară`    | `/images/ro/c/ro-c-chitara.webp`    | thin-object example with enough outline weight and margin                                 |
+| `elefant`    | `/images/ro/e/ro-e-elefant.webp`    | animal body volume, friendly expression, natural subject rather than mascot               |
+| `excavator`  | `/images/ro/e/ro-e-excavator.webp`  | complex vehicle simplified without losing identifying parts                               |
+| `jachetă`    | `/images/ro/j/ro-j-jacheta.webp`    | clothing item shown front-on with clear folds and no logos                                |
+| `măgar`      | `/images/ro/m/ro-m-magar.webp`      | small animal with full-body framing and soft contact shadow                               |
+| `oală`       | `/images/ro/o/ro-o-oala.webp`       | simple household object with strong volume and highlight control                          |
+| `scaun`      | `/images/ro/s/ro-s-scaun.webp`      | furniture with readable perspective and full object framing                               |
+| `vacă`       | `/images/ro/v/ro-v-vaca.webp`       | full animal silhouette, natural markings, friendly but not cartoon-mascot style           |
+| `barcă`      | `/images/ro/b/ro-b-barca.webp`      | elongated object that still fits the square with safe margins                             |
+| `glob`       | `/images/ro/g/ro-g-glob.webp`       | round object with visible stand and no text/labels                                        |
+| `buchet`     | `/images/ro/b/ro-b-buchet.webp`     | multi-part subject kept cohesive and not cluttered                                        |
+| `zebră`      | `/images/ro/z/ro-z-zebra.webp`      | stripe detail stays readable without overwhelming the animal form                         |
+| `umbrelă`    | `/images/ro/u/ro-u-umbrela.webp`    | open object with clean silhouette and simple handle detail                                |
+| `șurub`      | `/images/ro/ș/ro-sh-surub.webp`     | small hardware object enlarged enough to read safely as an icon                           |
+| `arici`      | `/images/ro/a/ro-a-arici.webp`      | detailed texture with controlled pixel density and friendly animal shape                  |
+| `cățel`      | `/images/ro/c/ro-c-catel.webp`      | close animal framing that remains recognizable and emotionally friendly                   |
+
+The spoken review note `caun` is interpreted here as `scaun`, because there is no `caun` production record.
+
+Reference traits to preserve:
+
+- use a pale warm off-white or soft sky-blue background when a background is needed; avoid dark transparent-preview artifacts in reviewed sheets;
+- subject usually fills about `70%` to `85%` of the square with a clear margin on all sides;
+- use simple three-quarter, front, or side views that reveal the object rather than cropping important parts;
+- keep a soft contact shadow or grounding shape when it helps the icon sit naturally in the square;
+- make objects feel lightly dimensional through top-left highlights, side planes, local-color outlines, and simple shadows;
+- keep the visible pixel grid refined enough that the icon reads as polished game art, not coarse block construction.
+
+### Known Regeneration Candidates
+
+The following ready images were flagged in human review and should be regenerated in a corrective image-quality pass before being treated as final brand examples:
+
+| Word ID        | Current issue                                                                                             | Regeneration direction                                                                                                       |
+| -------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `ro-r-robinet` | too coarse and ambiguous; does not read clearly as a faucet beside the stronger household-object examples | one simple sink faucet or tap, metallic gray/blue, recognizable spout and handle, pale background, polished pixel-art volume |
+| `ro-a-aripa`   | too abstract/coarse and visually ambiguous for a wing                                                     | one feathered wing with clear feather layers and curved silhouette, no bird body, no floating square fragments               |
+| `ro-c-coaja`   | odd detached fragments make the peel feel broken or artifacted                                            | one curled fruit peel, preferably orange or banana peel, continuous shape, no unexplained loose blocks                       |
+| `ro-e-esarfa`  | blocky and abstract; reads more like stacked pieces than a soft scarf                                     | one scarf with a gentle fold or trailing end, visible fringe, fabric-like highlights, no person                              |
+| `ro-g-girafa`  | too cropped/mascot-like compared with the full animal references                                          | natural friendly giraffe with visible long neck, head, spots, and enough body/neck framing to read at wheel size             |
+
+The spoken review note `Capea` does not match a current production word ID. Resolve the intended word with the human before adding it to a regeneration batch.
+
 Reject or regenerate if:
 
 - the subject is ambiguous;
@@ -190,6 +262,7 @@ Reject or regenerate if:
 - the generated image looks like a copyrighted character or brand;
 - the style drifts into emoji, sticker, photo, 3D, or flat vector art;
 - the object cannot be recognized when reduced to wheel thumbnail size.
+- the image is visibly off-brand beside the existing ready-image pack.
 
 Research notes:
 

@@ -1143,7 +1143,7 @@ Decision result:
 
 ## Batch 27: General Placeholder Image Replacement Slice 10
 
-Status: Proposed
+Status: Complete
 
 Continue general placeholder image replacement after Batch 26.
 
@@ -1174,6 +1174,458 @@ pnpm run check:gameplay
 pnpm run check:matching
 git diff --check
 ```
+
+Decision result:
+
+- Batch 27 implemented a 16-word image-only replacement slice for `capră`, `căpșună`, `clopoțel`, `colac`, `cort`, `cocoș`, `căruță`, `căsuță`, `cozonac`, `delfin`, `dovleac`, `dulap`, `elefant`, `elicopter`, `floare`, and `fluture`.
+- All selected words already existed as approved placeholder-backed production records.
+- Batch 27 added `image-briefs-batch-27.md`, generated reviewed pixel-art assets, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 28: General Placeholder Image Replacement Slice 11
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 27.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-27.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `fular`, `furculiță`, `umbrelă`, `ursuleț`, `vacă`, `vapor`, `vulpe`, `șopârlă`, `șarpe`, and `țânțar`.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, person-sensitive, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 28 implemented a 10-word image-only replacement slice for `fular`, `furculiță`, `umbrelă`, `ursuleț`, `vacă`, `vapor`, `vulpe`, `șopârlă`, `șarpe`, and `țânțar`.
+- All selected words already existed as approved placeholder-backed production records.
+- Batch 28 added `image-briefs-batch-28.md`, generated reviewed pixel-art assets, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 29: General Placeholder Image Replacement Slice 12
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 28.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-28.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `fustă`, `fotoliu`, `fasole`, `frigider`, `vagon`, `varză`, `vază`, `veveriță`, `vioară`, `vițel`, `șal`, `șampon`, `șervețel`, `șort`, `șiret`, `șurub`, `țap`, and `țeavă`.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, person-sensitive, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 29 implemented a 17-word image-only replacement slice for `fustă`, `fotoliu`, `fasole`, `vagon`, `varză`, `vază`, `veveriță`, `vioară`, `vițel`, `șal`, `șampon`, `șervețel`, `șorț`, `șiret`, `șurub`, `țap`, and `țeavă`.
+- `frigider` was already ready before the slice and was left unchanged; the requested `șort` spelling did not exist as a production record, so the existing `șorț` record was implemented.
+- All selected words already existed as approved placeholder-backed production records.
+- Batch 29 added `image-briefs-batch-29.md`, generated reviewed pixel-art assets, simplified source PNGs to a small hard-edged palette, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 30: General Placeholder Image Replacement Slice 13
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 29.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-29.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `album`, `ascuțitoare`, `ață`, `buștean`, `cadă`, `dinozaur`, `duș`, `excavator`, `găină`, `gâscă`, `găleată`, `gard`, `glob`, `gogoașă`, `hamac`, `hartă`, `iaurt`, `iglu`, `inel`, and `inimă` if visual review succeeds.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, person-sensitive, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 30 implemented a 20-word image-only replacement slice for `album`, `ascuțitoare`, `ață`, `buștean`, `cadă`, `dinozaur`, `duș`, `excavator`, `găină`, `gâscă`, `găleată`, `gard`, `glob`, `gogoașă`, `hamac`, `hartă`, `iaurt`, `iglu`, `inel`, and `inimă`.
+- All selected words already existed as approved placeholder-backed production records.
+- Batch 30 added `image-briefs-batch-30.md`, generated reviewed pixel-art assets, simplified source crops to a hard-edged 4-bit-per-channel RGB palette, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- `glob` and `hartă` remain above the `12 KB` warning threshold but below the hard maximum; further simplification was deferred because it reduced thumbnail clarity.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 31: General Placeholder Image Replacement Slice 14
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 30.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-30.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `haină`, `iarbă`, `joc`, `jeleu`, `jaluzea`, `lac`, `lalea`, `lămâie`, `lapte`, `lanternă`, `leu`, `lingură`, `lup`, `lanț`, `linguriță`, `maimuță`, `măgar`, `mătură`, `miere`, and `motan` if visual review succeeds.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, person-sensitive, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 31 implemented a 20-word image-only replacement slice for `haină`, `iarbă`, `joc`, `jeleu`, `jaluzea`, `lac`, `lalea`, `lămâie`, `lapte`, `lanternă`, `leu`, `lingură`, `lup`, `lanț`, `linguriță`, `maimuță`, `măgar`, `mătură`, `miere`, and `motan`.
+- All selected words already existed as approved placeholder-backed production records.
+- Batch 31 added `image-briefs-batch-31.md`, generated reviewed pixel-art assets, cropped reviewed source cells to canonical source PNGs, encoded final `256 x 256 px` WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- All Batch 31 final assets are below the `12 KB` warning threshold.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 32: General Placeholder Image Replacement Slice 15
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 31.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-31.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `nor`, `nucă`, `nasture`, `nufăr`, `oaie`, `oală`, `oglindă`, `omidă`, `ou`, `orez`, `pară`, `pălărie`, `pătură`, `pepene`, `pensulă`, `penar`, `pieptene`, `portocală`, `prună`, and `puzzle` if visual review succeeds.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, person-sensitive, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 32 implemented a 20-word image-only replacement slice for `nor`, `nucă`, `nasture`, `nufăr`, `oaie`, `oală`, `oglindă`, `omidă`, `ou`, `orez`, `pară`, `pălărie`, `pătură`, `pepene`, `pensulă`, `penar`, `pieptene`, `portocală`, `prună`, and `puzzle`.
+- All selected words already existed as approved placeholder-backed production records.
+- Batch 32 added `image-briefs-batch-32.md`, generated reviewed pixel-art assets, cropped reviewed source cells to canonical source PNGs, simplified source crops to a 48-color hard-edged palette, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- All Batch 32 final assets are below the `12 KB` warning threshold.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 33: General Placeholder Image Replacement Slice 16
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 32.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-32.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `raft`, `ramură`, `râu`, `roșie`, `robinet`, `rotiță`, `sandviș`, `scară`, `scoică`, `sfoară`, `spumă`, `struguri`, `stilou`, `stejar`, `săniuță`, `tavă`, `telefon`, `tigru`, `tobă`, `tobogan`, `tort`, `tricou`, and `televizor` if visual review succeeds.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, person-sensitive, frightening, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 33 implemented a 23-word image-only replacement slice for `raft`, `ramură`, `râu`, `roșie`, `robinet`, `rotiță`, `sandviș`, `scară`, `scoică`, `sfoară`, `spumă`, `struguri`, `stilou`, `stejar`, `săniuță`, `tavă`, `telefon`, `tigru`, `tobă`, `tobogan`, `tort`, `tricou`, and `televizor`.
+- Batch 33 added `image-briefs-batch-33.md`, generated reviewed hard-edged pixel-art assets from deterministic local `64 x 64 px` source icons, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- Production Romanian content remains `370` approved words; ready images move from `292` to `315`, and placeholders move from `78` to `55`.
+- Letter image readiness now includes `R` at `14` ready / `0` placeholder, `S` at `17` ready / `1` placeholder, and `T` at `9` ready / `1` placeholder.
+- `tata` was deferred as person-sensitive, and `stinghie` was deferred as lower-familiarity and visually less clear for this child-facing thumbnail slice.
+- No new vocabulary, `Ă`/`Â` buckets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 34: General Placeholder Image Replacement Slice 17
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 33.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-33.md`.
+- Prioritize another focused slice of common, concrete placeholder-backed words where wheel-thumbnail clarity is strongest.
+- Start visual review from high-clarity remaining candidates such as `acoperiș`, `aripă`, `cap`, `coajă`, `desen`, `eșarfă`, `garaj`, `iaz`, `mazăre`, `miez`, `plajă`, `ploaie`, `pluș`, `prăjitură`, `păianjen`, `pătuț`, `pisicuță`, `ulei`, `zid`, `zmeură`, `zambilă`, and `țurțure` if visual review succeeds.
+- Defer or reject concepts that remain too broad, abstract, low-familiarity, unsafe, visually cluttered, person-sensitive, frightening, brand-like, magical/fantasy-dependent, or ambiguous for a 4-to-6-year-old wheel thumbnail.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Write image briefs before image promotion.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Decision result:
+
+- Batch 34 implemented a 20-word image-only replacement slice for `acoperiș`, `aripă`, `cap`, `coajă`, `desen`, `eșarfă`, `garaj`, `iaz`, `mazăre`, `plajă`, `ploaie`, `prăjitură`, `păianjen`, `pătuț`, `pisicuță`, `ulei`, `zid`, `zmeură`, `zambilă`, and `țurțure`.
+- Batch 34 added `image-briefs-batch-34.md`, generated reviewed hard-edged pixel-art assets from deterministic local `128 x 128 px` source icons, checked them against a comparison sheet of existing production assets, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- Production Romanian content remains `370` approved words; ready images move from `315` to `335`, and placeholders move from `55` to `35`.
+- Letter image readiness now includes `A` at `17` ready / `0` placeholder, `D` at `9` ready / `0` placeholder, `P` at `32` ready / `2` placeholder, and `Ț` at `5` ready / `0` placeholder.
+- `miez` was deferred as broad and context-dependent at thumbnail size, and `pluș` was deferred because the material/object distinction remains ambiguous without leaning on an already-covered plush-toy concept.
+- No new vocabulary, `Ă`/`Â` buckets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 35: General Placeholder Image Replacement Slice 18
+
+Status: Complete
+
+Continue general placeholder image replacement after Batch 34.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-34.md`.
+- Prioritize the clearest remaining non-person, non-magical placeholders such as `colaj`, `chiciură`, `echipament`, `frizerie`, `ger`, `gheretă`, `gheruță`, `insulă`, `mușețel`, `mărțișor`, `poză`, and `școală` if visual review succeeds.
+- Reconsider `miez` or `pluș` only if the image brief can disambiguate the concept without confusing the 4-to-6-year-old wheel thumbnail.
+- Defer concepts that remain too abstract, broad, low-familiarity, unsafe, cluttered, person-sensitive, frightening, brand-like, magical/fantasy-dependent, or visually ambiguous.
+- Use only existing approved placeholder-backed production records; do not add vocabulary.
+- Replace only placeholder image paths/statuses with canonical ready assets; do not add speech-target production metadata.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- Every selected word remains approved in the current production JSON before image replacement.
+- Every ready image is recognizable, child-safe, text-free, logo-free, brand-free, style-consistent, `256 x 256 px`, and below the `20 KB` hard maximum.
+- Person/family, fantasy/magical, and abstract records stay deferred unless the human explicitly approves those production tradeoffs.
+- No new vocabulary, `Ă`/`Â` buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims are introduced.
+
+Decision result:
+
+- Batch 35 implemented a 12-word image-only replacement slice for `colaj`, `chiciură`, `echipament`, `frizerie`, `ger`, `gheretă`, `gheruță`, `insulă`, `mușețel`, `mărțișor`, `poză`, and `școală`.
+- Batch 35 added `image-briefs-batch-35.md`, generated reviewed hard-edged pixel-art assets from deterministic local `128 x 128 px` source icons, checked them against a comparison sheet of existing production assets, encoded final `256 x 256 px` lossless WebP files below the `20 KB` hard maximum, and promoted only the affected image fields to ready app-owned image paths.
+- Production Romanian content remains `370` approved words; ready images move from `335` to `347`, and placeholders move from `35` to `23`.
+- Letter image readiness now includes `C` at `62` ready / `0` placeholder, `I` at `8` ready / `0` placeholder, and `Ș` at `12` ready / `0` placeholder.
+- `miez` was deferred again as broad and context-dependent, and `pluș` was deferred again because the material/object distinction remains ambiguous without leaning on an already-covered plush-toy concept.
+- Remaining placeholders are now mostly person/family, fantasy/magical, abstract, low-familiarity, or visually ambiguous records; they need an explicit production tradeoff decision before further image replacement.
+- No new vocabulary, `Ă`/`Â` buckets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 36: Remaining Placeholder Decision Audit
+
+Status: Complete
+
+Pause broad image replacement and audit the remaining `23` placeholder-backed approved records after Batch 35.
+
+Tasks:
+
+- Continue from `/admin/words`, production JSON placeholder counts, and `image-briefs-batch-35.md`.
+- List every remaining placeholder-backed approved word and group each by likely decision path:
+  - replaceable with a clear non-person/non-magical icon;
+  - needs human approval because it is person/family-sensitive;
+  - needs human approval because it is magical/fantasy-dependent;
+  - likely should stay deferred because it is abstract, broad, low-familiarity, cluttered, unsafe, frightening, brand-like, or visually ambiguous.
+- Run a ready-image quality audit against the on-brand reference set in `docs/image-pipeline.md`.
+- Include the flagged corrective-regeneration candidates `ro-r-robinet`, `ro-a-aripa`, `ro-c-coaja`, `ro-e-esarfa`, and `ro-g-girafa` in that audit.
+- Clarify the spoken `Capea` review note with the human before creating, replacing, or regenerating any asset for it, because no current production word ID matches it.
+- Re-evaluate borderline non-person items such as `miez`, `pluș`, `ghicitoare`, and `stinghie` only as a decision audit; do not promote images unless the brief can stay clear for a 4-to-6-year-old wheel thumbnail.
+- Ask the human before changing production scope, removing approved records, hiding records from gameplay, adding person-sensitive image conventions, or accepting magical/fantasy image tradeoffs.
+- Do not add new vocabulary, `Ă`/`Â` buckets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Update this feature `status.md`, global `docs/status.md`, and `docs/next-image-batch-prompt.md`.
+
+Review checkpoint:
+
+- The remaining placeholder set is fully auditable from current production JSON.
+- The ready-image regeneration watchlist is recorded with enough context to produce corrected assets later.
+- No difficult remaining concept is silently accepted into production imagery without a recorded tradeoff.
+- The next implementation prompt is either a tightly approved image slice or a cleanup/scope decision prompt.
+
+Decision result:
+
+- Batch 36 added `remaining-placeholder-decision-audit-batch-36.md`.
+- Audited all `23` remaining approved placeholder-backed records from current production JSON.
+- Grouped the remaining placeholders by likely path:
+  - clear non-person/non-magical replacement candidate: `zmeu`, only if the intended child-facing sense is a toy kite;
+  - person/family-sensitive decision: `bebeluș`, `bunic`, `bunică`, `băiețel`, `echipă`, `fetiță`, `frizură`, `gemeni`, `gimnast`, `tata`, and `îmbrățișare`;
+  - magical/fantasy-dependent decision: `gigant`, `magie`, `magician`, `unicorn`, `zână`, and `împărat`;
+  - likely deferral: `gimnastică`, `ghicitoare`, `miez`, `pluș`, and `stinghie`.
+- Confirmed the existing ready-image watchlist should remain active for corrective regeneration: `ro-r-robinet`, `ro-a-aripa`, `ro-c-coaja`, `ro-e-esarfa`, and `ro-g-girafa`.
+- Kept the spoken `Capea` note unresolved because no current production record matches it.
+- Made no production content, image asset, route, schema, speech-target metadata, admin, auth, database, billing, account, AI pronunciation, or clinical-claim changes.
+
+## Batch 37: Human Decision Gate And Corrective Planning
+
+Status: Complete
+
+Use `remaining-placeholder-decision-audit-batch-36.md` as the source for the next step.
+
+Tasks:
+
+- Ask the human to decide whether person/family records should receive generic person icons, stay placeholder-backed, or move into a separate visibility/vocabulary cleanup decision.
+- Ask the human to decide whether magical/fantasy records are acceptable in the production image pack.
+- Ask the human to confirm whether `zmeu` should be treated as the toy kite sense for child-facing imagery.
+- Ask the human whether the likely-deferral records should remain approved placeholder-backed, be hidden from gameplay, or be revisited in a vocabulary cleanup batch.
+- Clarify the spoken `Capea` note before creating or regenerating any asset for it.
+- If the human approves a tightly scoped image or regeneration slice, write image briefs before asset promotion and follow `docs/image-pipeline.md`.
+- Do not generate or promote person/family, fantasy/magical, or corrective regeneration assets without explicit approval for that slice.
+- Do not add new vocabulary, `Ă`/`Â` buckets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+Review checkpoint:
+
+- Every sensitive tradeoff has an explicit human decision before implementation.
+- Any approved next image slice is tightly scoped and documented before image generation.
+- Remaining deferred records are not silently narrowed to convenient visuals.
+- Production JSON and asset changes happen only after the decision gate.
+
+Decision result:
+
+- Recorded human approval for normal reviewed person/family images.
+- Recorded human approval for child-safe magical/fantasy imagery.
+- Recorded human approval to treat `zmeu` as the toy kite sense for child-facing imagery.
+- Recorded human approval to image `gimnastică` and image `pluș` as a teddy bear.
+- Removed `ghicitoare`, `miez`, and `stinghie` from gameplay by changing their status from `approved` to `rejected`.
+- Kept the spoken `Capea` / `Kapia` note unresolved because no current production record matches it.
+- Recorded human approval for corrective regeneration of `ro-r-robinet`, `ro-a-aripa`, `ro-c-coaja`, `ro-e-esarfa`, and `ro-g-girafa`.
+- Added `human-decision-gate-and-corrective-planning-batch-37.md` and `image-briefs-batch-37.md`.
+- Production Romanian content now has `367` approved words, `347` ready images, and `20` approved placeholder images.
+
+## Batch 38: Approved Batch 37 Image Generation And Corrective Regeneration
+
+Status: Complete
+
+Use `image-briefs-batch-37.md` as the source of approved image work.
+
+Tasks:
+
+- Generate and review the `20` approved placeholder replacements from Batch 37:
+  - person/family records: `bebeluș`, `bunic`, `bunică`, `băiețel`, `echipă`, `fetiță`, `frizură`, `gemeni`, `gimnast`, `tata`, and `îmbrățișare`;
+  - child-safe fantasy records: `gigant`, `magie`, `magician`, `unicorn`, `zână`, and `împărat`;
+  - additional approved records: `zmeu` as a toy kite, `gimnastică`, and `pluș` as a teddy bear.
+- Regenerate and review the `5` approved corrective assets: `ro-r-robinet`, `ro-a-aripa`, `ro-c-coaja`, `ro-e-esarfa`, and `ro-g-girafa`.
+- Create a comparison sheet against the on-brand reference set in `docs/image-pipeline.md` before accepting replacements.
+- Promote only reviewed, recognizable, child-safe, text-free, brand-free, style-consistent final WebP assets.
+- If the full `25`-image scope is too large for one visual QA pass, split it into two smaller batches without changing scope.
+- Do not reintroduce `ghicitoare`, `miez`, or `stinghie` without a separate human-approved vocabulary decision.
+- Do not add new vocabulary, `Ă`/`Â` buckets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+
+Review checkpoint:
+
+- Every generated image has a Batch 37 image brief.
+- Every accepted image passes comparison review against the documented on-brand reference set.
+- `zmeu` is shown as a toy kite only.
+- `pluș` is shown as a teddy bear.
+- Corrective replacements are clearly better than the current ready images at wheel thumbnail size.
+
+Result:
+
+- Added `image-briefs-batch-38.md` with the generation, comparison review, accepted asset table, and content impact.
+- Generated and reviewed all `25` approved image targets from Batch 37.
+- Created a comparison sheet against the on-brand reference set before promotion.
+- Promoted all `20` approved placeholder replacements to ready app-owned WebP assets.
+- Replaced the `5` approved corrective ready assets with clearer regenerated WebP files.
+- Confirmed final Batch 38 assets are `256 x 256 px` WebP files between `1394 B` and `4296 B`, below the `20 KB` hard maximum.
+- Production Romanian content remains `367` approved words; ready images move from `347` to `367`, and approved placeholders move from `20` to `0`.
+- Kept `ghicitoare`, `miez`, and `stinghie` rejected.
+- Kept the spoken `Capea` / `Kapia` note unresolved with no vocabulary or asset change.
 
 ## Exit Criteria
 

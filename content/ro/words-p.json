@@ -209,9 +209,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pară",
+      "image": "/images/ro/p/ro-p-para.webp",
+      "imageStatus": "ready",
+      "alt": "O pară",
       "source": [
         "manual"
       ],
@@ -227,9 +227,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pălărie",
+      "image": "/images/ro/p/ro-p-palarie.webp",
+      "imageStatus": "ready",
+      "alt": "O pălărie galbenă",
       "source": [
         "manual"
       ],
@@ -245,9 +245,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pătură",
+      "image": "/images/ro/p/ro-p-patura.webp",
+      "imageStatus": "ready",
+      "alt": "O pătură colorată împăturită",
       "source": [
         "manual"
       ],
@@ -263,9 +263,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pepene",
+      "image": "/images/ro/p/ro-p-pepene.webp",
+      "imageStatus": "ready",
+      "alt": "O felie de pepene",
       "source": [
         "manual"
       ],
@@ -281,9 +281,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pensulă",
+      "image": "/images/ro/p/ro-p-pensula.webp",
+      "imageStatus": "ready",
+      "alt": "O pensulă",
       "source": [
         "manual"
       ],
@@ -299,9 +299,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul penar",
+      "image": "/images/ro/p/ro-p-penar.webp",
+      "imageStatus": "ready",
+      "alt": "Un penar cu creioane",
       "source": [
         "manual"
       ],
@@ -317,9 +317,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pieptene",
+      "image": "/images/ro/p/ro-p-pieptene.webp",
+      "imageStatus": "ready",
+      "alt": "Un pieptene",
       "source": [
         "manual"
       ],
@@ -335,9 +335,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul plajă",
+      "image": "/images/ro/p/ro-p-plaja.webp",
+      "imageStatus": "ready",
+      "alt": "O plajă cu nisip și mare",
       "source": [
         "manual"
       ],
@@ -353,9 +353,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ploaie",
+      "image": "/images/ro/p/ro-p-ploaie.webp",
+      "imageStatus": "ready",
+      "alt": "Un nor cu ploaie",
       "source": [
         "manual"
       ],
@@ -371,9 +371,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul portocală",
+      "image": "/images/ro/p/ro-p-portocala.webp",
+      "imageStatus": "ready",
+      "alt": "O portocală",
       "source": [
         "manual"
       ],
@@ -389,9 +389,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul prună",
+      "image": "/images/ro/p/ro-p-pruna.webp",
+      "imageStatus": "ready",
+      "alt": "O prună",
       "source": [
         "manual"
       ],
@@ -407,9 +407,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pluș",
+      "image": "/images/ro/p/ro-p-plus.webp",
+      "imageStatus": "ready",
+      "alt": "Un ursuleț de pluș",
       "source": [
         "manual"
       ],
@@ -425,9 +425,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul prăjitură",
+      "image": "/images/ro/p/ro-p-prajitura.webp",
+      "imageStatus": "ready",
+      "alt": "O prăjitură",
       "source": [
         "manual"
       ],
@@ -443,9 +443,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul păianjen",
+      "image": "/images/ro/p/ro-p-paianjen.webp",
+      "imageStatus": "ready",
+      "alt": "Un păianjen mic",
       "source": [
         "manual"
       ],
@@ -461,9 +461,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pătuț",
+      "image": "/images/ro/p/ro-p-patut.webp",
+      "imageStatus": "ready",
+      "alt": "Un pătuț",
       "source": [
         "manual"
       ],
@@ -479,9 +479,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul poză",
+      "image": "/images/ro/p/ro-p-poza.webp",
+      "imageStatus": "ready",
+      "alt": "O poză în ramă cu munți și soare",
       "source": [
         "manual"
       ],
@@ -497,9 +497,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul puzzle",
+      "image": "/images/ro/p/ro-p-puzzle.webp",
+      "imageStatus": "ready",
+      "alt": "Piese de puzzle colorate",
       "source": [
         "manual"
       ],
@@ -533,9 +533,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul pisicuță",
+      "image": "/images/ro/p/ro-p-pisicuta.webp",
+      "imageStatus": "ready",
+      "alt": "O pisicuță portocalie",
       "source": [
         "manual"
       ],

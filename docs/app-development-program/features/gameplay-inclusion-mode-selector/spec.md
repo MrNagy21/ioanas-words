@@ -41,6 +41,8 @@ The next feature should make those pools usable from the child-facing play scree
 - Keep result modal behavior clear and unchanged in intent.
 - Define remove and reset behavior across all modes.
 - Let the user choose how many randomly selected words appear on the wheel from the active mode pool.
+- Let the user choose exact words for the current target session when the active pool is too large for a useful roulette wheel.
+- Let the user save, load, and delete named local wheel configurations for the current target.
 - Let the user replace a spun word with a random available off-wheel word when the active mode pool has more eligible words than the current wheel.
 - Keep gameplay static-first, anonymous, database-free, and deployable on Vercel without credentials.
 
@@ -58,7 +60,7 @@ The next feature should make those pools usable from the child-facing play scree
 - No accounts.
 - No AI pronunciation.
 - No practice-target letter groups such as `ce`, `ci`, `ge`, or `gi`.
-- No exact manual word picking for the wheel.
+- No server-backed, cross-device, or account-backed configuration sync.
 - No child-facing link to `/admin/words`.
 - No new dev server port.
 
@@ -108,7 +110,21 @@ If review shows those labels are too terse, use:
 
 The selector should show which mode is active through visual state and programmatic state. It may include compact counts if they fit without crowding the setup sheet, for example `Încep cu 10`, but it should not add long child-facing instructional copy.
 
-The setup sheet should also expose a compact wheel-size control. The user chooses how many words should be displayed on the wheel, and the app picks that many words at random from the active mode pool. The user should not choose the exact words in v1. Mode and count changes are applied deliberately from setup; they should not mutate the wheel live while the child is playing.
+The setup sheet should also expose a compact wheel-size control. The user chooses how many words should be displayed on the wheel, and the app picks that many words at random from the active pool.
+
+When a target has a large pool, the setup sheet should allow the adult to choose a custom selected subset without showing a separate all/custom toggle. The main setup sheet should stay light; the searchable word list opens from `Alege cuvinte` in a smaller focused pop-up with search, thumbnails or initials, and checkbox-style selection. Selecting any word means the wheel uses the selected subset. Clearing the selected list falls back to the full pool. If the selected subset is larger than the wheel count, the wheel samples from that selected subset. If the selected subset is smaller than the requested wheel count, the wheel shows the selected subset.
+
+Named wheel configurations should be scoped to the current target. Loading a saved configuration updates the setup draft; the user still applies it deliberately. Deleting a saved configuration should affect only local storage and must not affect content manifests. The main setup sheet should expose saved configurations through a compact `Salvate` action, and the save action should open a naming pop-up rather than keeping a name input in the main setup surface. Save and saved-configuration surfaces should make clear that the saved item includes the full wheel configuration, not only a word list, and should show the selected-word count.
+
+Mode, count, and word-selection changes are applied deliberately from setup; they should not mutate the wheel live while the child is playing.
+
+Research notes recorded on 2026-05-18:
+
+- Material Design bottom-sheet guidance treats modal bottom sheets as a mobile-first surface, says they span full screen width on mobile, and explicitly allows internally scrolling long lists. Source: https://m1.material.io/components/bottom-sheets.html
+- The same Material guidance says desktop/tablet layouts should consider alternative surfaces because bottom sheets can split attention on large screens. Source: https://m1.material.io/components/bottom-sheets.html
+- `web.dev` storage guidance says `localStorage` is synchronous, string-only, and limited, while IndexedDB is the general recommendation for larger app data. Because this feature stores only small anonymous settings and presets, versioned `localStorage` is acceptable for v1; larger future synced state can move to a database or IndexedDB. Source: https://web.dev/articles/storage-for-the-web
+- `web.dev` IndexedDB guidance notes client-side data can be modified or cleared by users, so the app must treat saved local configurations as convenience state, not authoritative content. Source: https://web.dev/articles/indexeddb-best-practices-app-state
+- OWASP browser-storage guidance notes local storage can be viewed and edited in browser developer tools, so no sensitive data belongs in these presets. Source: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/11-Client-side_Testing/12-Testing_Browser_Storage
 
 During play, the main screen should show only the wheel, concise status, spin/reset controls, and the setup entry point. It should not restore the old full word-preview list or keep live mode/count controls visible.
 
@@ -315,7 +331,8 @@ Validation expectations if code changes:
 - The child or adult can switch between starts-with, contains-only, and mixed modes in setup.
 - The wheel updates when setup is applied.
 - The user can choose how many words appear on the wheel within documented limits.
-- The app chooses visible wheel words randomly from the active mode pool rather than letting the user pick exact words.
+- The app can choose visible wheel words randomly from the active mode pool or from a user-selected subset.
+- The user can save, load, and delete named local configurations for the current target.
 - The result modal can replace the selected word with a random eligible off-wheel word when one is available.
 - Starts-with mode preserves the current pilot behavior.
 - Contains-only mode excludes words that start with the selected target.

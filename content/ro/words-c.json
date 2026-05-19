@@ -299,9 +299,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cadă",
+      "image": "/images/ro/c/ro-c-cada.webp",
+      "imageStatus": "ready",
+      "alt": "O cadă",
       "source": [
         "manual"
       ],
@@ -317,9 +317,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "body",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cap",
+      "image": "/images/ro/c/ro-c-cap.webp",
+      "imageStatus": "ready",
+      "alt": "Un cap de copil",
       "source": [
         "manual"
       ],
@@ -335,9 +335,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul capră",
+      "image": "/images/ro/c/ro-c-capra.webp",
+      "imageStatus": "ready",
+      "alt": "O capră albă",
       "source": [
         "manual"
       ],
@@ -371,9 +371,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul căpșună",
+      "image": "/images/ro/c/ro-c-capsuna.webp",
+      "imageStatus": "ready",
+      "alt": "O căpșună roșie",
       "source": [
         "manual"
       ],
@@ -389,9 +389,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul clopoțel",
+      "image": "/images/ro/c/ro-c-clopotel.webp",
+      "imageStatus": "ready",
+      "alt": "Un clopoțel galben",
       "source": [
         "manual"
       ],
@@ -407,9 +407,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul colac",
+      "image": "/images/ro/c/ro-c-colac.webp",
+      "imageStatus": "ready",
+      "alt": "Un colac împletit",
       "source": [
         "manual"
       ],
@@ -425,9 +425,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cort",
+      "image": "/images/ro/c/ro-c-cort.webp",
+      "imageStatus": "ready",
+      "alt": "Un cort verde",
       "source": [
         "manual"
       ],
@@ -443,9 +443,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cocoș",
+      "image": "/images/ro/c/ro-c-cocos.webp",
+      "imageStatus": "ready",
+      "alt": "Un cocoș colorat",
       "source": [
         "manual"
       ],
@@ -461,9 +461,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul coajă",
+      "image": "/images/ro/c/ro-c-coaja.webp",
+      "imageStatus": "ready",
+      "alt": "O coajă de portocală răsucită",
       "source": [
         "manual"
       ],
@@ -479,9 +479,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul colaj",
+      "image": "/images/ro/c/ro-c-colaj.webp",
+      "imageStatus": "ready",
+      "alt": "Un colaj din hârtie colorată",
       "source": [
         "manual"
       ],
@@ -497,9 +497,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "vehicle",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul căruță",
+      "image": "/images/ro/c/ro-c-caruta.webp",
+      "imageStatus": "ready",
+      "alt": "O căruță de lemn",
       "source": [
         "manual"
       ],
@@ -515,9 +515,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul căsuță",
+      "image": "/images/ro/c/ro-c-casuta.webp",
+      "imageStatus": "ready",
+      "alt": "O căsuță cu acoperiș roșu",
       "source": [
         "manual"
       ],
@@ -551,9 +551,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul cozonac",
+      "image": "/images/ro/c/ro-c-cozonac.webp",
+      "imageStatus": "ready",
+      "alt": "Un cozonac feliat",
       "source": [
         "manual"
       ],
@@ -1109,9 +1109,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul chiciură",
+      "image": "/images/ro/c/ro-c-chiciura.webp",
+      "imageStatus": "ready",
+      "alt": "O ramură acoperită cu chiciură",
       "source": [
         "manual"
       ],

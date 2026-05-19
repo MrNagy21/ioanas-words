@@ -47,9 +47,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul delfin",
+      "image": "/images/ro/d/ro-d-delfin.webp",
+      "imageStatus": "ready",
+      "alt": "Un delfin albastru",
       "source": [
         "manual"
       ],
@@ -65,9 +65,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul dovleac",
+      "image": "/images/ro/d/ro-d-dovleac.webp",
+      "imageStatus": "ready",
+      "alt": "Un dovleac portocaliu",
       "source": [
         "manual"
       ],
@@ -83,9 +83,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul dulap",
+      "image": "/images/ro/d/ro-d-dulap.webp",
+      "imageStatus": "ready",
+      "alt": "Un dulap de lemn",
       "source": [
         "manual"
       ],
@@ -101,9 +101,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul desen",
+      "image": "/images/ro/d/ro-d-desen.webp",
+      "imageStatus": "ready",
+      "alt": "Un desen pe hârtie",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul dinozaur",
+      "image": "/images/ro/d/ro-d-dinozaur.webp",
+      "imageStatus": "ready",
+      "alt": "Un dinozaur prietenos",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul duș",
+      "image": "/images/ro/d/ro-d-dus.webp",
+      "imageStatus": "ready",
+      "alt": "Un duș",
       "source": [
         "manual"
       ],

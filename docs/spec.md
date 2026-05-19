@@ -94,6 +94,18 @@ The app is likely operated by a parent, teacher, or therapist, but the visible e
 - Decorative wheel shadow/rim effects must remain visually fixed and must not rotate with the spinning wheel surface.
 - Segment word labels and the center letter should remain upright/horizontal while the wheel spins, like self-leveling wheel caps.
 
+### Wheel Setup
+
+- Opens as a focused setup surface rather than live controls on the play screen.
+- Uses a mobile-friendly full-width, full-height sheet/modal with internal scrolling for long word lists.
+- Uses a wider centered modal on desktop and tablet rather than a separate page unless the setup flow becomes multi-step later.
+- Includes inclusion mode, wheel word count, and a single action for choosing exact words.
+- Keeps the main setup surface simple; search, exact word selection, saved configurations, and save-name input open in smaller focused pop-ups.
+- Supports searchable exact word selection for large target pools from the word picker pop-up; selecting any word creates the custom list, and clearing the selected list falls back to the full pool.
+- Supports target-scoped named wheel configurations for anonymous v1 use, with the name captured in a save pop-up that also shows the mode, wheel count, and selected-word count.
+- Stores only non-sensitive setup preferences locally; content remains canonical in static JSON.
+- Keeps the local setup entity shape compatible with future database-backed saved configurations.
+
 ### Spin Result Modal
 
 - Appears after the wheel lands.

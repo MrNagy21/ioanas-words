@@ -11,9 +11,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lac",
+      "image": "/images/ro/l/ro-l-lac.webp",
+      "imageStatus": "ready",
+      "alt": "Un lac mic cu stuf",
       "source": [
         "manual"
       ],
@@ -29,9 +29,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lalea",
+      "image": "/images/ro/l/ro-l-lalea.webp",
+      "imageStatus": "ready",
+      "alt": "O lalea roșie",
       "source": [
         "manual"
       ],
@@ -47,9 +47,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lămâie",
+      "image": "/images/ro/l/ro-l-lamaie.webp",
+      "imageStatus": "ready",
+      "alt": "O lămâie galbenă",
       "source": [
         "manual"
       ],
@@ -65,9 +65,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lapte",
+      "image": "/images/ro/l/ro-l-lapte.webp",
+      "imageStatus": "ready",
+      "alt": "O sticlă cu lapte",
       "source": [
         "manual"
       ],
@@ -83,9 +83,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lanternă",
+      "image": "/images/ro/l/ro-l-lanterna.webp",
+      "imageStatus": "ready",
+      "alt": "O lanternă galbenă",
       "source": [
         "manual"
       ],
@@ -101,9 +101,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul leu",
+      "image": "/images/ro/l/ro-l-leu.webp",
+      "imageStatus": "ready",
+      "alt": "Un leu prietenos",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lingură",
+      "image": "/images/ro/l/ro-l-lingura.webp",
+      "imageStatus": "ready",
+      "alt": "O lingură",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lup",
+      "image": "/images/ro/l/ro-l-lup.webp",
+      "imageStatus": "ready",
+      "alt": "Un lup prietenos",
       "source": [
         "manual"
       ],
@@ -155,9 +155,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul lanț",
+      "image": "/images/ro/l/ro-l-lant.webp",
+      "imageStatus": "ready",
+      "alt": "Un lanț metalic",
       "source": [
         "manual"
       ],
@@ -173,9 +173,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul linguriță",
+      "image": "/images/ro/l/ro-l-lingurita.webp",
+      "imageStatus": "ready",
+      "alt": "O linguriță",
       "source": [
         "manual"
       ],

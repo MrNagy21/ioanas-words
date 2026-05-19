@@ -65,9 +65,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul zid",
+      "image": "/images/ro/z/ro-z-zid.webp",
+      "imageStatus": "ready",
+      "alt": "Un zid de cărămidă",
       "source": [
         "manual"
       ],
@@ -83,9 +83,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul zmeu",
+      "image": "/images/ro/z/ro-z-zmeu.webp",
+      "imageStatus": "ready",
+      "alt": "Un zmeu colorat de jucărie",
       "source": [
         "manual"
       ],
@@ -101,9 +101,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "people",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul zână",
+      "image": "/images/ro/z/ro-z-zana.webp",
+      "imageStatus": "ready",
+      "alt": "O zână prietenoasă",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul zmeură",
+      "image": "/images/ro/z/ro-z-zmeura.webp",
+      "imageStatus": "ready",
+      "alt": "O zmeură",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul zambilă",
+      "image": "/images/ro/z/ro-z-zambila.webp",
+      "imageStatus": "ready",
+      "alt": "O zambilă mov",
       "source": [
         "manual"
       ],

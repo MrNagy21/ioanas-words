@@ -67,7 +67,7 @@
       "category": "animal",
       "image": "/images/ro/g/ro-g-girafa.webp",
       "imageStatus": "ready",
-      "alt": "O girafă",
+      "alt": "O girafă prietenoasă",
       "source": [
         "manual"
       ],
@@ -83,9 +83,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul găină",
+      "image": "/images/ro/g/ro-g-gaina.webp",
+      "imageStatus": "ready",
+      "alt": "O găină",
       "source": [
         "manual"
       ],
@@ -101,9 +101,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gâscă",
+      "image": "/images/ro/g/ro-g-gasca.webp",
+      "imageStatus": "ready",
+      "alt": "O gâscă",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul găleată",
+      "image": "/images/ro/g/ro-g-galeata.webp",
+      "imageStatus": "ready",
+      "alt": "O găleată",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gard",
+      "image": "/images/ro/g/ro-g-gard.webp",
+      "imageStatus": "ready",
+      "alt": "Un gard",
       "source": [
         "manual"
       ],
@@ -173,9 +173,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul glob",
+      "image": "/images/ro/g/ro-g-glob.webp",
+      "imageStatus": "ready",
+      "alt": "Un glob pământesc",
       "source": [
         "manual"
       ],
@@ -191,9 +191,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gogoașă",
+      "image": "/images/ro/g/ro-g-gogoasa.webp",
+      "imageStatus": "ready",
+      "alt": "O gogoașă",
       "source": [
         "manual"
       ],
@@ -209,9 +209,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul garaj",
+      "image": "/images/ro/g/ro-g-garaj.webp",
+      "imageStatus": "ready",
+      "alt": "Un garaj",
       "source": [
         "manual"
       ],
@@ -461,9 +461,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "people",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gemeni",
+      "image": "/images/ro/g/ro-g-gemeni.webp",
+      "imageStatus": "ready",
+      "alt": "Doi copii gemeni",
       "source": [
         "manual"
       ],
@@ -497,9 +497,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ger",
+      "image": "/images/ro/g/ro-g-ger.webp",
+      "imageStatus": "ready",
+      "alt": "Un termometru albastru cu fulg de zăpadă",
       "source": [
         "manual"
       ],
@@ -533,9 +533,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "people",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gimnastică",
+      "image": "/images/ro/g/ro-g-gimnastica.webp",
+      "imageStatus": "ready",
+      "alt": "Un copil făcând gimnastică cu panglică",
       "source": [
         "manual"
       ],
@@ -551,9 +551,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "people",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gimnast",
+      "image": "/images/ro/g/ro-g-gimnast.webp",
+      "imageStatus": "ready",
+      "alt": "Un gimnast pe o saltea",
       "source": [
         "manual"
       ],
@@ -587,9 +587,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "people",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gigant",
+      "image": "/images/ro/g/ro-g-gigant.webp",
+      "imageStatus": "ready",
+      "alt": "Un gigant prietenos lângă un copac mic",
       "source": [
         "manual"
       ],
@@ -659,9 +659,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gheretă",
+      "image": "/images/ro/g/ro-g-ghereta.webp",
+      "imageStatus": "ready",
+      "alt": "O gheretă mică cu fereastră",
       "source": [
         "manual"
       ],
@@ -677,9 +677,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "body",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul gheruță",
+      "image": "/images/ro/g/ro-g-gheruta.webp",
+      "imageStatus": "ready",
+      "alt": "O lăbuță de animal cu gheruțe",
       "source": [
         "manual"
       ],
@@ -738,7 +738,7 @@
         "manual"
       ],
       "license": "app-owned",
-      "status": "approved"
+      "status": "rejected"
     },
     {
       "word": "ghișeu",

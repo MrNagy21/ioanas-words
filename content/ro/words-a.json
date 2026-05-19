@@ -191,9 +191,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul album",
+      "image": "/images/ro/a/ro-a-album.webp",
+      "imageStatus": "ready",
+      "alt": "Un album foto",
       "source": [
         "manual"
       ],
@@ -209,9 +209,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul acoperiș",
+      "image": "/images/ro/a/ro-a-acoperis.webp",
+      "imageStatus": "ready",
+      "alt": "Un acoperiș roșu",
       "source": [
         "manual"
       ],
@@ -227,9 +227,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul aripă",
+      "image": "/images/ro/a/ro-a-aripa.webp",
+      "imageStatus": "ready",
+      "alt": "O aripă cu pene",
       "source": [
         "manual"
       ],
@@ -245,9 +245,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ascuțitoare",
+      "image": "/images/ro/a/ro-a-ascutitoare.webp",
+      "imageStatus": "ready",
+      "alt": "O ascuțitoare",
       "source": [
         "manual"
       ],
@@ -263,9 +263,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ață",
+      "image": "/images/ro/a/ro-a-ata.webp",
+      "imageStatus": "ready",
+      "alt": "Un mosor cu ață",
       "source": [
         "manual"
       ],

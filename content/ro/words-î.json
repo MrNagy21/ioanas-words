@@ -101,9 +101,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "family",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul îmbrățișare",
+      "image": "/images/ro/î/ro-i-circ-imbratisare.webp",
+      "imageStatus": "ready",
+      "alt": "Două persoane care se îmbrățișează",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "people",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul împărat",
+      "image": "/images/ro/î/ro-i-circ-imparat.webp",
+      "imageStatus": "ready",
+      "alt": "Un împărat cu coroană",
       "source": [
         "manual"
       ],

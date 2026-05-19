@@ -101,9 +101,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul raft",
+      "image": "/images/ro/r/ro-r-raft.webp",
+      "imageStatus": "ready",
+      "alt": "Un raft cu cărți și jucării",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul ramură",
+      "image": "/images/ro/r/ro-r-ramura.webp",
+      "imageStatus": "ready",
+      "alt": "O ramură cu frunze verzi",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul râu",
+      "image": "/images/ro/r/ro-r-rau.webp",
+      "imageStatus": "ready",
+      "alt": "Un râu albastru printre maluri verzi",
       "source": [
         "manual"
       ],
@@ -155,9 +155,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul roșie",
+      "image": "/images/ro/r/ro-r-rosie.webp",
+      "imageStatus": "ready",
+      "alt": "O roșie",
       "source": [
         "manual"
       ],
@@ -173,9 +173,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul robinet",
+      "image": "/images/ro/r/ro-r-robinet.webp",
+      "imageStatus": "ready",
+      "alt": "Un robinet metalic cu o picătură de apă",
       "source": [
         "manual"
       ],
@@ -191,9 +191,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "toy",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul rotiță",
+      "image": "/images/ro/r/ro-r-rotita.webp",
+      "imageStatus": "ready",
+      "alt": "O rotiță gri",
       "source": [
         "manual"
       ],

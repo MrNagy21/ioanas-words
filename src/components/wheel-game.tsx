@@ -31,6 +31,16 @@ import type {
   WheelEmptyStateKind,
   WordInclusionMode,
 } from "@/game/word-selection";
+import {
+  createSavedWheelSetup,
+  deleteSavedWheelSetup,
+  getActiveWheelSetup,
+  getSavedWheelSetupsForTarget,
+  saveActiveWheelSetup,
+  type SavedWheelSetup,
+  type WheelSetupConfig,
+  type WheelWordSelectionMode,
+} from "@/game/wheel-setup-storage";
 import type { SupportedLocale } from "@/i18n/locales";
 
 type WheelGameProps = Readonly<{
@@ -57,6 +67,8 @@ type Point = Readonly<{
   x: number;
   y: number;
 }>;
+
+type SetupDialogView = "words" | "save" | "saved" | null;
 
 const WHEEL_CENTER = 160;
 const WHEEL_RADIUS = 152;
@@ -110,12 +122,14 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   const targetKindLabel = isPracticeTarget(content.target)
     ? "Sunetul"
     : "Litera";
-  const [selectedMode, setSelectedMode] = useState<WordInclusionMode>(
-    defaultMode,
-  );
+  const [selectedMode, setSelectedMode] =
+    useState<WordInclusionMode>(defaultMode);
   const [targetWordCounts, setTargetWordCounts] = useState<
     Record<WordInclusionMode, number>
   >(() => createDefaultTargetWordCounts());
+  const [wordSelectionMode, setWordSelectionMode] =
+    useState<WheelWordSelectionMode>("all");
+  const [selectedWordIds, setSelectedWordIds] = useState<readonly string[]>([]);
   const [visibleWordIdsBySubsetKey, setVisibleWordIdsBySubsetKey] = useState<
     Readonly<Record<string, readonly string[]>>
   >({});
@@ -126,16 +140,23 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   const [selectedWord, setSelectedWord] = useState<ContentWord | null>(null);
   const [isResultOpen, setIsResultOpen] = useState(false);
   const [isSetupOpen, setIsSetupOpen] = useState(true);
-  const [draftMode, setDraftMode] = useState<WordInclusionMode>(
-    defaultMode,
-  );
+  const [draftMode, setDraftMode] = useState<WordInclusionMode>(defaultMode);
   const [draftWordCount, setDraftWordCount] = useState(
     DEFAULT_WHEEL_WORD_COUNT,
+  );
+  const [draftWordSelectionMode, setDraftWordSelectionMode] =
+    useState<WheelWordSelectionMode>("all");
+  const [draftSelectedWordIds, setDraftSelectedWordIds] = useState<
+    readonly string[]
+  >([]);
+  const [savedSetups, setSavedSetups] = useState<readonly SavedWheelSetup[]>(
+    [],
   );
   const prefersReducedMotion = usePrefersReducedMotion();
   const spinTimer = useRef<number | null>(null);
   const wheelButtonRef = useRef<HTMLButtonElement | null>(null);
   const setupButtonRef = useRef<HTMLButtonElement | null>(null);
+  const targetStorageKey = getTargetStorageKey(locale, content.target);
 
   const modeWordCounts = useMemo(
     () =>
@@ -155,7 +176,22 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   );
   const selectedModeOption = getModeOption(selectedMode);
   const selectedModeTotalWordCount = modeWordCounts[selectedMode];
-  const activeWords = useMemo(
+  const selectedModeAllWords = useMemo(
+    () =>
+      getPlayableWords({
+        target: content.target,
+        locale,
+        mode: selectedMode,
+        removedWordIds: EMPTY_REMOVED_WORD_IDS,
+        words: getModePool(content, selectedMode),
+      }),
+    [content, locale, selectedMode],
+  );
+  const selectedSetupTotalWordCount =
+    wordSelectionMode === "custom"
+      ? getSelectedWords(selectedModeAllWords, selectedWordIds).length
+      : selectedModeTotalWordCount;
+  const activeModeWords = useMemo(
     () =>
       getPlayableWords({
         target: content.target,
@@ -164,24 +200,28 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         removedWordIds,
         words: getModePool(content, selectedMode),
       }),
-    [
-      content,
-      locale,
-      removedWordIds,
-      selectedMode,
-    ],
+    [content, locale, removedWordIds, selectedMode],
+  );
+  const activeWords = useMemo(
+    () =>
+      wordSelectionMode === "custom"
+        ? getSelectedWords(activeModeWords, selectedWordIds)
+        : activeModeWords,
+    [activeModeWords, selectedWordIds, wordSelectionMode],
   );
   const targetWordCount = targetWordCounts[selectedMode];
   const visibleWheelWordCount = getBoundedWheelWordCount(
     targetWordCount,
     activeWords.length,
   );
-  const subsetKey = getWheelSubsetKey(selectedMode, visibleWheelWordCount);
+  const subsetKey = getWheelSubsetKey({
+    mode: selectedMode,
+    selectedWordIds,
+    targetWordCount: visibleWheelWordCount,
+    wordSelectionMode,
+  });
   const fallbackVisibleWordIds = useMemo(
-    () =>
-      activeWords
-        .slice(0, visibleWheelWordCount)
-        .map((word) => word.id),
+    () => activeWords.slice(0, visibleWheelWordCount).map((word) => word.id),
     [activeWords, visibleWheelWordCount],
   );
   const visibleWordIds =
@@ -214,13 +254,26 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     locale,
     mode: draftMode,
     removedWordIds,
+    selectedWordIds: draftSelectedWordIds,
+    wordSelectionMode: draftWordSelectionMode,
   });
+  const draftModeWords = useMemo(
+    () =>
+      getPlayableWords({
+        target: content.target,
+        locale,
+        mode: draftMode,
+        removedWordIds,
+        words: getModePool(content, draftMode),
+      }),
+    [content, draftMode, locale, removedWordIds],
+  );
   const boundedDraftWordCount = getBoundedWheelWordCount(
     draftWordCount,
     draftAvailableWordCount,
   );
   const emptyStateKind = getWheelEmptyStateKind({
-    availableWordCount: selectedModeTotalWordCount,
+    availableWordCount: selectedSetupTotalWordCount,
     visibleWordCount: activeWords.length,
   });
   const isInteractionBlocked = isSpinning || isResultOpen || isSetupOpen;
@@ -232,6 +285,46 @@ export function WheelGame({ content, locale }: WheelGameProps) {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const hydrateTimer = window.setTimeout(() => {
+      setSavedSetups(getSavedWheelSetupsForTarget(targetStorageKey));
+
+      const activeConfig = getActiveWheelSetup(targetStorageKey);
+
+      if (!activeConfig) {
+        return;
+      }
+
+      const resolvedConfig = resolveWheelSetupConfig({
+        config: activeConfig,
+        content,
+        locale,
+        removedWordIds: EMPTY_REMOVED_WORD_IDS,
+      });
+
+      setSelectedMode(resolvedConfig.mode);
+      setWordSelectionMode(resolvedConfig.wordSelectionMode);
+      setSelectedWordIds(resolvedConfig.selectedWordIds);
+      setTargetWordCounts((currentCounts) => ({
+        ...currentCounts,
+        [resolvedConfig.mode]: resolvedConfig.wheelWordCount,
+      }));
+      setDraftMode(resolvedConfig.mode);
+      setDraftWordCount(resolvedConfig.wheelWordCount);
+      setDraftWordSelectionMode(resolvedConfig.wordSelectionMode);
+      setDraftSelectedWordIds(resolvedConfig.selectedWordIds);
+      setRemovedWordIds([]);
+      setVisibleWordIdsBySubsetKey({});
+      setSelectedWord(null);
+      setIsResultOpen(false);
+      setIsSetupOpen(false);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(hydrateTimer);
+    };
+  }, [content, locale, targetStorageKey]);
 
   useEffect(() => {
     const randomizeTimer = window.setTimeout(() => {
@@ -316,6 +409,8 @@ export function WheelGame({ content, locale }: WheelGameProps) {
 
     setDraftMode(selectedMode);
     setDraftWordCount(targetWordCounts[selectedMode]);
+    setDraftWordSelectionMode(wordSelectionMode);
+    setDraftSelectedWordIds(selectedWordIds);
     setIsSetupOpen(true);
     setSelectedWord(null);
     setIsResultOpen(false);
@@ -326,17 +421,31 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   }
 
   function updateDraftMode(nextMode: WordInclusionMode) {
+    const nextSelectedWordIds = getValidWordIdsForMode({
+      content,
+      locale,
+      mode: nextMode,
+      removedWordIds,
+      wordIds: draftSelectedWordIds,
+    });
     const nextAvailableWordCount = getAvailableWordCountForMode({
       content,
       locale,
       mode: nextMode,
       removedWordIds,
+      selectedWordIds: nextSelectedWordIds,
+      wordSelectionMode:
+        draftWordSelectionMode === "custom" && nextSelectedWordIds.length > 0
+          ? "custom"
+          : "all",
     });
 
     setDraftMode(nextMode);
-    setDraftWordCount((currentCount) =>
-      getBoundedWheelWordCount(currentCount, nextAvailableWordCount) ||
-      DEFAULT_WHEEL_WORD_COUNT,
+    setDraftSelectedWordIds(nextSelectedWordIds);
+    setDraftWordCount(
+      (currentCount) =>
+        getBoundedWheelWordCount(currentCount, nextAvailableWordCount) ||
+        DEFAULT_WHEEL_WORD_COUNT,
     );
   }
 
@@ -350,6 +459,33 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     );
   }
 
+  function toggleDraftSelectedWord(wordId: string) {
+    setDraftSelectedWordIds((currentIds) =>
+      getNextDraftSelectedWordIds(
+        currentIds.includes(wordId)
+          ? currentIds.filter((currentId) => currentId !== wordId)
+          : [...currentIds, wordId],
+      ),
+    );
+  }
+
+  function selectAllDraftWords(wordIds: readonly string[]) {
+    setDraftSelectedWordIds(getNextDraftSelectedWordIds(wordIds));
+  }
+
+  function clearDraftSelectedWords() {
+    setDraftSelectedWordIds([]);
+    setDraftWordSelectionMode("all");
+  }
+
+  function getNextDraftSelectedWordIds(wordIds: readonly string[]) {
+    const nextWordIds = [...new Set(wordIds)];
+
+    setDraftWordSelectionMode(nextWordIds.length > 0 ? "custom" : "all");
+
+    return nextWordIds;
+  }
+
   function applySetup({ resetRemovedWords }: { resetRemovedWords: boolean }) {
     const nextRemovedWordIds = resetRemovedWords ? [] : removedWordIds;
     const nextAvailableWordCount = getAvailableWordCountForMode({
@@ -357,12 +493,34 @@ export function WheelGame({ content, locale }: WheelGameProps) {
       locale,
       mode: draftMode,
       removedWordIds: nextRemovedWordIds,
+      selectedWordIds: draftSelectedWordIds,
+      wordSelectionMode: draftWordSelectionMode,
     });
     const nextWordCount =
       getBoundedWheelWordCount(draftWordCount, nextAvailableWordCount) ||
       DEFAULT_WHEEL_WORD_COUNT;
+    const nextSelectedWordIds = getValidWordIdsForMode({
+      content,
+      locale,
+      mode: draftMode,
+      removedWordIds: nextRemovedWordIds,
+      wordIds: draftSelectedWordIds,
+    });
+    const nextWordSelectionMode =
+      draftWordSelectionMode === "custom" && nextSelectedWordIds.length > 0
+        ? "custom"
+        : "all";
+    const nextConfig: WheelSetupConfig = {
+      mode: draftMode,
+      wheelWordCount: nextWordCount,
+      wordSelectionMode: nextWordSelectionMode,
+      selectedWordIds:
+        nextWordSelectionMode === "custom" ? nextSelectedWordIds : [],
+    };
 
     setSelectedMode(draftMode);
+    setWordSelectionMode(nextWordSelectionMode);
+    setSelectedWordIds(nextSelectedWordIds);
     setTargetWordCounts((currentCounts) => ({
       ...currentCounts,
       [draftMode]: nextWordCount,
@@ -372,6 +530,66 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     setSelectedWord(null);
     setIsSetupOpen(false);
     setIsResultOpen(false);
+    saveActiveWheelSetup(targetStorageKey, nextConfig);
+  }
+
+  function loadSavedSetup(setup: SavedWheelSetup) {
+    const nextSelectedWordIds = getValidWordIdsForMode({
+      content,
+      locale,
+      mode: setup.config.mode,
+      removedWordIds,
+      wordIds: setup.config.selectedWordIds,
+    });
+
+    setDraftMode(setup.config.mode);
+    setDraftWordSelectionMode(
+      setup.config.wordSelectionMode === "custom" &&
+        nextSelectedWordIds.length > 0
+        ? "custom"
+        : "all",
+    );
+    setDraftSelectedWordIds(nextSelectedWordIds);
+    setDraftWordCount(setup.config.wheelWordCount);
+  }
+
+  function saveDraftSetup(name: string) {
+    const trimmedName = name.trim();
+
+    if (!trimmedName || draftAvailableWordCount === 0) {
+      return;
+    }
+
+    const validSelectedWordIds = getValidWordIdsForMode({
+      content,
+      locale,
+      mode: draftMode,
+      removedWordIds,
+      wordIds: draftSelectedWordIds,
+    });
+    const configWordSelectionMode =
+      draftWordSelectionMode === "custom" && validSelectedWordIds.length > 0
+        ? "custom"
+        : "all";
+    const config: WheelSetupConfig = {
+      mode: draftMode,
+      wheelWordCount: boundedDraftWordCount || DEFAULT_WHEEL_WORD_COUNT,
+      wordSelectionMode: configWordSelectionMode,
+      selectedWordIds:
+        configWordSelectionMode === "custom" ? validSelectedWordIds : [],
+    };
+
+    createSavedWheelSetup({
+      config,
+      name: trimmedName,
+      targetKey: targetStorageKey,
+    });
+    setSavedSetups(getSavedWheelSetupsForTarget(targetStorageKey));
+  }
+
+  function deleteDraftSetup(setupId: string) {
+    deleteSavedWheelSetup(setupId);
+    setSavedSetups(getSavedWheelSetupsForTarget(targetStorageKey));
   }
 
   function removeSelectedWord() {
@@ -617,9 +835,11 @@ export function WheelGame({ content, locale }: WheelGameProps) {
               {activeWords.length !== words.length
                 ? ` din ${activeWords.length}`
                 : ""}
-              {selectedModeTotalWordCount !== activeWords.length
-                ? ` disponibile`
-                : ""}
+              {wordSelectionMode === "custom"
+                ? ` ${getSelectedWordStatusLabel(activeWords.length)}`
+                : selectedModeTotalWordCount !== activeWords.length
+                  ? ` disponibile`
+                  : ""}
             </span>
           </p>
           <div className="spin-result" aria-live="polite">
@@ -685,18 +905,28 @@ export function WheelGame({ content, locale }: WheelGameProps) {
           availableWordCount={draftAvailableWordCount}
           boundedWordCount={boundedDraftWordCount}
           draftMode={draftMode}
+          draftSelectedWordIds={draftSelectedWordIds}
+          draftWordSelectionMode={draftWordSelectionMode}
           hasRemovedWords={removedWordCount > 0}
-          targetLabel={content.target.label}
-          targetKindLabel={targetKindLabel}
           modeWordCounts={modeWordCounts}
           onApply={() => applySetup({ resetRemovedWords: false })}
+          onClearSelectedWords={clearDraftSelectedWords}
           onClose={closeSetup}
+          onDeleteSavedSetup={deleteDraftSetup}
           onDraftModeChange={updateDraftMode}
           onDraftWordCountChange={updateDraftWordCount}
+          onLoadSavedSetup={loadSavedSetup}
           onResetAndApply={() => applySetup({ resetRemovedWords: true })}
           onReturnFocus={() =>
             setupButtonRef.current?.focus() ?? wheelButtonRef.current?.focus()
           }
+          onSaveSetup={saveDraftSetup}
+          onSelectAllWords={selectAllDraftWords}
+          onToggleSelectedWord={toggleDraftSelectedWord}
+          savedSetups={savedSetups}
+          targetKindLabel={targetKindLabel}
+          targetLabel={content.target.label}
+          words={draftModeWords}
         />
       ) : null}
     </section>
@@ -752,7 +982,7 @@ function ResultModal({
     }
 
     const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
     );
 
     if (focusableElements.length === 0) {
@@ -831,37 +1061,60 @@ function SetupModal({
   availableWordCount,
   boundedWordCount,
   draftMode,
+  draftSelectedWordIds,
+  draftWordSelectionMode,
   hasRemovedWords,
-  targetKindLabel,
-  targetLabel,
   modeWordCounts,
   onApply,
+  onClearSelectedWords,
   onClose,
+  onDeleteSavedSetup,
   onDraftModeChange,
   onDraftWordCountChange,
+  onLoadSavedSetup,
   onResetAndApply,
   onReturnFocus,
+  onSaveSetup,
+  onSelectAllWords,
+  onToggleSelectedWord,
+  savedSetups,
+  targetKindLabel,
+  targetLabel,
+  words,
 }: Readonly<{
   availableWordCount: number;
   boundedWordCount: number;
   draftMode: WordInclusionMode;
+  draftSelectedWordIds: readonly string[];
+  draftWordSelectionMode: WheelWordSelectionMode;
   hasRemovedWords: boolean;
-  targetKindLabel: string;
-  targetLabel: string;
   modeWordCounts: Record<WordInclusionMode, number>;
   onApply: () => void;
+  onClearSelectedWords: () => void;
   onClose: () => void;
+  onDeleteSavedSetup: (setupId: string) => void;
   onDraftModeChange: (mode: WordInclusionMode) => void;
   onDraftWordCountChange: (wordCount: number) => void;
+  onLoadSavedSetup: (setup: SavedWheelSetup) => void;
   onResetAndApply: () => void;
   onReturnFocus: () => void;
+  onSaveSetup: (name: string) => void;
+  onSelectAllWords: (wordIds: readonly string[]) => void;
+  onToggleSelectedWord: (wordId: string) => void;
+  savedSetups: readonly SavedWheelSetup[];
+  targetKindLabel: string;
+  targetLabel: string;
+  words: readonly ContentWord[];
 }>) {
   const modalRef = useRef<HTMLElement | null>(null);
   const primaryActionRef = useRef<HTMLButtonElement | null>(null);
+  const [activeSetupDialog, setActiveSetupDialog] =
+    useState<SetupDialogView>(null);
   const activeModeOption = getModeOption(draftMode);
   const activeModeTotalWordCount = modeWordCounts[draftMode];
   const hasAvailableWords = availableWordCount > 0;
   const maxWheelWordCount = Math.min(availableWordCount, MAX_WHEEL_WORD_COUNT);
+  const selectedWordCount = draftSelectedWordIds.length;
 
   useEffect(() => {
     const previouslyFocusedElement = document.activeElement;
@@ -871,7 +1124,11 @@ function SetupModal({
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
-        onClose();
+        if (activeSetupDialog) {
+          setActiveSetupDialog(null);
+        } else {
+          onClose();
+        }
       }
     }
 
@@ -886,7 +1143,7 @@ function SetupModal({
         onReturnFocus();
       }
     };
-  }, [onClose, onReturnFocus]);
+  }, [activeSetupDialog, onClose, onReturnFocus]);
 
   function trapFocus(event: ReactKeyboardEvent<HTMLElement>) {
     if (event.key !== "Tab" || !modalRef.current) {
@@ -894,7 +1151,7 @@ function SetupModal({
     }
 
     const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
     );
 
     if (focusableElements.length === 0) {
@@ -965,9 +1222,13 @@ function SetupModal({
           <strong>{boundedWordCount}</strong>
           <span>
             {getWordCountLabel(boundedWordCount)} pe roată
-            {activeModeTotalWordCount !== availableWordCount
-              ? ` din ${availableWordCount} disponibile`
-              : ""}
+            {draftWordSelectionMode === "custom"
+              ? boundedWordCount === selectedWordCount
+                ? ` ${getSelectedWordStatusLabel(selectedWordCount)}`
+                : ` din ${selectedWordCount} alese`
+              : activeModeTotalWordCount !== availableWordCount
+                ? ` din ${availableWordCount} disponibile`
+                : ""}
           </span>
         </p>
 
@@ -988,7 +1249,9 @@ function SetupModal({
           <strong>{boundedWordCount}</strong>
           <button
             aria-label="Mai multe cuvinte pe roată"
-            disabled={!hasAvailableWords || boundedWordCount >= maxWheelWordCount}
+            disabled={
+              !hasAvailableWords || boundedWordCount >= maxWheelWordCount
+            }
             onClick={() => onDraftWordCountChange(boundedWordCount + 1)}
             type="button"
           >
@@ -999,17 +1262,54 @@ function SetupModal({
           </span>
         </div>
 
+        <section aria-label="Alege cuvinte" className="setup-choice-card">
+          <div className="setup-section-heading">
+            <h3>Cuvinte</h3>
+            <span>
+              {draftWordSelectionMode === "custom"
+                ? `${selectedWordCount}/${words.length}`
+                : words.length}
+            </span>
+          </div>
+
+          <button
+            className="secondary-button setup-wide-button"
+            onClick={() => setActiveSetupDialog("words")}
+            type="button"
+          >
+            Alege cuvinte
+          </button>
+        </section>
+
         <div className="setup-modal__actions" aria-label="Comenzi setare">
           <button className="secondary-button" onClick={onClose} type="button">
             Anulează
           </button>
+          {savedSetups.length > 0 ? (
+            <button
+              className="secondary-button"
+              onClick={() => setActiveSetupDialog("saved")}
+              type="button"
+            >
+              Salvate
+            </button>
+          ) : null}
+          {hasRemovedWords ? (
+            <button
+              className="secondary-button"
+              onClick={onResetAndApply}
+              type="button"
+            >
+              Resetează
+            </button>
+          ) : null}
           <button
             className="secondary-button"
-            disabled={!hasRemovedWords}
-            onClick={onResetAndApply}
+            disabled={!hasAvailableWords}
+            onClick={() => setActiveSetupDialog("save")}
             type="button"
           >
-            Resetează roata
+            Salvează configurația
           </button>
           <button
             className="spin-button"
@@ -1019,6 +1319,343 @@ function SetupModal({
             type="button"
           >
             Pornește roata
+          </button>
+        </div>
+      </section>
+
+      {activeSetupDialog === "words" ? (
+        <WordPickerDialog
+          onClearSelectedWords={onClearSelectedWords}
+          onClose={() => setActiveSetupDialog(null)}
+          onSelectAllWords={onSelectAllWords}
+          onToggleSelectedWord={onToggleSelectedWord}
+          selectedWordIds={draftSelectedWordIds}
+          targetLabel={targetLabel}
+          words={words}
+        />
+      ) : null}
+
+      {activeSetupDialog === "save" ? (
+        <SaveSetupDialog
+          modeLabel={activeModeOption.label}
+          onClose={() => setActiveSetupDialog(null)}
+          onSave={(name) => {
+            onSaveSetup(name);
+            setActiveSetupDialog(null);
+          }}
+          selectedWordCount={selectedWordCount}
+          totalWordCount={words.length}
+          wheelWordCount={boundedWordCount}
+        />
+      ) : null}
+
+      {activeSetupDialog === "saved" ? (
+        <SavedSetupsDialog
+          onClose={() => setActiveSetupDialog(null)}
+          onDeleteSavedSetup={onDeleteSavedSetup}
+          onLoadSavedSetup={(setup) => {
+            onLoadSavedSetup(setup);
+            setActiveSetupDialog(null);
+          }}
+          savedSetups={savedSetups}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function WordPickerDialog({
+  onClearSelectedWords,
+  onClose,
+  onSelectAllWords,
+  onToggleSelectedWord,
+  selectedWordIds,
+  targetLabel,
+  words,
+}: Readonly<{
+  onClearSelectedWords: () => void;
+  onClose: () => void;
+  onSelectAllWords: (wordIds: readonly string[]) => void;
+  onToggleSelectedWord: (wordId: string) => void;
+  selectedWordIds: readonly string[];
+  targetLabel: string;
+  words: readonly ContentWord[];
+}>) {
+  const dialogRef = useRef<HTMLElement | null>(null);
+  const searchRef = useRef<HTMLInputElement | null>(null);
+  const [wordSearch, setWordSearch] = useState("");
+  const selectedWordIdSet = useMemo(
+    () => new Set(selectedWordIds),
+    [selectedWordIds],
+  );
+  const filteredWords = useMemo(() => {
+    const normalizedSearch = wordSearch.trim().toLocaleLowerCase("ro");
+
+    if (!normalizedSearch) {
+      return words;
+    }
+
+    return words.filter((word) =>
+      word.display.toLocaleLowerCase("ro").includes(normalizedSearch),
+    );
+  }, [wordSearch, words]);
+  const filteredWordIds = filteredWords.map((word) => word.id);
+
+  useEffect(() => {
+    searchRef.current?.focus();
+  }, []);
+
+  return (
+    <div className="setup-subdialog-backdrop" role="presentation">
+      <section
+        aria-labelledby="word-picker-title"
+        aria-modal="true"
+        className="setup-subdialog setup-subdialog--words"
+        onKeyDown={(event) => trapDialogFocus(event, dialogRef.current)}
+        ref={dialogRef}
+        role="dialog"
+      >
+        <div className="setup-modal__header">
+          <p className="stage-label">Litera {targetLabel}</p>
+          <h2 id="word-picker-title">Alege cuvinte</h2>
+        </div>
+
+        <p className="mode-status">
+          <span>Cuvinte alese</span>
+          <strong>{selectedWordIds.length}</strong>
+          <span>din {words.length}</span>
+        </p>
+
+        <div className="setup-word-tools">
+          <label className="setup-word-search">
+            <span>Caută</span>
+            <input
+              autoComplete="off"
+              onChange={(event) => setWordSearch(event.target.value)}
+              ref={searchRef}
+              type="search"
+              value={wordSearch}
+            />
+          </label>
+          <div className="setup-word-tools__actions">
+            <button
+              className="secondary-button"
+              disabled={filteredWordIds.length === 0}
+              onClick={() => onSelectAllWords(filteredWordIds)}
+              type="button"
+            >
+              Toate
+            </button>
+            <button
+              className="secondary-button"
+              disabled={selectedWordIds.length === 0}
+              onClick={onClearSelectedWords}
+              type="button"
+            >
+              Golește
+            </button>
+          </div>
+        </div>
+
+        <div className="setup-word-list" role="group">
+          {filteredWords.map((word) => (
+            <label className="setup-word-row" key={word.id}>
+              <input
+                checked={selectedWordIdSet.has(word.id)}
+                onChange={() => onToggleSelectedWord(word.id)}
+                type="checkbox"
+              />
+              <span className="setup-word-row__thumb" aria-hidden="true">
+                {hasReadyImage(word) ? (
+                  <Image
+                    alt=""
+                    height={40}
+                    src={word.image}
+                    unoptimized
+                    width={40}
+                  />
+                ) : (
+                  getWordInitial(word)
+                )}
+              </span>
+              <span className="setup-word-row__text">{word.display}</span>
+            </label>
+          ))}
+        </div>
+
+        <div className="setup-modal__actions">
+          <button className="spin-button" onClick={onClose} type="button">
+            Gata
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function SaveSetupDialog({
+  modeLabel,
+  onClose,
+  onSave,
+  selectedWordCount,
+  totalWordCount,
+  wheelWordCount,
+}: Readonly<{
+  modeLabel: string;
+  onClose: () => void;
+  onSave: (name: string) => void;
+  selectedWordCount: number;
+  totalWordCount: number;
+  wheelWordCount: number;
+}>) {
+  const dialogRef = useRef<HTMLElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [presetName, setPresetName] = useState("");
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  function savePreset() {
+    if (!presetName.trim()) {
+      return;
+    }
+
+    onSave(presetName);
+    setPresetName("");
+  }
+
+  return (
+    <div className="setup-subdialog-backdrop" role="presentation">
+      <section
+        aria-labelledby="save-setup-title"
+        aria-modal="true"
+        className="setup-subdialog"
+        onKeyDown={(event) => trapDialogFocus(event, dialogRef.current)}
+        ref={dialogRef}
+        role="dialog"
+      >
+        <div className="setup-modal__header">
+          <p className="stage-label">Configurație</p>
+          <h2 id="save-setup-title">Salvează configurația</h2>
+        </div>
+
+        <p className="mode-status">
+          <span>{modeLabel}</span>
+          <strong>{wheelWordCount}</strong>
+          <span>
+            pe roată ·{" "}
+            {selectedWordCount > 0
+              ? `${selectedWordCount} ${getSelectedWordStatusLabel(selectedWordCount)}`
+              : `toate cele ${totalWordCount}`}
+          </span>
+        </p>
+
+        <label className="setup-word-search">
+          <span>Nume</span>
+          <input
+            autoComplete="off"
+            onChange={(event) => setPresetName(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                savePreset();
+              }
+            }}
+            ref={inputRef}
+            type="text"
+            value={presetName}
+          />
+        </label>
+
+        <div className="setup-modal__actions">
+          <button className="secondary-button" onClick={onClose} type="button">
+            Anulează
+          </button>
+          <button
+            className="spin-button"
+            disabled={!presetName.trim()}
+            onClick={savePreset}
+            type="button"
+          >
+            Salvează configurația
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function SavedSetupsDialog({
+  onClose,
+  onDeleteSavedSetup,
+  onLoadSavedSetup,
+  savedSetups,
+}: Readonly<{
+  onClose: () => void;
+  onDeleteSavedSetup: (setupId: string) => void;
+  onLoadSavedSetup: (setup: SavedWheelSetup) => void;
+  savedSetups: readonly SavedWheelSetup[];
+}>) {
+  const dialogRef = useRef<HTMLElement | null>(null);
+  const closeRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+  }, []);
+
+  return (
+    <div className="setup-subdialog-backdrop" role="presentation">
+      <section
+        aria-labelledby="saved-setups-title"
+        aria-modal="true"
+        className="setup-subdialog"
+        onKeyDown={(event) => trapDialogFocus(event, dialogRef.current)}
+        ref={dialogRef}
+        role="dialog"
+      >
+        <div className="setup-modal__header">
+          <p className="stage-label">Configurații</p>
+          <h2 id="saved-setups-title">Salvate</h2>
+        </div>
+
+        <div className="setup-presets__list">
+          {savedSetups.map((setup) => (
+            <div className="setup-preset-row" key={setup.id}>
+              <button
+                className="setup-preset-row__load"
+                onClick={() => onLoadSavedSetup(setup)}
+                type="button"
+              >
+                <strong>{setup.name}</strong>
+                <span>
+                  {getModeOption(setup.config.mode).label} ·{" "}
+                  {setup.config.wheelWordCount} pe roată ·{" "}
+                  {setup.config.wordSelectionMode === "custom"
+                    ? `${setup.config.selectedWordIds.length} ${getSelectedWordStatusLabel(setup.config.selectedWordIds.length)}`
+                    : "toate cuvintele"}
+                </span>
+              </button>
+              <button
+                aria-label={`Șterge ${setup.name}`}
+                className="setup-preset-row__delete"
+                onClick={() => onDeleteSavedSetup(setup.id)}
+                type="button"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className="setup-modal__actions">
+          <button
+            className="spin-button"
+            onClick={onClose}
+            ref={closeRef}
+            type="button"
+          >
+            Gata
           </button>
         </div>
       </section>
@@ -1046,11 +1683,7 @@ function EmptyWheelState({
           ? "Ai scos toate cuvintele din acest mod."
           : "Nu sunt cuvinte aici."}
       </p>
-      <button
-        className="spin-button"
-        onClick={onOpenSetup}
-        type="button"
-      >
+      <button className="spin-button" onClick={onOpenSetup} type="button">
         Setează roata
       </button>
       <button
@@ -1072,6 +1705,37 @@ function hasReadyImage(word: ContentWord) {
   return word.imageStatus === "ready";
 }
 
+function trapDialogFocus(
+  event: ReactKeyboardEvent<HTMLElement>,
+  dialog: HTMLElement | null,
+) {
+  if (event.key !== "Tab" || !dialog) {
+    return;
+  }
+
+  const focusableElements = dialog.querySelectorAll<HTMLElement>(
+    'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+  );
+
+  if (focusableElements.length === 0) {
+    return;
+  }
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+    return;
+  }
+
+  if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+}
+
 function getModeOption(mode: WordInclusionMode) {
   return modeOptions.find((option) => option.mode === mode) ?? modeOptions[0];
 }
@@ -1080,6 +1744,12 @@ function isPracticeTarget(
   target: GameplayTarget,
 ): target is ContentPracticeTarget {
   return "kind" in target && target.kind === "sequence";
+}
+
+function getTargetStorageKey(locale: SupportedLocale, target: GameplayTarget) {
+  const targetKind = isPracticeTarget(target) ? "sequence" : "letter";
+
+  return `${locale}:${targetKind}:${target.id}`;
 }
 
 function getModePool(content: GameplayContent, mode: WordInclusionMode) {
@@ -1099,23 +1769,35 @@ function getAvailableWordCountForMode({
   locale,
   mode,
   removedWordIds,
+  selectedWordIds,
+  wordSelectionMode,
 }: Readonly<{
   content: GameplayContent;
   locale: SupportedLocale;
   mode: WordInclusionMode;
   removedWordIds: readonly string[];
+  selectedWordIds: readonly string[];
+  wordSelectionMode: WheelWordSelectionMode;
 }>) {
-  return getPlayableWords({
+  const playableWords = getPlayableWords({
     target: content.target,
     locale,
     mode,
     removedWordIds,
     words: getModePool(content, mode),
-  }).length;
+  });
+
+  return wordSelectionMode === "custom"
+    ? getSelectedWords(playableWords, selectedWordIds).length
+    : playableWords.length;
 }
 
 function getWordCountLabel(count: number) {
   return count === 1 ? "cuvânt" : "cuvinte";
+}
+
+function getSelectedWordStatusLabel(count: number) {
+  return count === 1 ? "ales" : "alese";
 }
 
 function createDefaultTargetWordCounts(): Record<WordInclusionMode, number> {
@@ -1126,8 +1808,98 @@ function createDefaultTargetWordCounts(): Record<WordInclusionMode, number> {
   };
 }
 
-function getWheelSubsetKey(mode: WordInclusionMode, targetWordCount: number) {
-  return `${mode}:${targetWordCount}`;
+function getWheelSubsetKey({
+  mode,
+  selectedWordIds,
+  targetWordCount,
+  wordSelectionMode,
+}: Readonly<{
+  mode: WordInclusionMode;
+  selectedWordIds: readonly string[];
+  targetWordCount: number;
+  wordSelectionMode: WheelWordSelectionMode;
+}>) {
+  const selectionKey =
+    wordSelectionMode === "custom" ? selectedWordIds.join(",") : "all";
+
+  return `${mode}:${wordSelectionMode}:${targetWordCount}:${selectionKey}`;
+}
+
+function getSelectedWords(
+  words: readonly ContentWord[],
+  selectedWordIds: readonly string[],
+) {
+  const selectedWordIdSet = new Set(selectedWordIds);
+
+  return words.filter((word) => selectedWordIdSet.has(word.id));
+}
+
+function getValidWordIdsForMode({
+  content,
+  locale,
+  mode,
+  removedWordIds,
+  wordIds,
+}: Readonly<{
+  content: GameplayContent;
+  locale: SupportedLocale;
+  mode: WordInclusionMode;
+  removedWordIds: readonly string[];
+  wordIds: readonly string[];
+}>) {
+  const playableWordIds = new Set(
+    getPlayableWords({
+      target: content.target,
+      locale,
+      mode,
+      removedWordIds,
+      words: getModePool(content, mode),
+    }).map((word) => word.id),
+  );
+
+  return [...new Set(wordIds)].filter((wordId) => playableWordIds.has(wordId));
+}
+
+function resolveWheelSetupConfig({
+  config,
+  content,
+  locale,
+  removedWordIds,
+}: Readonly<{
+  config: WheelSetupConfig;
+  content: GameplayContent;
+  locale: SupportedLocale;
+  removedWordIds: readonly string[];
+}>): WheelSetupConfig {
+  const selectedWordIds = getValidWordIdsForMode({
+    content,
+    locale,
+    mode: config.mode,
+    removedWordIds,
+    wordIds: config.selectedWordIds,
+  });
+  const wordSelectionMode =
+    config.wordSelectionMode === "custom" && selectedWordIds.length > 0
+      ? "custom"
+      : "all";
+  const availableWordCount = getAvailableWordCountForMode({
+    content,
+    locale,
+    mode: config.mode,
+    removedWordIds,
+    selectedWordIds,
+    wordSelectionMode,
+  });
+  const wheelWordCount =
+    getBoundedWheelWordCount(config.wheelWordCount, availableWordCount) ||
+    DEFAULT_WHEEL_WORD_COUNT;
+
+  return {
+    mode: config.mode,
+    wheelWordCount,
+    wordSelectionMode,
+    selectedWordIds: wordSelectionMode === "custom" ? selectedWordIds : [],
+  };
 }
 
 function getWordsByVisibleIds(

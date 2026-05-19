@@ -1,9 +1,26 @@
 # Next Image Batch Prompt
 
-Copy and paste the full prompt below for Romanian Content Expansion Batch 27.
+There is no additional approved image-generation scope after Romanian Content Expansion Batch 38, and Batch 39 finalized the current Romanian image completion scope. Do not generate images, add vocabulary, or create another image batch without a separate human-approved production decision.
 
-```txt
-Start Romanian Content Expansion Batch 27: General Placeholder Image Replacement Slice 10. Read AGENTS.md, docs/agent-brief.md, docs/spec.md, docs/status.md, docs/image-pipeline.md, docs/app-development-program/features/romanian-content-expansion/{plan.md,status.md}, and the Batch 26 result notes plus image-briefs-batch-26.md. Replace another focused slice of approved placeholder-backed Romanian words with reviewed final pixel-art WebP assets. Prioritize common, concrete, visually clear remaining placeholders such as capră, căpșună, clopoțel, colac, cort, cocoș, căruță, căsuță, cozonac, delfin, dovleac, dulap, elefant, elicopter, floare, fluture, fular, furculiță, umbrelă, ursuleț, vacă, vapor, vulpe, șopârlă, șarpe, and țânțar if visual review succeeds. Defer concepts that remain too abstract, broad, low-familiarity, unsafe, cluttered, or visually ambiguous for a 4-to-6-year-old wheel thumbnail. Use existing production records only; do not add new vocabulary, Ă/Â buckets, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims. Update image briefs/status docs and run the standard validation checks.
-```
+Current finalized Romanian production pack:
 
-For image generation, use the established pixel-art rules from `docs/image-pipeline.md`: one centered subject per square image, no text, no labels, no logos, no brands, no copyrighted characters, no unsafe scenes, final `256 x 256 px` lossless WebP assets below the `20 KB` hard maximum, and mark only reviewed accepted records as `imageStatus: "ready"`.
+- Approved words: `367`.
+- Ready images: `367`.
+- Approved placeholders: `0`.
+- Rejected audit-trail records: `ghicitoare`, `miez`, and `stinghie`.
+- Unresolved spoken note: `Capea` / `Kapia`; no current production word ID matches it.
+
+Batch 39 confirmed the production JSON, public image assets, `/admin/words`, and representative gameplay routes all match the finalized pack counts. The public non-placeholder image tree contains exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets found.
+
+## Remaining Release Verification Steps
+
+Before release or deployment handoff:
+
+1. Run `pnpm run build`.
+2. Deploy or inspect the Vercel preview.
+3. Verify deployed `/ro`, `/admin/words`, and representative `/ro/play/...` routes on mobile and desktop.
+4. Complete final human visual review of the deployed production image pack.
+
+## Future Scope Rule
+
+Any future vocabulary, image, `Ă`/`Â` bucket, route/schema, speech-target metadata, admin editing, auth, database, billing, account, AI pronunciation, clinical-claim, or image-generation work needs a new explicit human-approved production scope before implementation.

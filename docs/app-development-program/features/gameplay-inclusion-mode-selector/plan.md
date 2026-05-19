@@ -141,7 +141,7 @@ Tasks:
 - Add a compact control for choosing the target number of words shown on the wheel.
 - Keep the target count bounded by the documented maximum wheel size and the active mode's available words.
 - Randomly choose the visible wheel subset from the active mode pool after removed words are excluded.
-- Do not allow users to pick exact words for the wheel.
+- Preserve the original v1 behavior in this batch: users choose a count and the app picks the exact words.
 - Preserve one subset per active mode and target count where useful for stable session behavior.
 - Add a result-modal action to replace the selected word with a random eligible off-wheel word from the same active mode pool.
 - Disable or hide replacement when no eligible off-wheel word exists.
@@ -153,7 +153,7 @@ Review checkpoint:
 
 - Changing the wheel word count updates the visible wheel count.
 - The displayed wheel words are randomly selected from the active mode pool.
-- The user cannot manually choose exact words.
+- The user cannot manually choose exact words in this batch.
 - Replacing a result swaps in a random off-wheel eligible word when possible.
 - Replacement preserves canonical images and placeholder rendering.
 
@@ -247,11 +247,44 @@ http://localhost:3000/admin/words
 
 If `http://localhost:3000` is not reachable, ask the user to start the dev server on port `3000`. Do not start another port.
 
+## Post-QA Batch 6: Large-Pool Word Selection And Local Configurations
+
+Status: Complete
+
+Tasks:
+
+- Research mobile setup-surface and browser-storage guidance before choosing the UX.
+- Keep setup as the focused configuration surface instead of moving the flow to a separate route.
+- Add exact word selection for large pools with search, internal scrolling, and checkbox-style rows.
+- Keep the count control as the number of selected words displayed on the wheel.
+- Add target-scoped named configurations stored in versioned local storage.
+- Persist the active setup per target in local storage.
+- Keep saved configurations anonymous, non-sensitive, and disposable.
+- Keep the entity shape ready for future database-backed presets.
+
+Review checkpoint:
+
+- A target with a large pool can be narrowed to a custom selected subset.
+- A selected subset can be saved, loaded, and deleted locally.
+- Returning to the same target in the same browser restores the active setup.
+- The app still works when local storage is missing, cleared, or outdated.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+./node_modules/.bin/tsc --noEmit --incremental false
+pnpm run build
+```
+
 ## Exit Criteria
 
 - The play screen defaults to starts-with mode.
 - The child can switch among starts-with, contains-only, and mixed modes.
 - The user can choose how many random words appear on the wheel within documented limits.
+- The user can select exact words from large active pools.
+- The user can save, load, and delete target-scoped local configurations.
 - The result modal can replace the selected word with a random eligible off-wheel word when one exists.
 - Wheel pools come from the locale-wide content API and exact matching helpers.
 - Remove, reset, and modal behavior works across all modes.

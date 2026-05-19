@@ -296,13 +296,13 @@ for (const letter of enabledRomanianLetters) {
 
 const expectedPracticeTargetMixedCounts = {
   ce: 16,
-  ci: 19,
+  ci: 18,
   ge: 15,
   gi: 15,
   che: 15,
   chi: 15,
   ghe: 15,
-  ghi: 15,
+  ghi: 13,
 } as const;
 
 for (const target of enabledRomanianPracticeTargets) {

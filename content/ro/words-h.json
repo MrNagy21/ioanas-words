@@ -11,9 +11,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul haină",
+      "image": "/images/ro/h/ro-h-haina.webp",
+      "imageStatus": "ready",
+      "alt": "O haină albastră",
       "source": [
         "manual"
       ],
@@ -29,9 +29,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul hamac",
+      "image": "/images/ro/h/ro-h-hamac.webp",
+      "imageStatus": "ready",
+      "alt": "Un hamac",
       "source": [
         "manual"
       ],
@@ -47,9 +47,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul hartă",
+      "image": "/images/ro/h/ro-h-harta.webp",
+      "imageStatus": "ready",
+      "alt": "O hartă",
       "source": [
         "manual"
       ],

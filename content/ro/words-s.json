@@ -137,9 +137,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul sandviș",
+      "image": "/images/ro/s/ro-s-sandvis.webp",
+      "imageStatus": "ready",
+      "alt": "Un sandviș triunghiular",
       "source": [
         "manual"
       ],
@@ -155,9 +155,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul scară",
+      "image": "/images/ro/s/ro-s-scara.webp",
+      "imageStatus": "ready",
+      "alt": "O scară de lemn",
       "source": [
         "manual"
       ],
@@ -173,9 +173,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul scoică",
+      "image": "/images/ro/s/ro-s-scoica.webp",
+      "imageStatus": "ready",
+      "alt": "O scoică roz",
       "source": [
         "manual"
       ],
@@ -191,9 +191,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul sfoară",
+      "image": "/images/ro/s/ro-s-sfoara.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghem de sfoară",
       "source": [
         "manual"
       ],
@@ -209,9 +209,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul spumă",
+      "image": "/images/ro/s/ro-s-spuma.webp",
+      "imageStatus": "ready",
+      "alt": "Bule de spumă albă",
       "source": [
         "manual"
       ],
@@ -227,9 +227,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "food",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul struguri",
+      "image": "/images/ro/s/ro-s-struguri.webp",
+      "imageStatus": "ready",
+      "alt": "Un ciorchine de struguri mov",
       "source": [
         "manual"
       ],
@@ -245,9 +245,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul stilou",
+      "image": "/images/ro/s/ro-s-stilou.webp",
+      "imageStatus": "ready",
+      "alt": "Un stilou albastru",
       "source": [
         "manual"
       ],
@@ -263,9 +263,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "nature",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul stejar",
+      "image": "/images/ro/s/ro-s-stejar.webp",
+      "imageStatus": "ready",
+      "alt": "Un stejar verde cu ghinde",
       "source": [
         "manual"
       ],
@@ -281,9 +281,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "vehicle",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul săniuță",
+      "image": "/images/ro/s/ro-s-saniuta.webp",
+      "imageStatus": "ready",
+      "alt": "O săniuță roșie",
       "source": [
         "manual"
       ],
@@ -324,7 +324,7 @@
         "manual"
       ],
       "license": "app-owned",
-      "status": "approved"
+      "status": "rejected"
     }
   ]
 }

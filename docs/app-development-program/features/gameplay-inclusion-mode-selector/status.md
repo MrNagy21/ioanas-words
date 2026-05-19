@@ -1,12 +1,12 @@
 # Gameplay Inclusion Mode Selector Status
 
-Last updated: 2026-05-16
+Last updated: 2026-05-18
 
 ## Current Phase
 
 Phase: Complete
 
-Overall status: Gameplay Inclusion Mode Selector is implementation-complete and post-QA UX polish is documented. The play route now uses the mode-ready `GameplayContent` contract backed by `getDerivedWordPoolsForTarget`, defaults to `starts-with`, opens a focused wheel setup sheet for starts-with, contains-only, mixed mode, and bounded word-count choices, then keeps the play surface wheel-first with only concise status and setup/reset/spin actions. Remove, reset, result modal keep/remove, and result-modal random replacement all work from shared active-mode pools while preserving exact Romanian matching and canonical ready image or placeholder records. `Scoate` now removes the selected word and shrinks the current wheel instead of automatically backfilling; `Înlocuiește` remains the one-for-one random swap path. The documented 16-word cap is enforced by shared gameplay helpers and covered by small, exact-size, and large-pool compatibility checks. Final local browser verification remains pending because no user-running dev server was reachable at `http://localhost:3000`.
+Overall status: Gameplay Inclusion Mode Selector is implementation-complete and now includes large-pool setup improvements. The play route uses the mode-ready `GameplayContent` contract backed by `getDerivedWordPoolsForTarget`, defaults to `starts-with`, opens a focused wheel setup surface for starts-with, contains-only, mixed mode, bounded word-count choices, exact word selection, and named local configurations. The play surface stays wheel-first with concise status and setup/reset/spin actions. Remove, reset, result modal keep/remove, and result-modal random replacement all work from shared active-mode pools while preserving exact Romanian matching and canonical ready image or placeholder records. `Scoate` removes the selected word and shrinks the current wheel instead of automatically backfilling; `Înlocuiește` remains the one-for-one random swap path. The documented 16-word cap is enforced by shared gameplay helpers and covered by small, exact-size, and large-pool compatibility checks. Local browser verification remains pending because the user-owned dev server on `http://localhost:3000` must be used.
 
 ## Completed
 
@@ -50,7 +50,7 @@ Overall status: Gameplay Inclusion Mode Selector is implementation-complete and 
 - Captured a new requirement for user-selectable wheel word count:
   - users choose how many words appear on the wheel;
   - the app picks that many words randomly from the active mode pool;
-  - users do not pick exact words in v1.
+  - exact manual word picking was deferred from that batch and added later for large pools.
 - Captured a new requirement for result-modal replacement:
   - the modal should offer replacing the selected word with a random eligible off-wheel word;
   - replacement must not duplicate a word already on the wheel;
@@ -79,7 +79,7 @@ Overall status: Gameplay Inclusion Mode Selector is implementation-complete and 
   - `getRandomWord`.
 - Added a compact `Cuvinte` stepper to `WheelGame` for choosing the target number of visible wheel words.
 - Bounded the stepper by active mode available words after removals and by the 16-word maximum.
-- Kept exact manual word picking out of the UI; users can only choose a count.
+- Kept exact manual word picking out of the Batch 3.5 UI; users could only choose a count in that batch.
 - Randomized visible wheel words from the active mode pool after removed words are excluded.
 - Preserved stable visible subsets per selected mode and target count while words remain eligible.
 - Reset now clears removed words and rebuilds random subsets.
@@ -114,6 +114,27 @@ Overall status: Gameplay Inclusion Mode Selector is implementation-complete and 
 - Marked Batch 5 complete in this feature plan.
 - Updated global `docs/status.md` with feature completion notes and the next recommended feature.
 - Prepared the next ready-to-copy prompt for a Romanian Content Expansion spec package.
+- Researched mobile setup UX and browser storage constraints for large word pools.
+- Updated the feature spec to allow exact word selection and named local configurations.
+- Kept setup as a focused surface: full-width/internally scrolling on mobile, wider centered modal on desktop.
+- Added versioned local storage under `word-wheel.setup.v1`.
+- Added a future-database-ready local setup model with `WheelSetupConfig` and `SavedWheelSetup`.
+- Persisted the active setup per target so a returning user gets the same mode, count, and selected words for that browser.
+- Added target-scoped saved configurations with name, mode, wheel count, selection mode, selected word IDs, created timestamp, and updated timestamp.
+- Added setup loading and deletion for saved local configurations.
+- Added an all-words versus selected-words toggle.
+- Added searchable, scrollable checkbox word selection with ready thumbnails or initials.
+- Preserved the wheel count as a display/sample count, so selected subsets larger than the count are sampled and smaller subsets show all selected words.
+- Treated local saved configurations as convenience state only; content remains canonical in static manifests.
+- Split the heavy setup surface into focused sub-dialogs after mobile review:
+  - the main setup now keeps mode, wheel count, all/custom source, and primary actions only;
+  - `Alege cuvinte` opens the search and checkbox picker;
+  - `Salvează` opens the name input and confirmation action;
+  - `Salvate` opens saved configurations for load/delete.
+- Removed the visible `Toate` versus `Alese` toggle after review; clicking `Alege cuvinte` and selecting words now implicitly creates a custom list, while clearing all selected words falls back to the full pool.
+- Updated save wording to `Salvează configurația` so it is clear saved items include the full wheel configuration.
+- Added selected-word counts to the save and saved-configuration dialogs.
+- Made setup-related pop-ups full height to better fit mobile testing.
 
 ## In Progress
 
@@ -141,7 +162,10 @@ Overall status: Gameplay Inclusion Mode Selector is implementation-complete and 
 - Wheel spin, reset, and setup entry controls are disabled while the result modal is open.
 - User-adjustable wheel size belongs in this feature because it directly controls the active mode pool shown on the child-facing wheel.
 - Random replacement belongs in this feature because it depends on the same active mode pool, visible wheel subset, removed-word state, and result modal.
-- Exact manual word picking is explicitly out of scope for this feature.
+- Exact manual word picking is now in scope for large target pools, but only as local anonymous setup state.
+- Named configurations are scoped to the current target and stored locally for v1.
+- Local storage is acceptable for v1 because saved setup data is small, anonymous, non-sensitive, and disposable.
+- The setup storage schema is versioned so future database-backed presets can map from the same entity shape.
 - Wheel size is capped by exported `MAX_WHEEL_WORD_COUNT = 16`.
 - The default target wheel size is `10`, with smaller active pools showing all available words.
 - Random visible wheel subsets are stable for a selected mode/count while their words remain eligible.
@@ -206,6 +230,10 @@ Overall status: Gameplay Inclusion Mode Selector is implementation-complete and 
 - Batch 5 production build check: attempted; blocked by the local Next SWC code-signature issue before app compilation.
 - Batch 5 browser verification for `/ro`, `/ro/play/a`, and `/admin/words`: pending user-running dev server on port `3000`.
 - Post-QA result modal and setup UX polish: complete.
+- Exact word selection from setup: complete.
+- Searchable large-pool setup list: complete.
+- Target-scoped local saved configurations: complete.
+- Active target setup persistence in local storage: complete.
 - `Scoate` shrinks the current wheel without automatic backfill: complete.
 - `/admin/words` public read-only and unlinked from child-facing navigation: complete by code review.
 - No content expansion, admin editing, auth, database, upload, CSV, billing, accounts, or AI pronunciation introduced: complete.

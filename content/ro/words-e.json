@@ -11,9 +11,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul elefant",
+      "image": "/images/ro/e/ro-e-elefant.webp",
+      "imageStatus": "ready",
+      "alt": "Un elefant gri",
       "source": [
         "manual"
       ],
@@ -29,9 +29,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "vehicle",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul elicopter",
+      "image": "/images/ro/e/ro-e-elicopter.webp",
+      "imageStatus": "ready",
+      "alt": "Un elicopter roșu și alb",
       "source": [
         "manual"
       ],
@@ -47,9 +47,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul eșarfă",
+      "image": "/images/ro/e/ro-e-esarfa.webp",
+      "imageStatus": "ready",
+      "alt": "O eșarfă roz",
       "source": [
         "manual"
       ],
@@ -65,9 +65,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "vehicle",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul excavator",
+      "image": "/images/ro/e/ro-e-excavator.webp",
+      "imageStatus": "ready",
+      "alt": "Un excavator",
       "source": [
         "manual"
       ],
@@ -101,9 +101,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "people",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul echipă",
+      "image": "/images/ro/e/ro-e-echipa.webp",
+      "imageStatus": "ready",
+      "alt": "Trei copii într-o echipă",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul echipament",
+      "image": "/images/ro/e/ro-e-echipament.webp",
+      "imageStatus": "ready",
+      "alt": "Un echipament sportiv albastru",
       "source": [
         "manual"
       ],

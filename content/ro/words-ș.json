@@ -65,9 +65,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șal",
+      "image": "/images/ro/ș/ro-sh-sal.webp",
+      "imageStatus": "ready",
+      "alt": "Un șal mov",
       "source": [
         "manual"
       ],
@@ -83,9 +83,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șampon",
+      "image": "/images/ro/ș/ro-sh-sampon.webp",
+      "imageStatus": "ready",
+      "alt": "O sticlă de șampon verde",
       "source": [
         "manual"
       ],
@@ -101,9 +101,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șervețel",
+      "image": "/images/ro/ș/ro-sh-servetel.webp",
+      "imageStatus": "ready",
+      "alt": "Un șervețel alb împăturit",
       "source": [
         "manual"
       ],
@@ -119,9 +119,9 @@
       "difficulty": 3,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șopârlă",
+      "image": "/images/ro/ș/ro-sh-soparla.webp",
+      "imageStatus": "ready",
+      "alt": "O șopârlă verde",
       "source": [
         "manual"
       ],
@@ -137,9 +137,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "school",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul școală",
+      "image": "/images/ro/ș/ro-sh-scoala.webp",
+      "imageStatus": "ready",
+      "alt": "O școală galbenă cu clopoțel",
       "source": [
         "manual"
       ],
@@ -155,9 +155,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "animal",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șarpe",
+      "image": "/images/ro/ș/ro-sh-sarpe.webp",
+      "imageStatus": "ready",
+      "alt": "Un șarpe verde prietenos",
       "source": [
         "manual"
       ],
@@ -173,9 +173,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șorț",
+      "image": "/images/ro/ș/ro-sh-sort.webp",
+      "imageStatus": "ready",
+      "alt": "Un șorț galben",
       "source": [
         "manual"
       ],
@@ -191,9 +191,9 @@
       "difficulty": 1,
       "ageBand": "4-6",
       "category": "clothing",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șiret",
+      "image": "/images/ro/ș/ro-sh-siret.webp",
+      "imageStatus": "ready",
+      "alt": "Un șiret verde legat în fundă",
       "source": [
         "manual"
       ],
@@ -209,9 +209,9 @@
       "difficulty": 2,
       "ageBand": "4-6",
       "category": "household",
-      "image": "/images/ro/placeholders/generic-word-placeholder.webp",
-      "imageStatus": "placeholder",
-      "alt": "Imagine generică temporară pentru cuvântul șurub",
+      "image": "/images/ro/ș/ro-sh-surub.webp",
+      "imageStatus": "ready",
+      "alt": "Un șurub argintiu",
       "source": [
         "manual"
       ],

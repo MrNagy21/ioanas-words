@@ -1,15 +1,27 @@
 # Word Wheel Status
 
-Last updated: 2026-05-18
+Last updated: 2026-05-19
 
 ## Current Phase
 
-Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor complete; gameplay inclusion mode selector complete; Romanian content expansion Batch 26 placeholder image replacement complete; Batch 27 general placeholder image replacement proposed
+Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor complete; gameplay inclusion mode selector and large-pool setup selection complete; Romanian content expansion Batch 39 final image pack QA and release readiness audit complete
 
-Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. Locale-Wide Content Refactor and Gameplay Inclusion Mode Selector are complete. The Romanian Content Expansion package now includes completed coverage, worksheet, production, sound-target, placeholder-image replacement, diacritic/sequence top-up planning, Batch 23 top-up manifest implementation, and Batch 26 image replacement. Batch 26 replaced `11` approved placeholder-backed records with reviewed final pixel-art WebP assets. Production Romanian content now has `370` approved words, `189` ready images, and `181` placeholders. The eight bottom-row sequence practice targets remain at or above the `15` mixed-word floor where quality allowed, with `CE` and `CHE` now fully ready at `0` placeholders. Exact `Î` starts-with depth remains `8`, now with `6` ready / `2` placeholder; `Ă` and `Â` remain disabled/convention-only. The `/ro` start page continues to show separate starts-with and contains-only counts on letter and sequence tiles, and the mobile selection surface now scrolls instead of compressing tiles on short phones. Project handoff docs now state that `pnpm` is the required package manager for project commands.
+Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. Locale-Wide Content Refactor and Gameplay Inclusion Mode Selector are complete, including large-pool setup selection: users can keep all words, search and select exact words, choose the wheel display count, and save/load/delete target-scoped local configurations from versioned `localStorage`. The Romanian Content Expansion package now includes completed coverage, worksheet, production, sound-target, placeholder-image replacement, diacritic/sequence top-up planning, Batch 23 top-up manifest implementation, Batch 35 image replacement, Batch 36 remaining-placeholder decision audit, Batch 37 human decision gate, Batch 38 approved image generation and corrective regeneration, and Batch 39 final image pack QA. The Romanian image completion scope is finalized for the current approved production pack: `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets found. `ghicitoare`, `miez`, and `stinghie` remain `rejected`, and the spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Exact `Ă` and `Â` remain disabled/convention-only. The eight bottom-row sequence practice targets remain at or above the `15` mixed-word floor where quality allowed, with `CE`, `CHE`, and `GHE` fully ready at `0` placeholders. Exact `Î` starts-with depth remains `8`, now fully ready at `8` ready / `0` placeholder. The image pipeline includes a concrete on-brand reference set, and Batch 38 recorded comparison review and accepted asset sizes in `image-briefs-batch-38.md`. The `/ro` start page continues to show separate starts-with and contains-only counts on letter and sequence tiles, and the mobile selection surface now scrolls instead of compressing tiles on short phones. Project handoff docs state that `pnpm` is the required package manager for project commands.
 
 ## Completed
 
+- Completed large-pool wheel setup UX and local configuration update on 2026-05-18.
+- Kept setup as a focused modal/sheet instead of moving the flow to a separate page.
+- Added exact word selection in setup with all/custom toggle, search, scrollable checkbox rows, and ready thumbnails or initials.
+- Preserved wheel count as the number of words displayed on the wheel; selected subsets larger than the count are sampled, while smaller subsets show all selected words.
+- Added versioned local setup persistence under `word-wheel.setup.v1`.
+- Added `WheelSetupConfig` and `SavedWheelSetup` as future database-ready setup entities.
+- Persisted the active setup per target so mode, count, and selected words restore in the same browser.
+- Added target-scoped saved local configurations with load and delete actions.
+- Recorded UX/storage research sources in `docs/app-development-program/features/gameplay-inclusion-mode-selector/spec.md`.
+- Updated the mobile setup UX after review so search/selection, save naming, and saved-configuration management each open as focused sub-dialogs instead of crowding the main setup modal.
+- Removed the visible `Toate`/`Alese` source toggle; selecting words from `Alege cuvinte` now implicitly uses the chosen list, and clearing the list returns to all words.
+- Updated save wording from list to full wheel configuration, added selected-word counts to save/saved surfaces, and made setup pop-ups full height.
 - Audited post-test sequence and exact-diacritic coverage after user testing on 2026-05-18:
   - `CE`: 11 starts-with, 3 contains-only, 14 mixed;
   - `CI`: 9 starts-with, 5 contains-only, 14 mixed;
@@ -56,9 +68,92 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Replaced 11 approved placeholder-backed records with reviewed final pixel-art WebP assets: `înger`, `gibon`, `giroscop`, `mochetă`, `machetă`, `gheară`, `ghețuș`, `argint`, `chimen`, `unghi`, and `ghișeu`.
 - Confirmed production Romanian content now has `370` approved words, `189` ready images, and `181` placeholders.
 - Confirmed sequence image readiness improved for `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`; `CHE` is now fully ready with `0` placeholders.
+- Completed Romanian Content Expansion Batch 27: General Placeholder Image Replacement Slice 10.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-27.md`.
+- Replaced 16 approved placeholder-backed records with reviewed final pixel-art WebP assets: `capră`, `căpșună`, `clopoțel`, `colac`, `cort`, `cocoș`, `căruță`, `căsuță`, `cozonac`, `delfin`, `dovleac`, `dulap`, `elefant`, `elicopter`, `floare`, and `fluture`.
+- Confirmed production Romanian content now has `370` approved words, `205` ready images, and `165` placeholders.
+- Confirmed letter image readiness now includes `C` at `57` ready / `5` placeholder, `D` at `6` ready / `3` placeholder, `E` at `3` ready / `4` placeholder, and `F` at `9` ready / `8` placeholder.
+- Completed Romanian Content Expansion Batch 28: General Placeholder Image Replacement Slice 11.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-28.md`.
+- Replaced 10 approved placeholder-backed records with reviewed final pixel-art WebP assets: `fular`, `furculiță`, `umbrelă`, `ursuleț`, `vacă`, `vapor`, `vulpe`, `șopârlă`, `șarpe`, and `țânțar`.
+- Confirmed production Romanian content now has `370` approved words, `215` ready images, and `155` placeholders.
+- Confirmed letter image readiness now includes `F` at `11` ready / `6` placeholder, `U` at `8` ready / `2` placeholder, `V` at `3` ready / `6` placeholder, `Ș` at `5` ready / `7` placeholder, and `Ț` at `2` ready / `3` placeholder.
+- Completed Romanian Content Expansion Batch 29: General Placeholder Image Replacement Slice 12.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-29.md`.
+- Replaced 17 approved placeholder-backed records with reviewed final pixel-art WebP assets: `fustă`, `fotoliu`, `fasole`, `vagon`, `varză`, `vază`, `veveriță`, `vioară`, `vițel`, `șal`, `șampon`, `șervețel`, `șorț`, `șiret`, `șurub`, `țap`, and `țeavă`.
+- Confirmed `frigider` was already ready before the slice and left unchanged; the requested `șort` spelling did not exist as a production record, so the existing `șorț` record was implemented.
+- Confirmed production Romanian content now has `370` approved words, `232` ready images, and `138` placeholders.
+- Confirmed letter image readiness now includes `F` at `14` ready / `3` placeholder, `V` at `9` ready / `0` placeholder, `Ș` at `11` ready / `1` placeholder, and `Ț` at `4` ready / `1` placeholder.
+- Completed Romanian Content Expansion Batch 30: General Placeholder Image Replacement Slice 13.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-30.md`.
+- Replaced 20 approved placeholder-backed records with reviewed final pixel-art WebP assets: `album`, `ascuțitoare`, `ață`, `buștean`, `cadă`, `dinozaur`, `duș`, `excavator`, `găină`, `gâscă`, `găleată`, `gard`, `glob`, `gogoașă`, `hamac`, `hartă`, `iaurt`, `iglu`, `inel`, and `inimă`.
+- Confirmed production Romanian content now has `370` approved words, `252` ready images, and `118` placeholders.
+- Confirmed letter image readiness now includes `A` at `15` ready / `2` placeholder, `B` at `18` ready / `4` placeholder, `C` at `58` ready / `4` placeholder, `D` at `8` ready / `1` placeholder, `E` at `4` ready / `3` placeholder, `G` at `33` ready / `9` placeholder, `H` at `2` ready / `1` placeholder, and `I` at `5` ready / `3` placeholder.
+- Confirmed `glob` and `hartă` remain above the `12 KB` warning threshold but below the `20 KB` hard maximum; further simplification was deferred because it reduced thumbnail clarity.
+- Completed Romanian Content Expansion Batch 31: General Placeholder Image Replacement Slice 14.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-31.md`.
+- Replaced 20 approved placeholder-backed records with reviewed final pixel-art WebP assets: `haină`, `iarbă`, `joc`, `jeleu`, `jaluzea`, `lac`, `lalea`, `lămâie`, `lapte`, `lanternă`, `leu`, `lingură`, `lup`, `lanț`, `linguriță`, `maimuță`, `măgar`, `mătură`, `miere`, and `motan`.
+- Confirmed production Romanian content now has `370` approved words, `272` ready images, and `98` placeholders.
+- Confirmed letter image readiness now includes `H` at `3` ready / `0` placeholder, `I` at `6` ready / `2` placeholder, `J` at `5` ready / `0` placeholder, `L` at `12` ready / `0` placeholder, and `M` at `18` ready / `6` placeholder.
+- Confirmed all Batch 31 final assets are below the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Confirmed Batch 31 validation, lint, TypeScript, gameplay, matching, whitespace, and outside-sandbox localhost route/image checks pass; local `pnpm run build` is still blocked by the known Next SWC darwin/arm64 code-signature error before app compilation.
+- Completed Romanian Content Expansion Batch 32: General Placeholder Image Replacement Slice 15.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-32.md`.
+- Replaced 20 approved placeholder-backed records with reviewed final pixel-art WebP assets: `nor`, `nucă`, `nasture`, `nufăr`, `oaie`, `oală`, `oglindă`, `omidă`, `ou`, `orez`, `pară`, `pălărie`, `pătură`, `pepene`, `pensulă`, `penar`, `pieptene`, `portocală`, `prună`, and `puzzle`.
+- Confirmed production Romanian content now has `370` approved words, `292` ready images, and `78` placeholders.
+- Confirmed letter image readiness now includes `N` at `5` ready / `0` placeholder, `O` at `9` ready / `0` placeholder, and `P` at `26` ready / `8` placeholder.
+- Confirmed all Batch 32 final assets are below the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Confirmed Batch 32 validation, lint, TypeScript, gameplay, matching, whitespace, and outside-sandbox localhost route/image checks pass; local `pnpm run build` is still blocked by the known Next SWC darwin/arm64 code-signature error before app compilation.
+- Completed Romanian Content Expansion Batch 33: General Placeholder Image Replacement Slice 16.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-33.md`.
+- Replaced 23 approved placeholder-backed records with reviewed final pixel-art WebP assets: `raft`, `ramură`, `râu`, `roșie`, `robinet`, `rotiță`, `sandviș`, `scară`, `scoică`, `sfoară`, `spumă`, `struguri`, `stilou`, `stejar`, `săniuță`, `tavă`, `telefon`, `tigru`, `tobă`, `tobogan`, `tort`, `tricou`, and `televizor`.
+- Confirmed production Romanian content now has `370` approved words, `315` ready images, and `55` placeholders.
+- Confirmed letter image readiness now includes `R` at `14` ready / `0` placeholder, `S` at `17` ready / `1` placeholder, and `T` at `9` ready / `1` placeholder.
+- Confirmed all Batch 33 final assets are below the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Confirmed Batch 33 validation, lint, TypeScript, gameplay, matching, build, whitespace, and outside-sandbox localhost route/image checks pass.
+- Completed Romanian Content Expansion Batch 34: General Placeholder Image Replacement Slice 17.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-34.md`.
+- Replaced 20 approved placeholder-backed records with reviewed final pixel-art WebP assets: `acoperiș`, `aripă`, `cap`, `coajă`, `desen`, `eșarfă`, `garaj`, `iaz`, `mazăre`, `plajă`, `ploaie`, `prăjitură`, `păianjen`, `pătuț`, `pisicuță`, `ulei`, `zid`, `zmeură`, `zambilă`, and `țurțure`.
+- Regenerated the first Batch 34 pass after brand comparison showed it was coarser and flatter than the existing production pack; the final Batch 34 sources use a finer `128 x 128 px` pixel grid with outlines, highlights, and contact shadows.
+- Added brand-consistency review guidance to `docs/image-pipeline.md`, requiring future image batches to compare new assets against representative existing ready images before acceptance.
+- Confirmed production Romanian content now has `370` approved words, `335` ready images, and `35` placeholders.
+- Confirmed letter image readiness now includes `A` at `17` ready / `0` placeholder, `C` at `60` ready / `2` placeholder, `D` at `9` ready / `0` placeholder, `E` at `5` ready / `2` placeholder, `G` at `34` ready / `8` placeholder, `I` at `7` ready / `1` placeholder, `M` at `19` ready / `5` placeholder, `P` at `32` ready / `2` placeholder, `U` at `9` ready / `1` placeholder, `Z` at `6` ready / `2` placeholder, and `Ț` at `5` ready / `0` placeholder.
+- Confirmed all Batch 34 final assets are below the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Confirmed Batch 34 validation, lint, TypeScript, gameplay, matching, and whitespace checks pass; local `pnpm run build` is blocked by the Next SWC darwin/arm64 code-signature error, including after retrying outside the sandbox.
+- Batch 34 route QA: sandboxed localhost checks failed, and outside-sandbox retries returned `200 OK` for `http://localhost:3000/ro/play/a`, `http://localhost:3000/ro/play/p`, `http://localhost:3000/ro/play/tz`, `/images/ro/a/ro-a-acoperis.webp`, `/images/ro/p/ro-p-pisicuta.webp`, and `/images/ro/ț/ro-tz-turture.webp`.
+- Completed Romanian Content Expansion Batch 35: General Placeholder Image Replacement Slice 18.
+- Added `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-35.md`.
+- Replaced 12 approved placeholder-backed records with reviewed final pixel-art WebP assets: `colaj`, `chiciură`, `echipament`, `frizerie`, `ger`, `gheretă`, `gheruță`, `insulă`, `mușețel`, `mărțișor`, `poză`, and `școală`.
+- Created Batch 35 contact and brand-comparison sheets against representative existing ready images before accepting the slice.
+- Confirmed `miez` and `pluș` remain deferred because their thumbnails would still risk teaching a narrower or different concept.
+- Confirmed production Romanian content now has `370` approved words, `347` ready images, and `23` placeholders.
+- Confirmed letter image readiness now includes `C` at `62` ready / `0` placeholder, `E` at `6` ready / `1` placeholder, `F` at `15` ready / `2` placeholder, `G` at `37` ready / `5` placeholder, `I` at `8` ready / `0` placeholder, `M` at `21` ready / `3` placeholder, `P` at `33` ready / `1` placeholder, and `Ș` at `12` ready / `0` placeholder.
+- Confirmed all Batch 35 final assets are below the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Confirmed Batch 35 validation, lint, TypeScript, gameplay, matching, build, and whitespace checks pass using the nvm Node 24.15.0 path for `pnpm`.
+- Batch 35 route QA: sandboxed localhost checks failed, and outside-sandbox retries returned `200 OK` for `http://localhost:3000/ro/play/c`, `http://localhost:3000/ro/play/sh`, `/images/ro/c/ro-c-colaj.webp`, and `/images/ro/%C8%99/ro-sh-scoala.webp`.
+- Added an on-brand style reference set to `docs/image-pipeline.md`: `autobuz`, `acvariu`, `cal`, `castravete`, `copac`, `cadă`, `cozonac`, `cetate`, `chitară`, `elefant`, `excavator`, `jachetă`, `măgar`, `oală`, `scaun`, `vacă`, `barcă`, `glob`, `buchet`, `zebră`, `umbrelă`, `șurub`, `arici`, and `cățel`.
+- Flagged `ro-r-robinet`, `ro-a-aripa`, `ro-c-coaja`, `ro-e-esarfa`, and `ro-g-girafa` for future corrective regeneration; the spoken `Capea` note needs human clarification because no current production record matches it.
+- Completed Romanian Content Expansion Batch 36: Remaining Placeholder Decision Audit.
+- Added `docs/app-development-program/features/romanian-content-expansion/remaining-placeholder-decision-audit-batch-36.md`.
+- Confirmed production Romanian content remains `370` approved words, `347` ready images, and `23` placeholders.
+- Grouped the remaining placeholders into one kite-only `zmeu` replacement candidate, `11` person/family-sensitive records, `6` magical/fantasy-dependent records, and `5` likely deferrals.
+- Confirmed `ro-r-robinet`, `ro-a-aripa`, `ro-c-coaja`, `ro-e-esarfa`, and `ro-g-girafa` remain on the ready-image corrective-regeneration watchlist.
+- Kept `Capea` unresolved because no current production word ID matches it.
+- Kept Batch 36 documentation-only with no production JSON, image asset, route/schema, speech-target metadata, admin, auth, database, billing, account, AI pronunciation, or clinical-claim changes.
 - Improved `/ro` start-page mobile layout so the letter selection stage owns vertical scrolling on short phones.
 - Normalized letter and sequence tiles to the same base shape, larger vertical padding, and consistent mobile heights.
 - Updated agent-facing docs to keep `pnpm` as the required project command runner and to avoid recommending package-manager substitutions.
+- Completed Romanian Content Expansion Batch 39: Final Romanian Image Pack QA And Release Readiness Audit.
+- Confirmed current production JSON has `370` total Romanian records: `367` approved, `3` rejected, and `0` drafts.
+- Confirmed all `367` approved records have ready app-owned image metadata and existing public WebP assets.
+- Confirmed approved Romanian production content has `367` ready images and `0` approved placeholders.
+- Confirmed the public non-placeholder image tree has exactly `367` WebP assets referenced by approved ready records, with no missing or unused production image files.
+- Confirmed `ghicitoare`, `miez`, and `stinghie` remain rejected and absent from `/admin/words` and representative gameplay route text.
+- Confirmed no current production word ID matches the spoken `Capea` / `Kapia` note, so no vocabulary or asset change was made.
+- Verified `/admin/words` renders `367` approved words, `367` ready images, and `0` placeholder images.
+- Verified representative local routes on `http://localhost:3000`: `/ro`, `/admin/words`, `/ro/play/b`, `/ro/play/g`, `/ro/play/ghe`, `/ro/play/i-circ`, and `/images/ro/z/ro-z-zmeu.webp`.
+- Batch 39 QA: `pnpm run validate:content` passed with only existing image warning-threshold notices; `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check` passed.
+- Remaining release verification steps: run `pnpm run build` before deployment, verify the Vercel preview, test the deployed `/ro`, `/admin/words`, and representative `/ro/play/...` routes on mobile and desktop, and complete final human visual review of the deployed production image pack.
 - Created initial product specification.
 - Created initial implementation plan.
 - Created initial status tracker.
@@ -459,12 +554,39 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
 
 ## Verification
 
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content`: passes after the large-pool wheel setup update, with existing image warning-threshold notices below the hard maximum.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint`: passes after the large-pool wheel setup update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:matching`: passes after the large-pool wheel setup update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:gameplay`: passes after the large-pool wheel setup update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm exec tsc --noEmit`: passes after the large-pool wheel setup update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build`: still blocked locally by the existing Next SWC darwin/arm64 code-signature error before app compilation.
+- `curl -I --max-time 5 http://localhost:3000/ro/play/u`: failed inside the sandbox, then passed outside the sandbox with `200 OK`.
+- In-app browser verification for `/ro/play/u` confirmed the setup surface opens, mixed mode exposes the large `103`-word pool, custom selection can narrow the wheel to searched words, local named configurations can be saved, and the active custom setup restores after reload.
+- In-app browser verification for the split setup UX confirmed the main setup no longer shows search or name inputs, `Alege cuvinte` opens the search/checkbox picker, and `Salvează` opens a separate name dialog.
+- In-app browser verification confirmed the main setup no longer shows standalone `Toate` or `Alese` toggle buttons and still exposes `Alege cuvinte`.
+- In-app browser verification confirmed setup and save dialogs render at full available height and the save dialog uses `Salvează configurația` with a selected-word count.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content`: passes after Batch 37 cleanup, with existing image warning-threshold notices below the hard maximum.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint`: passes after Batch 37 cleanup.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm exec tsc --noEmit`: passes after Batch 37 cleanup.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:gameplay`: passes after updating expected `CI` and `GHI` mixed counts for the three rejected records.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:matching`: passes after Batch 37 cleanup.
+- `git diff --check`: passes after Batch 37 cleanup.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build`: remains blocked locally by the known Next SWC darwin/arm64 code-signature error before app compilation.
+- `curl -I --max-time 3 http://localhost:3000/ro/play/ci`: failed inside the sandbox, then passed outside the sandbox with `200 OK`.
 - `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content`: passes after the start-page mobile scroll and pnpm-doc update, with the existing five image warning-threshold notices below the hard maximum.
 - `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint`: passes after the start-page mobile scroll and pnpm-doc update.
 - `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:matching`: passes after the pnpm-doc update.
 - `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:gameplay`: passes after the pnpm-doc update.
 - `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm exec tsc --noEmit --incremental false`: passes after the start-page mobile scroll and pnpm-doc update.
 - `git diff --check`: passes after the start-page mobile scroll and pnpm-doc update.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run validate:content`: passes after Batch 38, with only pre-existing image warning-threshold notices; all Batch 38 assets are below the warning threshold and hard maximum.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run lint`: passes after Batch 38.
+- `./node_modules/.bin/tsc --noEmit --incremental false`: passes after Batch 38 with the nvm Node path.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:gameplay`: passes after Batch 38 when `/Users/darius/.bun/bin` is included on `PATH`.
+- `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run check:matching`: passes after Batch 38 when `/Users/darius/.bun/bin` is included on `PATH`.
+- `git diff --check`: passes after Batch 38.
+- Browser verification loaded `http://localhost:3000/ro/play/b` and confirmed the `B` wheel includes `bebeluș` with SVG href `/images/ro/b/ro-b-bebelus.webp`.
+- Sandboxed localhost checks failed for `/ro`, `/ro/play/b`, and a representative image; outside-sandbox retries returned `200 OK` for `/ro`, `/ro/play/b`, `/ro/play/g`, and representative Batch 38 images.
 - `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm run build`: still blocked locally by the existing Next SWC darwin/arm64 code-signature error before app compilation.
 - `curl -I --max-time 3 http://localhost:3000/ro`: failed inside the sandbox, then passed outside the sandbox with `200 OK`.
 - In-app browser verification at `375 x 667` confirmed the `/ro` start page has no body scroll, `.letter-stage` has `overflow-y: auto`, the stage scroll height exceeds the viewport, letter tiles use a consistent `79px` rendered height, sequence tiles use a consistent `78px` rendered height, and the bottom sequence tiles are reachable by scrolling.
@@ -834,7 +956,9 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
 
 ## Next Task
 
-Admin Words Inventory, Locale-Wide Content Refactor, Gameplay Inclusion Mode Selector, and Romanian Content Expansion Batch 26 are complete. The next Romanian content step is Batch 27: General Placeholder Image Replacement Slice 10. It should continue from `/admin/words`, helper-derived coverage, current production JSON, `docs/image-pipeline.md`, `docs/app-development-program/features/romanian-content-expansion/plan.md`, and `docs/app-development-program/features/romanian-content-expansion/image-briefs-batch-26.md`; replace another focused slice of approved placeholder images with reviewed final pixel-art WebP assets; prioritize common, concrete, visually clear remaining placeholders such as `capră`, `căpșună`, `clopoțel`, `colac`, `cort`, `cocoș`, `căruță`, `căsuță`, `cozonac`, `delfin`, `dovleac`, `dulap`, `elefant`, `elicopter`, `floare`, `fluture`, `fular`, `furculiță`, `umbrelă`, `ursuleț`, `vacă`, `vapor`, `vulpe`, `șopârlă`, `șarpe`, and `țânțar` if visual review succeeds; defer concepts that remain too abstract, broad, low-familiarity, unsafe, cluttered, or visually ambiguous; use existing production records only; keep `Ă` and `Â` disabled unless the human explicitly changes the quality ceiling decision; keep sequence targets separate from alphabet letters; and avoid new vocabulary, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims. Browser verification should target the always-running local dev server on port `3000`; if sandboxed `localhost:3000` checks fail, agents should retry outside the sandbox before treating the app as unavailable.
+Admin Words Inventory, Locale-Wide Content Refactor, Gameplay Inclusion Mode Selector, and Romanian Content Expansion Batch 39 are complete. The current Romanian image completion scope is finalized: production content has `367` approved words, `367` ready images, and `0` approved placeholders. There is no next approved Romanian image-generation batch. Any future vocabulary, image, `Ă`/`Â` bucket, route/schema, speech-target metadata, admin editing, auth, database, billing, account, AI pronunciation, clinical-claim, or image-generation work needs a new explicit human-approved production scope before implementation.
+
+Remaining release verification steps: run `pnpm run build`, deploy or inspect the Vercel preview, verify deployed `/ro`, `/admin/words`, and representative `/ro/play/...` routes on mobile and desktop, and complete final human visual review of the deployed production image pack. Browser verification should target the local dev server on port `3000`; if sandboxed `localhost:3000` checks fail, agents should retry outside the sandbox before treating the app as unavailable.
 
 ## Decisions Made
 
