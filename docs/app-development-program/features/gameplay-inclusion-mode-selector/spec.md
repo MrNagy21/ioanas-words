@@ -26,6 +26,8 @@ The child-facing play route currently behaves as a starts-with-only game. That b
 
 The next feature should make those pools usable from the child-facing play screen through a compact setup flow. The app must stay simple for children, keep `starts-with` as the default, and preserve the existing wheel, result modal, remove, reset, and choose-another-letter workflows.
 
+Superseding setup UX note: this feature implemented the first modal-based setup flow. Future wheel setup work should follow `docs/app-development-program/features/wheel-setup-ux-redesign/spec.md`, which treats the setup journey as large enough for a dedicated setup route or full-screen setup state.
+
 ## Goals
 
 - Add a child-facing wheel setup sheet with an inclusion mode selector.
@@ -91,6 +93,8 @@ Implemented compatibility point:
 - Future batches should continue using this mode-ready contract and should not reintroduce `getLetterContent` as the play route gameplay source.
 
 ## User Experience
+
+Historical note: this section describes the implemented Gameplay Inclusion Mode Selector setup flow. It is retained as implementation history. Future setup UX changes should follow the Wheel Setup UX Redesign spec.
 
 The play screen remains the actual game. It should not become an explanatory page.
 
@@ -293,7 +297,8 @@ This limit can be revisited after Romanian content expansion and real browser re
 
 - Keep the wheel as the primary visual focus.
 - Keep the game within the no-scroll app shell for normal mobile use.
-- Use a focused setup sheet for mode/count controls instead of live settings on the play surface.
+- Historical note: this feature originally used a focused setup sheet for mode/count controls instead of live settings on the play surface.
+- Superseding direction: future setup UX work should follow `docs/app-development-program/features/wheel-setup-ux-redesign/spec.md`, which moves the heavier setup journey to a dedicated setup route or full-screen setup state.
 - Keep the setup entry point compact during play.
 - Do not use a marketing-style hero.
 - Do not add a child-facing `/admin/words` link.

@@ -18,6 +18,13 @@ import {
   WORD_INCLUSION_MODES,
   type WordInclusionMode,
 } from "@/game/word-selection";
+import {
+  getAvailableWordCountForMode as getSetupAvailableWordCountForMode,
+  getModeWords as getSetupModeWords,
+  getValidWordIdsForMode as getSetupValidWordIdsForMode,
+  getWheelSetupEmptyStateKind,
+  resolveWheelSetupConfig,
+} from "@/game/wheel-setup";
 import type { ContentWord } from "@/content/types";
 
 const enabledRomanianLetters = getEnabledLetters("ro");
@@ -337,6 +344,131 @@ for (const target of enabledRomanianPracticeTargets) {
     `Expected practice target ${target.id} mixed pool to be duplicate-free`,
   );
 }
+
+const fLetter =
+  enabledRomanianLetters.find((letter) => letter.id === "f") ??
+  assert.fail("Expected Romanian letter F to be enabled");
+const fContent = {
+  target: fLetter,
+  wordPools: getDerivedWordPoolsForTarget("ro", fLetter),
+};
+const fStartsWithWords = getSetupModeWords({
+  content: fContent,
+  locale: "ro",
+  mode: "starts-with",
+});
+const fStartsWithWithoutR = getSetupModeWords({
+  content: fContent,
+  excludedTargetKeys: ["letter:r"],
+  locale: "ro",
+  mode: "starts-with",
+});
+const fStartsWithWordWithR =
+  fStartsWithWords.find((word) => wordContainsTarget("ro", word, "r")) ??
+  assert.fail("Expected at least one F starts-with word containing R");
+
+assert.equal(
+  fStartsWithWithoutR.length,
+  6,
+  "Expected setup mode words to apply exclusions after inclusion mode",
+);
+assert.ok(
+  fStartsWithWithoutR.every((word) => !wordContainsTarget("ro", word, "r")),
+  "Expected setup mode words to remove every exact R match",
+);
+assert.equal(
+  getSetupAvailableWordCountForMode({
+    content: fContent,
+    excludedTargetKeys: ["letter:r"],
+    locale: "ro",
+    mode: "starts-with",
+    selectedWordIds: [],
+    wordSelectionMode: "all",
+  }),
+  6,
+  "Expected all-words availability to count the filtered eligible pool",
+);
+assert.deepEqual(
+  getSetupValidWordIdsForMode({
+    content: fContent,
+    excludedTargetKeys: ["letter:r"],
+    locale: "ro",
+    mode: "starts-with",
+    wordIds: [
+      fStartsWithWithoutR[0]?.id ?? assert.fail("Expected filtered F word"),
+      fStartsWithWordWithR.id,
+    ],
+  }),
+  [fStartsWithWithoutR[0].id],
+  "Expected manual selected word IDs to clamp to the filtered eligible pool",
+);
+
+const resolvedFilteredSetup = resolveWheelSetupConfig({
+  config: {
+    mode: "starts-with",
+    excludedTargetKeys: ["letter:r"],
+    wheelWordCount: 16,
+    wordSelectionMode: "custom",
+    selectedWordIds: [fStartsWithWithoutR[0].id, fStartsWithWordWithR.id],
+  },
+  content: fContent,
+  locale: "ro",
+});
+
+assert.deepEqual(resolvedFilteredSetup.excludedTargetKeys, ["letter:r"]);
+assert.deepEqual(resolvedFilteredSetup.selectedWordIds, [
+  fStartsWithWithoutR[0].id,
+]);
+assert.equal(resolvedFilteredSetup.wordSelectionMode, "custom");
+assert.equal(
+  resolvedFilteredSetup.wheelWordCount,
+  1,
+  "Expected wheel count to clamp to the filtered custom selection count",
+);
+
+const resolvedInvalidCustomSetup = resolveWheelSetupConfig({
+  config: {
+    mode: "starts-with",
+    excludedTargetKeys: ["letter:r"],
+    wheelWordCount: 10,
+    wordSelectionMode: "custom",
+    selectedWordIds: [fStartsWithWordWithR.id],
+  },
+  content: fContent,
+  locale: "ro",
+});
+
+assert.equal(
+  resolvedInvalidCustomSetup.wordSelectionMode,
+  "all",
+  "Expected custom setup to fall back to all words when exclusions invalidate every selected word",
+);
+assert.deepEqual(resolvedInvalidCustomSetup.selectedWordIds, []);
+assert.equal(resolvedInvalidCustomSetup.wheelWordCount, 6);
+assert.equal(
+  getWheelSetupEmptyStateKind({
+    baseWordCount: fStartsWithWords.length,
+    excludedTargetKeys: ["letter:r"],
+    filteredWordCount: fStartsWithWithoutR.length,
+  }),
+  null,
+);
+assert.equal(
+  getWheelSetupEmptyStateKind({
+    baseWordCount: 0,
+    excludedTargetKeys: ["letter:r"],
+    filteredWordCount: 0,
+  }),
+  "no-mode-words",
+);
+assert.equal(
+  getWheelSetupEmptyStateKind({
+    baseWordCount: 2,
+    excludedTargetKeys: ["letter:r"],
+    filteredWordCount: 0,
+  }),
+  "all-excluded",
+);
 
 function getPlayableWordIds(
   letter: (typeof enabledRomanianLetters)[number],

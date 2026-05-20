@@ -1,17 +1,107 @@
 # Word Wheel Status
 
-Last updated: 2026-05-19
+Last updated: 2026-05-20
 
 ## Current Phase
 
-Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor complete; gameplay inclusion mode selector and large-pool setup selection complete; Romanian content expansion Batch 39 final image pack QA and release readiness audit complete
+Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; locale-wide content refactor complete; gameplay inclusion mode selector and large-pool setup selection complete; wheel setup UX redesign implementation complete; Romanian content expansion Batch 39 final image pack QA and release readiness audit complete; Wheel Setup Exclusion Filters saved setup editing UX overhaul complete; Batch 5 partially complete
 
-Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. Locale-Wide Content Refactor and Gameplay Inclusion Mode Selector are complete, including large-pool setup selection: users can keep all words, search and select exact words, choose the wheel display count, and save/load/delete target-scoped local configurations from versioned `localStorage`. The Romanian Content Expansion package now includes completed coverage, worksheet, production, sound-target, placeholder-image replacement, diacritic/sequence top-up planning, Batch 23 top-up manifest implementation, Batch 35 image replacement, Batch 36 remaining-placeholder decision audit, Batch 37 human decision gate, Batch 38 approved image generation and corrective regeneration, and Batch 39 final image pack QA. The Romanian image completion scope is finalized for the current approved production pack: `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets found. `ghicitoare`, `miez`, and `stinghie` remain `rejected`, and the spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Exact `Ă` and `Â` remain disabled/convention-only. The eight bottom-row sequence practice targets remain at or above the `15` mixed-word floor where quality allowed, with `CE`, `CHE`, and `GHE` fully ready at `0` placeholders. Exact `Î` starts-with depth remains `8`, now fully ready at `8` ready / `0` placeholder. The image pipeline includes a concrete on-brand reference set, and Batch 38 recorded comparison review and accepted asset sizes in `image-briefs-batch-38.md`. The `/ro` start page continues to show separate starts-with and contains-only counts on letter and sequence tiles, and the mobile selection surface now scrolls instead of compressing tiles on short phones. Project handoff docs state that `pnpm` is the required package manager for project commands.
+Overall status: Static Romanian starter content drives an interactive SVG wheel with segment labels, ready image rendering, stable placeholder fallbacks, spin selection, and spin animation. The wheel itself is the primary spin target, decorative frame effects stay fixed outside the rotating surface, word labels and the center letter stay upright, and spin animation uses a longer physical deceleration. Batch 4 adds the result modal, close/keep flow, client-side word removal, reset current letter, choose-another-letter paths, reduced-motion spin behavior, and a clear empty-wheel state after all current-letter words are removed. Batch 5 added local static content validation for Romanian letters, word manifests, image paths, duplicate IDs, letter buckets, and production status rules. Batch 6 selected pixel art, AI batch generation with human review, `256 x 256 px` lossless WebP, size targets, prompt/style guidelines, and word-ID naming conventions in `docs/image-pipeline.md`, then added local ready-image validation and a dry-run capable optimizer command. The `C`, `M`, `A`, and `P` starter image pilots now each have all 10 words ready. Locale-Wide Content Refactor and Gameplay Inclusion Mode Selector are complete. Wheel Setup UX Redesign is complete: `/ro` now sends letter and practice-target tiles to `/ro/setup/<target>`, setup has a dedicated route with saved-configuration chooser, full editor, explicit all/custom word source, searchable exact word picking, save/load/delete local configurations with confirmation, reset-to-all-words, and responsive desktop/tablet/mobile layouts; `/ro/play/<target>` remains the wheel-first play route. Wheel Setup Exclusion Filters Batch 4 is complete: the setup wizard now uses `Reguli`, `Evită`, `Cuvinte`, and `Final`; the exclusion step has chips, impact counts, recovery blocking, full 31-letter Romanian exclusion choices, and mobile verification; `/ro/play/<target>` now applies active saved exclusions to wheel words and replacement/reset behavior. The saved setup editing UX overhaul is complete: editing a saved setup preserves saved identity/name, update and save-as-new actions give inline feedback, duplicate names are blocked per target, and the final start action is simply `Pornește roata`. The production UX audit follow-up is complete: play-to-setup now reopens the active configuration context, active setup constraints are visible on the play screen, mobile setup step changes reset scroll position, short-phone play layout avoids wheel/panel overlap, and result removal wording is explicit. The Romanian Content Expansion package now includes completed coverage, worksheet, production, sound-target, placeholder-image replacement, diacritic/sequence top-up planning, Batch 23 top-up manifest implementation, Batch 35 image replacement, Batch 36 remaining-placeholder decision audit, Batch 37 human decision gate, Batch 38 approved image generation and corrective regeneration, and Batch 39 final image pack QA. The Romanian image completion scope is finalized for the current approved production pack: `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets found. `ghicitoare`, `miez`, and `stinghie` remain `rejected`, and the spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Exact `Ă` and `Â` remain disabled/convention-only as starting-letter practice buckets but are available as exclusion choices. The eight bottom-row sequence practice targets remain at or above the `15` mixed-word floor where quality allowed, with `CE`, `CHE`, and `GHE` fully ready at `0` placeholders. Exact `Î` starts-with depth remains `8`, now fully ready at `8` ready / `0` placeholder. The image pipeline includes a concrete on-brand reference set, and Batch 38 recorded comparison review and accepted asset sizes in `image-briefs-batch-38.md`. The `/ro` start page now uses compact letter-only and group-only target tiles so the first screen feels like practice-target selection rather than content inventory; starts-with and contains-only counts remain available in setup screens where they support adult configuration decisions. Project handoff docs state that `pnpm` is the required package manager for project commands.
 
 ## Completed
 
+- Completed production UX audit follow-up on 2026-05-20.
+- Fixed play-to-setup continuity: opening setup from `/ro/play/<target>` now uses the active play configuration as `Configurația activă`, and matching saved configurations reopen with their saved identity/name.
+- Added adult-facing active setup context on the play screen when constraints are applied, including exclusion and manual-selection summaries such as `Fără R · 1 ales`.
+- Improved mobile setup reliability by resetting the setup card scroll position on step changes, replacing clipped mobile step labels with clear number-plus-label tabs, moving the rules step higher on short phones, and keeping word/final-step controls visible after scrolling.
+- Clarified exclusion and removal wording: the exclusion step now says `Evită litere/sunete`, no-selection state says `Nicio țintă evitată`, and the result action says `Scoate din roată`.
+- Improved destructive saved-setup deletion layout by separating the saved setup name from the modal title.
+- Tightened short-phone play layout so the wheel no longer overlaps the status panel on `320 x 568`, and confirmed the empty state has no horizontal overflow.
+- Browser QA passed against the existing `http://localhost:3000` server for `/ro/setup/p`, `/ro/setup/p?from=play`, and `/ro/play/p` at `320 x 568`, covering exclusion selection, manual word selection, final review, active setup return, result modal, removal, and empty state.
+- Verification passed after rerunning `pnpm` outside the sandbox because sandboxed pnpm failed with `fetch failed`: `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:setup-storage`, `pnpm run check:gameplay`, and `git diff --check`. `pnpm run build` remains blocked by the local Next SWC darwin/arm64 code-signature failure before app compilation.
+- Completed saved wheel setup editing UX audit and fix on 2026-05-20.
+- Audit finding: editing a saved setup loaded its config but lost saved setup identity/name, so the final step showed a blank `Nume configurație` and generic save actions.
+- Added explicit setup editor context for new versus editing-saved state, including saved setup `id`, original name, and original normalized config for comparison.
+- Added local storage update API `updateSavedWheelSetup(setupId, { name, config })`, preserving `createdAt` and updating `updatedAt`.
+- Editing a saved setup now prefills the saved name, shows `Editezi: <name>`, shows `Modificări nesalvate` when the draft differs, disables `Salvează modificările` when unchanged, offers `Salvează ca nouă`, and uses `Pornește roata` as the final start action.
+- Creating a new setup still uses save-as-new behavior and does not require saving before start.
+- Browser QA confirmed create, return to saved configurations, edit/update same setup, save as new, start edited draft without saving, and safe delete confirmation on the existing `http://localhost:3000` server.
+- Browser QA confirmed no horizontal overflow for saved-edit final step at `320 x 568`, `360 x 780`, `390 x 844`, tablet `820 x 1180`, and desktop `1280 x 720`; `/ro/setup/ghe` final step at `390 x 844` also stayed within viewport.
+- Verification passed after rerunning `pnpm` outside the sandbox because sandboxed pnpm failed with `fetch failed`: `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:setup-storage`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check`.
+- Completed saved wheel setup editing UX overhaul follow-up on 2026-05-20.
+- Added target-scoped duplicate-name validation for saved setup names, with whitespace normalization and Romanian lowercase comparison.
+- Save/update actions now show inline success/error feedback, including duplicate-name errors.
+- Save-as-new is disabled when the current name is already taken; updating an existing setup may keep its own name but cannot take another saved setup's name.
+- Changed final-step start action back to `Pornește roata` and removed the confusing `Pornește fără salvare` wording.
+- Browser QA confirmed save feedback, duplicate-name blocking, update feedback, one saved item per unique test name before cleanup, no `Pornește fără salvare` copy, and no horizontal overflow on `320 x 568`, `360 x 780`, `390 x 844`, `820 x 1180`, and `1280 x 720`.
+- Verification passed after rerunning `pnpm` outside the sandbox because sandboxed pnpm failed with `fetch failed`: `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:setup-storage`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check`.
+- Started Wheel Setup Exclusion Filters Batch 4: Four-Step Setup UI on 2026-05-20.
+- Completed Wheel Setup Exclusion Filters Batch 4: Four-Step Setup UI on 2026-05-20.
+- Added four setup steps: `Reguli`, `Evită`, `Cuvinte`, and `Final`.
+- Added the `Evită` setup step with selectable letter and sequence chips, `aria-pressed`, selected styling, impact counts, clear action, and recovery blocking when exclusions empty a previously non-empty pool.
+- Expanded Romanian exclusion letter choices to the full 31-letter alphabet, including `Ă`, `Â`, `K`, `Q`, `W`, `X`, and `Y`, without enabling those as starts-with practice buckets.
+- Fixed the user-reported play-route issue: `/ro/play/<target>` now applies active saved exclusions when building wheel words, replacement candidates, reset state, and visible subset keys.
+- Browser verification confirmed `/ro/setup/f` excluding `R` starts `/ro/play/f` with only `față`, `fetiță`, `fulgi`, `fasole`, `fustă`, and `fotoliu` on the wheel.
+- Browser verification confirmed the exclusion picker includes `Ă`, `Â`, `Q`, and `X`, and mobile setup viewports `320 x 568`, `360 x 780`, and `390 x 844` have no horizontal overflow.
+- Verification for Wheel Setup Exclusion Filters Batch 4 passed after rerunning `pnpm` with approved network access for the pnpm shim: `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:matching`, `pnpm run check:gameplay`, and `git diff --check`.
+- Started Wheel Setup Exclusion Filters Batch 3: Filtering Data Flow And Counts on 2026-05-20.
+- Completed Wheel Setup Exclusion Filters Batch 3: Filtering Data Flow And Counts on 2026-05-20.
+- Setup data helpers now apply `excludedTargetKeys` after inclusion-mode selection and before all/manual word source selection.
+- Available counts, manual selected word IDs, and wheel word count now resolve against the filtered eligible pool.
+- Added empty-state helper logic to distinguish no base words from exclusions that remove all words.
+- Added `check:gameplay` coverage for `F` starts-with excluding `R`, filtered count changes, selected-word clamping, wheel-count clamping, custom fallback, and empty-state classification.
+- Verification for Wheel Setup Exclusion Filters Batch 3 passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm` because the default shell PATH did not include `pnpm`: `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, and `pnpm run check:matching`. `git diff --check` also passed.
+- Completed Wheel Setup Exclusion Filters Batch 2: Setup Storage Schema Migration on 2026-05-20.
+- Added `excludedTargetKeys` to `WheelSetupConfig`, with existing local schema version `1` active configs and saved configs loading as `excludedTargetKeys: []`.
+- Bumped setup storage writes to schema version `2` while preserving the existing `word-wheel.setup.v1` localStorage key.
+- Validated stored exclusion keys through the Batch 1 registry so invalid keys are ignored and valid keys are retained for future UI.
+- Added setup summary support for optional exclusion labels such as `Fără R`, omitted when no exclusions exist.
+- Added `pnpm run check:setup-storage` focused compatibility coverage for old saved configs and new configs with valid exclusion keys.
+- Verification for Wheel Setup Exclusion Filters Batch 2 passed using `/Users/darius/.nvm/versions/node/v24.15.0/bin/pnpm` because the default shell PATH did not include `pnpm`: `pnpm run check:setup-storage`, `pnpm run lint`, and `pnpm exec tsc --noEmit --incremental false`.
+- Completed Wheel Setup Exclusion Filters Batch 1: Exclusion Target Registry And Matching Helpers on 2026-05-20.
+- Added `src/content/exclusions.ts` with locale-aware selectable exclusion targets from enabled letters and enabled practice targets.
+- Added stable prefixed exclusion keys such as `letter:r` and `sequence:ghe`; helper output includes `kind`, `id`, `label`, and `key`.
+- Omitted the active setup target from selectable exclusion choices.
+- Added shared filtering by excluded target keys that ignores invalid stored keys and reuses exact `wordContainsTarget` matching without folded `normalized` values.
+- Added `check:matching` coverage for target-list generation, active target exclusion, invalid keys, `F` starts-with excluding `R`, exact `S` versus `Ș` behavior, and all enabled Romanian sequence targets.
+- Verification for Wheel Setup Exclusion Filters Batch 1 passed using the local nvm `pnpm` binary because the default shell PATH did not include `pnpm`: `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:matching`, and `pnpm run check:gameplay`. `git diff --check` also passed.
+- Created the Wheel Setup Exclusion Filters feature package on 2026-05-20:
+  - added `docs/app-development-program/features/wheel-setup-exclusion-filters/spec.md`;
+  - added `docs/app-development-program/features/wheel-setup-exclusion-filters/plan.md`;
+  - added `docs/app-development-program/features/wheel-setup-exclusion-filters/status.md`;
+  - added `docs/app-development-program/features/wheel-setup-exclusion-filters/next-implementation-prompt.md`.
+- Recommended a four-step setup flow for exclusion filters: `Reguli`, `Evită`, `Cuvinte`, `Final`.
+- Confirmed exclusion filters should be a separate rule layer rather than a fourth inclusion mode.
+- Initially scoped exclusion choices to enabled app targets; Batch 4 follow-up expanded Romanian letter exclusions to the full 31-letter alphabet while keeping sequence choices to enabled targets `CE`, `CI`, `GE`, `GI`, `CHE`, `CHI`, `GHE`, and `GHI`.
+- Confirmed exclusions should apply after inclusion mode and before all/manual word selection.
+- Recorded source-backed implementation guidance in the feature spec for accessibility, mobile usability, and avoiding clinical-claim scope creep.
+- Updated `docs/spec.md` and `docs/plan.md` to make the feature discoverable for future agents.
+- Fixed the mobile setup and play-screen UX issues found after the target-selection cleanup on 2026-05-20:
+  - made the mobile setup wizard step-aware so the simple rules step uses a compact centered card instead of stretching an empty white panel to the viewport bottom;
+  - kept the full-height treatment for word-heavy setup steps, with manual word picking still using the main setup body as the scroll surface;
+  - added visible parent-readable mode context on setup cards: beginning, inside not at the beginning, and mixed beginning plus inside;
+  - shortened the mobile play-screen status line to a compact target plus mode label while keeping wider-screen wording unchanged.
+- Browser QA for this mobile UX fix passed against `http://localhost:3000` on `/ro/setup/p` at `320 x 568`, `360 x 780`, and `390 x 844`; `/ro/setup/che` at `320 x 568` and `390 x 844`; and `/ro/play/p` at `320 x 568`, `360 x 780`, and `390 x 844`. QA covered setup step 1 spacing, step 2 all-words preview, step 2 manual picker scrolling, step 3 footer reachability, no horizontal overflow, no text overlap, play-screen wheel focus, shortened mobile status text, and usable bottom actions.
+- Verification for the mobile UX fix: `pnpm run lint` passed and `pnpm exec tsc --noEmit --incremental false` passed using the nvm Node 24.15.0 pnpm path. `pnpm run build` remains blocked by the local Next SWC darwin/arm64 code-signature failure; retrying outside the sandbox failed the same way before app compilation. Content validation was not run because no content JSON, metadata, or image files were touched.
+- Completed Wheel Setup UX Redesign implementation on 2026-05-19.
+- Added `app/[locale]/setup/[letter]/page.tsx` and static `/ro/setup/<target>` routes for all enabled gameplay targets.
+- Routed `/ro` letter and practice-target selection tiles to setup instead of directly to play.
+- Updated play-screen `Setează` and empty-wheel setup entry to open the setup route while keeping `/ro/play/<target>` wheel-first.
+- Added `src/game/wheel-setup.ts` setup helpers and `src/components/wheel-setup-screen.tsx` for chooser, editor, word picker, save, load, delete, and reset-to-all behavior.
+- Improved the setup editor layout after screenshot review so desktop/tablet setup uses a wider app frame, full-width top control band, primary word-picker workspace, right-side summary actions, and a non-collapsing custom empty-selection count control.
+- Reworked the setup editor again after product review into a three-step wizard: choose rules, choose/review words, then optionally save and start. Desktop/tablet now use a side stepper and one main wizard card; mobile uses compact top steps and fixed bottom navigation.
+- Preserved static-first v1 behavior: setup remains localStorage-backed under `word-wheel.setup.v1`; no content, image, database, auth, billing, admin editing, AI pronunciation, or clinical-claim changes were made.
+- Browser QA for Wheel Setup UX Redesign passed against `http://localhost:3000` on desktop `1280 x 720`, tablet `820 x 1180`, and mobile `390 x 844`; QA also confirmed `/ro` exposes setup links, mobile drill-in word picking works, and saved setup delete confirmation works.
+- Follow-up browser QA after the setup editor layout change passed on desktop `1600 x 900`, tablet `820 x 1180`, and mobile `390 x 844`; mobile drill-in picker still renders with search, `Gata`, and no horizontal overflow.
+- Follow-up browser QA after the wizard redesign passed on desktop `1600 x 900`, tablet `820 x 1180`, and mobile `390 x 844`; mobile step navigation keeps the action footer fixed and step 2/step 3 transitions work.
+- Fixed mobile setup scroll traps by making the wizard card body the only mobile scroll container and removing nested mobile scrolling from the custom word list; QA confirmed step 1 and step 2 custom word selection scroll correctly at `390 x 844`.
+- Verification for Wheel Setup UX Redesign passed: `pnpm run validate:content` with existing image-size warnings only, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, and `pnpm run build`.
+- Drafted `docs/app-development-program/features/wheel-setup-ux-redesign/spec.md` on 2026-05-19.
+- Added `docs/app-development-program/features/wheel-setup-ux-redesign/status.md`.
+- Updated `docs/spec.md` to supersede the older focused setup modal direction with a dedicated setup route or full-screen setup-state direction.
+- Added a compatibility note to `docs/app-development-program/features/gameplay-inclusion-mode-selector/spec.md` pointing future setup work to the Wheel Setup UX Redesign spec.
 - Completed large-pool wheel setup UX and local configuration update on 2026-05-18.
-- Kept setup as a focused modal/sheet instead of moving the flow to a separate page.
+- Kept setup as a focused modal/sheet instead of moving the flow to a separate page at the time; this decision is now superseded by the Wheel Setup UX Redesign spec.
 - Added exact word selection in setup with all/custom toggle, search, scrollable checkbox rows, and ready thumbnails or initials.
 - Preserved wheel count as the number of words displayed on the wheel; selected subsets larger than the count are sampled, while smaller subsets show all selected words.
 - Added versioned local setup persistence under `word-wheel.setup.v1`.
@@ -22,6 +112,8 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Updated the mobile setup UX after review so search/selection, save naming, and saved-configuration management each open as focused sub-dialogs instead of crowding the main setup modal.
 - Removed the visible `Toate`/`Alese` source toggle; selecting words from `Alege cuvinte` now implicitly uses the chosen list, and clearing the list returns to all words.
 - Updated save wording from list to full wheel configuration, added selected-word counts to save/saved surfaces, and made setup pop-ups full height.
+- Fixed the `/ro` desktop and tablet-landscape start-page selector layout so the letter grid and sequence target grid no longer overlap their headings or each other.
+- Wrapped the start-page selector controls in a dedicated scrollable left panel for non-mobile layouts while preserving the existing mobile scrolling behavior.
 - Audited post-test sequence and exact-diacritic coverage after user testing on 2026-05-18:
   - `CE`: 11 starts-with, 3 contains-only, 14 mixed;
   - `CI`: 9 starts-with, 5 contains-only, 14 mixed;
@@ -143,6 +235,32 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 - Improved `/ro` start-page mobile layout so the letter selection stage owns vertical scrolling on short phones.
 - Normalized letter and sequence tiles to the same base shape, larger vertical padding, and consistent mobile heights.
 - Updated agent-facing docs to keep `pnpm` as the required project command runner and to avoid recommending package-manager substitutions.
+- Improved mobile wheel setup after product review on 2026-05-19:
+  - moved the setup route's language badge and selected target badge into the same compact top row;
+  - removed the extra setup page header from the setup route;
+  - replaced the tall mobile wizard stepper with a slim 44px tab row;
+  - hid duplicate mobile card headings and compacted setup option, summary, and save controls;
+  - verified `320 x 568`, `360 x 780`, and `390 x 844` phone viewports against `http://localhost:3000/ro/setup/a` with no horizontal overflow;
+  - confirmed steps 1, 2, and 3 fit without page scroll in default all-words setup on the smallest checked viewport, while custom exact-word picking keeps a single main setup scroll surface for the long word list.
+- Cleaned up the mobile wheel setup step order after follow-up review on 2026-05-19:
+  - removed the all-words versus manual word-picking choice from step 1;
+  - added a compact `Toate` / `Aleg manual` source switch at the top of step 2;
+  - verified `320 x 568` mobile behavior for step 1, step 2 all-words, and step 2 manual picking with no horizontal overflow.
+- Corrected the wheel-count step placement after follow-up review on 2026-05-19:
+  - moved `Cuvinte pe roată` from step 1 to the final step because its maximum depends on the selected word pool;
+  - kept step 1 focused only on the inclusion rule;
+  - verified a custom 3-word selection reaches the final step with max `3`, current count `3`, and the increment control disabled.
+- Cleaned up the desktop saved-configuration chooser after screenshot review on 2026-05-19:
+  - removed the detached right-side action panel;
+  - made the saved-configuration chooser a single full-width panel;
+  - placed `Editează`, `Pornește roata`, and `Configurație nouă` in a bottom action bar on desktop;
+  - kept the mobile chooser stacked with the primary start action first and no horizontal overflow.
+- Completed mobile-first target selection and setup wording cleanup on 2026-05-19:
+  - removed starts-with and contains-only counts from `/ro` letter and practice-target tiles;
+  - tightened the `/ro` mobile grid so all core letters and the eight sequence groups fit on an iPhone SE-sized `320 x 568` viewport without horizontal overflow;
+  - kept word counts in setup mode cards and summaries only;
+  - changed inclusion-mode labels to parent-readable wording: `La început`, `În cuvânt`, and `Amestec`;
+  - verified `/ro` and `/ro/setup/p` at `320 x 568`, `360 x 780`, `390 x 844`, `820 x 1180`, and `1280 x 720`, plus `/ro/play/p` at `390 x 844`, with no horizontal overflow or text overlap found.
 - Completed Romanian Content Expansion Batch 39: Final Romanian Image Pack QA And Release Readiness Audit.
 - Confirmed current production JSON has `370` total Romanian records: `367` approved, `3` rejected, and `0` drafts.
 - Confirmed all `367` approved records have ready app-owned image metadata and existing public WebP assets.
@@ -956,7 +1074,7 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
 
 ## Next Task
 
-Admin Words Inventory, Locale-Wide Content Refactor, Gameplay Inclusion Mode Selector, and Romanian Content Expansion Batch 39 are complete. The current Romanian image completion scope is finalized: production content has `367` approved words, `367` ready images, and `0` approved placeholders. There is no next approved Romanian image-generation batch. Any future vocabulary, image, `Ă`/`Â` bucket, route/schema, speech-target metadata, admin editing, auth, database, billing, account, AI pronunciation, clinical-claim, or image-generation work needs a new explicit human-approved production scope before implementation.
+Admin Words Inventory, Locale-Wide Content Refactor, Gameplay Inclusion Mode Selector, Wheel Setup UX Redesign, the mobile setup compression pass, Romanian Content Expansion Batch 39, and Wheel Setup Exclusion Filters Batch 3 are complete. The next approved feature batch is Wheel Setup Exclusion Filters Batch 4: Four-Step Setup UI. The current Romanian image completion scope is finalized: production content has `367` approved words, `367` ready images, and `0` approved placeholders. There is no next approved Romanian image-generation batch. Any future vocabulary, image, `Ă`/`Â` bucket, route/schema, speech-target metadata, admin editing, auth, database, billing, account, AI pronunciation, clinical-claim, or image-generation work needs a new explicit human-approved production scope before implementation.
 
 Remaining release verification steps: run `pnpm run build`, deploy or inspect the Vercel preview, verify deployed `/ro`, `/admin/words`, and representative `/ro/play/...` routes on mobile and desktop, and complete final human visual review of the deployed production image pack. Browser verification should target the local dev server on port `3000`; if sandboxed `localhost:3000` checks fail, agents should retry outside the sandbox before treating the app as unavailable.
 
@@ -998,7 +1116,7 @@ Remaining release verification steps: run `pnpm run build`, deploy or inspect th
 - Keep runtime missing-manifest behavior tolerant with `null` or empty word arrays, and rely on `validate:content` to fail production content where enabled letters reference missing word files.
 - Deduplicate derived word pools by stable word ID so mixed pools do not return the same canonical record more than once.
 - Use `GameplayContent` with derived starts-with, contains-only, and mixed pools as the `/ro/play/<letter>` client contract; setup defaults to starts-with and applies mode/count changes deliberately.
-- Keep mode/count controls in the wheel setup modal rather than as live play-time controls.
+- Keep mode/count controls out of live play-time controls; the earlier wheel setup modal direction is superseded by the dedicated Wheel Setup UX Redesign spec.
 - Make `Scoate` shrink the current wheel; use `Înlocuiește` for one-for-one random replacement.
 - Use stable placeholder image paths until real optimized assets are produced.
 - Treat the local dev server on port `3000` as the always-running local verification target; retry reachability checks outside the sandbox if sandboxed `localhost:3000` checks fail.

@@ -1,5 +1,11 @@
 import assert from "node:assert/strict";
 import {
+  filterWordsByExcludedTargetKeys,
+  getExclusionTargets,
+  getExclusionTargetsForKeys,
+  getSelectableExclusionTargets,
+} from "@/content/exclusions";
+import {
   getDerivedWordPoolsForTarget,
   getEnabledLetters,
   getEnabledPracticeTargets,
@@ -77,6 +83,40 @@ assert.deepEqual(pools.imageCounts, {
 
 const enabledRomanianLetters = getEnabledLetters("ro");
 const enabledRomanianPracticeTargets = getEnabledPracticeTargets("ro");
+const romanianExclusionTargets = getExclusionTargets("ro");
+const romanianExclusionLetterKeys = [
+  "letter:a",
+  "letter:ă",
+  "letter:â",
+  "letter:b",
+  "letter:c",
+  "letter:d",
+  "letter:e",
+  "letter:f",
+  "letter:g",
+  "letter:h",
+  "letter:i",
+  "letter:î",
+  "letter:j",
+  "letter:k",
+  "letter:l",
+  "letter:m",
+  "letter:n",
+  "letter:o",
+  "letter:p",
+  "letter:q",
+  "letter:r",
+  "letter:s",
+  "letter:ș",
+  "letter:t",
+  "letter:ț",
+  "letter:u",
+  "letter:v",
+  "letter:w",
+  "letter:x",
+  "letter:y",
+  "letter:z",
+] as const;
 const coverage = getLocaleCoverageSummary("ro");
 const practiceCoverage = getPracticeTargetCoverageSummaries("ro");
 
@@ -84,6 +124,98 @@ assert.deepEqual(
   enabledRomanianPracticeTargets.map((target) => target.routeSegment),
   ["ce", "ci", "ge", "gi", "che", "chi", "ghe", "ghi"],
 );
+assert.deepEqual(
+  romanianExclusionTargets.map((target) => target.key),
+  [
+    ...romanianExclusionLetterKeys,
+    ...enabledRomanianPracticeTargets.map((target) => `sequence:${target.id}`),
+  ],
+);
+assert.equal(enabledRomanianLetters.some((letter) => letter.id === "ă"), false);
+assert.ok(romanianExclusionTargets.some((target) => target.key === "letter:ă"));
+assert.ok(romanianExclusionTargets.some((target) => target.key === "letter:â"));
+assert.ok(romanianExclusionTargets.some((target) => target.key === "letter:x"));
+assert.ok(romanianExclusionTargets.some((target) => target.key === "letter:q"));
+assert.ok(
+  romanianExclusionTargets.every(
+    (target) => target.kind === "letter" || target.kind === "sequence",
+  ),
+);
+assert.deepEqual(
+  getSelectableExclusionTargets({
+    activeTarget:
+      enabledRomanianLetters.find((letter) => letter.id === "f") ?? null,
+    locale: "ro",
+  }).map((target) => target.key),
+  romanianExclusionTargets
+    .map((target) => target.key)
+    .filter((key) => key !== "letter:f"),
+);
+assert.deepEqual(
+  getSelectableExclusionTargets({
+    activeTarget:
+      enabledRomanianPracticeTargets.find((target) => target.id === "ghe") ??
+      null,
+    locale: "ro",
+  }).map((target) => target.key),
+  romanianExclusionTargets
+    .map((target) => target.key)
+    .filter((key) => key !== "sequence:ghe"),
+);
+assert.deepEqual(
+  getExclusionTargetsForKeys("ro", [
+    "letter:r",
+    "letter:missing",
+    "sequence:nope",
+    "letter:r",
+  ]).map((target) => target.key),
+  ["letter:r"],
+);
+
+const fStartsWithWithoutR = filterWordsByExcludedTargetKeys({
+  excludedTargetKeys: ["letter:r", "letter:missing"],
+  locale: "ro",
+  words: getDerivedWordPoolsForTarget("ro", "f").startsWithWords,
+});
+
+assert.equal(fStartsWithWithoutR.length, 6);
+assert.ok(
+  fStartsWithWithoutR.every((word) => !wordContainsTarget("ro", word, "r")),
+  "Expected F starts-with words excluding R to leave only words without exact r",
+);
+
+const exactDiacriticExclusionFixtures = [
+  makeWord("ro-test-sac", "sac", "sac", "sac"),
+  makeWord("ro-test-sarpe", "șarpe", "șarpe", "sarpe"),
+] as const satisfies readonly ContentWord[];
+
+assert.deepEqual(
+  filterWordsByExcludedTargetKeys({
+    excludedTargetKeys: ["letter:s"],
+    locale: "ro",
+    words: exactDiacriticExclusionFixtures,
+  }).map((word) => word.id),
+  ["ro-test-sarpe"],
+);
+
+for (const target of enabledRomanianPracticeTargets) {
+  const mixedWords = getDerivedWordPoolsForTarget("ro", target).mixedWords;
+  const filteredWords = filterWordsByExcludedTargetKeys({
+    excludedTargetKeys: [`sequence:${target.id}`],
+    locale: "ro",
+    words: mixedWords,
+  });
+
+  assert.ok(
+    mixedWords.length > 0,
+    `Expected sequence target ${target.id} to have matching fixture content`,
+  );
+  assert.equal(
+    filteredWords.some((word) => wordContainsTarget("ro", word, target)),
+    false,
+    `Expected excluding ${target.id} to remove exact sequence matches`,
+  );
+}
 
 assert.equal(coverage.locale, "ro");
 assert.deepEqual(

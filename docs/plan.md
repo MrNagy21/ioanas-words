@@ -207,6 +207,24 @@ Planning note: the next-phase feature order is now defined in `docs/app-developm
 - Keep the play screen focused on the wheel, with the mode selector taking the space where the removed word list used to be.
 - See `docs/future-word-modes.md` before writing the detailed spec.
 
+## Future Batch: Wheel Setup Exclusion Filters
+
+Status: Batch 4 complete; Batch 5 partially complete
+
+- Add optional exclusion filters to wheel setup so an adult can practice one target while avoiding other letters or sequence targets.
+- Use a four-step setup flow:
+  - `Reguli`;
+  - `Evită`;
+  - `Cuvinte`;
+  - `Final`.
+- Build exclusion choices from the full Romanian alphabet plus enabled practice target groups.
+- Apply exclusions after inclusion mode and before all/manual word selection.
+- Apply saved exclusions on `/ro/play/<target>` so excluded sounds do not appear on the wheel.
+- Preserve exact Romanian matching and diacritic distinctions.
+- Migrate local saved configurations so existing setups load with no exclusions.
+- Do not add clinical claims, recommendations, database, auth, billing, accounts, AI pronunciation, content expansion, or image work.
+- Detailed direction lives in `docs/app-development-program/features/wheel-setup-exclusion-filters/spec.md`.
+
 ## Batch 9: Vercel Deployment
 
 Status: Not started

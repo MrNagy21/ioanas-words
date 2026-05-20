@@ -1,12 +1,17 @@
+import { getExclusionTargetsForKeys } from "@/content/exclusions";
 import type { WordInclusionMode } from "@/game/word-selection";
+import { isSupportedLocale, type SupportedLocale } from "@/i18n/locales";
 
 export const WHEEL_SETUP_STORAGE_KEY = "word-wheel.setup.v1";
-export const WHEEL_SETUP_SCHEMA_VERSION = 1;
+export const WHEEL_SETUP_SCHEMA_VERSION = 2;
+
+type WheelSetupSchemaVersion = 1 | typeof WHEEL_SETUP_SCHEMA_VERSION;
 
 export type WheelWordSelectionMode = "all" | "custom";
 
 export type WheelSetupConfig = Readonly<{
   mode: WordInclusionMode;
+  excludedTargetKeys: readonly string[];
   wheelWordCount: number;
   wordSelectionMode: WheelWordSelectionMode;
   selectedWordIds: readonly string[];
@@ -61,6 +66,28 @@ export function getSavedWheelSetupsForTarget(targetKey: string) {
     .sort((first, second) => second.updatedAt.localeCompare(first.updatedAt));
 }
 
+export function isSavedWheelSetupNameTaken({
+  excludeSetupId,
+  name,
+  targetKey,
+}: Readonly<{
+  excludeSetupId?: string;
+  name: string;
+  targetKey: string;
+}>) {
+  const normalizedName = normalizeSavedSetupName(name);
+
+  if (!normalizedName) {
+    return false;
+  }
+
+  return getSavedWheelSetupsForTarget(targetKey).some(
+    (setup) =>
+      setup.id !== excludeSetupId &&
+      normalizeSavedSetupName(setup.name) === normalizedName,
+  );
+}
+
 export function saveActiveWheelSetup(
   targetKey: string,
   config: WheelSetupConfig,
@@ -104,6 +131,47 @@ export function createSavedWheelSetup({
   return setup;
 }
 
+export function updateSavedWheelSetup(
+  setupId: string,
+  updates: Readonly<{
+    config: WheelSetupConfig;
+    name: string;
+  }>,
+): SavedWheelSetup | null {
+  const store = loadWheelSetupStore();
+  const trimmedName = updates.name.trim();
+  const setupIndex = store.savedSetups.findIndex(
+    (setup) => setup.id === setupId,
+  );
+
+  if (setupIndex < 0) {
+    return null;
+  }
+
+  const existingSetup = store.savedSetups[setupIndex];
+
+  if (!existingSetup) {
+    return null;
+  }
+
+  const updatedSetup: SavedWheelSetup = {
+    ...existingSetup,
+    name: trimmedName,
+    config: updates.config,
+    updatedAt: new Date().toISOString(),
+  };
+  const savedSetups = [...store.savedSetups];
+
+  savedSetups[setupIndex] = updatedSetup;
+
+  writeWheelSetupStore({
+    ...store,
+    savedSetups,
+  });
+
+  return updatedSetup;
+}
+
 export function deleteSavedWheelSetup(setupId: string) {
   const store = loadWheelSetupStore();
 
@@ -122,10 +190,7 @@ function writeWheelSetupStore(store: WheelSetupStore) {
 }
 
 function parseWheelSetupStore(value: unknown): WheelSetupStore {
-  if (
-    !isPlainObject(value) ||
-    value.schemaVersion !== WHEEL_SETUP_SCHEMA_VERSION
-  ) {
+  if (!isPlainObject(value) || !isSupportedSchemaVersion(value.schemaVersion)) {
     return EMPTY_STORE;
   }
 
@@ -145,7 +210,7 @@ function parseActiveConfigs(value: unknown) {
 
   return Object.fromEntries(
     Object.entries(value).flatMap(([targetKey, config]) => {
-      const parsedConfig = parseSetupConfig(config);
+      const parsedConfig = parseSetupConfig(config, targetKey);
 
       return parsedConfig ? [[targetKey, parsedConfig]] : [];
     }),
@@ -169,7 +234,7 @@ function parseSavedSetups(value: unknown): SavedWheelSetup[] {
       return [];
     }
 
-    const config = parseSetupConfig(setup.config);
+    const config = parseSetupConfig(setup.config, setup.targetKey);
 
     if (!config) {
       return [];
@@ -188,7 +253,10 @@ function parseSavedSetups(value: unknown): SavedWheelSetup[] {
   });
 }
 
-function parseSetupConfig(value: unknown): WheelSetupConfig | null {
+function parseSetupConfig(
+  value: unknown,
+  targetKey: string,
+): WheelSetupConfig | null {
   if (
     !isPlainObject(value) ||
     !isWordInclusionMode(value.mode) ||
@@ -202,10 +270,42 @@ function parseSetupConfig(value: unknown): WheelSetupConfig | null {
 
   return {
     mode: value.mode,
+    excludedTargetKeys: parseExcludedTargetKeys(
+      value.excludedTargetKeys,
+      targetKey,
+    ),
     wheelWordCount: value.wheelWordCount,
     wordSelectionMode: value.wordSelectionMode,
     selectedWordIds: dedupeStrings(value.selectedWordIds),
   };
+}
+
+function parseExcludedTargetKeys(value: unknown, targetKey: string) {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  const locale = getLocaleFromTargetKey(targetKey);
+
+  if (!locale) {
+    return [];
+  }
+
+  return getExclusionTargetsForKeys(locale, dedupeStrings(value)).map(
+    (target) => target.key,
+  );
+}
+
+function getLocaleFromTargetKey(targetKey: string): SupportedLocale | null {
+  const locale = targetKey.split(":")[0];
+
+  return isSupportedLocale(locale) ? locale : null;
+}
+
+function isSupportedSchemaVersion(
+  value: unknown,
+): value is WheelSetupSchemaVersion {
+  return value === 1 || value === WHEEL_SETUP_SCHEMA_VERSION;
 }
 
 function isWordInclusionMode(value: unknown): value is WordInclusionMode {
@@ -236,4 +336,8 @@ function createSetupId() {
   }
 
   return `local-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function normalizeSavedSetupName(name: string) {
+  return name.trim().replace(/\s+/g, " ").toLocaleLowerCase("ro-RO");
 }

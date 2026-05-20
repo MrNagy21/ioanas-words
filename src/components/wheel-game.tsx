@@ -27,6 +27,13 @@ import {
   getWheelEmptyStateKind,
   MAX_WHEEL_WORD_COUNT,
 } from "@/game/word-selection";
+import {
+  getExcludedTargetsSummary,
+  getModeWordCounts as getSetupModeWordCounts,
+  getModeWords as getSetupModeWords,
+  getTargetRouteSegment,
+  resolveWheelSetupConfig as resolveStoredWheelSetupConfig,
+} from "@/game/wheel-setup";
 import type {
   WheelEmptyStateKind,
   WordInclusionMode,
@@ -83,22 +90,26 @@ const EMPTY_REMOVED_WORD_IDS: readonly string[] = [];
 const modeOptions = [
   {
     mode: "starts-with",
-    label: "Încep cu",
-    statusLabel: "Încep cu",
+    label: "La început",
+    statusLabel: "La începutul cuvântului",
+    shortStatusLabel: "Început",
   },
   {
     mode: "contains-only",
-    label: "Conțin",
-    statusLabel: "Conțin",
+    label: "În interior",
+    statusLabel: "În interior, nu la început",
+    shortStatusLabel: "Interior",
   },
   {
     mode: "starts-with-or-contains",
-    label: "Amestecat",
-    statusLabel: "Toate potrivirile",
+    label: "Amestec",
+    statusLabel: "La început + în interior",
+    shortStatusLabel: "Mixt",
   },
 ] as const satisfies readonly {
   mode: WordInclusionMode;
   label: string;
+  shortStatusLabel: string;
   statusLabel: string;
 }[];
 
@@ -129,6 +140,9 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   >(() => createDefaultTargetWordCounts());
   const [wordSelectionMode, setWordSelectionMode] =
     useState<WheelWordSelectionMode>("all");
+  const [excludedTargetKeys, setExcludedTargetKeys] = useState<
+    readonly string[]
+  >([]);
   const [selectedWordIds, setSelectedWordIds] = useState<readonly string[]>([]);
   const [visibleWordIdsBySubsetKey, setVisibleWordIdsBySubsetKey] = useState<
     Readonly<Record<string, readonly string[]>>
@@ -139,7 +153,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   const [spinDurationMs, setSpinDurationMs] = useState(SPIN_MIN_DURATION_MS);
   const [selectedWord, setSelectedWord] = useState<ContentWord | null>(null);
   const [isResultOpen, setIsResultOpen] = useState(false);
-  const [isSetupOpen, setIsSetupOpen] = useState(true);
+  const [isSetupOpen, setIsSetupOpen] = useState(false);
   const [draftMode, setDraftMode] = useState<WordInclusionMode>(defaultMode);
   const [draftWordCount, setDraftWordCount] = useState(
     DEFAULT_WHEEL_WORD_COUNT,
@@ -157,50 +171,85 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   const wheelButtonRef = useRef<HTMLButtonElement | null>(null);
   const setupButtonRef = useRef<HTMLButtonElement | null>(null);
   const targetStorageKey = getTargetStorageKey(locale, content.target);
+  const setupHref = `/${locale}/setup/${getTargetRouteSegment(
+    locale,
+    content.target,
+  )}?from=play`;
 
   const modeWordCounts = useMemo(
     () =>
-      Object.fromEntries(
-        modeOptions.map((option) => [
-          option.mode,
-          getPlayableWords({
-            target: content.target,
-            locale,
-            mode: option.mode,
-            removedWordIds: EMPTY_REMOVED_WORD_IDS,
-            words: getModePool(content, option.mode),
-          }).length,
-        ]),
-      ) as Record<WordInclusionMode, number>,
-    [content, locale],
+      getSetupModeWordCounts({
+        content,
+        excludedTargetKeys,
+        locale,
+      }),
+    [content, excludedTargetKeys, locale],
   );
   const selectedModeOption = getModeOption(selectedMode);
   const selectedModeTotalWordCount = modeWordCounts[selectedMode];
   const selectedModeAllWords = useMemo(
     () =>
-      getPlayableWords({
-        target: content.target,
+      getSetupModeWords({
+        content,
+        excludedTargetKeys,
         locale,
         mode: selectedMode,
         removedWordIds: EMPTY_REMOVED_WORD_IDS,
-        words: getModePool(content, selectedMode),
       }),
-    [content, locale, selectedMode],
+    [content, excludedTargetKeys, locale, selectedMode],
   );
   const selectedSetupTotalWordCount =
     wordSelectionMode === "custom"
       ? getSelectedWords(selectedModeAllWords, selectedWordIds).length
       : selectedModeTotalWordCount;
+  const targetWordCount = targetWordCounts[selectedMode];
+  const activeSetupConfig = useMemo<WheelSetupConfig>(
+    () => ({
+      mode: selectedMode,
+      excludedTargetKeys,
+      wheelWordCount: targetWordCount,
+      wordSelectionMode,
+      selectedWordIds:
+        wordSelectionMode === "custom" ? selectedWordIds : [],
+    }),
+    [
+      excludedTargetKeys,
+      selectedMode,
+      selectedWordIds,
+      targetWordCount,
+      wordSelectionMode,
+    ],
+  );
+  const matchingSavedSetup = useMemo(
+    () =>
+      savedSetups.find((setup) =>
+        areWheelSetupConfigsEqual(setup.config, activeSetupConfig),
+      ) ?? null,
+    [activeSetupConfig, savedSetups],
+  );
+  const activeExclusionSummary = getExcludedTargetsSummary({
+    excludedTargetKeys,
+    locale,
+  });
+  const activeSetupSummary = formatActiveSetupSummary([
+    matchingSavedSetup ? matchingSavedSetup.name : null,
+    activeExclusionSummary,
+    wordSelectionMode === "custom"
+      ? `${selectedSetupTotalWordCount} ${getSelectedWordStatusLabel(
+          selectedSetupTotalWordCount,
+        )}`
+      : null,
+  ]);
   const activeModeWords = useMemo(
     () =>
-      getPlayableWords({
-        target: content.target,
+      getSetupModeWords({
+        content,
+        excludedTargetKeys,
         locale,
         mode: selectedMode,
         removedWordIds,
-        words: getModePool(content, selectedMode),
       }),
-    [content, locale, removedWordIds, selectedMode],
+    [content, excludedTargetKeys, locale, removedWordIds, selectedMode],
   );
   const activeWords = useMemo(
     () =>
@@ -209,12 +258,12 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         : activeModeWords,
     [activeModeWords, selectedWordIds, wordSelectionMode],
   );
-  const targetWordCount = targetWordCounts[selectedMode];
   const visibleWheelWordCount = getBoundedWheelWordCount(
     targetWordCount,
     activeWords.length,
   );
   const subsetKey = getWheelSubsetKey({
+    excludedTargetKeys,
     mode: selectedMode,
     selectedWordIds,
     targetWordCount: visibleWheelWordCount,
@@ -296,7 +345,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         return;
       }
 
-      const resolvedConfig = resolveWheelSetupConfig({
+      const resolvedConfig = resolveStoredWheelSetupConfig({
         config: activeConfig,
         content,
         locale,
@@ -305,6 +354,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
 
       setSelectedMode(resolvedConfig.mode);
       setWordSelectionMode(resolvedConfig.wordSelectionMode);
+      setExcludedTargetKeys(resolvedConfig.excludedTargetKeys);
       setSelectedWordIds(resolvedConfig.selectedWordIds);
       setTargetWordCounts((currentCounts) => ({
         ...currentCounts,
@@ -399,20 +449,6 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   }
 
   function closeResult() {
-    setIsResultOpen(false);
-  }
-
-  function openSetup() {
-    if (isSpinning || isResultOpen) {
-      return;
-    }
-
-    setDraftMode(selectedMode);
-    setDraftWordCount(targetWordCounts[selectedMode]);
-    setDraftWordSelectionMode(wordSelectionMode);
-    setDraftSelectedWordIds(selectedWordIds);
-    setIsSetupOpen(true);
-    setSelectedWord(null);
     setIsResultOpen(false);
   }
 
@@ -512,6 +548,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         : "all";
     const nextConfig: WheelSetupConfig = {
       mode: draftMode,
+      excludedTargetKeys: [],
       wheelWordCount: nextWordCount,
       wordSelectionMode: nextWordSelectionMode,
       selectedWordIds:
@@ -520,6 +557,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
 
     setSelectedMode(draftMode);
     setWordSelectionMode(nextWordSelectionMode);
+    setExcludedTargetKeys([]);
     setSelectedWordIds(nextSelectedWordIds);
     setTargetWordCounts((currentCounts) => ({
       ...currentCounts,
@@ -573,6 +611,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         : "all";
     const config: WheelSetupConfig = {
       mode: draftMode,
+      excludedTargetKeys: [],
       wheelWordCount: boundedDraftWordCount || DEFAULT_WHEEL_WORD_COUNT,
       wordSelectionMode: configWordSelectionMode,
       selectedWordIds:
@@ -813,8 +852,8 @@ export function WheelGame({ content, locale }: WheelGameProps) {
             emptyStateKind={emptyStateKind ?? "no-content"}
             hasRemovedWords={removedWordCount > 0}
             locale={locale}
-            onOpenSetup={openSetup}
             onReset={resetCurrentLetter}
+            setupHref={setupHref}
           />
         )}
 
@@ -826,8 +865,11 @@ export function WheelGame({ content, locale }: WheelGameProps) {
             {hasWords ? "Învârte roata" : "Roata este goală"}
           </h2>
           <p className="mode-status">
-            <span>
+            <span className="mode-status__desktop">
               {selectedModeOption.statusLabel} {content.target.label}
+            </span>
+            <span className="mode-status__mobile">
+              {content.target.label} · {selectedModeOption.shortStatusLabel}
             </span>
             <strong>{words.length}</strong>
             <span>
@@ -842,6 +884,12 @@ export function WheelGame({ content, locale }: WheelGameProps) {
                   : ""}
             </span>
           </p>
+          {activeSetupSummary ? (
+            <p className="active-setup-status">
+              <span>Configurație</span>
+              <strong>{activeSetupSummary}</strong>
+            </p>
+          ) : null}
           <div className="spin-result" aria-live="polite">
             {selectedWord ? (
               <>
@@ -862,15 +910,17 @@ export function WheelGame({ content, locale }: WheelGameProps) {
       </div>
 
       <div className="game-actions" aria-label="Comenzi joc">
-        <button
+        <Link
           className="secondary-button"
-          disabled={isSpinning || isResultOpen}
-          onClick={openSetup}
-          ref={setupButtonRef}
-          type="button"
+          href={isSpinning || isResultOpen ? "#" : setupHref}
+          onClick={(event) => {
+            if (isSpinning || isResultOpen) {
+              event.preventDefault();
+            }
+          }}
         >
           Setează
-        </button>
+        </Link>
         <button
           className="secondary-button"
           disabled={removedWordCount === 0 || isInteractionBlocked}
@@ -1039,7 +1089,7 @@ function ResultModal({
             Păstrează
           </button>
           <button className="secondary-button" onClick={onRemove} type="button">
-            Scoate
+            Scoate din roată
           </button>
           {replacementWordCount > 0 ? (
             <button
@@ -1667,14 +1717,14 @@ function EmptyWheelState({
   emptyStateKind,
   hasRemovedWords,
   locale,
-  onOpenSetup,
   onReset,
+  setupHref,
 }: Readonly<{
   emptyStateKind: WheelEmptyStateKind;
   hasRemovedWords: boolean;
   locale: SupportedLocale;
-  onOpenSetup: () => void;
   onReset: () => void;
+  setupHref: string;
 }>) {
   return (
     <div className="empty-wheel-state">
@@ -1683,9 +1733,12 @@ function EmptyWheelState({
           ? "Ai scos toate cuvintele din acest mod."
           : "Nu sunt cuvinte aici."}
       </p>
-      <button className="spin-button" onClick={onOpenSetup} type="button">
+      <Link
+        className="spin-button"
+        href={setupHref}
+      >
         Setează roata
-      </button>
+      </Link>
       <button
         className="secondary-button"
         disabled={!hasRemovedWords}
@@ -1800,6 +1853,29 @@ function getSelectedWordStatusLabel(count: number) {
   return count === 1 ? "ales" : "alese";
 }
 
+function formatActiveSetupSummary(parts: readonly (string | null)[]) {
+  return parts.filter((part): part is string => Boolean(part)).join(" · ");
+}
+
+function areWheelSetupConfigsEqual(
+  firstConfig: WheelSetupConfig,
+  secondConfig: WheelSetupConfig,
+) {
+  return (
+    firstConfig.mode === secondConfig.mode &&
+    firstConfig.wheelWordCount === secondConfig.wheelWordCount &&
+    firstConfig.wordSelectionMode === secondConfig.wordSelectionMode &&
+    areWordIdListsEqual(
+      firstConfig.excludedTargetKeys,
+      secondConfig.excludedTargetKeys,
+    ) &&
+    areWordIdListsEqual(
+      firstConfig.selectedWordIds,
+      secondConfig.selectedWordIds,
+    )
+  );
+}
+
 function createDefaultTargetWordCounts(): Record<WordInclusionMode, number> {
   return {
     "starts-with": DEFAULT_WHEEL_WORD_COUNT,
@@ -1809,11 +1885,13 @@ function createDefaultTargetWordCounts(): Record<WordInclusionMode, number> {
 }
 
 function getWheelSubsetKey({
+  excludedTargetKeys,
   mode,
   selectedWordIds,
   targetWordCount,
   wordSelectionMode,
 }: Readonly<{
+  excludedTargetKeys: readonly string[];
   mode: WordInclusionMode;
   selectedWordIds: readonly string[];
   targetWordCount: number;
@@ -1821,8 +1899,10 @@ function getWheelSubsetKey({
 }>) {
   const selectionKey =
     wordSelectionMode === "custom" ? selectedWordIds.join(",") : "all";
+  const exclusionKey =
+    excludedTargetKeys.length > 0 ? excludedTargetKeys.join(",") : "none";
 
-  return `${mode}:${wordSelectionMode}:${targetWordCount}:${selectionKey}`;
+  return `${mode}:${exclusionKey}:${wordSelectionMode}:${targetWordCount}:${selectionKey}`;
 }
 
 function getSelectedWords(
@@ -1858,48 +1938,6 @@ function getValidWordIdsForMode({
   );
 
   return [...new Set(wordIds)].filter((wordId) => playableWordIds.has(wordId));
-}
-
-function resolveWheelSetupConfig({
-  config,
-  content,
-  locale,
-  removedWordIds,
-}: Readonly<{
-  config: WheelSetupConfig;
-  content: GameplayContent;
-  locale: SupportedLocale;
-  removedWordIds: readonly string[];
-}>): WheelSetupConfig {
-  const selectedWordIds = getValidWordIdsForMode({
-    content,
-    locale,
-    mode: config.mode,
-    removedWordIds,
-    wordIds: config.selectedWordIds,
-  });
-  const wordSelectionMode =
-    config.wordSelectionMode === "custom" && selectedWordIds.length > 0
-      ? "custom"
-      : "all";
-  const availableWordCount = getAvailableWordCountForMode({
-    content,
-    locale,
-    mode: config.mode,
-    removedWordIds,
-    selectedWordIds,
-    wordSelectionMode,
-  });
-  const wheelWordCount =
-    getBoundedWheelWordCount(config.wheelWordCount, availableWordCount) ||
-    DEFAULT_WHEEL_WORD_COUNT;
-
-  return {
-    mode: config.mode,
-    wheelWordCount,
-    wordSelectionMode,
-    selectedWordIds: wordSelectionMode === "custom" ? selectedWordIds : [],
-  };
 }
 
 function getWordsByVisibleIds(
