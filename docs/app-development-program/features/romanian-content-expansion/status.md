@@ -1,12 +1,12 @@
 # Romanian Content Expansion Status
 
-Last updated: 2026-05-19
+Last updated: 2026-05-20
 
 ## Current Phase
 
-Phase: Batch 39 final Romanian image pack QA and release readiness audit complete
+Phase: Batch 40 A-C corrective image regeneration complete
 
-Overall status: The Romanian image completion scope is finalized for the current approved production pack. Batch 39 audited the current production JSON, public image assets, `/admin/words`, and representative gameplay routes without adding vocabulary or generating images. Production Romanian content has `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` ready WebP files referenced by approved records, with no missing or unused production image assets found. `ghicitoare`, `miez`, and `stinghie` remain `rejected` and were not reintroduced. The spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only.
+Overall status: The Romanian image completion scope remains finalized for the current approved production pack. Batch 39 audited the current production JSON, public image assets, `/admin/words`, and representative gameplay routes without adding vocabulary or generating images. Production Romanian content has `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` ready WebP files referenced by approved records, with no missing or unused production image assets found. `ghicitoare`, `miez`, and `stinghie` remain `rejected` and were not reintroduced. The spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only. Batch 40 corrected the first A-C human-flagged image list through a human-approved AI contact sheet, refined `128 px` pixel-art post-processing, `96`-color palette limiting, nearest-neighbor upscale to `256 x 256 px`, and lossless WebP optimization. The previous deterministic local-drawing attempt remains rejected and restored. The kept Batch 40 assets are the `14` A-C replacements plus reused casual-cap `ro-sh-sapca`.
 
 ## Completed
 
@@ -194,6 +194,38 @@ Overall status: The Romanian image completion scope is finalized for the current
 - Verified representative local routes on `http://localhost:3000`: `/ro`, `/admin/words`, `/ro/play/b`, `/ro/play/g`, `/ro/play/ghe`, `/ro/play/i-circ`, and `/images/ro/z/ro-z-zmeu.webp`.
 - Batch 39 QA: `pnpm run validate:content` passed with only existing image warning-threshold notices; `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check` passed.
 - Remaining release verification steps: run `pnpm run build` before deployment, verify the Vercel preview, test the deployed `/ro`, `/admin/words`, and representative `/ro/play/...` routes on mobile and desktop, and complete final human visual review of the deployed production image pack.
+- Prepared Batch 40 corrective image audit framework.
+- Added `corrective-image-audit-batch-40.md` as the place to record human-flagged poor images, current-image diagnosis, reference comparison, online object references, and per-word decisions before any regeneration.
+- Updated `docs/image-pipeline.md` with a required corrective image audit workflow covering quality, style match, 3D-ness, pixel construction, shadows, shape clarity, subject size, perspective, background color, color/contrast, and thumbnail readability.
+- Added guidance that agents should look up online images of the object when the visual form or intended Romanian meaning is uncertain, use those sources only for object-shape understanding, and record source URLs in the audit.
+- Updated the feature plan and next-image prompt so future image work starts with audit and human-approved scope, not immediate generation.
+- Audited the first Batch 40 corrective image list for `A` through `C` on 2026-05-20.
+- Tried deterministic local-drawing replacements for `ro-a-acoperis`, `ro-a-alge`, `ro-a-ascutitoare`, `ro-a-ata`, `ro-b-branza`, `ro-b-barza`, `ro-b-buzunar`, `ro-c-ceapa`, `ro-c-ciorap`, `ro-c-cirese`, `ro-c-cap`, `ro-c-colaj`, `ro-c-cascheta`, and `ro-c-chiciura`; the human rejected them as too flat, coarse, ugly, and off-brand.
+- Restored those `14` A-C replacement assets to their previous committed versions and reverted the temporary alt text changes.
+- Reused the previous casual-cap `ro-c-cascheta` bitmap from Git history for `ro-sh-sapca`, because it fit `șapcă` better than the existing `șapcă` image.
+- Recorded the corrective lesson: future A-C replacement work should use the earlier successful AI contact-sheet workflow, not deterministic SVG-like local drawings.
+- Added a hard human review gate for corrective regeneration: after each generated contact sheet of about `12` to `15` images, stop and ask the human to review before cropping, optimizing, editing JSON, or replacing production assets.
+- Generated one unlabeled AI corrective contact sheet for the `14` A-C flagged assets and stopped for human review.
+- Recorded the human approval that the direction was correct, with a request for slightly stronger pixelation if needed.
+- Cropped the accepted cells in fixed order and post-processed them through a refined `128 px` pixel-art grid with `96` colors, then nearest-upscaled to `256 x 256 px`.
+- Compared the final candidates against `cozonac`, `cățel`, `cadă`, `buchet`, `castravete`, `jachetă`, `umbrelă`, and `scaun`; the accepted assets are more polished and dimensional while retaining visible pixel texture.
+- Replaced `ro-a-acoperis`, `ro-a-alge`, `ro-a-ascutitoare`, `ro-a-ata`, `ro-b-branza`, `ro-b-barza`, `ro-b-buzunar`, `ro-c-ceapa`, `ro-c-ciorap`, `ro-c-cirese`, `ro-c-cap`, `ro-c-colaj`, `ro-c-cascheta`, and `ro-c-chiciura` with optimized `256 x 256 px` lossless WebP files.
+- Confirmed the `14` new A-C assets are between `7692 B` and `11120 B`, below both the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Updated only necessary alt text: `ro-a-alge` now describes algae underwater, and `ro-b-buzunar` now describes a pocket on pants.
+- Batch 40 QA: sandboxed `pnpm` commands returned `fetch failed`, then outside-sandbox `pnpm run validate:content`, `pnpm run lint`, and `pnpm exec tsc --noEmit --incremental false` passed; `git diff --check` passed.
+- Recorded follow-up human notes that `ro-a-ascutitoare` needs pencil orientation correction, `ro-b-bicicleta` should be improved, and several accepted A-C assets had cut-looking backgrounds.
+- Normalized full square backgrounds for `ro-a-ascutitoare`, `ro-b-branza`, `ro-b-bustean`, `ro-b-barza`, `ro-c-ceapa`, `ro-c-cirese`, `ro-c-ciorap`, `ro-c-cada`, `ro-c-colaj`, `ro-c-cascheta`, and `ro-c-chiciura` without changing the subject concept.
+- Confirmed the background-cleaned assets remain `256 x 256 px` and under the `12 KB` warning threshold.
+- Updated `docs/image-pipeline.md` so future image crops must fill the whole square background and reject gutters, side bars, corner blocks, or rectangular panel artifacts before promotion.
+- Marked the A-C corrective set done for now per human review, while preserving the caveat that some A-C images may still be improved in a later polish pass.
+- Started the next D-F corrective scope for `desen`, `duș`, `echer`, `echipament`, `față`, `frunză`, `fasole`, `frizerie`, and `frizură`; recorded the per-image human issues and candidate directions in `corrective-image-audit-batch-40.md`.
+- Generated one unlabeled `3 x 3` D-F corrective contact sheet for `desen`, `duș`, `echer`, `echipament`, `față`, `frunză`, `fasole`, `frizerie`, and `frizură`, then stopped for human review.
+- Recorded human approval of all `9` D-F cells.
+- Cropped the accepted D-F cells in fixed order, normalized full square backgrounds, post-processed through the refined `128 px` grid and `96`-color palette, nearest-upscaled to `256 x 256 px`, and optimized as lossless WebP files.
+- Replaced `ro-d-desen`, `ro-d-dus`, `ro-e-echer`, `ro-e-echipament`, `ro-f-fata`, `ro-f-frunza`, `ro-f-fasole`, `ro-f-frizerie`, and `ro-f-frizura`.
+- Confirmed the `9` promoted D-F assets are `256 x 256 px` and between `4574 B` and `8216 B`, below the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Updated alt text for `ro-d-desen`, `ro-d-dus`, `ro-e-echipament`, `ro-f-fata`, `ro-f-frizerie`, and `ro-f-frizura` to match the accepted replacements.
+- Batch 40 D-F QA: sandboxed `pnpm` commands returned `fetch failed`, then outside-sandbox `pnpm run validate:content`, `pnpm run lint`, and `pnpm exec tsc --noEmit --incremental false` passed; `git diff --check` passed.
 - Completed Batch 1: Coverage Audit And Expansion Targets.
 - Created `coverage-audit-and-targets.md`.
 - Recorded current alphabet coverage:

@@ -1,6 +1,6 @@
 # Word Wheel Image Pipeline Decisions
 
-Last updated: 2026-05-18
+Last updated: 2026-05-20
 
 This document locks the first production image direction before Batch 6 implementation.
 
@@ -58,6 +58,14 @@ Maximum batch: 30 images
 
 Do not generate hundreds of images before review. Early batches should be used to tune the prompt, composition, and palette.
 
+For corrective regeneration, use an even stricter review gate:
+
+- generate one small contact sheet, ideally around `12` to `15` candidate images;
+- include generous gutters and no labels inside the generated image sheet;
+- stop after the sheet is generated and ask the human to review before cropping cells, optimizing WebP assets, editing JSON, or replacing production files;
+- if the sheet is rejected, do not salvage individual crops unless the human explicitly identifies acceptable cells;
+- record the human decision in the batch audit document before any production asset promotion.
+
 Required metadata per generated candidate:
 
 - word ID;
@@ -111,6 +119,8 @@ Pixel style:
 - visible pixel-art construction;
 - polished dimensional pixel-art volume, not flat sticker art and not smooth CGI;
 - apparent source density should feel close to a refined `96 x 96` to `128 x 128` pixel icon upscaled to the final `256 x 256 px` asset;
+- when AI output is semantically strong but slightly too smooth, prefer post-processing through a refined `128 px` working grid, palette limiting around `96` to `128` colors, and nearest-neighbor upscaling to `256 x 256 px`;
+- use `128 px` / `96`-color processing as the current corrective-regeneration default; drop toward `96 px` only when the image still reads too smooth, and avoid `64 px`-style coarseness unless the human explicitly asks for a retro sprite look;
 - clean silhouette first;
 - limited internal detail;
 - no noisy dithering;
@@ -135,6 +145,9 @@ Background:
 - transparent background is preferred for final production assets;
 - if transparency is not practical, use a very pale warm off-white or soft sky-blue background;
 - avoid scenery unless the word itself requires context.
+- final assets must have a full square background or transparency across the entire `256 x 256 px` canvas; do not leave contact-sheet gutters, white side bars, corner blocks, rectangular panels, or cut-background artifacts around a cropped subject;
+- after cropping from a generated contact sheet, normalize edge-connected background pixels to the intended pale background before WebP optimization, then inspect the `256 x 256 px` result at full size and thumbnail size;
+- if a subject needs a contextual background such as water or frost sky, that background must fill the full square consistently instead of appearing as a smaller rectangular patch inside a white square.
 
 ## Palette Direction
 
@@ -194,10 +207,64 @@ Required agent workflow:
 1. Open or create a contact sheet for the new batch.
 2. Create a second comparison sheet that mixes representative existing ready images from recent accepted batches with a sample of the new images.
 3. Check silhouette clarity, subject scale, outline weight, palette, internal detail level, contact shadow style, and apparent pixel density.
-4. Regenerate or revise images that look noticeably coarser, flatter, lower-detail, more emoji-like, more vector-like, or otherwise off-brand compared with the established pack.
+4. Regenerate or revise images that look noticeably coarser, flatter, lower-detail, too smooth, too photorealistic, more emoji-like, more vector-like, or otherwise off-brand compared with the established pack.
 5. Record in the batch image-brief document that the comparison review happened.
 
 Use at least 8 to 12 existing production references when the slice has more than a few images. Choose references from nearby categories when possible, for example food against food, animals against animals, clothing against clothing, and household objects against household objects.
+
+## Corrective Image Audit Workflow
+
+Use this workflow when a human reports that an existing ready image is weak, unclear, off-style, or poorly generated. The goal is to diagnose the current asset before regenerating it, so the replacement prompt has concrete visual direction instead of a vague "make it better" instruction.
+
+Do not replace a ready production image only because it is aesthetically different. Replace it when the audit shows a real child-facing risk: the object is hard to recognize, the word meaning is wrong or too narrow, the style is visibly off-brand, the image looks too smooth/3D/vector/emoji-like, the pixel density is wrong, the subject is badly framed, the background color clashes, or the image fails at wheel thumbnail size.
+
+For every flagged word, record:
+
+- word ID, display word, canonical image path, and current status;
+- the human-reported issue, if any;
+- intended Romanian meaning and any ambiguity to avoid;
+- current image observations at full size and at wheel thumbnail size;
+- reference images from the production style set below;
+- online object-reference sources when the object/concept is visually uncertain;
+- audit decision: keep, regenerate, remove from gameplay, or ask the human;
+- replacement prompt direction if regeneration is approved.
+
+Compare the current image against the reference set across these dimensions:
+
+| Dimension | What to Check |
+| --- | --- |
+| Meaning and recognizability | Does a 4-to-6-year-old have a good chance of naming the intended object? Does the picture match the Romanian word rather than a related concept? |
+| Style match | Does it look like the established polished educational-game pixel art, not an emoji, sticker, flat vector, photo, or smooth CGI render? |
+| Pixel construction | Does the apparent source density feel close to refined `96 x 96` to `128 x 128` pixel art upscaled to `256 x 256`, with hard readable edges and controlled detail? |
+| Dimensionality | Does it have light pixel-art volume from highlights, side planes, and simple shading without becoming realistic 3D? |
+| Silhouette and shape | Is the object shape clear, continuous, and free from unexplained fragments or AI artifacts? |
+| Subject scale | Does the subject fill about `70%` to `85%` of the square with safe margins, without important parts being cropped? |
+| Perspective | Is the viewpoint simple and readable, usually front, side, slight top-down, or three-quarter? |
+| Shadows and grounding | Is any contact shadow soft, small, and consistent with the reference pack? Does it help readability without becoming a dark blob? |
+| Background | Is the background transparent or a pale warm off-white or soft sky-blue compatible with the pack? Avoid dark preview artifacts and busy scenery. |
+| Color and contrast | Are colors child-friendly, object-appropriate, and readable in the wheel without neon, muddy, or one-note palettes? |
+| Safety and rights | Is there no text, watermark, logo, brand, copyrighted character, frightening element, adult theme, or confusing extra object? |
+
+When an object is visually uncertain, agents should look up real-world object references before writing or revising the image brief. Use online search for visual understanding only; do not copy an image or imitate a protected artwork. Prefer several plain reference examples from ordinary product, encyclopedia, museum, educational, or dictionary-style pages. Record the source URLs in the audit document with a short note such as "used only to confirm object shape and common visual features." If the online references reveal that the Romanian word is ambiguous, culturally specific, abstract, or hard to show in one icon, stop and ask the human before generating.
+
+For each approved regeneration, write a short prompt delta that names the corrective target:
+
+```txt
+Current problem: <why the existing image fails>.
+Replacement direction: <one clear subject, viewpoint, colors, scale, background, shadow, and details>.
+Must preserve: polished pixel-art style, refined pixel density, local-color outlines, top-left highlights, simple contact shadow, no text/logos/brands.
+Must avoid: <wrong meaning, extra objects, over-3D rendering, flat vector, emoji/sticker look, background clutter, cropped parts>.
+```
+
+Before accepting replacements:
+
+1. Create a contact sheet of the current bad images, new candidates, and selected production references.
+2. Stop and ask the human to review the sheet before cropping, optimizing, or replacing production files.
+3. Inspect approved candidates at `256 x 256 px` and at a small thumbnail size close to the wheel display.
+4. Reject candidates that improve the object meaning but drift away from the pack style.
+5. Reject candidates that match the style but remain semantically unclear.
+6. Confirm the final promoted WebP is square, `256 x 256 px`, and has no contact-sheet gutter, side bar, corner block, or rectangular background panel.
+7. Record the review outcome in the corrective batch document before promoting WebP files.
 
 ### Production Style Reference Set
 

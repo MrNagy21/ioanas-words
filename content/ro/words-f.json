@@ -13,7 +13,7 @@
       "category": "body",
       "image": "/images/ro/f/ro-f-fata.webp",
       "imageStatus": "ready",
-      "alt": "O față",
+      "alt": "O față de copil",
       "source": [
         "manual"
       ],
@@ -193,7 +193,7 @@
       "category": "household",
       "image": "/images/ro/f/ro-f-frizerie.webp",
       "imageStatus": "ready",
-      "alt": "O frizerie mică cu foarfecă și stâlp în dungi",
+      "alt": "O frizerie cu scaun, oglindă și ustensile",
       "source": [
         "manual"
       ],
@@ -211,7 +211,7 @@
       "category": "people",
       "image": "/images/ro/f/ro-f-frizura.webp",
       "imageStatus": "ready",
-      "alt": "O frizură cu părul prins",
+      "alt": "O frizură bărbătească",
       "source": [
         "manual"
       ],

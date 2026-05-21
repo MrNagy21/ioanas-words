@@ -1627,6 +1627,53 @@ Result:
 - Kept `ghicitoare`, `miez`, and `stinghie` rejected.
 - Kept the spoken `Capea` / `Kapia` note unresolved with no vocabulary or asset change.
 
+## Batch 40: Corrective Image Audit And Regeneration Planning
+
+Status: A-C corrective image regeneration complete
+
+Use `corrective-image-audit-batch-40.md` as the audit artifact and `docs/image-pipeline.md` as the visual QA source of truth.
+
+Tasks:
+
+- Collect the human's list of poor, unclear, or off-style ready images.
+- Resolve each flagged word to a production word ID and canonical image path.
+- Inspect the current image at full `256 x 256 px` size and wheel thumbnail size.
+- Compare current images against the production reference set for quality, style, 3D-ness, pixel construction, shadows, shape, subject size, background color, color palette, and thumbnail readability.
+- Look up online images of the object when the visual form or intended word sense is uncertain; use them only as object-shape references, not as copied artwork, and record source URLs.
+- Decide per word whether to keep, regenerate, remove from gameplay, or ask the human for a meaning/scope decision.
+- Write regeneration prompt deltas only after the audit identifies the concrete failure.
+- Do not generate or promote replacement images until the flagged list and regeneration scope are reviewed.
+
+Review checkpoint:
+
+- Every flagged image has a recorded current-image diagnosis, reference comparison, and decision.
+- Online object references are recorded when they affect the prompt direction.
+- Ambiguous Romanian word senses are escalated to the human before generation.
+- No vocabulary, route/schema, speech-target metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical-claim changes happen in this corrective image step.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+pnpm exec tsc --noEmit --incremental false
+git diff --check
+```
+
+Result:
+
+- Audited the first human-flagged list for letters `A` through `C`.
+- Tried a deterministic local-drawing replacement pass for `acoperiș`, `alge`, `ascuțitoare`, `ață`, `brânză`, `barză`, `buzunar`, `ceapă`, `ciorap`, `cireșe`, `cap`, `colaj`, `caschetă`, and `chiciură`; the human rejected it as too ugly, coarse, flat, and off-brand.
+- Restored those `14` generated A-C replacements to the previous committed ready assets and reverted temporary alt text changes.
+- Kept the requested reuse of the previous casual-cap `caschetă` asset for `șapcă`, because it better matches `șapcă`.
+- Recorded current-image issues, reference comparisons, online object references, and the rejected-generation lesson in `corrective-image-audit-batch-40.md`.
+- Generated one unlabeled AI contact sheet for the `14` A-C flagged assets, stopped for human review, and received human approval for the direction.
+- Cropped accepted cells in fixed order and used the current corrective post-processing default: refined `128 px` pixel-art grid, `96`-color palette limit, nearest-neighbor upscale to `256 x 256 px`, and lossless WebP optimization.
+- Replaced `ro-a-acoperis`, `ro-a-alge`, `ro-a-ascutitoare`, `ro-a-ata`, `ro-b-branza`, `ro-b-barza`, `ro-b-buzunar`, `ro-c-ceapa`, `ro-c-ciorap`, `ro-c-cirese`, `ro-c-cap`, `ro-c-colaj`, `ro-c-cascheta`, and `ro-c-chiciura`.
+- Confirmed the `14` promoted A-C assets are `256 x 256 px` and between `7692 B` and `11120 B`, below the `12 KB` warning threshold and the `20 KB` hard maximum.
+- Updated only necessary alt text: `ro-a-alge` and `ro-b-buzunar`.
+- Updated `docs/image-pipeline.md` so future corrective prompts and post-processing can explicitly distinguish refined `128 px` pixel-art texture from both over-smooth AI output and coarse `64 px` sprite output.
+
 ## Exit Criteria
 
 - Romanian expansion targets are documented from current coverage data.
