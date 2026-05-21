@@ -31,7 +31,7 @@
       "category": "household",
       "image": "/images/ro/t/ro-t-tava.webp",
       "imageStatus": "ready",
-      "alt": "O tavă gri",
+      "alt": "O tavă metalică",
       "source": [
         "manual"
       ],
@@ -85,7 +85,7 @@
       "category": "toy",
       "image": "/images/ro/t/ro-t-toba.webp",
       "imageStatus": "ready",
-      "alt": "O tobă roșie",
+      "alt": "O tobă roșie cu bețe",
       "source": [
         "manual"
       ],
@@ -121,7 +121,7 @@
       "category": "food",
       "image": "/images/ro/t/ro-t-tort.webp",
       "imageStatus": "ready",
-      "alt": "Un tort roz cu lumânări",
+      "alt": "Un tort cu cremă și cireșe",
       "source": [
         "manual"
       ],
@@ -157,7 +157,7 @@
       "category": "household",
       "image": "/images/ro/t/ro-t-televizor.webp",
       "imageStatus": "ready",
-      "alt": "Un televizor",
+      "alt": "Un televizor cu peisaj pe ecran",
       "source": [
         "manual"
       ],

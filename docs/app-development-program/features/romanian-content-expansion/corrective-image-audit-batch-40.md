@@ -275,6 +275,199 @@ G-M verification:
 - `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
 - `git diff --check` passed.
 
+## Next Corrective Scope: N-R Human Flags
+
+The next human-flagged list covers:
+
+| Word ID | Word | Current image path | Human issue | Current image audit | Decision | Regeneration direction |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ro-n-nas` | `nas` | `/images/ro/n/ro-n-nas.webp` | Shows a face, not very intuitive or suggestive. | Current image is a full child face; the nose is only one facial feature and is not isolated enough for the word. | Generate review candidate. | A friendly isolated nose or close-up lower face where the nose is clearly the subject, warm skin tones, non-scary, no full head/face dominance. |
+| `ro-p-plaja` | `plajă` | `/images/ro/p/ro-p-plaja.webp` | Plain bad; needs fixing. | Current beach is a very flat umbrella/stripe symbol with weak beach depth and polish. | Generate review candidate. | Small beach scene with sand, sea edge, umbrella or beach towel, dimensional shoreline, clear sky/water context, full square background. |
+| `ro-p-ploaie` | `ploaie` | `/images/ro/p/ro-p-ploaie.webp` | Bad; needs fixing. | Current rain cloud is flat, symbolic, and below the pack standard. | Generate review candidate. | Soft gray rain cloud with falling raindrops and visible rainy atmosphere, polished volume, no storm/scary mood, full sky-blue square background. |
+| `ro-p-prajitura` | `prăjitură` | `/images/ro/p/ro-p-prajitura.webp` | Bad and needs fixing. | Current cake is a flat block/box with weak appetizing detail. | Generate review candidate. | Appetizing slice or small piece of cake/pastry, frosting/cream layers, soft 3D volume, no candle/text, full warm square background. |
+| `ro-p-paianjen` | `păianjen` | `/images/ro/p/ro-p-paianjen.webp` | Needs to be 3D and properly generated. | Current spider is flat, crude, and not in the refined animal style. | Generate review candidate. | Child-friendly spider with rounded body, eight clear legs, subtle volume, non-scary eyes/expression if present, no extra limbs, full square background. |
+| `ro-p-poza` | `poză` | `/images/ro/p/ro-p-poza.webp` | Needs to be properly defined. | Current framed landscape is readable as a picture, but too generic and flat. | Generate review candidate. | Clearly a printed photo/picture in a simple frame or held photo print, with a simple landscape/photo image inside, visible paper/frame depth, no text. |
+| `ro-p-pisicuta` | `pisicuță` | `/images/ro/p/ro-p-pisicuta.webp` | Needs to be 3D and up to style. | Current kitten is a flat face icon and not a dimensional kitten. | Generate review candidate. | Cute small kitten, preferably whole seated body or bust with paws, soft fur volume, friendly, not just a flat head, full square background. |
+| `ro-r-raft` | `raft` | `/images/ro/r/ro-r-raft.webp` | Similar flat/plain quality issue. | Current shelf is a flat rectangle with minimal depth and boxy contents. | Generate review candidate. | Wooden shelf/bookcase in slight three-quarter view with books and a toy/object, dimensional wood and contents, no text. |
+| `ro-r-ramura` | `ramură` | `/images/ro/r/ro-r-ramura.webp` | Similar flat/plain quality issue. | Current branch is simple, flat, and icon-like. | Generate review candidate. | Natural brown branch with green leaves, organic curves, bark texture, subtle dimension, full square background. |
+| `ro-r-rau` | `râu` | `/images/ro/r/ro-r-rau.webp` | Similar flat/plain quality issue. | Current river is a flat blue stripe on a rectangular green panel, with cut-background risk. | Generate review candidate. | Winding river through grassy banks or small landscape, dimensional water flow, full square background, distinct from lake/pond. |
+| `ro-r-rosie` | `roșie` | `/images/ro/r/ro-r-rosie.webp` | Similar flat/plain quality issue. | Current tomato is readable but flat and simplified. | Generate review candidate. | Glossy red tomato with green calyx, rounded believable volume, subtle highlights and shadow, full warm background. |
+| `ro-r-rotita` | `rotiță` | `/images/ro/r/ro-r-rotita.webp` | Similar flat/plain quality issue; first review candidate looked too much like a full vehicle tire. | Current small wheel/gear reads flat and mechanical-symbol-like. | Generate focused second-pass review candidate. | Visibly small wheel or cog-like little wheel, compact and clearly a `rotiță`, with rim/teeth depth and rounded 3D form; avoid a large car tire, app-settings gear confusion, or a flat symbol. |
+
+Contact-sheet plan: generate one unlabeled 12-cell candidate sheet in the exact table order above, with complete square backgrounds inside every cell, then stop for human review before cropping, optimization, JSON edits, or production replacement.
+
+Contact-sheet first-pass outcome: the human accepted the first 11 cells and requested another pass only for `ro-r-rotita`, because the candidate should read more as a cog or visibly small wheel.
+
+Second-pass outcome: generated a focused 4-cell `rotiță` variant sheet and the human accepted the bottom-left third cell, a small caster-style wheel.
+
+Implemented N-R corrective changes:
+
+| Word ID | Public path | Size | Dimensions | Result |
+| --- | --- | ---: | --- | --- |
+| `ro-n-nas` | `/images/ro/n/ro-n-nas.webp` | 12166 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-p-plaja` | `/images/ro/p/ro-p-plaja.webp` | 10580 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-p-ploaie` | `/images/ro/p/ro-p-ploaie.webp` | 11262 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-p-prajitura` | `/images/ro/p/ro-p-prajitura.webp` | 11818 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-p-paianjen` | `/images/ro/p/ro-p-paianjen.webp` | 12248 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-p-poza` | `/images/ro/p/ro-p-poza.webp` | 11416 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-p-pisicuta` | `/images/ro/p/ro-p-pisicuta.webp` | 12026 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-r-raft` | `/images/ro/r/ro-r-raft.webp` | 11006 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-r-ramura` | `/images/ro/r/ro-r-ramura.webp` | 12068 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-r-rau` | `/images/ro/r/ro-r-rau.webp` | 11548 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-r-rosie` | `/images/ro/r/ro-r-rosie.webp` | 11276 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-r-rotita` | `/images/ro/r/ro-r-rotita.webp` | 11068 B | 256 x 256 | Accepted, second-pass AI contact-sheet replacement |
+
+Alt text updated where the new image meaning became more specific: `prăjitură`, `poză`, `pisicuță`, `raft`, and `rotiță`.
+
+N-R brand/style review:
+
+- Created a final comparison sheet mixing `cozonac`, `cățel`, `cadă`, `buchet`, `castravete`, `jachetă`, `umbrelă`, `scaun`, and all promoted N-R crops.
+- Confirmed the approved crops use true `256 x 256 px` canvases, refined `128 px` pixel-art processing, full square backgrounds, and no contact-sheet gutter/cut-background artifacts.
+- All promoted N-R files are below the `12 KiB` warning boundary after lossless WebP optimization.
+
+N-R verification:
+
+- `pnpm run validate:content` passed outside the sandbox; only pre-existing warning-threshold images were reported, and none of the promoted N-R assets were in the warning list.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
+## Next Corrective Scope: S Human Flags
+
+The human requested regeneration for all approved `S` letter images except `soare`, `suc`, `săpun`, `scaun`, and `spaghete`, which are acceptable despite being a bit coarser than the newest assets. Rejected audit-trail row `stinghie` remains out of scope.
+
+The S corrective list covers:
+
+| Word ID | Word | Current image path | Human issue | Current image audit | Decision | Regeneration direction |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ro-s-sanie` | `sanie` | `/images/ro/s/ro-s-sanie.webp` | Needs to be on-brand, 3D, non-geometric, and without bottom shadow. | Current sled is flat, blocky, and uses a heavy oval bottom shadow. | Generate review candidate. | Normal-sized wooden/red sled on snow if useful, realistic-cartoon pixel art, dimensional rails and seat, clearly larger than `săniuță`, no bottom oval shadow. |
+| `ro-s-salata` | `salată` | `/images/ro/s/ro-s-salata.webp` | Same S-batch quality issue. | Current salad bowl is flat and geometric with minimal ingredient detail. | Generate review candidate. | Dimensional bowl of salad with leafy greens and small vegetable pieces, appetizing, full square background, no bottom oval shadow. |
+| `ro-s-sandale` | `sandale` | `/images/ro/s/ro-s-sandale.webp` | Same S-batch quality issue. | Current sandals are flat, simplified, and icon-like. | Generate review candidate. | Pair of child-friendly sandals with straps, soles, depth, and soft leather/fabric volume, full square background, no bottom oval shadow. |
+| `ro-s-sandvis` | `sandviș` | `/images/ro/s/ro-s-sandvis.webp` | Same S-batch quality issue. | Current sandwich is a flat triangular wedge with weak food detail. | Generate review candidate. | Triangular sandwich with bread thickness, visible filling layers, rounded believable volume, no text, no bottom oval shadow. |
+| `ro-s-scara` | `scară` | `/images/ro/s/ro-s-scara.webp` | Same S-batch quality issue. | Current ladder is very flat, front-on, and has a heavy bottom shadow. | Generate review candidate. | Wooden ladder in slight three-quarter perspective, visible rails/rungs and depth, full square background, no bottom oval shadow. |
+| `ro-s-scoica` | `scoică` | `/images/ro/s/ro-s-scoica.webp` | Same S-batch quality issue. | Current shell is readable but flat and low detail. | Generate review candidate. | Pink/cream seashell with ridges, glossy curved volume, natural shell shape, full square background, no bottom oval shadow. |
+| `ro-s-sfoara` | `sfoară` | `/images/ro/s/ro-s-sfoara.webp` | Same S-batch quality issue. | Current rope coil is flat and coarse. | Generate review candidate. | Coiled rope or ball of twine with braided fiber texture and dimensional curl, full square background, no bottom oval shadow. |
+| `ro-s-spuma` | `spumă` | `/images/ro/s/ro-s-spuma.webp` | Same S-batch quality issue. | Current foam is sparse geometric bubbles and a stripe. | Generate review candidate. | Cluster of soft white soap/foam bubbles with translucent highlights and rounded volume, full square background, no bottom oval shadow. |
+| `ro-s-struguri` | `struguri` | `/images/ro/s/ro-s-struguri.webp` | Same S-batch quality issue. | Current grapes are flat, angular, and not grape-cluster-like enough. | Generate review candidate. | Bunch of purple grapes with many round glossy grapes and a small green leaf/stem, dimensional, no bottom oval shadow. |
+| `ro-s-stilou` | `stilou` | `/images/ro/s/ro-s-stilou.webp` | Same S-batch quality issue. | Current fountain pen is a flat blue stick and does not clearly show a nib. | Generate review candidate. | Blue fountain pen with visible metal nib, cap/body depth, slight diagonal pose, no text/logo, no bottom oval shadow. |
+| `ro-s-stejar` | `stejar` | `/images/ro/s/ro-s-stejar.webp` | Same S-batch quality issue. | Current oak tree is boxy and flat, with crude acorns. | Generate review candidate. | Friendly oak tree with rounded leafy crown, trunk bark, acorns, dimensional but simple, full square background, no bottom oval shadow. |
+| `ro-s-saniuta` | `săniuță` | `/images/ro/s/ro-s-saniuta.webp` | Must be clearly distinct from `sanie`; little sled should read as very small, maybe baby/toy sled. | Current little sled is flat and does not strongly communicate small scale. | Generate review candidate. | Very small toy/baby sled, visibly smaller and cuter than the normal sled, perhaps on a small snow patch with toy-like proportions, no bottom oval shadow. |
+
+Contact-sheet plan: generate one unlabeled 12-cell candidate sheet in the exact table order above, with complete square backgrounds inside every cell and no bottom oval shadows, then stop for human review before cropping, optimization, JSON edits, or production replacement.
+
+Contact-sheet outcome: generated one unlabeled 12-cell candidate sheet in the exact order above, stopped for human review, and the human accepted all cells.
+
+Implemented S corrective changes:
+
+| Word ID | Public path | Size | Dimensions | Result |
+| --- | --- | ---: | --- | --- |
+| `ro-s-sanie` | `/images/ro/s/ro-s-sanie.webp` | 8134 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-salata` | `/images/ro/s/ro-s-salata.webp` | 8016 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-sandale` | `/images/ro/s/ro-s-sandale.webp` | 7996 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-sandvis` | `/images/ro/s/ro-s-sandvis.webp` | 7828 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-scara` | `/images/ro/s/ro-s-scara.webp` | 8078 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-scoica` | `/images/ro/s/ro-s-scoica.webp` | 8444 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-sfoara` | `/images/ro/s/ro-s-sfoara.webp` | 8780 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-spuma` | `/images/ro/s/ro-s-spuma.webp` | 8976 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-struguri` | `/images/ro/s/ro-s-struguri.webp` | 8376 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-stilou` | `/images/ro/s/ro-s-stilou.webp` | 7198 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-stejar` | `/images/ro/s/ro-s-stejar.webp` | 8660 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-s-saniuta` | `/images/ro/s/ro-s-saniuta.webp` | 7470 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+
+Alt text updated where the new image meaning became more specific: `sanie`, `sandviș`, and `săniuță`.
+
+S circular-slot review:
+
+- The human noted that wheel images are circular and future regenerated assets should be composed for circular display.
+- Cropped the accepted S cells with additional padding/recentering and created a circular-mask preview before production promotion.
+- Confirmed the accepted S crops fit inside the circular wheel/admin safe area; only background is clipped by the circular mask.
+- Updated `docs/image-pipeline.md` with a reusable circular corrective prompt add-on requiring subjects to fit inside the inscribed circle of the square cell.
+
+S brand/style review:
+
+- Created a final comparison sheet mixing `cozonac`, `cățel`, `cadă`, `buchet`, `castravete`, `jachetă`, `umbrelă`, `scaun`, and all promoted S crops.
+- Confirmed the approved crops use true `256 x 256 px` canvases, refined `128 px` pixel-art processing, circle-safe composition, full square backgrounds, and no contact-sheet gutter/cut-background artifacts.
+- All promoted S files are below the `12 KiB` warning boundary after lossless WebP optimization.
+
+S verification:
+
+- `pnpm run validate:content` passed outside the sandbox; only pre-existing warning-threshold images were reported, and none of the promoted S assets were in the warning list.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
+## Next Corrective Scope: Ș-T-Ț-U-Z Human Flags
+
+The next human-flagged list covers approved images from `Ș`, `T`, `Ț`, `U`, and `Z`. The common issue is the older flat/geometric style with heavy bottom shadows, weaker dimensionality, and less reliable circular wheel fit.
+
+Candidate order for the review sheet:
+
+1. `ro-sh-soricel` / `șoricel`: friendly small mouse, full body, dimensional fur, large ears, tail inside circle-safe area.
+2. `ro-sh-soseta` / `șosetă`: single sock or pair of socks with cuff, heel, toe shape, fabric folds, soft volume.
+3. `ro-sh-servetel` / `șervețel`: folded napkin or small stack of napkins, paper folds and thickness, no text/pattern clutter.
+4. `ro-sh-scoala` / `școală`: small school building, dimensional, friendly, clear doors/windows/bell, no text/sign.
+5. `ro-t-tava` / `tavă`: shallow tray or baking tray, metal/wood rim, handles if useful, clear 3D depth.
+6. `ro-t-telefon` / `telefon`: phone object, child-readable modern smartphone or simple phone, dimensional screen/body, no brand/text.
+7. `ro-t-tigru` / `tigru`: friendly tiger, preferably full body or clear bust, orange stripes, non-scary, dimensional animal style.
+8. `ro-t-toba` / `tobă`: drum with cylindrical body, rim, drumhead, sticks if useful, clear volume.
+9. `ro-t-tort` / `tort`: whole cake with frosting/layers, child-friendly, no letters/numbers/logos.
+10. `ro-t-tricou` / `tricou`: T-shirt with sleeves/collar/fabric folds, dimensional, no text/logo.
+11. `ro-t-televizor` / `televizor`: TV set/screen with stand, dimensional body, no text/logo, screen can show simple color/landscape.
+12. `ro-tz-testoasa` / `țestoasă`: friendly turtle/tortoise, shell volume, full body, non-scary.
+13. `ro-tz-turture` / `țurțure`: natural icicle hanging from a roof/branch edge, transparent icy texture, cold pale background.
+14. `ro-u-ulei` / `ulei`: bottle of cooking oil, golden liquid, glass/plastic volume, no label/text.
+15. `ro-z-zar` / `zar`: 3D die with pips, rounded cube, clear perspective, no numbers/text.
+16. `ro-z-zid` / `zid`: brick wall segment with depth and staggered bricks, not a flat rectangle.
+17. `ro-z-zmeura` / `zmeură`: raspberry or small cluster of raspberries, bumpy drupelet texture, leaf if useful.
+18. `ro-z-zambila` / `zambilă`: hyacinth flower spike with many small purple blossoms and green leaves, dimensional plant form.
+
+Contact-sheet plan: generate one unlabeled 18-cell candidate sheet in the exact order above, with complete square backgrounds, no heavy bottom shadows, and circle-safe composition inside each cell, then stop for human review before cropping, optimization, JSON edits, or production replacement.
+
+Contact-sheet outcome: generated one unlabeled 18-cell candidate sheet in the exact order above, stopped for human review, and the human accepted all cells.
+
+Implemented Ș-T-Ț-U-Z corrective changes:
+
+| Word ID | Public path | Size | Dimensions | Result |
+| --- | --- | ---: | --- | --- |
+| `ro-sh-soricel` | `/images/ro/ș/ro-sh-soricel.webp` | 9996 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-sh-soseta` | `/images/ro/ș/ro-sh-soseta.webp` | 9544 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-sh-servetel` | `/images/ro/ș/ro-sh-servetel.webp` | 10426 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-sh-scoala` | `/images/ro/ș/ro-sh-scoala.webp` | 9020 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-t-tava` | `/images/ro/t/ro-t-tava.webp` | 9686 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-t-telefon` | `/images/ro/t/ro-t-telefon.webp` | 8822 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-t-tigru` | `/images/ro/t/ro-t-tigru.webp` | 9888 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-t-toba` | `/images/ro/t/ro-t-toba.webp` | 9476 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-t-tort` | `/images/ro/t/ro-t-tort.webp` | 9930 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-t-tricou` | `/images/ro/t/ro-t-tricou.webp` | 9186 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-t-televizor` | `/images/ro/t/ro-t-televizor.webp` | 7594 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-tz-testoasa` | `/images/ro/ț/ro-tz-testoasa.webp` | 9612 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-tz-turture` | `/images/ro/ț/ro-tz-turture.webp` | 9540 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-u-ulei` | `/images/ro/u/ro-u-ulei.webp` | 9248 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-z-zar` | `/images/ro/z/ro-z-zar.webp` | 9000 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-z-zid` | `/images/ro/z/ro-z-zid.webp` | 9570 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-z-zmeura` | `/images/ro/z/ro-z-zmeura.webp` | 9694 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-z-zambila` | `/images/ro/z/ro-z-zambila.webp` | 9606 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+
+Alt text updated where the new image meaning became more specific: `șosetă`, `șervețel`, `tavă`, `tobă`, `tort`, `televizor`, `țurțure`, and `zmeură`.
+
+Ș-T-Ț-U-Z circular-slot review:
+
+- Created a circular-mask preview before production promotion.
+- Confirmed the accepted crops fit inside the circular wheel/admin safe area; only background is clipped by the circular mask.
+
+Ș-T-Ț-U-Z brand/style review:
+
+- Created a final comparison sheet mixing representative accepted assets (`cozonac`, `cățel`, `cadă`, `buchet`, `scaun`, `sanie`) with all promoted Ș-T-Ț-U-Z crops.
+- Confirmed the approved crops use true `256 x 256 px` canvases, refined `128 px` pixel-art processing, circle-safe composition, full square backgrounds, and no contact-sheet gutter/cut-background artifacts.
+- All promoted Ș-T-Ț-U-Z files are below the `12 KiB` warning boundary after lossless WebP optimization.
+
+Ș-T-Ț-U-Z verification:
+
+- `pnpm run validate:content` passed outside the sandbox; only pre-existing warning-threshold images were reported, and none of the promoted Ș-T-Ț-U-Z assets were in the warning list.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
 ## Non-Goals
 
 - No broad image-generation batch without a human-approved flagged list.

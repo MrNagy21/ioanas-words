@@ -427,7 +427,7 @@
       "category": "food",
       "image": "/images/ro/p/ro-p-prajitura.webp",
       "imageStatus": "ready",
-      "alt": "O prăjitură",
+      "alt": "O felie de prăjitură cu cremă",
       "source": [
         "manual"
       ],
@@ -481,7 +481,7 @@
       "category": "household",
       "image": "/images/ro/p/ro-p-poza.webp",
       "imageStatus": "ready",
-      "alt": "O poză în ramă cu munți și soare",
+      "alt": "O poză cu peisaj",
       "source": [
         "manual"
       ],
@@ -535,7 +535,7 @@
       "category": "animal",
       "image": "/images/ro/p/ro-p-pisicuta.webp",
       "imageStatus": "ready",
-      "alt": "O pisicuță portocalie",
+      "alt": "O pisicuță portocalie așezată",
       "source": [
         "manual"
       ],

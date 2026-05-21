@@ -67,7 +67,7 @@
       "category": "vehicle",
       "image": "/images/ro/s/ro-s-sanie.webp",
       "imageStatus": "ready",
-      "alt": "O sanie",
+      "alt": "O sanie pe zăpadă",
       "source": [
         "manual"
       ],
@@ -139,7 +139,7 @@
       "category": "food",
       "image": "/images/ro/s/ro-s-sandvis.webp",
       "imageStatus": "ready",
-      "alt": "Un sandviș triunghiular",
+      "alt": "Un sandviș triunghiular cu legume",
       "source": [
         "manual"
       ],
@@ -283,7 +283,7 @@
       "category": "vehicle",
       "image": "/images/ro/s/ro-s-saniuta.webp",
       "imageStatus": "ready",
-      "alt": "O săniuță roșie",
+      "alt": "O săniuță mică pe zăpadă",
       "source": [
         "manual"
       ],

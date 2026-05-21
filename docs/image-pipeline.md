@@ -63,6 +63,7 @@ For corrective regeneration, use an even stricter review gate:
 - generate one small contact sheet, ideally around `12` to `15` candidate images;
 - include generous gutters and no labels inside the generated image sheet;
 - explicitly prompt that each cell contains a complete square image background or transparency, not a smaller cropped rectangle, panel, partial fill, or cut-out pasted onto the sheet;
+- compose every subject to be safe inside the wheel/admin circular mask: the object must fit comfortably inside the inscribed circle of the square cell, with no meaningful parts in the corners that would be clipped when shown circularly;
 - stop after the sheet is generated and ask the human to review before cropping cells, optimizing WebP assets, editing JSON, or replacing production files;
 - if the sheet is rejected, do not salvage individual crops unless the human explicitly identifies acceptable cells;
 - record the human decision in the batch audit document before any production asset promotion.
@@ -150,6 +151,14 @@ Background:
 - after cropping from a generated contact sheet, normalize edge-connected background pixels to the intended pale background before WebP optimization, then inspect the `256 x 256 px` result at full size and thumbnail size;
 - if a subject needs a contextual background such as water or frost sky, that background must fill the full square consistently instead of appearing as a smaller rectangular patch inside a white square.
 
+Circular display:
+
+- The app displays word images in circular wheel slots, and future admin/list views may also show circular thumbnails.
+- Generate and crop assets as square files, but compose the subject inside the inscribed circle of that square.
+- Avoid diagonals, long objects, branches, ropes, pens, ladders, or sled pull-cords reaching into the square corners unless they remain well inside the circular crop.
+- Before promotion, render a circular-mask preview of every accepted crop and confirm only background is clipped by the circle.
+- If the circular mask clips meaningful subject pixels, recenter/scale down locally while preserving quality, or regenerate the cell if padding makes the image too weak.
+
 ## Palette Direction
 
 Use a broad, child-friendly palette rather than a one-color theme.
@@ -212,6 +221,19 @@ Required agent workflow:
 5. Record in the batch image-brief document that the comparison review happened.
 
 Use at least 8 to 12 existing production references when the slice has more than a few images. Choose references from nearby categories when possible, for example food against food, animals against animals, clothing against clothing, and household objects against household objects.
+
+## Circular Corrective Prompt Add-On
+
+Use this add-on for future corrective contact sheets:
+
+```txt
+Circular display constraint:
+- These square icons will be shown inside circular wheel/admin thumbnails.
+- Compose every subject comfortably inside the inscribed circle of its square cell.
+- Leave safe margin from all four corners so a circular mask clips only background, never important subject parts.
+- For long or diagonal objects, shorten/recenter/angle them so the full object stays inside the circular safe area.
+- Do not draw a visible circle border unless explicitly requested; the asset remains a square image with circle-safe composition.
+```
 
 ## Corrective Image Audit Workflow
 

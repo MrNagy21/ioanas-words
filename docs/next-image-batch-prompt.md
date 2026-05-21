@@ -2,7 +2,7 @@
 
 There is no additional approved image-generation scope after Romanian Content Expansion Batch 40. Batch 39 finalized the current Romanian image completion scope, and Batch 40 completed the first human-flagged A-C corrective image regeneration pass. Do not generate images, add vocabulary, or create another image batch without a separate human-approved production decision.
 
-The approved image-related path for future work is corrective review through `docs/app-development-program/features/romanian-content-expansion/corrective-image-audit-batch-40.md` when the human supplies a list of poor, unclear, or off-style ready images. Batch 40 corrective passes are complete through the human-approved G-M list: the deterministic local-drawing replacement attempt was rejected and restored, later AI contact sheets were human-approved, and the accepted cells were promoted. Do not repeat the deterministic SVG-like/local drawing approach.
+The approved image-related path for future work is corrective review through `docs/app-development-program/features/romanian-content-expansion/corrective-image-audit-batch-40.md` when the human supplies a list of poor, unclear, or off-style ready images. Batch 40 corrective passes are complete through the human-approved Ș-T-Ț-U-Z list: the deterministic local-drawing replacement attempt was rejected and restored, later AI contact sheets were human-approved, and the accepted cells were promoted. Do not repeat the deterministic SVG-like/local drawing approach.
 
 Current finalized Romanian production pack:
 
@@ -12,7 +12,7 @@ Current finalized Romanian production pack:
 - Rejected audit-trail records: `ghicitoare`, `miez`, and `stinghie`.
 - Unresolved spoken note: `Capea` / `Kapia`; no current production word ID matches it.
 
-Batch 39 confirmed the production JSON, public image assets, `/admin/words`, and representative gameplay routes all match the finalized pack counts. Batch 40 replaced human-flagged A-C, D-F, and G-M ready images and kept the reused old casual-cap `caschetă` bitmap for `șapcă`. The public non-placeholder image tree should still contain exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets.
+Batch 39 confirmed the production JSON, public image assets, `/admin/words`, and representative gameplay routes all match the finalized pack counts. Batch 40 replaced human-flagged A-C, D-F, G-M, N-R, S, and Ș-T-Ț-U-Z ready images and kept the reused old casual-cap `caschetă` bitmap for `șapcă`. The public non-placeholder image tree should still contain exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets.
 
 ## Remaining Release Verification Steps
 
@@ -67,6 +67,10 @@ Critical context:
 - The A-C corrective set is marked done for now, but can still be improved in a later polish pass.
 - The D-F corrective scope is complete: `desen`, `duș`, `echer`, `echipament`, `față`, `frunză`, `fasole`, `frizerie`, and `frizură` were generated as one `3 x 3` AI contact sheet, accepted by the human, cropped in fixed order, background-normalized, and promoted as `256 x 256 px` lossless WebP assets.
 - The G-M corrective scope is complete: `gem`, `garaj`, `gemeni`, `ger`, `gheretă`, `gheruță`, `insulă`, `iaz`, `lac`, `melc`, `mușețel`, `mărțișor`, and `mazăre` were generated as one `13`-cell AI contact sheet, accepted by the human, cropped in fixed order, background-normalized into true square canvases, and promoted as optimized `256 x 256 px` lossless WebP assets. `mărțișor` was checked against online Romanian/tradition references before prompting.
+- The N-R corrective scope is complete: `nas`, `plajă`, `ploaie`, `prăjitură`, `păianjen`, `poză`, `pisicuță`, `raft`, `ramură`, `râu`, `roșie`, and `rotiță` were generated as one `12`-cell AI contact sheet; the first 11 were accepted, and `rotiță` used a second focused 4-cell variant sheet where the human selected the bottom-left small caster wheel.
+- The S corrective scope is complete for all approved S images except `soare`, `suc`, `săpun`, `scaun`, and `spaghete`, which the human marked acceptable. The promoted S replacements are circle-safe for wheel/admin circular display. Rejected `stinghie` remains untouched.
+- The Ș-T-Ț-U-Z corrective scope is complete: `șoricel`, `șosetă`, `șervețel`, `școală`, `tavă`, `telefon`, `tigru`, `tobă`, `tort`, `tricou`, `televizor`, `țestoasă`, `țurțure`, `ulei`, `zar`, `zid`, `zmeură`, and `zambilă` were generated as one `18`-cell AI contact sheet, human-accepted, cropped in fixed order, checked with circular-mask QA, and promoted as optimized `256 x 256 px` lossless WebP assets.
+- Future corrective prompt sheets should include the circular display constraint from `docs/image-pipeline.md`: every subject must fit comfortably inside the inscribed circle of the square cell so a circular UI mask clips only background.
 - Future corrective work needs a new human-flagged list and must stop for human review after the generated contact sheet.
 
 Goal:
@@ -79,6 +83,7 @@ Use this style target:
 - polished, lightly dimensional, with cartoon-friendly colors but believable object forms;
 - visible refined pixel-art texture after post-processing, not flat vector art, emoji, blocky icon, or coarse 64 px sprite;
 - subject fills roughly `70%` to `85%` of the square with safe margins;
+- compose each subject so it fits inside the circular wheel/admin safe area; circular masks must clip only background, not the object;
 - pale warm off-white or soft sky-blue background only where useful;
 - simple, pack-consistent contact shadow when needed;
 - no text, letters, logos, brands, watermarks, copyrighted characters, clutter, scary expression, or confusing extra objects.
@@ -97,7 +102,7 @@ After generating the contact sheet:
 1. Show the sheet to the human.
 2. Ask which cells are accepted, rejected, or need another pass.
 3. Do not crop or promote anything until the human responds.
-4. If approved, crop only accepted cells in the fixed order, normalize background, preserve the realistic-cartoon pixel-art quality, use the `128 px` grid / `96` to `128` color / nearest-upscale post-processing default if needed, optimize to `256 x 256 px` WebP, update only necessary alt text, and run:
+4. If approved, crop only accepted cells in the fixed order, normalize background, preserve the realistic-cartoon pixel-art quality, create a circular-mask preview and confirm subjects fit inside the inscribed circle, use the `128 px` grid / `96` to `128` color / nearest-upscale post-processing default if needed, optimize to `256 x 256 px` WebP, update only necessary alt text, and run:
    - `pnpm run validate:content`
    - `pnpm run lint`
    - `pnpm exec tsc --noEmit --incremental false`

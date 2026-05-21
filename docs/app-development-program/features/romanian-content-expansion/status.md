@@ -2334,6 +2334,66 @@ G-M verification:
 - `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
 - `git diff --check` passed.
 
+## Batch 40 N-R Corrective Image Continuation
+
+Batch 40 continued with another human-flagged corrective image list after the G-M pass.
+
+Implemented N-R corrective changes:
+
+- Generated one unlabeled 12-cell AI contact sheet for `nas`, `plajă`, `ploaie`, `prăjitură`, `păianjen`, `poză`, `pisicuță`, `raft`, `ramură`, `râu`, `roșie`, and `rotiță`.
+- The human accepted the first 11 cells and requested another pass only for `rotiță`, which needed to read more as a cog or visibly small wheel instead of a full vehicle tire.
+- Generated a focused 4-cell `rotiță` variant sheet; the human accepted the bottom-left third cell.
+- Cropped accepted cells in fixed order, normalized them onto true square `256 x 256 px` canvases, processed them through the refined `128 px` pixel-art workflow, and optimized them as lossless WebP files below the `12 KiB` warning boundary.
+- Updated only necessary alt text for `prăjitură`, `poză`, `pisicuță`, `raft`, and `rotiță`.
+
+N-R verification:
+
+- `pnpm run validate:content` passed outside the sandbox; only pre-existing image-size warnings were reported, and none of the promoted N-R assets were in the warning list.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
+## Batch 40 S Corrective Image Continuation
+
+Batch 40 continued with a human-approved corrective pass for the `S` letter.
+
+Implemented S corrective changes:
+
+- Excluded the human-approved acceptable S images: `soare`, `suc`, `săpun`, `scaun`, and `spaghete`.
+- Left rejected audit-trail row `stinghie` untouched.
+- Generated one unlabeled 12-cell AI contact sheet for `sanie`, `salată`, `sandale`, `sandviș`, `scară`, `scoică`, `sfoară`, `spumă`, `struguri`, `stilou`, `stejar`, and `săniuță`.
+- The human accepted all S cells.
+- Cropped accepted cells in fixed order, then added circular-slot QA because the app displays images in circular wheel slots and future admin thumbnails may also be circular.
+- Promoted circle-safe `256 x 256 px` lossless WebP assets; the circular-mask preview confirmed the subject stays inside the inscribed circle for each S crop.
+- Updated only necessary alt text for `sanie`, `sandviș`, and `săniuță`.
+- Updated `docs/image-pipeline.md` with a reusable circular corrective prompt add-on for future batch-by-batch regeneration.
+
+S verification:
+
+- `pnpm run validate:content` passed outside the sandbox; only pre-existing image-size warnings were reported, and none of the promoted S assets were in the warning list.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
+## Batch 40 Ș-T-Ț-U-Z Corrective Image Continuation
+
+Batch 40 continued with a human-approved corrective pass for selected `Ș`, `T`, `Ț`, `U`, and `Z` images.
+
+Implemented corrective changes:
+
+- Generated one unlabeled 18-cell AI contact sheet for `șoricel`, `șosetă`, `șervețel`, `școală`, `tavă`, `telefon`, `tigru`, `tobă`, `tort`, `tricou`, `televizor`, `țestoasă`, `țurțure`, `ulei`, `zar`, `zid`, `zmeură`, and `zambilă`.
+- The human accepted all cells.
+- Cropped accepted cells in fixed order, added circular-slot QA, and promoted circle-safe `256 x 256 px` lossless WebP assets.
+- The circular-mask preview confirmed the subject stays inside the inscribed circle for each crop.
+- Updated only necessary alt text for `șosetă`, `șervețel`, `tavă`, `tobă`, `tort`, `televizor`, `țurțure`, and `zmeură`.
+
+Ș-T-Ț-U-Z verification:
+
+- `pnpm run validate:content` passed outside the sandbox; only pre-existing image-size warnings were reported, and none of the promoted Ș-T-Ț-U-Z assets were in the warning list.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
 ## Next Batch
 
 There is no next approved Romanian image-generation batch beyond human-supplied corrective review. The current Romanian image completion scope remains at `367` approved words, `367` ready images, and `0` approved placeholders.
