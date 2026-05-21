@@ -2314,9 +2314,29 @@ Batch 39 QA:
 - `git diff --check` passed.
 - Sandboxed localhost checks failed for representative routes and assets; the required outside-sandbox retries returned `200 OK`.
 
+## Batch 40 Corrective Image Continuation
+
+Batch 40 continued with human-flagged corrective image work after the A-C and D-F passes.
+
+Implemented G-M corrective changes:
+
+- Generated one unlabeled 13-cell AI contact sheet for `gem`, `garaj`, `gemeni`, `ger`, `gheretă`, `gheruță`, `insulă`, `iaz`, `lac`, `melc`, `mușețel`, `mărțișor`, and `mazăre`.
+- Looked up `mărțișor` before prompting and recorded the Romanian red-white cord/trinket sources in the corrective audit document.
+- Stopped for human review; the human accepted all cells.
+- Cropped the accepted cells in fixed order, normalized them onto true square `256 x 256 px` canvases, processed them through the refined `128 px` / `96` color pixel-art workflow, and optimized them as lossless WebP files below the `12 KiB` warning boundary.
+- Updated only necessary alt text for `garaj`, `gemeni`, `ger`, `gheretă`, `iaz`, `lac`, `mușețel`, and `mărțișor`.
+- Updated `docs/image-pipeline.md` to explicitly reject partial/cut backgrounds inside future generated contact-sheet cells.
+
+G-M verification:
+
+- `pnpm run validate:content` passed outside the sandbox after sandboxed `pnpm` returned `fetch failed`; only pre-existing image-size warnings were reported, and none of the promoted G-M assets were in the warning list.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
 ## Next Batch
 
-There is no next approved Romanian image-generation batch. The current Romanian image completion scope is finalized.
+There is no next approved Romanian image-generation batch beyond human-supplied corrective review. The current Romanian image completion scope remains at `367` approved words, `367` ready images, and `0` approved placeholders.
 
 Remaining release verification steps:
 

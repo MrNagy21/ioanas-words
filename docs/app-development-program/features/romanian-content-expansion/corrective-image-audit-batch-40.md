@@ -218,6 +218,63 @@ Local ignored review artifacts may include:
 - `assets/image-sources/ro/batch-40/brand-comparison-final.png`
 - `assets/image-sources/ro/batch-40/generated-96/*.png`
 
+## Next Corrective Scope: G-M Human Flags
+
+The next human-flagged list covers:
+
+| Word ID | Word | Current image path | Human issue | Current image audit | Decision | Regeneration direction |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ro-g-gem` | `gem` | `/images/ro/g/ro-g-gem.webp` | Plain and bad; needs more detail and dimensionality. | Current jar reads as jam but is flat, sparse, and below the accepted food-object polish level. | Generate review candidate. | Detailed glass jar or small open jar of red berry jam, glossy jam surface, believable glass volume, warm full square background. |
+| `ro-g-garaj` | `garaj` | `/images/ro/g/ro-g-garaj.webp` | Needs to be more 3D, detailed, and specific; could be a boxy garage or near a house. | Current garage is simple and flat, with weak dimensional detail. | Generate review candidate. | Boxy small garage with clear segmented garage door, slight three-quarter view, a hint of house wall/driveway context if useful, full square background. |
+| `ro-g-gemeni` | `gemeni` | `/images/ro/g/ro-g-gemeni.webp` | Should be two identical boys. | Current image shows two children but not clearly identical twins. | Generate review candidate. | Two identical friendly boys side by side, same hair/clothes/proportions, child-safe expression, full square background. |
+| `ro-g-ger` | `ger` | `/images/ro/g/ro-g-ger.webp` | Too boxy/geometrical; needs more detail and 3D. | Current thermometer/snowflake symbol is geometric and too icon-like. | Generate review candidate. | Readable freezing-cold scene/object, such as frosty window/ice crystals with a small thermometer or icy branch, dimensional frost texture, cold full square background. |
+| `ro-g-ghereta` | `gheretă` | `/images/ro/g/ro-g-ghereta.webp` | Needs to be more specific, more detailed, more 3D, in style, and no shadow. | Current booth is readable but flat and too simple. | Generate review candidate. | Small kiosk/guard booth/ticket booth with window and door, simple 3D volume, no text, no cast/contact shadow, full square background. |
+| `ro-g-gheruta` | `gheruță` | `/images/ro/g/ro-g-gheruta.webp` | Same style/detail issue as `gheretă`; no shadow. | Current paw/claw is symbolic, flat, and on a cut/transparent-looking background. | Generate review candidate. | Small animal paw with visible little claws, rounded friendly shape, dimensional fur/pad detail, no scary talons, no shadow, full square background. |
+| `ro-i-insula` | `insulă` | `/images/ro/i/ro-i-insula.webp` | Needs more detail and 3D in the current standard. | Current island is too simple and geometric. | Generate review candidate. | Small sandy island with water around it and a palm/tree, gentle three-quarter/top-down volume, full square background. |
+| `ro-i-iaz` | `iaz` | `/images/ro/i/ro-i-iaz.webp` | Needs more detail and 3D. | Current pond is closer, but still too flat and sparse. | Generate review candidate. | Small contained pond with reeds, stones, lily pad, shallow-water feel, distinct from a large lake, full square background. |
+| `ro-l-lac` | `lac` | `/images/ro/l/ro-l-lac.webp` | Current image feels more like `iaz`; should be a bigger lake landscape. | Current lake is small and pond-like. | Generate review candidate. | Broader lake landscape with a larger water body, shoreline, trees or distant hills, still simple enough for thumbnail, full square background. |
+| `ro-m-melc` | `melc` | `/images/ro/m/ro-m-melc.webp` | Has two sets of eyes; snail eyes should be on eyestalks, not on the face. | Current snail is otherwise readable, but extra face eyes are biologically confusing. | Generate review candidate. | Friendly snail with exactly two eyes at the ends of upper eyestalks, no extra face eyes, rounded shell/body, full square background. |
+| `ro-m-musetel` | `mușețel` | `/images/ro/m/ro-m-musetel.webp` | Too boxy, geometrical, plain, and bad. | Current flower is stiff and icon-like. | Generate review candidate. | Small cluster of chamomile flowers with white petals and yellow centers, natural stems/leaves, soft dimensional pixel-art texture, full square background. |
+| `ro-m-martisor` | `mărțișor` | `/images/ro/m/ro-m-martisor.webp` | Too boxy/geometrical/plain; should be more Romanian-like. | Current heart charm has a red-white cord but does not clearly capture the Romanian traditional object. | Generate review candidate. | Romanian mărțișor with red-white twisted cord, tassels or bow, and a small spring/luck charm such as a flower, horseshoe, or clover; no text. Sources: Wikipedia overview of the Romanian/Moldovan spring tradition and red-white string (https://en.wikipedia.org/wiki/M%C4%83r%C8%9Bi%C8%99or), DEX definition of the mărțișor object/custom (https://dexonline.ro/definitie/m%C4%83r%C8%9Bi%C8%99or). |
+| `ro-m-mazare` | `mazăre` | `/images/ro/m/ro-m-mazare.webp` | Too boxy, geometrical, plain, and bad. | Current pea pod is flat and angular. | Generate review candidate. | Rounded green pea pod partly open with visible peas, organic curves, soft volume, full square background. |
+
+Contact-sheet plan: generate one unlabeled 13-cell candidate sheet in the exact table order above, with full square backgrounds inside every cell, then stop for human review before cropping, optimization, JSON edits, or production replacement.
+
+Contact-sheet outcome: generated one unlabeled 13-cell candidate sheet in the exact order above, stopped for human review, and the human accepted all cells.
+
+Implemented G-M corrective changes:
+
+| Word ID | Public path | Size | Dimensions | Result |
+| --- | --- | ---: | --- | --- |
+| `ro-g-gem` | `/images/ro/g/ro-g-gem.webp` | 11158 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-g-garaj` | `/images/ro/g/ro-g-garaj.webp` | 8830 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-g-gemeni` | `/images/ro/g/ro-g-gemeni.webp` | 10846 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-g-ger` | `/images/ro/g/ro-g-ger.webp` | 12038 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-g-ghereta` | `/images/ro/g/ro-g-ghereta.webp` | 10202 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-g-gheruta` | `/images/ro/g/ro-g-gheruta.webp` | 11544 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-i-insula` | `/images/ro/i/ro-i-insula.webp` | 10982 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-i-iaz` | `/images/ro/i/ro-i-iaz.webp` | 11242 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-l-lac` | `/images/ro/l/ro-l-lac.webp` | 9376 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-m-melc` | `/images/ro/m/ro-m-melc.webp` | 11812 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-m-musetel` | `/images/ro/m/ro-m-musetel.webp` | 12190 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-m-martisor` | `/images/ro/m/ro-m-martisor.webp` | 12056 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+| `ro-m-mazare` | `/images/ro/m/ro-m-mazare.webp` | 11214 B | 256 x 256 | Accepted, AI contact-sheet replacement |
+
+Alt text updated where the new image meaning became more specific: `garaj`, `gemeni`, `ger`, `gheretă`, `iaz`, `lac`, `mușețel`, and `mărțișor`.
+
+G-M brand/style review:
+
+- Created a final comparison sheet mixing `cozonac`, `cățel`, `cadă`, `buchet`, `castravete`, `jachetă`, `umbrelă`, `scaun`, and all promoted G-M crops.
+- Confirmed the approved crops use true `256 x 256 px` canvases, refined `128 px` pixel-art processing, full square backgrounds, and no contact-sheet gutter/cut-background artifacts.
+- All promoted G-M files are below the `12 KiB` warning boundary after lossless WebP optimization.
+
+G-M verification:
+
+- `pnpm run validate:content` passed outside the sandbox after sandboxed `pnpm` returned `fetch failed`; the reported image-size warnings were pre-existing assets (`fular`, `glob`, `hartă`, `mamă`, `mână`, `păpușă`, `porc`, `pernă`, `șarpe`, `ursuleț`, `vacă`, and `vulpe`), not the promoted G-M corrective assets.
+- `pnpm run lint` passed outside the sandbox.
+- `pnpm exec tsc --noEmit --incremental false` passed outside the sandbox.
+- `git diff --check` passed.
+
 ## Non-Goals
 
 - No broad image-generation batch without a human-approved flagged list.

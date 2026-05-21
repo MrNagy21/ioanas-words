@@ -2,7 +2,7 @@
 
 There is no additional approved image-generation scope after Romanian Content Expansion Batch 40. Batch 39 finalized the current Romanian image completion scope, and Batch 40 completed the first human-flagged A-C corrective image regeneration pass. Do not generate images, add vocabulary, or create another image batch without a separate human-approved production decision.
 
-The approved image-related path for future work is corrective review through `docs/app-development-program/features/romanian-content-expansion/corrective-image-audit-batch-40.md` when the human supplies a list of poor, unclear, or off-style ready images. The first Batch 40 A-C flagged list is complete: the deterministic local-drawing replacement attempt was rejected and restored, a later AI contact sheet was human-approved, and the accepted A-C cells were promoted. Do not repeat the deterministic SVG-like/local drawing approach.
+The approved image-related path for future work is corrective review through `docs/app-development-program/features/romanian-content-expansion/corrective-image-audit-batch-40.md` when the human supplies a list of poor, unclear, or off-style ready images. Batch 40 corrective passes are complete through the human-approved G-M list: the deterministic local-drawing replacement attempt was rejected and restored, later AI contact sheets were human-approved, and the accepted cells were promoted. Do not repeat the deterministic SVG-like/local drawing approach.
 
 Current finalized Romanian production pack:
 
@@ -12,7 +12,7 @@ Current finalized Romanian production pack:
 - Rejected audit-trail records: `ghicitoare`, `miez`, and `stinghie`.
 - Unresolved spoken note: `Capea` / `Kapia`; no current production word ID matches it.
 
-Batch 39 confirmed the production JSON, public image assets, `/admin/words`, and representative gameplay routes all match the finalized pack counts. Batch 40 replaced `14` human-flagged A-C ready images and kept the reused old casual-cap `caschetă` bitmap for `șapcă`. The public non-placeholder image tree should still contain exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets.
+Batch 39 confirmed the production JSON, public image assets, `/admin/words`, and representative gameplay routes all match the finalized pack counts. Batch 40 replaced human-flagged A-C, D-F, and G-M ready images and kept the reused old casual-cap `caschetă` bitmap for `șapcă`. The public non-placeholder image tree should still contain exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets.
 
 ## Remaining Release Verification Steps
 
@@ -66,6 +66,7 @@ Critical context:
 - `ro-b-bicicleta` still needs a human-reviewed quality/style improvement.
 - The A-C corrective set is marked done for now, but can still be improved in a later polish pass.
 - The D-F corrective scope is complete: `desen`, `duș`, `echer`, `echipament`, `față`, `frunză`, `fasole`, `frizerie`, and `frizură` were generated as one `3 x 3` AI contact sheet, accepted by the human, cropped in fixed order, background-normalized, and promoted as `256 x 256 px` lossless WebP assets.
+- The G-M corrective scope is complete: `gem`, `garaj`, `gemeni`, `ger`, `gheretă`, `gheruță`, `insulă`, `iaz`, `lac`, `melc`, `mușețel`, `mărțișor`, and `mazăre` were generated as one `13`-cell AI contact sheet, accepted by the human, cropped in fixed order, background-normalized into true square canvases, and promoted as optimized `256 x 256 px` lossless WebP assets. `mărțișor` was checked against online Romanian/tradition references before prompting.
 - Future corrective work needs a new human-flagged list and must stop for human review after the generated contact sheet.
 
 Goal:

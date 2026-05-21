@@ -211,7 +211,7 @@
       "category": "household",
       "image": "/images/ro/g/ro-g-garaj.webp",
       "imageStatus": "ready",
-      "alt": "Un garaj",
+      "alt": "Un garaj cu ușă mare",
       "source": [
         "manual"
       ],
@@ -463,7 +463,7 @@
       "category": "people",
       "image": "/images/ro/g/ro-g-gemeni.webp",
       "imageStatus": "ready",
-      "alt": "Doi copii gemeni",
+      "alt": "Doi băieți gemeni",
       "source": [
         "manual"
       ],
@@ -499,7 +499,7 @@
       "category": "nature",
       "image": "/images/ro/g/ro-g-ger.webp",
       "imageStatus": "ready",
-      "alt": "Un termometru albastru cu fulg de zăpadă",
+      "alt": "O ramură înghețată și un termometru",
       "source": [
         "manual"
       ],
@@ -661,7 +661,7 @@
       "category": "household",
       "image": "/images/ro/g/ro-g-ghereta.webp",
       "imageStatus": "ready",
-      "alt": "O gheretă mică cu fereastră",
+      "alt": "O gheretă mică cu fereastră și ușă",
       "source": [
         "manual"
       ],

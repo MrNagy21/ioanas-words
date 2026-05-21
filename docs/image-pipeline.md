@@ -62,6 +62,7 @@ For corrective regeneration, use an even stricter review gate:
 
 - generate one small contact sheet, ideally around `12` to `15` candidate images;
 - include generous gutters and no labels inside the generated image sheet;
+- explicitly prompt that each cell contains a complete square image background or transparency, not a smaller cropped rectangle, panel, partial fill, or cut-out pasted onto the sheet;
 - stop after the sheet is generated and ask the human to review before cropping cells, optimizing WebP assets, editing JSON, or replacing production files;
 - if the sheet is rejected, do not salvage individual crops unless the human explicitly identifies acceptable cells;
 - record the human decision in the batch audit document before any production asset promotion.
@@ -145,7 +146,7 @@ Background:
 - transparent background is preferred for final production assets;
 - if transparency is not practical, use a very pale warm off-white or soft sky-blue background;
 - avoid scenery unless the word itself requires context.
-- final assets must have a full square background or transparency across the entire `256 x 256 px` canvas; do not leave contact-sheet gutters, white side bars, corner blocks, rectangular panels, or cut-background artifacts around a cropped subject;
+- final assets must have a full square background or transparency across the entire `256 x 256 px` canvas; do not leave contact-sheet gutters, white side bars, corner blocks, black transparent-composite areas, rectangular panels, or cut-background artifacts around a cropped subject;
 - after cropping from a generated contact sheet, normalize edge-connected background pixels to the intended pale background before WebP optimization, then inspect the `256 x 256 px` result at full size and thumbnail size;
 - if a subject needs a contextual background such as water or frost sky, that background must fill the full square consistently instead of appearing as a smaller rectangular patch inside a white square.
 
