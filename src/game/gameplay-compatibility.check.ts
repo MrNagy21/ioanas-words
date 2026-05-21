@@ -15,6 +15,7 @@ import {
   getRandomWheelWords,
   getWheelEmptyStateKind,
   MAX_WHEEL_WORD_COUNT,
+  reconcileVisibleWheelWordIds,
   WORD_INCLUSION_MODES,
   type WordInclusionMode,
 } from "@/game/word-selection";
@@ -159,6 +160,14 @@ assert.deepEqual(
   "Expected random subsets to preserve canonical ready and placeholder word records",
 );
 
+assertVisibleSubsetCountdown({
+  expectedRemainingWordCount: 0,
+  label: "synthetic large pool",
+  removalCount: 15,
+  targetWordCount: 15,
+  words: makeSyntheticWords(24),
+});
+
 for (const letter of enabledRomanianLetters) {
   const wordPools = getDerivedWordPoolsForTarget("ro", letter);
 
@@ -300,6 +309,57 @@ for (const letter of enabledRomanianLetters) {
     );
   }
 }
+
+const vLetter =
+  enabledRomanianLetters.find((letter) => letter.id === "v") ??
+  assert.fail("Expected Romanian letter V to be enabled");
+const sLetter =
+  enabledRomanianLetters.find((letter) => letter.id === "s") ??
+  assert.fail("Expected Romanian letter S to be enabled");
+const shLetter =
+  enabledRomanianLetters.find((letter) => letter.id === "ș") ??
+  assert.fail("Expected Romanian letter Ș to be enabled");
+const vWordPools = getDerivedWordPoolsForTarget("ro", vLetter);
+const sWordPools = getDerivedWordPoolsForTarget("ro", sLetter);
+const shWordPools = getDerivedWordPoolsForTarget("ro", shLetter);
+const vContainsOnlyWords = getModePool(vWordPools, "contains-only");
+const sMixedWords = getModePool(sWordPools, "starts-with-or-contains");
+const shMixedWords = getModePool(shWordPools, "starts-with-or-contains");
+
+assert.equal(
+  vContainsOnlyWords.length,
+  15,
+  "Expected V contains-only to remain an exact 15-word pool for the reset-regression fixture",
+);
+assert.ok(
+  sMixedWords.length > 15,
+  "Expected S mixed mode to remain a large pool for the reset-regression fixture",
+);
+assert.ok(
+  shMixedWords.length > 15,
+  "Expected Ș mixed mode to remain a large pool for the reset-regression fixture",
+);
+assertVisibleSubsetCountdown({
+  expectedRemainingWordCount: 1,
+  label: "V contains-only exact-size pool",
+  removalCount: 14,
+  targetWordCount: 15,
+  words: vContainsOnlyWords,
+});
+assertVisibleSubsetCountdown({
+  expectedRemainingWordCount: 3,
+  label: "S mixed large pool",
+  removalCount: 12,
+  targetWordCount: 15,
+  words: sMixedWords,
+});
+assertVisibleSubsetCountdown({
+  expectedRemainingWordCount: 3,
+  label: "Ș mixed large pool",
+  removalCount: 12,
+  targetWordCount: 15,
+  words: shMixedWords,
+});
 
 const expectedPracticeTargetMixedCounts = {
   ce: 16,
@@ -498,6 +558,73 @@ function getModePool(
   }
 
   return wordPools.startsWithWords;
+}
+
+function assertVisibleSubsetCountdown({
+  expectedRemainingWordCount,
+  label,
+  removalCount,
+  targetWordCount,
+  words,
+}: Readonly<{
+  expectedRemainingWordCount: number;
+  label: string;
+  removalCount: number;
+  targetWordCount: number;
+  words: readonly ContentWord[];
+}>) {
+  let removedWordIds: string[] = [];
+  let activeWords = words;
+  let visibleWordIds = reconcileVisibleWheelWordIds({
+    activeWords,
+    existingWordIds: null,
+    targetWordCount,
+  });
+  const initialVisibleWordIds = new Set(visibleWordIds);
+
+  assert.equal(
+    visibleWordIds.length,
+    getBoundedWheelWordCount(targetWordCount, words.length),
+    `Expected ${label} to initialize the requested visible subset`,
+  );
+
+  for (let removalIndex = 0; removalIndex < removalCount; removalIndex += 1) {
+    const selectedWordId =
+      visibleWordIds[0] ??
+      assert.fail(`Expected ${label} to have a visible word to remove`);
+
+    removedWordIds = [...removedWordIds, selectedWordId];
+    visibleWordIds = visibleWordIds.filter(
+      (wordId) => wordId !== selectedWordId,
+    );
+    activeWords = words.filter((word) => !removedWordIds.includes(word.id));
+    visibleWordIds = reconcileVisibleWheelWordIds({
+      activeWords,
+      existingWordIds: visibleWordIds,
+      targetWordCount,
+    });
+
+    assert.equal(
+      visibleWordIds.length,
+      Math.max(
+        0,
+        getBoundedWheelWordCount(targetWordCount, words.length) -
+          removalIndex -
+          1,
+      ),
+      `Expected ${label} removal ${removalIndex + 1} not to refill hidden off-wheel words`,
+    );
+    assert.ok(
+      visibleWordIds.every((wordId) => initialVisibleWordIds.has(wordId)),
+      `Expected ${label} to keep the visible subset from refilling with hidden words`,
+    );
+  }
+
+  assert.equal(
+    visibleWordIds.length,
+    expectedRemainingWordCount,
+    `Expected ${label} to count down to ${expectedRemainingWordCount} visible words`,
+  );
 }
 
 function makeSyntheticWords(count: number): ContentWord[] {

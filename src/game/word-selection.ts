@@ -131,6 +131,27 @@ export function getRandomWord(words: readonly ContentWord[]) {
   return words[Math.floor(Math.random() * words.length)];
 }
 
+export function reconcileVisibleWheelWordIds({
+  activeWords,
+  existingWordIds,
+  targetWordCount,
+}: Readonly<{
+  activeWords: readonly ContentWord[];
+  existingWordIds: readonly string[] | null;
+  targetWordCount: number;
+}>): string[] {
+  if (existingWordIds === null) {
+    return getRandomWheelWords({
+      targetWordCount,
+      words: activeWords,
+    }).map((word) => word.id);
+  }
+
+  const activeWordIds = new Set(activeWords.map((word) => word.id));
+
+  return existingWordIds.filter((wordId) => activeWordIds.has(wordId));
+}
+
 export function getWheelEmptyStateKind({
   availableWordCount,
   visibleWordCount,

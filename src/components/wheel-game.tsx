@@ -22,8 +22,8 @@ import {
   getBoundedWheelWordCount,
   getOffWheelWords,
   getPlayableWords,
-  getRandomWheelWords,
   getRandomWord,
+  reconcileVisibleWheelWordIds,
   getWheelEmptyStateKind,
   MAX_WHEEL_WORD_COUNT,
 } from "@/game/word-selection";
@@ -203,6 +203,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
       ? getSelectedWords(selectedModeAllWords, selectedWordIds).length
       : selectedModeTotalWordCount;
   const targetWordCount = targetWordCounts[selectedMode];
+  const setupRequestedWheelWordCount = targetWordCount;
   const activeSetupConfig = useMemo<WheelSetupConfig>(
     () => ({
       mode: selectedMode,
@@ -259,34 +260,41 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     [activeModeWords, selectedWordIds, wordSelectionMode],
   );
   const visibleWheelWordCount = getBoundedWheelWordCount(
-    targetWordCount,
+    setupRequestedWheelWordCount,
     activeWords.length,
   );
   const subsetKey = getWheelSubsetKey({
     excludedTargetKeys,
     mode: selectedMode,
     selectedWordIds,
-    targetWordCount: visibleWheelWordCount,
+    targetWordCount: setupRequestedWheelWordCount,
     wordSelectionMode,
   });
   const fallbackVisibleWordIds = useMemo(
     () => activeWords.slice(0, visibleWheelWordCount).map((word) => word.id),
     [activeWords, visibleWheelWordCount],
   );
-  const visibleWordIds =
-    visibleWordIdsBySubsetKey[subsetKey] ?? fallbackVisibleWordIds;
+  const hasVisibleSubset = Object.prototype.hasOwnProperty.call(
+    visibleWordIdsBySubsetKey,
+    subsetKey,
+  );
+  const visibleWordIds = useMemo(
+    () =>
+      hasVisibleSubset
+        ? (visibleWordIdsBySubsetKey[subsetKey] ?? [])
+        : fallbackVisibleWordIds,
+    [
+      fallbackVisibleWordIds,
+      hasVisibleSubset,
+      subsetKey,
+      visibleWordIdsBySubsetKey,
+    ],
+  );
   const visibleWordsFromIds = useMemo(
     () => getWordsByVisibleIds(activeWords, visibleWordIds),
     [activeWords, visibleWordIds],
   );
-  const fallbackWords = useMemo(
-    () => activeWords.slice(0, visibleWheelWordCount),
-    [activeWords, visibleWheelWordCount],
-  );
-  const words =
-    visibleWordsFromIds.length > 0 || activeWords.length === 0
-      ? visibleWordsFromIds
-      : fallbackWords;
+  const words = visibleWordsFromIds;
   const replacementWords = useMemo(
     () =>
       getOffWheelWords({
@@ -323,7 +331,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   );
   const emptyStateKind = getWheelEmptyStateKind({
     availableWordCount: selectedSetupTotalWordCount,
-    visibleWordCount: activeWords.length,
+    visibleWordCount: words.length,
   });
   const isInteractionBlocked = isSpinning || isResultOpen || isSetupOpen;
 
@@ -379,20 +387,22 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   useEffect(() => {
     const randomizeTimer = window.setTimeout(() => {
       setVisibleWordIdsBySubsetKey((currentSubsets) => {
-        const currentWordIds = currentSubsets[subsetKey];
-        const nextWordIds = currentWordIds
-          ? getStillAvailableWordIds({
-              activeWords,
-              currentWordIds,
-              visibleWheelWordCount,
-            })
-          : getRandomWheelWords({
-              targetWordCount: visibleWheelWordCount,
-              words: activeWords,
-            }).map((word) => word.id);
+        const hasCurrentSubset = Object.prototype.hasOwnProperty.call(
+          currentSubsets,
+          subsetKey,
+        );
+        const currentWordIds = hasCurrentSubset
+          ? (currentSubsets[subsetKey] ?? [])
+          : null;
+        const nextWordIds = reconcileVisibleWheelWordIds({
+          activeWords,
+          existingWordIds: currentWordIds,
+          targetWordCount: visibleWheelWordCount,
+        });
 
         if (
-          currentWordIds &&
+          hasCurrentSubset &&
+          currentWordIds !== null &&
           areWordIdListsEqual(currentWordIds, nextWordIds)
         ) {
           return currentSubsets;
@@ -641,6 +651,27 @@ export function WheelGame({ content, locale }: WheelGameProps) {
         ? currentIds
         : [...currentIds, selectedWord.id],
     );
+    setVisibleWordIdsBySubsetKey((currentSubsets) => {
+      const hasCurrentSubset = Object.prototype.hasOwnProperty.call(
+        currentSubsets,
+        subsetKey,
+      );
+      const currentWordIds = hasCurrentSubset
+        ? (currentSubsets[subsetKey] ?? [])
+        : words.map((word) => word.id);
+      const nextWordIds = currentWordIds.filter(
+        (wordId) => wordId !== selectedWord.id,
+      );
+
+      if (areWordIdListsEqual(currentWordIds, nextWordIds)) {
+        return currentSubsets;
+      }
+
+      return {
+        ...currentSubsets,
+        [subsetKey]: nextWordIds,
+      };
+    });
     setSelectedWord(null);
     setIsResultOpen(false);
   }
@@ -1961,22 +1992,6 @@ function areWordIdListsEqual(
     firstWordIds.length === secondWordIds.length &&
     firstWordIds.every((wordId, index) => wordId === secondWordIds[index])
   );
-}
-
-function getStillAvailableWordIds({
-  activeWords,
-  currentWordIds,
-  visibleWheelWordCount,
-}: Readonly<{
-  activeWords: readonly ContentWord[];
-  currentWordIds: readonly string[];
-  visibleWheelWordCount: number;
-}>) {
-  const activeWordIds = new Set(activeWords.map((word) => word.id));
-
-  return currentWordIds
-    .filter((wordId) => activeWordIds.has(wordId))
-    .slice(0, visibleWheelWordCount);
 }
 
 function getImageClipId(word: ContentWord) {
