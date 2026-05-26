@@ -814,7 +814,7 @@ Tasks:
   - `lighean`
   - `spaghete`
   - `ghirlandă`
-  - `ghiuvetă`
+  - `ghimbir`
   - `unghie`
 - Generate, visually review, palette-reduce if needed, and optimize final pixel-art WebP assets using the established image pipeline.
 - Replace only placeholder image paths/statuses with canonical ready assets; do not add new vocabulary or speech-target production metadata.
@@ -840,7 +840,7 @@ git diff --check
 
 Decision result:
 
-- Batch 19 implemented a 12-word `GE`/`GI`/`GHE`/`GHI` image-replacement slice for `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghiuvetă`, and `unghie`.
+- Batch 19 implemented a 12-word `GE`/`GI`/`GHE`/`GHI` image-replacement slice for `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghimbir`, and `unghie`. The `ghimbir` entry supersedes the incorrect `ghiuvetă` G-bucket record corrected on 2026-05-26.
 - Added `image-briefs-batch-19.md` with target words, image briefs, review decisions, final asset paths, and target-readiness impact.
 - Generated one cropable contact sheet with generous gutters, then cropped, background-normalized, palette-reduced, and optimized final canonical WebP assets under `public/images/ro/`.
 - Updated the 12 canonical word records from the generic placeholder to ready app-owned image paths and meaningful alt text.

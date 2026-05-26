@@ -435,17 +435,17 @@
       "status": "approved"
     },
     {
-      "id": "ro-g-ghiuveta",
-      "word": "ghiuvetă",
-      "display": "ghiuvetă",
-      "normalized": "ghiuveta",
+      "id": "ro-g-ghimbir",
+      "word": "ghimbir",
+      "display": "ghimbir",
+      "normalized": "ghimbir",
       "partOfSpeech": "noun",
       "difficulty": 2,
       "ageBand": "4-6",
-      "category": "household",
-      "image": "/images/ro/g/ro-g-ghiuveta.webp",
+      "category": "food",
+      "image": "/images/ro/g/ro-g-ghimbir.webp",
       "imageStatus": "ready",
-      "alt": "O ghiuvetă cu robinet",
+      "alt": "O rădăcină de ghimbir",
       "source": [
         "manual"
       ],

@@ -4,7 +4,7 @@ Batch: Romanian Content Expansion Batch 19, Placeholder Image Replacement Slice 
 
 Spec date: 2026-05-17.
 
-Status: Implemented fourth image-replacement slice.
+Status: Implemented fourth image-replacement slice. Corrected on 2026-05-26: the incorrect `ro-g-ghiuveta` / `ghiuvetă` record and asset were replaced by `ro-g-ghimbir` / `ghimbir`; the correct `ro-c-chiuveta` / `chiuvetă` record remains in the `C` / `CHI` pool.
 
 ## Scope
 
@@ -22,14 +22,16 @@ This slice replaced 12 placeholder-backed words that clear the remaining `GE`, `
 | `ro-l-lighean` | `lighean` | medial `GHE` spelling | Simple household plastic wash basin/tub. | accepted |
 | `ro-s-spaghete` | `spaghete` | medial `GHE` spelling | Plain plate of spaghetti, no restaurant branding. | accepted |
 | `ro-g-ghirlanda` | `ghirlandă` | initial `GHI` | Small colorful garland, no letters or written flags. | accepted |
-| `ro-g-ghiuveta` | `ghiuvetă` | initial `GHI` | Simple household sink basin with faucet. | accepted |
+| `ro-g-ghimbir` | `ghimbir` | initial `GHI` | One fresh ginger root, warm tan skin with pale cut ends, no packaging or kitchen scene. | accepted as 2026-05-26 correction |
 | `ro-u-unghie` | `unghie` | medial/final `GHI` spelling | Neutral clean fingernail icon, no injury or medical scene. | accepted |
 
 ## Generation And Review
 
 Generation used the established pixel-art pipeline in `docs/image-pipeline.md` with the built-in image generation workflow.
 
-The accepted source was a 4-by-3 contact sheet generated with generous gutters and no labels. Source cells were cropped in the fixed order above, background-normalized to the warm pack background, palette-reduced to 48 colors, staged as reviewed source PNGs under ignored `assets/image-sources/ro/<letter>/` paths, and optimized through the existing local image optimizer.
+The original accepted source was a 4-by-3 contact sheet generated with generous gutters and no labels. Source cells were cropped in the fixed order above, background-normalized to the warm pack background, palette-reduced to 48 colors, staged as reviewed source PNGs under ignored `assets/image-sources/ro/<letter>/` paths, and optimized through the existing local image optimizer.
+
+The 2026-05-26 `ghimbir` correction used a one-off built-in image generation with the same pack style target, then refined the result through a `128 px` pixel-art grid and optimized it as a `256 x 256 px` lossless WebP asset.
 
 Final review confirmed:
 
@@ -50,8 +52,8 @@ Final WebP assets were written to canonical paths:
 public/images/ro/a/ro-a-alge.webp
 public/images/ro/f/ro-f-frigider.webp
 public/images/ro/f/ro-f-fulger.webp
+public/images/ro/g/ro-g-ghimbir.webp
 public/images/ro/g/ro-g-ghirlanda.webp
-public/images/ro/g/ro-g-ghiuveta.webp
 public/images/ro/l/ro-l-lighean.webp
 public/images/ro/m/ro-m-margele.webp
 public/images/ro/p/ro-p-pagina.webp

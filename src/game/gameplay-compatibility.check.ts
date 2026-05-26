@@ -328,8 +328,8 @@ const shMixedWords = getModePool(shWordPools, "starts-with-or-contains");
 
 assert.equal(
   vContainsOnlyWords.length,
-  15,
-  "Expected V contains-only to remain an exact 15-word pool for the reset-regression fixture",
+  14,
+  "Expected V contains-only to remain an exact-size pool for the reset-regression fixture",
 );
 assert.ok(
   sMixedWords.length > 15,
@@ -342,8 +342,8 @@ assert.ok(
 assertVisibleSubsetCountdown({
   expectedRemainingWordCount: 1,
   label: "V contains-only exact-size pool",
-  removalCount: 14,
-  targetWordCount: 15,
+  removalCount: 13,
+  targetWordCount: 14,
   words: vContainsOnlyWords,
 });
 assertVisibleSubsetCountdown({

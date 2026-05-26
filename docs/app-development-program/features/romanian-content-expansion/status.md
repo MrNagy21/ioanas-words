@@ -1,16 +1,20 @@
 # Romanian Content Expansion Status
 
-Last updated: 2026-05-20
+Last updated: 2026-05-26
 
 ## Current Phase
 
-Phase: Batch 40 A-C corrective image regeneration complete
+Phase: Post-Batch 40 vocabulary correction complete
 
-Overall status: The Romanian image completion scope remains finalized for the current approved production pack. Batch 39 audited the current production JSON, public image assets, `/admin/words`, and representative gameplay routes without adding vocabulary or generating images. Production Romanian content has `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` ready WebP files referenced by approved records, with no missing or unused production image assets found. `ghicitoare`, `miez`, and `stinghie` remain `rejected` and were not reintroduced. The spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only. Batch 40 corrected the first A-C human-flagged image list through a human-approved AI contact sheet, refined `128 px` pixel-art post-processing, `96`-color palette limiting, nearest-neighbor upscale to `256 x 256 px`, and lossless WebP optimization. The previous deterministic local-drawing attempt remains rejected and restored. The kept Batch 40 assets are the `14` A-C replacements plus reused casual-cap `ro-sh-sapca`.
+Overall status: The Romanian image completion scope remains finalized for the current approved production pack. Batch 39 audited the current production JSON, public image assets, `/admin/words`, and representative gameplay routes without adding vocabulary or generating images. Production Romanian content has `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` ready WebP files referenced by approved records, with no missing or unused production image assets found. The user-reported incorrect `ro-g-ghiuveta` / `ghiuvetă` G-bucket record was corrected on 2026-05-26: dexonline/DOOM support the standard spelling `chiuvetă`, the existing correct `ro-c-chiuveta` / `chiuvetă` record remains in the `C` / `CHI` pool, and the G/GHI slot is now `ro-g-ghimbir` / `ghimbir` with a new app-owned ready image. `ghicitoare`, `miez`, and `stinghie` remain `rejected` and were not reintroduced. The spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only. Batch 40 corrected the first A-C human-flagged image list through a human-approved AI contact sheet, refined `128 px` pixel-art post-processing, `96`-color palette limiting, nearest-neighbor upscale to `256 x 256 px`, and lossless WebP optimization. The previous deterministic local-drawing attempt remains rejected and restored. The kept Batch 40 assets are the `14` A-C replacements plus reused casual-cap `ro-sh-sapca`.
 
 ## Completed
 
 - Created the feature folder.
+- Corrected the user-reported G/GHI vocabulary error on 2026-05-26 after online dexonline/DOOM checks (`https://dexonline.ro/intrare/chiuvet%C4%83/10192`, `https://dexonline.ro/definitie/ghimbir`): removed the incorrect approved `ro-g-ghiuveta` / `ghiuvetă` record and unused public image asset, preserved the existing correct `ro-c-chiuveta` / `chiuvetă` C/CHI record, added `ro-g-ghimbir` / `ghimbir` as the replacement G/GHI word, generated a child-safe ginger-root pixel-art image, refined it through a `128 px` pixel-art grid, and promoted `public/images/ro/g/ro-g-ghimbir.webp` as a `256 x 256 px` lossless WebP file below the warning threshold.
+- Updated the content-dependent gameplay compatibility fixture because replacing `ghiuvetă` with `ghimbir` intentionally reduces the derived `V` contains-only pool from `15` to `14` while preserving exact-size visible-subset countdown regression coverage.
+- Verification for the 2026-05-26 vocabulary correction passed: `pnpm run validate:content` passed with only pre-existing image warning-threshold notices; `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check` passed; a production image sanity check found `367` approved words, `367` ready image refs, `367` public non-placeholder WebP files, `0` missing files, and `0` unused files. `pnpm run build` remains blocked locally by the known Next SWC darwin/arm64 code-signature failure before app compilation.
+- Outside-sandbox route checks returned `200 OK` for `http://localhost:3000/ro/play/ghi` and `http://localhost:3000/images/ro/g/ro-g-ghimbir.webp`.
 - Drafted `spec.md`.
 - Drafted batch plan in `plan.md`.
 - Created this feature-specific `status.md`.
@@ -633,7 +637,7 @@ Overall status: The Romanian image completion scope remains finalized for the cu
 - Batch 17 decision: `genunchi` can be illustrated as a neutral bent-knee body-part icon, with no injury, medical scene, or full-person context.
 - Batch 17 decision: the next placeholder image replacement slice should prioritize `CHE`, remaining `CHI`, remaining `GE/GI`, and any remaining visually straightforward `GHE/GHI` placeholders without adding new vocabulary or production speech-target metadata.
 - Batch 18 decision: regenerate the contact sheet when icons are too close for clean cropping; future image sheets should use generous gutters or individual generations before cropping.
-- Batch 18 decision: the next placeholder image replacement slice should prioritize the remaining `GE`, `GI`, `GHE`, and `GHI` placeholders: `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghiuvetă`, and `unghie`.
+- Batch 18 decision: the next placeholder image replacement slice should prioritize the remaining `GE`, `GI`, `GHE`, and `GHI` placeholders: `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghimbir`, and `unghie`. `ghimbir` supersedes the incorrect `ghiuvetă` G-bucket record corrected on 2026-05-26.
 - Batch 19 decision: the next placeholder image replacement slice should prioritize remaining high-value sequence target placeholders, especially the remaining `CE` and `CI` rows, while preserving `CHE`, `CHI`, `GE`, `GI`, `GHE`, and `GHI` at `0` placeholders.
 - Batch 20 decision: replace all remaining `CE` and `CI` sequence-target placeholders in one 8-word slice because the concepts were visually straightforward and the batch size stayed manageable for visual QA.
 - Batch 20 decision: after this slice, the next Romanian image work can move to general high-value placeholder-backed records because all eight sequence practice targets are now at `0` placeholders.
@@ -794,7 +798,7 @@ Overall status: The Romanian image completion scope remains finalized for the cu
 - Batch 18 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
 - Batch 19 fourth `GE`/`GI`/`GHE`/`GHI` placeholder replacement slice: complete.
 - Batch 19 image briefs and review record: complete; see `image-briefs-batch-19.md`.
-- Batch 19 generated and visually reviewed 12 child-safe, text-free, logo-free, brand-free pixel-art images for `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghiuvetă`, and `unghie`.
+- Batch 19 generated and visually reviewed 12 child-safe, text-free, logo-free, brand-free pixel-art images for `alge`, `fulger`, `mărgele`, `frigider`, `pagină`, `regină`, `înghețată`, `lighean`, `spaghete`, `ghirlandă`, `ghimbir`, and `unghie`; the `ghimbir` asset was added later as the 2026-05-26 correction for the incorrect G-bucket `ghiuvetă`.
 - Batch 19 cropped the generated contact sheet with generous gutters, background-normalized the accepted source cells, palette-reduced them, optimized final canonical WebP assets under `public/images/ro/`, and confirmed all 12 final assets are `256 x 256 px` and below the `20 KB` hard maximum.
 - Batch 19 promoted the 12 affected production records from the generic placeholder to ready app-owned image paths with meaningful alt text.
 - Batch 19 confirmation that no new vocabulary, rejected/held/needs-revision candidates, speech-target JSON metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added: complete.
@@ -1668,7 +1672,7 @@ Updated image records:
 - `ro-l-lighean`
 - `ro-s-spaghete`
 - `ro-g-ghirlanda`
-- `ro-g-ghiuveta`
+- `ro-g-ghimbir`
 - `ro-u-unghie`
 
 Helper-derived production totals after Batch 19:

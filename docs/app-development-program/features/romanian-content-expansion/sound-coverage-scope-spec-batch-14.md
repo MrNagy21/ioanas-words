@@ -187,7 +187,7 @@ All accepted rows are intended as Batch 15 source rows only. They are not produc
 | `ghiocel` | `G` | `ghi`, `ce` | starts-with `ghi`; final `ce` spelling | `SEQ`, `DEX`, `IR` | strong / high / pass | accept |
 | `ghidon` | `G` | `ghi` | starts-with | `SEQ`, `DEX`, `IR` | good / high / pass; bicycle handlebar | accept |
 | `ghirlandă` | `G` | `ghi` | starts-with | `SEQ`, `DEX`, `IR` | good / high / pass | accept |
-| `ghiuvetă` | `G` | `ghi` | starts-with | `SEQ`, `DEX`, `IR` | good / high / pass | accept |
+| `ghimbir` | `G` | `ghi` | starts-with | `SEQ`, `DEX`, `IR` | mixed / medium / pass; concrete food/root, accepted as a narrow replacement for the incorrect `ghiuvetă` record | accept |
 
 ## Quality Ceilings And Held Rows
 
@@ -214,7 +214,6 @@ The following candidates are not accepted for Batch 15. They can be revisited on
 | `ghimpe` | `ghi` | reject | Thorn image is safety-sensitive and less child-friendly. |
 | `ghiulea` | `ghi` | reject | Weapon/cannonball association is out of child-facing scope. |
 | `gheară` | `ghe` | hold | Concrete but can read as threatening; not needed for current quality target. |
-| `ghimbir` | `ghi` | hold | Concrete food/root but less familiar to many 4-to-6-year-old children. |
 
 ## Target Decisions
 
