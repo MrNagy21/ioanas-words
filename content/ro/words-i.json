@@ -145,6 +145,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-i-iac",
+      "word": "iac",
+      "display": "iac",
+      "normalized": "iac",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/i/ro-i-iac.webp",
+      "imageStatus": "ready",
+      "alt": "Un iac blând, cu blană deasă și coarne.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

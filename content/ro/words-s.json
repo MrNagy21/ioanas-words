@@ -309,6 +309,78 @@
       "status": "approved"
     },
     {
+      "id": "ro-s-supa",
+      "word": "supă",
+      "display": "supă",
+      "normalized": "supa",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/s/ro-s-supa.webp",
+      "imageStatus": "ready",
+      "alt": "Un bol cu supă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sare",
+      "word": "sare",
+      "display": "sare",
+      "normalized": "sare",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/s/ro-s-sare.webp",
+      "imageStatus": "ready",
+      "alt": "Sare într-o solniță.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-seminte",
+      "word": "semințe",
+      "display": "semințe",
+      "normalized": "seminte",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/s/ro-s-seminte.webp",
+      "imageStatus": "ready",
+      "alt": "O grămăjoară de semințe.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sita",
+      "word": "sită",
+      "display": "sită",
+      "normalized": "sita",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/s/ro-s-sita.webp",
+      "imageStatus": "ready",
+      "alt": "O sită de bucătărie.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
       "word": "stinghie",
       "display": "stinghie",
       "normalized": "stinghie",
@@ -325,6 +397,78 @@
       ],
       "license": "app-owned",
       "status": "rejected"
+    },
+    {
+      "id": "ro-s-sticla",
+      "word": "sticlă",
+      "display": "sticlă",
+      "normalized": "sticla",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/s/ro-s-sticla.webp",
+      "imageStatus": "ready",
+      "alt": "O sticlă întreagă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sac",
+      "word": "sac",
+      "display": "sac",
+      "normalized": "sac",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/s/ro-s-sac.webp",
+      "imageStatus": "ready",
+      "alt": "Un sac simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sora",
+      "word": "soră",
+      "display": "soră",
+      "normalized": "sora",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "family",
+      "image": "/images/ro/s/ro-s-sora.webp",
+      "imageStatus": "ready",
+      "alt": "O soră zâmbitoare.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-sacou",
+      "word": "sacou",
+      "display": "sacou",
+      "normalized": "sacou",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/s/ro-s-sacou.webp",
+      "imageStatus": "ready",
+      "alt": "Un sacou simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

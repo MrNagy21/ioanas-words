@@ -1,0 +1,96 @@
+{
+  "locale": "ro",
+  "letter": "k",
+  "words": [
+    {
+      "id": "ro-k-kiwi",
+      "word": "kiwi",
+      "display": "kiwi",
+      "normalized": "kiwi",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/k/ro-k-kiwi.webp",
+      "imageStatus": "ready",
+      "alt": "Un fruct kiwi tăiat, cu miez verde.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-k-koala",
+      "word": "koala",
+      "display": "koala",
+      "normalized": "koala",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/k/ro-k-koala.webp",
+      "imageStatus": "ready",
+      "alt": "Un koala prietenos pe o creangă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-k-kimono",
+      "word": "kimono",
+      "display": "kimono",
+      "normalized": "kimono",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/k/ro-k-kimono.webp",
+      "imageStatus": "ready",
+      "alt": "Un kimono alb cu centură albastră.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-k-karate",
+      "word": "karate",
+      "display": "karate",
+      "normalized": "karate",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/k/ro-k-karate.webp",
+      "imageStatus": "ready",
+      "alt": "Un copil în poziție de karate.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-k-kilt",
+      "word": "kilt",
+      "display": "kilt",
+      "normalized": "kilt",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/k/ro-k-kilt.webp",
+      "imageStatus": "ready",
+      "alt": "Un kilt în carouri.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

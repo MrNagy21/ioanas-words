@@ -181,6 +181,150 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-t-taxi",
+      "word": "taxi",
+      "display": "taxi",
+      "normalized": "taxi",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/t/ro-t-taxi.webp",
+      "imageStatus": "ready",
+      "alt": "O mașină galbenă de taxi, fără text.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tren",
+      "word": "tren",
+      "display": "tren",
+      "normalized": "tren",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/t/ro-t-tren.webp",
+      "imageStatus": "ready",
+      "alt": "Un tren colorat cu locomotivă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tractor",
+      "word": "tractor",
+      "display": "tractor",
+      "normalized": "tractor",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/t/ro-t-tractor.webp",
+      "imageStatus": "ready",
+      "alt": "Un tractor verde cu roți mari.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tabla",
+      "word": "tablă",
+      "display": "tablă",
+      "normalized": "tabla",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/t/ro-t-tabla.webp",
+      "imageStatus": "ready",
+      "alt": "O tablă de școală goală.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tigaie",
+      "word": "tigaie",
+      "display": "tigaie",
+      "normalized": "tigaie",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/t/ro-t-tigaie.webp",
+      "imageStatus": "ready",
+      "alt": "O tigaie simplă cu mâner.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tamburina",
+      "word": "tamburină",
+      "display": "tamburină",
+      "normalized": "tamburina",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/t/ro-t-tamburina.webp",
+      "imageStatus": "ready",
+      "alt": "O tamburină cu zurgălăi.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-trandafir",
+      "word": "trandafir",
+      "display": "trandafir",
+      "normalized": "trandafir",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/t/ro-t-trandafir.webp",
+      "imageStatus": "ready",
+      "alt": "Un trandafir roșu cu frunze.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tacamuri",
+      "word": "tacâmuri",
+      "display": "tacâmuri",
+      "normalized": "tacamuri",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/t/ro-t-tacamuri.webp",
+      "imageStatus": "ready",
+      "alt": "Tacâmuri cu lingură și furculiță.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

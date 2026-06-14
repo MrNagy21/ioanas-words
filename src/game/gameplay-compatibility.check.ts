@@ -45,11 +45,13 @@ assert.deepEqual(
     "i",
     "î",
     "j",
+    "k",
     "l",
     "m",
     "n",
     "o",
     "p",
+    "q",
     "r",
     "s",
     "ș",
@@ -57,6 +59,9 @@ assert.deepEqual(
     "ț",
     "u",
     "v",
+    "w",
+    "x",
+    "y",
     "z",
   ],
 );
@@ -310,26 +315,26 @@ for (const letter of enabledRomanianLetters) {
   }
 }
 
-const vLetter =
-  enabledRomanianLetters.find((letter) => letter.id === "v") ??
-  assert.fail("Expected Romanian letter V to be enabled");
+const dLetter =
+  enabledRomanianLetters.find((letter) => letter.id === "d") ??
+  assert.fail("Expected Romanian letter D to be enabled");
 const sLetter =
   enabledRomanianLetters.find((letter) => letter.id === "s") ??
   assert.fail("Expected Romanian letter S to be enabled");
 const shLetter =
   enabledRomanianLetters.find((letter) => letter.id === "ș") ??
   assert.fail("Expected Romanian letter Ș to be enabled");
-const vWordPools = getDerivedWordPoolsForTarget("ro", vLetter);
+const dWordPools = getDerivedWordPoolsForTarget("ro", dLetter);
 const sWordPools = getDerivedWordPoolsForTarget("ro", sLetter);
 const shWordPools = getDerivedWordPoolsForTarget("ro", shLetter);
-const vContainsOnlyWords = getModePool(vWordPools, "contains-only");
+const dStartsWithWords = getModePool(dWordPools, "starts-with");
 const sMixedWords = getModePool(sWordPools, "starts-with-or-contains");
 const shMixedWords = getModePool(shWordPools, "starts-with-or-contains");
 
 assert.equal(
-  vContainsOnlyWords.length,
-  14,
-  "Expected V contains-only to remain an exact-size pool for the reset-regression fixture",
+  dStartsWithWords.length,
+  15,
+  "Expected D starts-with mode to remain an exact-size pool for the reset-regression fixture",
 );
 assert.ok(
   sMixedWords.length > 15,
@@ -341,10 +346,10 @@ assert.ok(
 );
 assertVisibleSubsetCountdown({
   expectedRemainingWordCount: 1,
-  label: "V contains-only exact-size pool",
-  removalCount: 13,
-  targetWordCount: 14,
-  words: vContainsOnlyWords,
+  label: "D starts-with exact-size pool",
+  removalCount: 14,
+  targetWordCount: 15,
+  words: dStartsWithWords,
 });
 assertVisibleSubsetCountdown({
   expectedRemainingWordCount: 3,
@@ -362,14 +367,14 @@ assertVisibleSubsetCountdown({
 });
 
 const expectedPracticeTargetMixedCounts = {
-  ce: 16,
-  ci: 18,
-  ge: 15,
-  gi: 15,
-  che: 15,
-  chi: 15,
-  ghe: 15,
-  ghi: 13,
+  ce: 18,
+  ci: 20,
+  ge: 16,
+  gi: 16,
+  che: 16,
+  chi: 16,
+  ghe: 16,
+  ghi: 15,
 } as const;
 
 for (const target of enabledRomanianPracticeTargets) {
@@ -429,7 +434,7 @@ const fStartsWithWordWithR =
 
 assert.equal(
   fStartsWithWithoutR.length,
-  6,
+  7,
   "Expected setup mode words to apply exclusions after inclusion mode",
 );
 assert.ok(
@@ -445,7 +450,7 @@ assert.equal(
     selectedWordIds: [],
     wordSelectionMode: "all",
   }),
-  6,
+  7,
   "Expected all-words availability to count the filtered eligible pool",
 );
 assert.deepEqual(
@@ -504,7 +509,7 @@ assert.equal(
   "Expected custom setup to fall back to all words when exclusions invalidate every selected word",
 );
 assert.deepEqual(resolvedInvalidCustomSetup.selectedWordIds, []);
-assert.equal(resolvedInvalidCustomSetup.wheelWordCount, 6);
+assert.equal(resolvedInvalidCustomSetup.wheelWordCount, 7);
 assert.equal(
   getWheelSetupEmptyStateKind({
     baseWordCount: fStartsWithWords.length,

@@ -1,0 +1,24 @@
+{
+  "locale": "ro",
+  "letter": "w",
+  "words": [
+    {
+      "id": "ro-w-walkie-talkie",
+      "word": "walkie-talkie",
+      "display": "walkie-talkie",
+      "normalized": "walkie-talkie",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/w/ro-w-walkie-talkie.webp",
+      "imageStatus": "ready",
+      "alt": "Un walkie-talkie de jucărie cu antenă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import {
   getLocaleCoverageSummary,
   getPracticeTargetCoverageSummaries,
 } from "@/content/loaders";
+import { CreatorCredit } from "@/components/creator-credit";
 
 export const metadata: Metadata = {
   title: "Admin Words | Word Wheel",
@@ -47,9 +48,14 @@ export default function AdminWordsPage() {
               editing, uploads, auth, or database writes are available here.
             </p>
           </div>
-          <span className="admin-locale" aria-label="Locale: Romanian">
-            Romanian
-          </span>
+          <div className="admin-header__actions">
+            <Link className="admin-link" href="/admin/releases">
+              Releases
+            </Link>
+            <span className="admin-locale" aria-label="Locale: Romanian">
+              Romanian
+            </span>
+          </div>
         </header>
 
         <section
@@ -241,6 +247,9 @@ export default function AdminWordsPage() {
             ))}
           </div>
         </section>
+        <footer className="admin-footer" aria-label="Creator credit">
+          <CreatorCredit className="admin-creator-credit" />
+        </footer>
       </div>
     </main>
   );

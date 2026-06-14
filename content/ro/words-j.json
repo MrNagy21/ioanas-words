@@ -91,6 +91,96 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-j-joben",
+      "word": "joben",
+      "display": "joben",
+      "normalized": "joben",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/j/ro-j-joben.webp",
+      "imageStatus": "ready",
+      "alt": "Un joben negru.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-janta",
+      "word": "jantă",
+      "display": "jantă",
+      "normalized": "janta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/j/ro-j-janta.webp",
+      "imageStatus": "ready",
+      "alt": "O jantă de roată.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jardiniera",
+      "word": "jardinieră",
+      "display": "jardinieră",
+      "normalized": "jardiniera",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/j/ro-j-jardiniera.webp",
+      "imageStatus": "ready",
+      "alt": "O jardinieră cu flori.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jder",
+      "word": "jder",
+      "display": "jder",
+      "normalized": "jder",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/j/ro-j-jder.webp",
+      "imageStatus": "ready",
+      "alt": "Un jder prietenos.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jambiere",
+      "word": "jambiere",
+      "display": "jambiere",
+      "normalized": "jambiere",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/j/ro-j-jambiere.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de jambiere mov.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

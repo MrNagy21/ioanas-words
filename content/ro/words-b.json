@@ -397,6 +397,240 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-b-boxa",
+      "word": "boxă",
+      "display": "boxă",
+      "normalized": "boxa",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/b/ro-b-boxa.webp",
+      "imageStatus": "ready",
+      "alt": "O boxă audio cu difuzor rotund.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-biberon",
+      "word": "biberon",
+      "display": "biberon",
+      "normalized": "biberon",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/b/ro-b-biberon.webp",
+      "imageStatus": "ready",
+      "alt": "Un biberon simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-borcan",
+      "word": "borcan",
+      "display": "borcan",
+      "normalized": "borcan",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/b/ro-b-borcan.webp",
+      "imageStatus": "ready",
+      "alt": "Un borcan cu capac.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-burete",
+      "word": "burete",
+      "display": "burete",
+      "normalized": "burete",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/b/ro-b-burete.webp",
+      "imageStatus": "ready",
+      "alt": "Un burete de curățat.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-brad",
+      "word": "brad",
+      "display": "brad",
+      "normalized": "brad",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/b/ro-b-brad.webp",
+      "imageStatus": "ready",
+      "alt": "Un brad verde.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-bluza",
+      "word": "bluză",
+      "display": "bluză",
+      "normalized": "bluza",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/b/ro-b-bluza.webp",
+      "imageStatus": "ready",
+      "alt": "O bluză simplă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-banca",
+      "word": "bancă",
+      "display": "bancă",
+      "normalized": "banca",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/b/ro-b-banca.webp",
+      "imageStatus": "ready",
+      "alt": "O bancă de parc.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-bratara",
+      "word": "brățară",
+      "display": "brățară",
+      "normalized": "bratara",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/b/ro-b-bratara.webp",
+      "imageStatus": "ready",
+      "alt": "O brățară colorată.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-bomboana",
+      "word": "bomboană",
+      "display": "bomboană",
+      "normalized": "bomboana",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/b/ro-b-bomboana.webp",
+      "imageStatus": "ready",
+      "alt": "O bomboană ambalată.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-biblioteca",
+      "word": "bibliotecă",
+      "display": "bibliotecă",
+      "normalized": "biblioteca",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/b/ro-b-biblioteca.webp",
+      "imageStatus": "ready",
+      "alt": "O bibliotecă cu cărți colorate.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-bondar",
+      "word": "bondar",
+      "display": "bondar",
+      "normalized": "bondar",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/b/ro-b-bondar.webp",
+      "imageStatus": "ready",
+      "alt": "Un bondar pufos.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-bijuterie",
+      "word": "bijuterie",
+      "display": "bijuterie",
+      "normalized": "bijuterie",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/b/ro-b-bijuterie.webp",
+      "imageStatus": "ready",
+      "alt": "O bijuterie cu pandantiv.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-burghiu",
+      "word": "burghiu",
+      "display": "burghiu",
+      "normalized": "burghiu",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/b/ro-b-burghiu.webp",
+      "imageStatus": "ready",
+      "alt": "Un burghiu metalic.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

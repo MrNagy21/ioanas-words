@@ -613,6 +613,132 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-p-pix",
+      "word": "pix",
+      "display": "pix",
+      "normalized": "pix",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/p/ro-p-pix.webp",
+      "imageStatus": "ready",
+      "alt": "Un pix albastru simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-periuta",
+      "word": "periuță",
+      "display": "periuță",
+      "normalized": "periuta",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/p/ro-p-periuta.webp",
+      "imageStatus": "ready",
+      "alt": "O periuță de dinți.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-papuci",
+      "word": "papuci",
+      "display": "papuci",
+      "normalized": "papuci",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/p/ro-p-papuci.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de papuci.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-punguta",
+      "word": "punguță",
+      "display": "punguță",
+      "normalized": "punguta",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/p/ro-p-punguta.webp",
+      "imageStatus": "ready",
+      "alt": "O punguță mică.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-porumbel",
+      "word": "porumbel",
+      "display": "porumbel",
+      "normalized": "porumbel",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/p/ro-p-porumbel.webp",
+      "imageStatus": "ready",
+      "alt": "Un porumbel prietenos.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-padure",
+      "word": "pădure",
+      "display": "pădure",
+      "normalized": "padure",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/p/ro-p-padure.webp",
+      "imageStatus": "ready",
+      "alt": "O pădure verde.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-pereche",
+      "word": "pereche",
+      "display": "pereche",
+      "normalized": "pereche",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/p/ro-p-pereche.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de șosete albastre.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

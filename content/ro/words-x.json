@@ -1,0 +1,24 @@
+{
+  "locale": "ro",
+  "letter": "x",
+  "words": [
+    {
+      "id": "ro-x-xilofon",
+      "word": "xilofon",
+      "display": "xilofon",
+      "normalized": "xilofon",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/x/ro-x-xilofon.webp",
+      "imageStatus": "ready",
+      "alt": "Un xilofon colorat cu două bețișoare.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

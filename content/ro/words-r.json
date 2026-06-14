@@ -253,6 +253,150 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-r-rac",
+      "word": "rac",
+      "display": "rac",
+      "normalized": "rac",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/r/ro-r-rac.webp",
+      "imageStatus": "ready",
+      "alt": "Un rac prietenos.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-ren",
+      "word": "ren",
+      "display": "ren",
+      "normalized": "ren",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/r/ro-r-ren.webp",
+      "imageStatus": "ready",
+      "alt": "Un ren cu coarne.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rucsac",
+      "word": "rucsac",
+      "display": "rucsac",
+      "normalized": "rucsac",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/r/ro-r-rucsac.webp",
+      "imageStatus": "ready",
+      "alt": "Un rucsac simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-role",
+      "word": "role",
+      "display": "role",
+      "normalized": "role",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/r/ro-r-role.webp",
+      "imageStatus": "ready",
+      "alt": "O pereche de role.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-roaba",
+      "word": "roabă",
+      "display": "roabă",
+      "normalized": "roaba",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/r/ro-r-roaba.webp",
+      "imageStatus": "ready",
+      "alt": "O roabă goală.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-radiator",
+      "word": "radiator",
+      "display": "radiator",
+      "normalized": "radiator",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/r/ro-r-radiator.webp",
+      "imageStatus": "ready",
+      "alt": "Un radiator de casă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rasina",
+      "word": "rășină",
+      "display": "rășină",
+      "normalized": "rasina",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/r/ro-r-rasina.webp",
+      "imageStatus": "ready",
+      "alt": "O picătură de rășină pe scoarță.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rechizite",
+      "word": "rechizite",
+      "display": "rechizite",
+      "normalized": "rechizite",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/r/ro-r-rechizite.webp",
+      "imageStatus": "ready",
+      "alt": "Rechizite pentru școală.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

@@ -163,6 +163,114 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-d-dovlecel",
+      "word": "dovlecel",
+      "display": "dovlecel",
+      "normalized": "dovlecel",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/d/ro-d-dovlecel.webp",
+      "imageStatus": "ready",
+      "alt": "Un dovlecel verde.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dormitor",
+      "word": "dormitor",
+      "display": "dormitor",
+      "normalized": "dormitor",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/d/ro-d-dormitor.webp",
+      "imageStatus": "ready",
+      "alt": "Un dormitor cu pat.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dantela",
+      "word": "dantelă",
+      "display": "dantelă",
+      "normalized": "dantela",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/d/ro-d-dantela.webp",
+      "imageStatus": "ready",
+      "alt": "O bucată de dantelă albă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-degetar",
+      "word": "degetar",
+      "display": "degetar",
+      "normalized": "degetar",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/d/ro-d-degetar.webp",
+      "imageStatus": "ready",
+      "alt": "Un degetar metalic.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dalta",
+      "word": "daltă",
+      "display": "daltă",
+      "normalized": "dalta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/d/ro-d-dalta.webp",
+      "imageStatus": "ready",
+      "alt": "O daltă simplă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-duda",
+      "word": "dudă",
+      "display": "dudă",
+      "normalized": "duda",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/d/ro-d-duda.webp",
+      "imageStatus": "ready",
+      "alt": "O dudă coaptă pe o frunză.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

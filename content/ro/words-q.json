@@ -1,0 +1,24 @@
+{
+  "locale": "ro",
+  "letter": "q",
+  "words": [
+    {
+      "id": "ro-q-quinoa",
+      "word": "quinoa",
+      "display": "quinoa",
+      "normalized": "quinoa",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/q/ro-q-quinoa.webp",
+      "imageStatus": "ready",
+      "alt": "Un bol mic cu boabe de quinoa.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    }
+  ]
+}

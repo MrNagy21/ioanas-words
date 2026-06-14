@@ -217,6 +217,114 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-sh-sina",
+      "word": "șină",
+      "display": "șină",
+      "normalized": "sina",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/ș/ro-sh-sina.webp",
+      "imageStatus": "ready",
+      "alt": "O șină de tren.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-soim",
+      "word": "șoim",
+      "display": "șoim",
+      "normalized": "soim",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/ș/ro-sh-soim.webp",
+      "imageStatus": "ready",
+      "alt": "Un șoim calm.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-stampila",
+      "word": "ștampilă",
+      "display": "ștampilă",
+      "normalized": "stampila",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/ș/ro-sh-stampila.webp",
+      "imageStatus": "ready",
+      "alt": "O ștampilă simplă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-sezlong",
+      "word": "șezlong",
+      "display": "șezlong",
+      "normalized": "sezlong",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/ș/ro-sh-sezlong.webp",
+      "imageStatus": "ready",
+      "alt": "Un șezlong simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-surubelnita",
+      "word": "șurubelniță",
+      "display": "șurubelniță",
+      "normalized": "surubelnita",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/ș/ro-sh-surubelnita.webp",
+      "imageStatus": "ready",
+      "alt": "O șurubelniță colorată.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-snur",
+      "word": "șnur",
+      "display": "șnur",
+      "normalized": "snur",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/ș/ro-sh-snur.webp",
+      "imageStatus": "ready",
+      "alt": "Un șnur colorat.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

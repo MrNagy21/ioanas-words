@@ -181,6 +181,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-u-unghiera",
+      "word": "unghieră",
+      "display": "unghieră",
+      "normalized": "unghiera",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/u/ro-u-unghiera.webp",
+      "imageStatus": "ready",
+      "alt": "O unghieră metalică închisă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

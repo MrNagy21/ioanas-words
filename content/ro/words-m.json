@@ -433,6 +433,42 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-m-mixer",
+      "word": "mixer",
+      "display": "mixer",
+      "normalized": "mixer",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/m/ro-m-mixer.webp",
+      "imageStatus": "ready",
+      "alt": "Un mixer de bucătărie cu palete.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-m-medalie",
+      "word": "medalie",
+      "display": "medalie",
+      "normalized": "medalie",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/m/ro-m-medalie.webp",
+      "imageStatus": "ready",
+      "alt": "O medalie cu panglică.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

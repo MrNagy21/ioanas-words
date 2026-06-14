@@ -11,11 +11,13 @@ import wordsHJson from "../../content/ro/words-h.json";
 import wordsIJson from "../../content/ro/words-i.json";
 import wordsICircJson from "../../content/ro/words-î.json";
 import wordsJJson from "../../content/ro/words-j.json";
+import wordsKJson from "../../content/ro/words-k.json";
 import wordsLJson from "../../content/ro/words-l.json";
 import wordsMJson from "../../content/ro/words-m.json";
 import wordsNJson from "../../content/ro/words-n.json";
 import wordsOJson from "../../content/ro/words-o.json";
 import wordsPJson from "../../content/ro/words-p.json";
+import wordsQJson from "../../content/ro/words-q.json";
 import wordsRJson from "../../content/ro/words-r.json";
 import wordsSJson from "../../content/ro/words-s.json";
 import wordsShJson from "../../content/ro/words-ș.json";
@@ -23,6 +25,9 @@ import wordsTJson from "../../content/ro/words-t.json";
 import wordsTzJson from "../../content/ro/words-ț.json";
 import wordsUJson from "../../content/ro/words-u.json";
 import wordsVJson from "../../content/ro/words-v.json";
+import wordsWJson from "../../content/ro/words-w.json";
+import wordsXJson from "../../content/ro/words-x.json";
+import wordsYJson from "../../content/ro/words-y.json";
 import wordsZJson from "../../content/ro/words-z.json";
 import type { SupportedLocale } from "@/i18n/locales";
 import type {
@@ -82,11 +87,13 @@ const wordManifestRegistry: Record<
     i: wordsIJson as WordManifest,
     î: wordsICircJson as WordManifest,
     j: wordsJJson as WordManifest,
+    k: wordsKJson as WordManifest,
     l: wordsLJson as WordManifest,
     m: wordsMJson as WordManifest,
     n: wordsNJson as WordManifest,
     o: wordsOJson as WordManifest,
     p: wordsPJson as WordManifest,
+    q: wordsQJson as WordManifest,
     r: wordsRJson as WordManifest,
     s: wordsSJson as WordManifest,
     ș: wordsShJson as WordManifest,
@@ -94,6 +101,9 @@ const wordManifestRegistry: Record<
     ț: wordsTzJson as WordManifest,
     u: wordsUJson as WordManifest,
     v: wordsVJson as WordManifest,
+    w: wordsWJson as WordManifest,
+    x: wordsXJson as WordManifest,
+    y: wordsYJson as WordManifest,
     z: wordsZJson as WordManifest,
   },
 };

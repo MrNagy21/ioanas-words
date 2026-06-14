@@ -1117,6 +1117,132 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-c-camera-web",
+      "word": "cameră web",
+      "display": "cameră web",
+      "normalized": "camera web",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/c/ro-c-camera-web.webp",
+      "imageStatus": "ready",
+      "alt": "O cameră web mică pe suport.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-ceainic",
+      "word": "ceainic",
+      "display": "ceainic",
+      "normalized": "ceainic",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/c/ro-c-ceainic.webp",
+      "imageStatus": "ready",
+      "alt": "Un ceainic roșu cu toartă și cioc.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-covor",
+      "word": "covor",
+      "display": "covor",
+      "normalized": "covor",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/c/ro-c-covor.webp",
+      "imageStatus": "ready",
+      "alt": "Un covor colorat.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cravata",
+      "word": "cravată",
+      "display": "cravată",
+      "normalized": "cravata",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/c/ro-c-cravata.webp",
+      "imageStatus": "ready",
+      "alt": "O cravată simplă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cabana",
+      "word": "cabană",
+      "display": "cabană",
+      "normalized": "cabana",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/c/ro-c-cabana.webp",
+      "imageStatus": "ready",
+      "alt": "O cabană luminoasă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cotofana",
+      "word": "coțofană",
+      "display": "coțofană",
+      "normalized": "cotofana",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/c/ro-c-cotofana.webp",
+      "imageStatus": "ready",
+      "alt": "O coțofană alb-negru.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cojoc",
+      "word": "cojoc",
+      "display": "cojoc",
+      "normalized": "cojoc",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/c/ro-c-cojoc.webp",
+      "imageStatus": "ready",
+      "alt": "Un cojoc simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

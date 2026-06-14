@@ -178,7 +178,7 @@ const fStartsWithWithoutR = filterWordsByExcludedTargetKeys({
   words: getDerivedWordPoolsForTarget("ro", "f").startsWithWords,
 });
 
-assert.equal(fStartsWithWithoutR.length, 6);
+assert.equal(fStartsWithWithoutR.length, 7);
 assert.ok(
   fStartsWithWithoutR.every((word) => !wordContainsTarget("ro", word, "r")),
   "Expected F starts-with words excluding R to leave only words without exact r",

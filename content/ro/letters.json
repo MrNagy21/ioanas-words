@@ -79,6 +79,13 @@
       "sortOrder": 13
     },
     {
+      "id": "k",
+      "label": "K",
+      "enabled": true,
+      "wordFile": "words-k.json",
+      "sortOrder": 14
+    },
+    {
       "id": "l",
       "label": "L",
       "enabled": true,
@@ -112,6 +119,13 @@
       "enabled": true,
       "wordFile": "words-p.json",
       "sortOrder": 19
+    },
+    {
+      "id": "q",
+      "label": "Q",
+      "enabled": true,
+      "wordFile": "words-q.json",
+      "sortOrder": 20
     },
     {
       "id": "r",
@@ -161,6 +175,27 @@
       "enabled": true,
       "wordFile": "words-v.json",
       "sortOrder": 27
+    },
+    {
+      "id": "w",
+      "label": "W",
+      "enabled": true,
+      "wordFile": "words-w.json",
+      "sortOrder": 28
+    },
+    {
+      "id": "x",
+      "label": "X",
+      "enabled": true,
+      "wordFile": "words-x.json",
+      "sortOrder": 29
+    },
+    {
+      "id": "y",
+      "label": "Y",
+      "enabled": true,
+      "wordFile": "words-y.json",
+      "sortOrder": 30
     },
     {
       "id": "z",

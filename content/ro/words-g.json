@@ -661,7 +661,7 @@
       "category": "household",
       "image": "/images/ro/g/ro-g-ghereta.webp",
       "imageStatus": "ready",
-      "alt": "O gheretă mică cu fereastră și ușă",
+      "alt": "O gheretă mică din lemn",
       "source": [
         "manual"
       ],
@@ -752,6 +752,60 @@
       "image": "/images/ro/g/ro-g-ghiseu.webp",
       "imageStatus": "ready",
       "alt": "Un ghișeu mic cu tejghea și clopoțel",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-g-galusca",
+      "word": "gălușcă",
+      "display": "gălușcă",
+      "normalized": "galusca",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/g/ro-g-galusca.webp",
+      "imageStatus": "ready",
+      "alt": "O gălușcă într-o lingură.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-g-gingie",
+      "word": "gingie",
+      "display": "gingie",
+      "normalized": "gingie",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/g/ro-g-gingie.webp",
+      "imageStatus": "ready",
+      "alt": "O gingie roz lângă dinți.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-g-ghemuit",
+      "word": "ghemuit",
+      "display": "ghemuit",
+      "normalized": "ghemuit",
+      "partOfSpeech": "adjective",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/g/ro-g-ghemuit.webp",
+      "imageStatus": "ready",
+      "alt": "Un copil ghemuit.",
       "source": [
         "manual"
       ],

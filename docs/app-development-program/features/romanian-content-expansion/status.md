@@ -1,16 +1,292 @@
 # Romanian Content Expansion Status
 
-Last updated: 2026-05-26
+Last updated: 2026-06-13
 
 ## Current Phase
 
-Phase: Post-Batch 40 vocabulary correction complete
+Phase: Batch 74 final requirement top-up complete; Release 1/Release 2 admin review route complete
 
-Overall status: The Romanian image completion scope remains finalized for the current approved production pack. Batch 39 audited the current production JSON, public image assets, `/admin/words`, and representative gameplay routes without adding vocabulary or generating images. Production Romanian content has `367` approved words, `367` ready images, and `0` approved placeholders. The public non-placeholder image tree also contains exactly `367` ready WebP files referenced by approved records, with no missing or unused production image assets found. The user-reported incorrect `ro-g-ghiuveta` / `ghiuvetă` G-bucket record was corrected on 2026-05-26: dexonline/DOOM support the standard spelling `chiuvetă`, the existing correct `ro-c-chiuveta` / `chiuvetă` record remains in the `C` / `CHI` pool, and the G/GHI slot is now `ro-g-ghimbir` / `ghimbir` with a new app-owned ready image. `ghicitoare`, `miez`, and `stinghie` remain `rejected` and were not reintroduced. The spoken `Capea` / `Kapia` note remains unresolved because no current production word ID matches it. Production word JSON still uses only ordinary vocabulary fields; speech-target, syllable, cluster, contrast, therapy, and clinical-review fields remain documentation-only. Batch 40 corrected the first A-C human-flagged image list through a human-approved AI contact sheet, refined `128 px` pixel-art post-processing, `96`-color palette limiting, nearest-neighbor upscale to `256 x 256 px`, and lossless WebP optimization. The previous deterministic local-drawing attempt remains rejected and restored. The kept Batch 40 assets are the `14` A-C replacements plus reused casual-cap `ro-sh-sapca`.
+Overall status: Batch 74 completed the final strict top-up for the requested point 2 sound groups. The current production pack is `479` total Romanian records, `476` approved words, `476` ready images, `0` approved placeholders, and `3` rejected audit-trail rows (`ghicitoare`, `miez`, and `stinghie`). Batch 74 added `ghemuit` as a more usual true new `GHE` starts-with row and `burghiu` as a `GHI` contains row, with both production assets cropped and padded for circular-mask safety; `ghemuit` replaced the less suitable `gherghef` after human review. Batch 73 remains the prior promotion that added `unghieră`, `pereche`, and `rechizite`, replaced the existing `gheretă` image, and kept `ghebe` / `ghioc` out. The read-only `/admin/releases` area exposes `/admin/releases/1` for the committed baseline and `/admin/releases/2` for the curated dirty-tree additions (`109` entries after Batch 74), with shared image thumbnails, detail dialogs, and links to affected wheels for QA. All listed Romanian expansion requirements are satisfied for the current Release 2 candidate; the next step is human QA on `/admin/releases/2`, then commit/release preparation if QA accepts the pack.
 
 ## Completed
 
+- Completed Batch 74 final requirement top-up on 2026-06-13.
+- Added `production-promotion-batch-74.md` with source checks, image-processing notes, asset sizes, content totals, point 2 coverage, Release 2 updates, verification, browser QA, and the release QA prompt.
+- Promoted new approved rows for `ghemuit` and `burghiu`; `ghemuit` replaced the less usual `gherghef` after human review.
+- Added `public/images/ro/g/ro-g-ghemuit.webp` (`3,320 B`) and `public/images/ro/b/ro-b-burghiu.webp` (`7,000 B`); both are `256 x 256 px`, below `20 KB`, and below the `12 KB` warning threshold.
+- Confirmed post-Batch-74 totals: `479` total records, `476` approved words, `476` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed point 2 mixed coverage after Batch 74: `CE 18`, `CI 20`, `GE 16`, `GI 16`, `CHE 16`, `CHI 16`, `GHE 16`, and `GHI 15`.
+- Updated `/admin/releases/2` to include `ghemuit` and `burghiu`; Release 2 now lists `109` dirty-tree additions for QA.
+- Batch 74 verification passed outside the sandbox after sandboxed `pnpm` hung before script output: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run check:setup-storage`, `pnpm run build`, and `git diff --check`.
+- In-app Browser QA loaded `/ro`, `/admin/releases/2`, `/ro/play/ghe`, and `/ro/play/ghi`; outside-sandbox HTTP checks returned `200` for those routes plus `/images/ro/g/ro-g-ghemuit.webp` and `/images/ro/b/ro-b-burghiu.webp`.
+- Completed Batch 73 production promotion on 2026-06-13.
+- Added `production-promotion-batch-73.md` with human review decisions, image-processing notes, promoted asset sizes, content totals, coverage, verification, localhost route QA, and the Batch 74 prompt.
+- Promoted new approved rows for `unghieră`, `pereche`, and `rechizite`.
+- Replaced the existing `gheretă` production image with the human-accepted corrective image and updated its alt text; no duplicate `gheretă` row was added.
+- Added `public/images/ro/u/ro-u-unghiera.webp`, `public/images/ro/p/ro-p-pereche.webp`, `public/images/ro/r/ro-r-rechizite.webp`, and replaced `public/images/ro/g/ro-g-ghereta.webp`; every Batch 73 asset is `256 x 256 px`, below `20 KB`, and below the `12 KB` warning threshold.
+- Confirmed post-Batch-73 totals: `477` total records, `474` approved words, `474` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Updated `/admin/releases/2` to include `unghieră`, `pereche`, and `rechizite` for Release 2 QA.
+- Batch 73 verification passed outside the sandbox after sandboxed `pnpm` failed with `fetch failed`: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run check:setup-storage`, `pnpm run build`, and `git diff --check`.
+- Sandboxed localhost checks failed, then required outside-sandbox retries returned `200` for `/ro`, `/admin/releases/2`, `/ro/play/ghe`, `/ro/play/ghi`, `/images/ro/u/ro-u-unghiera.webp`, and `/images/ro/r/ro-r-rechizite.webp`.
+- Completed Batch 72 sequence top-up image-brief/contact-sheet preparation on 2026-06-13.
+- Added `image-briefs-batch-72.md` with row-major mapping, candidate rationale, DEX/dexonline source notes, human feedback, corrective generation metadata, and the Batch 73 prompt for promoting only human-accepted cells.
+- Generated the unlabeled four-cell Batch 72 review sheet at `assets/image-sources/ro/batch-72/contact-sheet.png` for `ghebe`, `ghioc`, `pereche`, and `rechizite`.
+- Recorded human feedback that `rechizite` is accepted, `pereche` is accepted as a word but needs a clearer pair image, and `ghebe` / `ghioc` should be changed.
+- Generated the unlabeled corrective Batch 72 review sheet at `assets/image-sources/ro/batch-72/corrective-contact-sheet-1.png` for `gheretă`, `unghieră`, and a clearer socks-based `pereche` image.
+- Confirmed Batch 72 stayed review-only with no production JSON records, cropped cells, optimized public WebP assets, route/schema changes, placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Updated the read-only `/admin/releases` area on 2026-06-13 so content QA can move between `/admin/releases/1` for the committed baseline and `/admin/releases/2` for the current dirty-tree additions.
+- Completed Batch 71 slice coverage QA and next-prompt preparation on 2026-06-13.
+- Added `slice-coverage-qa-batch-71.md` with canonical totals, Batch 70 asset QA, requested-target coverage, verification results, preserved decisions, and the Batch 72 planning prompt.
+- Confirmed the Batch 70 state remains `474` total records, `471` approved words, `471` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed `răchită` was not promoted and has no production row or asset.
+- Confirmed all Batch 70 assets are `256 x 256 px`, below `20 KB`, and below the `12 KB` warning threshold.
+- Batch 71 verification passed on 2026-06-13: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run check:setup-storage`, `pnpm run build`, and `git diff --check`.
+- Sandboxed localhost checks failed, then required outside-sandbox retries returned `200` for `/ro`, `/admin/words`, `/ro/play/gi`, and representative Batch 70 image URL `/images/ro/r/ro-r-rasina.webp`.
+- Redirected Batch 72 from broad planning to the focused point 2 sequence top-up review after the release-readiness check found no new Release 2 `GHE`, `GHI`, `CHE`, or `CHI` rows.
+- Completed Batch 70 production promotion on 2026-06-13.
+- Added `production-promotion-batch-70.md` with human review decisions, removed `răchită`, promoted rows, image QA artifacts, final asset sizes, content totals, requested-target coverage, verification, localhost route QA, and the Batch 71 prompt.
+- Promoted the `14` accepted Batch 69 cells: `șnur`, `țambal`, `țipar`, `dantelă`, `degetar`, `daltă`, `dudă`, `jder`, `jambiere`, `rășină`, `bondar`, `cojoc`, `bijuterie`, and `gingie`.
+- Used the first corrective sheet option for `rășină` and the first corrective sheet option for `gingie`.
+- Added production WebP assets under `public/images/ro/ș`, `public/images/ro/ț`, `public/images/ro/d`, `public/images/ro/j`, `public/images/ro/r`, `public/images/ro/b`, `public/images/ro/c`, and `public/images/ro/g`; every Batch 70 asset is `256 x 256 px` and below both the `12 KB` warning threshold and `20 KB` hard maximum.
+- Confirmed post-Batch-70 totals: `474` total records, `471` approved words, `471` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Recorded affected coverage after Batch 70, including `Ă` `0` starts / `196` contains / `196` mixed, `GE` `9` / `7` / `16`, `GI` `7` / `9` / `16`, `L` `22` / `98` / `120`, `R` `21` / `169` / `190`, `Ș` `18` / `30` / `48`, `T` `18` / `102` / `120`, `Ț` `10` / `44` / `54`, `B` `34` / `31` / `65`, `D` `15` / `29` / `44`, and `J` `10` / `11` / `21`.
+- Updated the content-derived gameplay compatibility fixture because `degetar` increases the `GE` mixed pool from `15` to `16`, and `gingie` increases the `GI` mixed pool from `15` to `16`; the exact-size reset-regression fixture now uses the stable `CHE` mixed pool.
+- Batch 70 verification passed on 2026-06-13: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run check:setup-storage`, `pnpm run build`, and `git diff --check`.
+- Sandboxed localhost checks failed, then required outside-sandbox retries returned `200` for `/ro`, `/admin/words`, `/ro/play/gi`, and representative Batch 70 image URL `/images/ro/g/ro-g-gingie.webp`.
+- Set Batch 71 as the next slice coverage QA and next-prompt preparation batch.
+- Completed Batch 69 corrective image pass on 2026-06-13.
+- Recorded human feedback that `gingie` must clearly show gums, `rășină` must clearly come from a tree, and `răchită` should be removed because it is not familiar or inferable enough.
+- Generated focused corrective sheet `assets/image-sources/ro/batch-69/corrective-contact-sheet-1.png` with four `gingie` variants in the top row and four `rășină` variants in the bottom row.
+- Removed `răchită` from the active Batch 70 promotion candidate list; do not crop or promote the original Batch 69 `răchită` cell.
+- Completed Batch 69 image briefs and contact sheet on 2026-06-13.
+- Added `image-briefs-batch-69.md` with per-word image briefs for the original `15` review cells and revised it after human feedback to keep `14` active promotion candidates.
+- Generated one ordered, unlabeled review contact sheet at `assets/image-sources/ro/batch-69/contact-sheet.png` using the built-in `image_gen` tool and the pixel-art, full-square, circle-safe constraints from `docs/image-pipeline.md`.
+- Generated a style comparison sheet at `assets/image-sources/ro/batch-69/comparison-sheet.png` with representative existing production assets and selected Batch 69 cells.
+- Confirmed Batch 69 stayed review-only with no production word records, cropped cells, optimized public WebP assets, route/schema changes, placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded human-review attention points and the corrected Batch 70 prompt for human-accepted image promotion and full validation.
+- Completed Batch 68 production-slice planning on 2026-06-13.
+- Added `production-slice-planning-batch-68.md` with source checks, canonical file/ID/path plans, metadata plans, route/loader/validation impact, coverage deltas, preserved decisions, and the Batch 69 prompt.
+- Planned the seventh requested expansion slice, later revised after human image review to the `14` active rows: `șnur`, `țambal`, `țipar`, `dantelă`, `degetar`, `daltă`, `dudă`, `jder`, `jambiere`, `rășină`, `bondar`, `cojoc`, `bijuterie`, and `gingie`.
+- Confirmed Batch 68 stayed planning-only with no production JSON records, image assets, placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded revised planned coverage impact if all `14` active rows are later promoted with ready images: total would become `471` approved words and `471` ready images; requested-target deltas would be `Ă +4 contains`, `GE +1 contains`, `GI +1 starts`, `L +3 contains`, `R +1 starts/+7 contains`, `Ș +1 starts/+1 contains`, `T +4 contains`, `Ț +2 starts`, `B +2 starts/+2 contains`, `D +4 starts/+2 contains`, and `J +2 starts/+2 contains`.
+- Set Batch 69 as the next image-brief/contact-sheet batch for human review.
+- Completed Batch 67 slice coverage QA and next-prompt preparation on 2026-06-13.
+- Added `slice-coverage-qa-batch-67.md` with canonical totals, Batch 66 asset QA, requested-target coverage, verification results, preserved decisions, and the Batch 68 planning prompt.
+- Confirmed the Batch 66 state remains `460` total records, `457` approved words, `457` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed `tacâmuri` is the promoted production row and `tacâm` was not added.
+- Set Batch 68 as the next planning-only production slice from the remaining already human-reviewed Batch 43 candidate pool.
+- Completed Batch 66 production promotion on 2026-06-13.
+- Added `production-promotion-batch-66.md` with human review decisions, the `tacâmuri` revision, promoted rows, image QA artifacts, final asset sizes, content totals, requested-target coverage, verification plan, and the Batch 67 prompt.
+- Promoted all `15` accepted Batch 65 cells: `bibliotecă`, `radiator`, `sacou`, `șoim`, `ștampilă`, `șezlong`, `tacâmuri`, `țarc`, `țiglă`, `viespe`, `șurubelniță`, `joben`, `jantă`, `coțofană`, and `jardinieră`.
+- Added production WebP assets under `public/images/ro/b`, `public/images/ro/r`, `public/images/ro/s`, `public/images/ro/ș`, `public/images/ro/t`, `public/images/ro/ț`, `public/images/ro/v`, `public/images/ro/j`, and `public/images/ro/c`; every Batch 66 asset is `256 x 256 px` and below both the `12 KB` warning threshold and `20 KB` hard maximum.
+- Confirmed post-Batch-66 totals: `460` total records, `457` approved words, `457` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Recorded affected coverage after Batch 66, including `Ă` `0` starts / `192` contains / `192` mixed, `Â` `0` / `13` / `13`, `L` `22` / `95` / `117`, `R` `20` / `162` / `182`, `S` `25` / `32` / `57`, `Ș` `17` / `29` / `46`, `T` `18` / `98` / `116`, `Ț` `8` / `44` / `52`, `V` `17` / `19` / `36`, `B` `32` / `29` / `61`, `D` `11` / `27` / `38`, and `J` `8` / `9` / `17`.
+- Batch 66 verification passed on 2026-06-13: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run check:setup-storage`, `pnpm run build`, and `git diff --check`.
+- Sandboxed localhost checks failed, then required outside-sandbox retries returned `200` for `/ro`, `/admin/words`, affected play routes, and representative Batch 66 image URLs.
+- Set Batch 67 as the next slice coverage QA and next-prompt preparation batch.
+- Completed Batch 65 image briefs and contact sheet on 2026-06-13.
+- Added `image-briefs-batch-65.md` with per-word image briefs for `bibliotecă`, `radiator`, `sacou`, `șoim`, `ștampilă`, `șezlong`, `tacâmuri`, `țarc`, `țiglă`, `viespe`, `șurubelniță`, `joben`, `jantă`, `coțofană`, and `jardinieră`.
+- Generated one ordered, unlabeled review contact sheet at `assets/image-sources/ro/batch-65/contact-sheet.png` using the built-in `image_gen` tool and the pixel-art, full-square, circle-safe constraints from `docs/image-pipeline.md`.
+- Generated a style comparison sheet at `assets/image-sources/ro/batch-65/comparison-sheet.png` with representative existing production assets and selected Batch 65 cells.
+- Confirmed Batch 65 stayed review-only with no production word records, cropped cells, optimized public WebP assets, route/schema changes, placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded human-review attention points for `bibliotecă`, `radiator`, `sacou`, `șoim`, `ștampilă`, `șezlong`, `tacâmuri`, `țarc`, `țiglă`, `viespe`, `șurubelniță`, `joben`, `jantă`, `coțofană`, and `jardinieră`.
+- Recorded that `șurubelniță` is diagonal and needs careful circular-mask QA if accepted, and that Batch 66 must crop/normalize accepted cells into true `256 x 256 px` square assets because the review sheet is `1536 x 1024 px`.
+- Recorded the ready-to-copy Batch 66 prompt for human-accepted image promotion and full validation.
+- Completed Batch 64 production-slice planning on 2026-06-13.
+- Added `production-slice-planning-batch-64.md` with source checks, canonical file/ID/path plans, metadata plans, route/loader/validation impact, coverage deltas, preserved decisions, and the Batch 65 prompt.
+- Planned the sixth requested expansion slice in order: `bibliotecă`, `radiator`, `sacou`, `șoim`, `ștampilă`, `șezlong`, `tacâmuri`, `țarc`, `țiglă`, `viespe`, `șurubelniță`, `joben`, `jantă`, `coțofană`, and `jardinieră`.
+- Confirmed Batch 64 stayed planning-only with no production JSON records, image assets, placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Deferred `sticluță`, `râmă`, `roză`, `șnur`, the weakest remaining obscure stretch rows, and rare-letter reopen candidates because their near-duplicate, familiarity, image-clarity, or source tradeoffs are weaker than the selected slice.
+- Recorded planned coverage impact if all `15` rows are later promoted with ready images: total would become `457` approved words and `457` ready images; requested-target deltas would be `Ă +7 contains`, `Â +1 contains`, `L +5 contains`, `R +1 starts/+4 contains`, `S +1 starts/+1 contains`, `Ș +4 starts`, `T +1 starts/+4 contains`, `Ț +2 starts/+2 contains`, `V +1 starts`, `B +1 starts/+2 contains`, `D +2 contains`, and `J +3 starts`.
+- Set Batch 65 as the next image-brief/contact-sheet batch for human review.
+- Completed Batch 63 slice coverage QA and next-prompt preparation on 2026-06-13.
+- Added `slice-coverage-qa-batch-63.md` with canonical totals, requested-target coverage, scope guard checks, Batch 62 asset dimensions and sizes, localhost route QA, verification, next-step decision, and the Batch 64 prompt.
+- Confirmed the Batch 62 state remains `442` approved words, `442` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed all Batch 62 assets are `256 x 256 px`, below `20 KB`, and below the `12 KB` warning threshold.
+- Confirmed no production `webcam` or `yak` row exists; `cameră web` remains in `C`; `iac` remains in `I`.
+- Batch 63 verification passed on 2026-06-13: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run check:setup-storage`, `pnpm run build`, and `git diff --check`.
+- Sandboxed localhost checks failed, then required outside-sandbox retries returned `200` for `/ro`, `/admin/words`, affected play routes, and representative Batch 62 image URLs.
+- Set Batch 64 as the next planning-only production slice from the remaining already human-reviewed Batch 43 candidate pool.
+- Completed Batch 62 production promotion on 2026-06-12.
+- Added `production-promotion-batch-62.md` with human review decisions, promoted rows, image QA artifacts, final asset sizes, content totals, coverage impact, verification, localhost route QA, and the Batch 63 prompt.
+- Promoted all `15` Batch 61 accepted cells: `locomotivă`, `sac`, `soră`, `gălușcă`, `fundiță`, `punguță`, `covor`, `cravată`, `lavetă`, `porumbel`, `roabă`, `cabană`, `pădure`, `medalie`, and `bomboană`.
+- Used the third spoon-based corrective sheet option for `gălușcă` after the human accepted any of the spoon-based options.
+- Added production WebP assets under `public/images/ro/l`, `public/images/ro/s`, `public/images/ro/g`, `public/images/ro/f`, `public/images/ro/p`, `public/images/ro/c`, `public/images/ro/r`, `public/images/ro/m`, and `public/images/ro/b`; every Batch 62 asset is below both the `12 KB` warning threshold and `20 KB` hard maximum.
+- Confirmed post-Batch-62 totals: `445` total records, `442` approved words, `442` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Updated content-derived fixtures because `fundiță` increases the F filtered setup pool from `6` to `7`, and the previous `V` contains-only exact-size fixture is no longer exact-size after the new `V` contains additions; the exact-size visible-subset fixture now uses the stable `GE` mixed pool.
+- Verification passed on 2026-06-12: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `pnpm run build`.
+- Sandboxed localhost checks failed, then required outside-sandbox retries returned `200` for `/ro`, `/admin/words`, affected play routes, and representative Batch 62 image URLs.
+- Set Batch 63 as the next slice coverage QA and next-prompt preparation batch.
+- Completed Batch 61 image briefs and contact sheet on 2026-06-12.
+- Added `image-briefs-batch-61.md` with per-word image briefs for `locomotivă`, `sac`, `soră`, `gălușcă`, `fundiță`, `punguță`, `covor`, `cravată`, `lavetă`, `porumbel`, `roabă`, `cabană`, `pădure`, `medalie`, and `bomboană`.
+- Generated one ordered, unlabeled review contact sheet at `assets/image-sources/ro/batch-61/contact-sheet.png` using the built-in `image_gen` tool and the pixel-art, full-square, circle-safe constraints from `docs/image-pipeline.md`.
+- Recorded human feedback that all first-sheet cells are pretty good except `gălușcă`, which should emphasize the singular noun more clearly.
+- Generated one ordered, unlabeled corrective review sheet at `assets/image-sources/ro/batch-61/corrective-contact-sheet-1.png` with four spoon-based singular `gălușcă` options after the first corrective direction looked too much like `gomboț`.
+- Confirmed Batch 61 stayed review-only with no production word records, cropped cells, optimized public WebP assets, route/schema changes, placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded human-review attention points for `locomotivă`, `soră`, `gălușcă`, `fundiță`, `punguță`, `covor`, `cravată`, `lavetă`, `cabană`, and `pădure`.
+- Recorded the ready-to-copy Batch 62 prompt for human-accepted image promotion and full validation.
+- Completed Batch 60 production-slice planning on 2026-06-12.
+- Added `production-slice-planning-batch-60.md` with source checks, canonical file/ID/path plans, metadata plans, route/loader/validation impact, coverage deltas, image brief direction, preserved decisions, and a ready-to-copy Batch 61 prompt.
+- Planned the fifth requested expansion slice in order: `locomotivă`, `sac`, `soră`, `gălușcă`, `fundiță`, `punguță`, `covor`, `cravată`, `lavetă`, `porumbel`, `roabă`, `cabană`, `pădure`, `medalie`, and `bomboană`.
+- Confirmed all `15` planned rows remain planning-only; no production JSON records, image assets, placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims were added.
+- Deferred `sticluță` because `sticlă` was just corrected and promoted, making the diminutive a higher visual-confusion risk for this immediate slice.
+- Recorded planned coverage impact if all `15` rows are later promoted with ready images: total would become `442` approved words and `442` ready images; requested-target deltas would be `Ă +11 contains`, `L +2 starts/+3 contains`, `R +1 starts/+5 contains`, `S +2 starts`, `Ș +1 contains`, `T +3 contains`, `Ț +2 contains`, `V +4 contains`, `B +1 starts/+3 contains`, and `D +3 contains`.
+- Preserved Batch 59 baseline decisions: no forced `Ă` or `Â` starts-with rows, no `Q`/`W`/`Y` padding with obscure vocabulary, no `webcam`, no `yak`, and no speech-target production metadata.
+- Set Batch 61 as the next image-brief/contact-sheet batch for human review.
+- Completed Batch 59 slice coverage QA and next-prompt preparation on 2026-06-12.
+- Added `slice-coverage-qa-batch-59.md` with canonical totals, requested-target coverage, scope guard checks, Batch 58 asset dimensions and sizes, resolved localhost route QA, verification, next-step decision, and the Batch 60 prompt.
+- Confirmed the Batch 58 state remains `427` approved words, `427` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed all Batch 58 assets are `256 x 256 px`, below `20 KB`, and below the `12 KB` warning threshold.
+- Confirmed no production `webcam` or `yak` row exists; `cameră web` remains in `C`; `iac` remains in `I`.
+- Resolved previously pending localhost route and representative asset QA for Batches 54, 55, and 58: outside-sandbox checks returned `200` for `/ro`, `/admin/words`, representative play routes, and representative Batch 54/58 image URLs.
+- Batch 59 verification passed on 2026-06-12: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run build`, and `git diff --check`.
+- Set Batch 60 as the next planning-only production slice from the remaining already human-reviewed Batch 43 candidate pool.
+- Completed Batch 58 production promotion on 2026-06-12.
+- Added `production-promotion-batch-58.md` with human approval, promoted rows, image QA artifacts, final asset sizes, content totals, coverage impact, verification, and the Batch 59 prompt.
+- Promoted all `15` Batch 57 accepted cells: `biberon`, `borcan`, `burete`, `brad`, `bluză`, `bancă`, `dormitor`, `periuță`, `brățară`, `sticlă`, `șină`, `vierme`, `vișine`, `papuci`, and `lădiță`.
+- Used the corrective sheet for `dormitor`, `brățară`, `sticlă`, and `vișine`, and used the first Batch 57 sheet for the other accepted cells.
+- Added production WebP assets under `public/images/ro/b`, `public/images/ro/d`, `public/images/ro/p`, `public/images/ro/s`, `public/images/ro/ș`, `public/images/ro/v`, and `public/images/ro/l`; every Batch 58 asset is below both the `12 KB` warning threshold and `20 KB` hard maximum.
+- Added production JSON rows only to existing canonical manifests.
+- Confirmed post-Batch-58 totals: `430` total records, `427` approved words, `427` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Recorded affected coverage after Batch 58, including `B` `30` starts / `24` contains / `54` mixed, `CI` `9` / `11` / `20`, `L` `20` / `87` / `107`, `R` `18` / `153` / `171`, `S` `22` / `31` / `53`, `Ș` `13` / `28` / `41`, `Ț` `6` / `40` / `46`, `V` `16` / `15` / `31`, and `D` `11` / `22` / `33`.
+- Updated content-derived gameplay compatibility fixtures because `papuci` increases the `CI` mixed practice-target pool from `19` to `20`.
+- Verification passed on 2026-06-12: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run build`, and `git diff --check`.
+- Local browser/app QA could not run because `http://localhost:3000` was unavailable both inside and outside the sandbox; no alternate dev server or port was started.
+- Completed Batch 57 image briefs and contact sheet on 2026-06-12.
+- Added `image-briefs-batch-57.md` with per-word image briefs for `biberon`, `borcan`, `burete`, `brad`, `bluză`, `bancă`, `dormitor`, `periuță`, `brățară`, `sticlă`, `șină`, `vierme`, `vișine`, `papuci`, and `lădiță`.
+- Generated one ordered, unlabeled review contact sheet at `assets/image-sources/ro/batch-57/contact-sheet.png` using the built-in `image_gen` tool and the pixel-art, full-square, circle-safe constraints from `docs/image-pipeline.md`.
+- Confirmed Batch 57 stayed review-only with no production word records, cropped cells, optimized public WebP assets, route/schema changes, placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded human-review attention points for `bancă` circular crop comfort, `sticlă` bottle reading, `șină` circular crop comfort, and `vierme` character-like face acceptability.
+- Recorded human feedback: `dormitor` should better represent a bedroom, `brățară` should be on a hand, `sticlă` should be a glass bottle rather than a `flacon`, and `vișine` needs stronger distinction from `cireșe`.
+- Generated corrective contact sheet `assets/image-sources/ro/batch-57/corrective-contact-sheet-1.png` with replacement candidates for `dormitor`, `brățară`, `sticlă`, and `vișine`.
+- Recorded that the strongest no-label cue for `vișine` is darker/smaller sour cherries with a cut fruit, but the distinction from `cireșe` remains inherently ambiguous for some children; if exact recognition is critical, use `cireșe` or defer the row.
+- Prepared the Batch 58 promotion prompt with a hard requirement to promote only human-accepted cells after review.
+- Completed Batch 56 production-slice planning on 2026-06-12.
+- Added `production-slice-planning-batch-56.md` with source checks, canonical file/ID/path plans, metadata plans, route/loader/validation impact, coverage deltas, image brief direction, preserved decisions, and a ready-to-copy Batch 57 prompt.
+- Planned the fourth requested expansion slice in order: `biberon`, `borcan`, `burete`, `brad`, `bluză`, `bancă`, `dormitor`, `periuță`, `brățară`, `sticlă`, `șină`, `vierme`, `vișine`, `papuci`, and `lădiță`.
+- Confirmed all `15` planned rows remain planning-only; no production JSON records, image assets, placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims were added.
+- Recorded source/safety decisions: `bancă` must use the park bench sense; `sticlă` must use the bottle sense; `șină` must show rail/train-track; `periuță` uses the toothbrush sense; `vișine` and `papuci` are natural plural rows from singular dictionary forms; `brad` should stay a plain fir tree; `vierme` should be friendly and non-scary; `dormitor` should stay a simple bed-centered room icon; and `lădiță` should show a small crate/box.
+- Recorded planned coverage impact if all `15` rows are later promoted with ready images: total would become `427` approved words and `427` ready images; requested-target deltas would be `Ă +7 contains`, `CI +1 contains`, `L +1 starts/+2 contains`, `R +8 contains`, `S +1 starts`, `Ș +1 starts/+1 contains`, `T +3 contains`, `Ț +3 contains`, `V +2 starts`, `B +7 starts`, and `D +1 starts/+2 contains`.
+- Preserved Batch 55 baseline decisions: no forced `Ă` or `Â` starts-with rows, no `Q`/`W`/`Y` padding with obscure vocabulary, no `webcam`, no `yak`, and no speech-target production metadata.
+- Completed Batch 55 slice coverage QA and next-prompt preparation on 2026-06-11.
+- Added `slice-coverage-qa-batch-55.md` with canonical totals, requested-target coverage including `GHI`, scope guard checks, Batch 54 asset dimensions and sizes, localhost status, verification, next-step decision, and the Batch 56 prompt.
+- Confirmed the Batch 54 state remains `412` approved words, `412` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed all Batch 54 assets are `256 x 256 px`, below `20 KB`, and below the `12 KB` warning threshold.
+- Confirmed no production `webcam` or `yak` row exists; `cameră web` remains in `C`; `iac` remains in `I`.
+- Batch 55 verification passed on 2026-06-11: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run build`, and `git diff --check`.
+- Local browser/app QA could not run because `http://localhost:3000` was unavailable both inside and outside the sandbox; no alternate dev server or port was started.
+- Set Batch 56 as the next planning-only production slice from the remaining already human-reviewed Batch 43 candidate pool.
+- Completed Batch 54 production promotion on 2026-06-11.
+- Added `production-promotion-batch-54.md` with human approval, promoted rows, image QA artifacts, final asset sizes, content totals, coverage impact, verification, and the Batch 55 prompt.
+- Promoted all `15` Batch 53 accepted cells: `lebădă`, `lopată`, `lipici`, `lupă`, `leagăn`, `rac`, `ren`, `rucsac`, `role`, `supă`, `sare`, `semințe`, `sită`, `dovlecel`, and `țelină`.
+- Added production WebP assets under `public/images/ro/l`, `public/images/ro/r`, `public/images/ro/s`, `public/images/ro/d`, and `public/images/ro/ț`; every Batch 54 asset is below both the `12 KB` warning threshold and `20 KB` hard maximum.
+- Added production JSON rows only to `content/ro/words-l.json`, `content/ro/words-r.json`, `content/ro/words-s.json`, `content/ro/words-d.json`, and `content/ro/words-ț.json`.
+- Confirmed post-Batch-54 totals: `415` total records, `412` approved words, `412` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Recorded affected coverage after Batch 54, including `L` `19` starts / `85` contains / `104` mixed, `R` `18` / `145` / `163`, `S` `21` / `31` / `52`, `D` `10` / `20` / `30`, `Ț` `6` / `37` / `43`, `V` `14` / `15` / `29`, `CE` `14` / `4` / `18`, and `CI` `9` / `10` / `19`.
+- Updated content-derived gameplay compatibility fixtures because `dovlecel` increases `V` contains-only and `CE` mixed counts, and `lipici` increases `CI` mixed count.
+- Verification passed on 2026-06-11: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run build`, and `git diff --check`.
+- Local browser/app QA could not run because `http://localhost:3000` was unavailable both inside and outside the sandbox; no alternate dev server or port was started.
+- Completed Batch 53 image briefs and contact sheet on 2026-06-11.
+- Added `image-briefs-batch-53.md` with per-word image briefs for `lebădă`, `lopată`, `lipici`, `lupă`, `leagăn`, `rac`, `ren`, `rucsac`, `role`, `supă`, `sare`, `semințe`, `sită`, `dovlecel`, and `țelină`.
+- Generated one ordered, unlabeled review contact sheet at `assets/image-sources/ro/batch-53/contact-sheet.png` using the built-in `image_gen` tool and the pixel-art, full-square, circle-safe constraints from `docs/image-pipeline.md`.
+- Confirmed Batch 53 stayed review-only with no production word records, cropped cells, optimized public WebP assets, route/schema changes, placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded human-review attention points for `lopată`, `rac`, `sare`, and `semințe`.
+- Prepared the Batch 54 promotion prompt with a hard requirement to promote only human-accepted cells after review.
+- Completed Batch 52 production-slice planning on 2026-06-11.
+- Added `production-slice-planning-batch-52.md` with source checks, canonical file/ID/path plans, metadata plans, route/loader/validation impact, coverage deltas, image brief direction, preserved decisions, and a ready-to-copy Batch 53 prompt.
+- Planned the third requested expansion slice in order: `lebădă`, `lopată`, `lipici`, `lupă`, `leagăn`, `rac`, `ren`, `rucsac`, `role`, `supă`, `sare`, `semințe`, `sită`, `dovlecel`, and `țelină`.
+- Confirmed all `15` planned rows remain planning-only; no production JSON records, image assets, placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims were added.
+- Recorded source/safety decisions: `role` uses the roller-skates sense from `rolă`; `semințe` is planned as a natural plural food row from `sămânță`; `sită` uses the household sieve sense; `dovlecel` must stay visually distinct from `dovleac`; `țelină` uses the culinary vegetable sense; `leagăn` uses a playground swing, not a cradle or institution.
+- Recorded planned coverage impact if all `15` rows are later promoted with ready images: total would become `412` approved words and `412` ready images; requested-target deltas would be `Ă +7 contains`, `L +5 starts/+3 contains`, `R +4 starts/+1 contains`, `S +4 starts/+1 contains`, `D +1 starts/+1 contains`, `Ț +1 starts/+1 contains`, `T +2 contains`, `V +1 contains`, `B +1 contains`, `CE +1 contains`, and `CI +1 contains`.
+- Preserved Batch 51 baseline decisions: no forced `Ă` or `Â` starts-with rows, no `Q`/`W`/`Y` padding with obscure vocabulary, no `webcam`, no `yak`, and no speech-target production metadata.
+- Completed Batch 51 slice coverage QA and next-prompt preparation on 2026-06-11.
+- Added `slice-coverage-qa-batch-51.md` with canonical totals, affected target coverage, scope guard checks, Batch 50 asset dimensions and sizes, localhost status, verification, next-step decision, and the Batch 52 prompt.
+- Confirmed `400` total records, `397` approved words, `397` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed no production `webcam` or `yak` row exists; `cameră web` remains in `C`; `iac` remains in `I`.
+- Confirmed all Batch 50 public WebP files exist, are `256 x 256 px`, and are below the `20 KB` hard maximum.
+- Confirmed `http://localhost:3000/ro` remained unavailable both inside and outside the sandbox; browser QA remains pending.
+- Set Batch 52 as the next planning-only production-slice batch from the already human-reviewed Batch 43 candidate pool.
+- Completed Batch 50 production promotion on 2026-06-11.
+- Added `production-promotion-batch-50.md` with human review decisions, promoted rows, image QA artifacts, file sizes, content totals, verification, and the Batch 51 prompt.
+- Promoted all `15` planned Batch 48 rows after human acceptance: `kimono`, `karate`, `kilt`, `yoga`, `tren`, `tractor`, `tablă`, `tigaie`, `tamburină`, `trandafir`, `ventilator`, `vopsea`, `volan`, `vestă`, and `vânătă`.
+- Generated a white `kimono` replacement with a blue belt because the human rejected the purple robe color but accepted the concept.
+- Added production WebP assets under `public/images/ro/k`, `public/images/ro/y`, `public/images/ro/t`, and `public/images/ro/v`; every Batch 50 asset is below both the `12 KB` warning threshold and `20 KB` hard maximum.
+- Added production JSON rows only to `content/ro/words-k.json`, `content/ro/words-y.json`, `content/ro/words-t.json`, and `content/ro/words-v.json`.
+- Confirmed post-Batch-50 totals: `400` total records, `397` approved words, `397` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Recorded affected coverage after Batch 50: `K` `5` starts / `1` contains / `6` mixed, `Y` `2` / `0` / `2`, `T` `17` / `86` / `103`, `V` `14` / `14` / `28`, `L` `14` / `82` / `96`, `R` `14` / `144` / `158`, `S` `17` / `30` / `47`, `B` `23` / `23` / `46`, and `D` `9` / `19` / `28`.
+- Verification passed on 2026-06-11: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run build`, and `git diff --check`.
+- Local browser/app QA could not run because `http://localhost:3000` was unavailable both inside and outside the sandbox; no alternate dev server or port was started.
+- Completed Batch 49 image briefs and contact sheet on 2026-06-02.
+- Added `image-briefs-batch-49.md` with per-word image briefs for `kimono`, `karate`, `kilt`, `yoga`, `tren`, `tractor`, `tablă`, `tigaie`, `tamburină`, `trandafir`, `ventilator`, `vopsea`, `volan`, `vestă`, and `vânătă`.
+- Generated one ordered, unlabeled review contact sheet at `assets/image-sources/ro/batch-49/contact-sheet.png` using the built-in `image_gen` tool and the pixel-art, full-square, circle-safe constraints from `docs/image-pipeline.md`.
+- Confirmed Batch 49 stayed review-only with no production word records, cropped cells, optimized public WebP assets, route/schema changes, placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded human-review attention points for the `karate` and `yoga` person/action cells, and circular-safety or thumbnail-readability checks for `tren`, `tractor`, `tigaie`, `trandafir`, and `ventilator`.
+- Prepared the Batch 50 promotion prompt with a hard requirement to promote only human-accepted cells after review.
+- Completed Batch 48 second production-slice planning on 2026-06-02.
+- Added `production-slice-planning-batch-48.md` with source checks, canonical file/ID/path plans, metadata plans, route/loader/validation impact, coverage deltas, image brief direction, preserved decisions, and a ready-to-copy Batch 49 prompt.
+- Planned the second requested expansion slice in order: `kimono`, `karate`, `kilt`, `yoga`, `tren`, `tractor`, `tablă`, `tigaie`, `tamburină`, `trandafir`, `ventilator`, `vopsea`, `volan`, `vestă`, and `vânătă`.
+- Confirmed all `15` planned rows remain planning-only; no production JSON records, image assets, placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims were added.
+- Recorded source/safety decisions: `karate` requires a solo, nonviolent sport image; `kilt` should be garment-only and culture-neutral; `yoga` should be a calm exercise pose without spiritual, medical, therapy, or wellness claims; `tablă` uses the school-board sense; `volan` uses the steering-wheel sense; and `vânătă` uses the eggplant/aubergine food sense.
+- Recorded planned coverage impact if all `15` rows are later promoted with ready images: total would become `397` approved words and `397` ready images; requested-target deltas would be `Ă +4 contains`, `Â +1 contains`, `K +3 starts`, `Y +1 starts`, `L +4 contains`, `R +6 contains`, `S +2 contains`, `T +6 starts/+5 contains`, `V +5 starts`, `B +2 contains`, and `D +1 contains`.
+- Preserved Batch 47 baseline decisions: no forced `Ă` or `Â` starts-with rows, no `Q`/`W`/`Y` padding with obscure vocabulary, no `webcam`, no `yak`, and no speech-target production metadata.
+- Completed Batch 47 slice coverage QA and next-prompt preparation on 2026-06-02.
+- Recomputed canonical production totals from `content/ro/*.json`: `385` total records, `382` approved, `382` approved ready images, `0` approved placeholders, and `3` rejected audit-trail rows: `ghicitoare`, `miez`, and `stinghie`.
+- Confirmed new playable letters/routes are enabled and loaded: `K` -> `k` / `content/ro/words-k.json`, `Q` -> `q` / `words-q.json`, `W` -> `w` / `words-w.json`, `X` -> `x` / `words-x.json`, and `Y` -> `y` / `words-y.json`.
+- Confirmed the first-slice canonical rows remain in the intended files: `cameră web` is `ro-c-camera-web` in `content/ro/words-c.json`, `iac` is `ro-i-iac` in `content/ro/words-i.json`, and no production `webcam` or `yak` row exists.
+- Recorded requested-target coverage after Batch 46 from canonical manifests: `Ă` `0` starts / `156` contains / `156` mixed; `Â` `0` / `11` / `11`; `K` `2` / `1` / `3`; `Q` `1` / `0` / `1`; `W` `1` / `2` / `3`; `X` `1` / `5` / `6`; `Y` `1` / `0` / `1`; `CE` `14` / `3` / `17`; `CI` `9` / `9` / `18`; `GE` `9` / `6` / `15`; `GI` `6` / `9` / `15`; `GHE` `11` / `4` / `15`; `CHE` `2` / `13` / `15`; `CHI` `8` / `7` / `15`; `L` `14` / `78` / `92`; `R` `14` / `138` / `152`; `S` `17` / `28` / `45`; `Ș` `12` / `27` / `39`; `T` `11` / `81` / `92`; `Ț` `5` / `36` / `41`; `V` `9` / `14` / `23`; `B` `23` / `21` / `44`; `D` `9` / `18` / `27`; and `J` `5` / `9` / `14`.
+- Reviewed follow-up needs after the first slice: `K`, `Q`, `W`, `X`, and `Y` are now playable but remain small; no production-ready starts-with `Ă` or `Â` rows have been found; `Q`, `W`, and additional `Y` rows should stay source-checked and quality-gated; the next slice should avoid forcing rare buckets and should draw primarily from the already human-approved Batch 43 pool.
+- Batch 47 verification passed outside the sandbox after sandboxed `pnpm` attempts hung and then failed with `fetch failed`: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, and `pnpm run check:matching`.
+- `pnpm run validate:content` passed with warning-threshold image notices only; the new `content/ro/words-x.json` / `ro-x-xilofon.webp` warning remains `13,520 B`, below the `20 KB` hard maximum.
+- `git diff --check` passed after the Batch 47 status edits.
+- Localhost route QA for representative new routes and images could not be completed because `http://localhost:3000` was unavailable both inside and outside the sandbox; no alternate dev server or port was started.
+- Prepared the next ready-to-copy prompt for a repeated Batch 44-style second production-slice planning batch.
+- Completed Batch 46 production promotion and verification on 2026-06-02 after the human explicitly accepted all Batch 45 contact-sheet cells.
+- Promoted all `15` accepted rows: `kiwi`, `koala`, `xilofon`, `taxi`, `pix`, `boxă`, `mixer`, `walkie-talkie`, `cameră web`, `yo-yo`, `iac`, `quinoa`, `lampă`, `lună`, and `ceainic`.
+- Added new enabled Romanian letter manifests and routes for `K`, `Q`, `W`, `X`, and `Y`: `content/ro/words-k.json`, `words-q.json`, `words-w.json`, `words-x.json`, and `words-y.json`.
+- Added existing-manifest production rows for `boxă`, `cameră web`, `ceainic`, `iac`, `lampă`, `lună`, `mixer`, `pix`, and `taxi`; kept `cameră web` in `content/ro/words-c.json` and `iac` in `content/ro/words-i.json`.
+- Promoted final public assets under canonical paths in `public/images/ro/...`; all new assets are `256 x 256 px` lossless WebP files below the `20 KB` hard maximum.
+- Confirmed the accepted crops are recognizable at full size and thumbnail size, with circular-mask QA for long or edge-heavy subjects; `pix`, `yo-yo`, `koala`, and `iac` were locally padded so circular thumbnails clip only background or non-meaningful pixels.
+- Updated `src/content/loaders.ts` to import the new rare-letter manifests and updated `src/game/gameplay-compatibility.check.ts` for the enabled-letter list and the new `CE` mixed count.
+- Confirmed post-Batch-46 production totals from the canonical manifests: `382` approved words, `382` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed requested-target coverage after Batch 46: `Ă` `0` starts / `156` contains, `K` `2` starts / `1` contains, `Q` `1` starts / `0` contains, `W` `1` starts / `2` contains, `X` `1` starts / `5` contains, `Y` `1` starts / `0` contains, `CE` `14` starts / `3` contains, `L` `14` starts / `78` contains, `R` `14` starts / `138` contains, `T` `11` starts / `81` contains, and `B` `23` starts / `21` contains.
+- Batch 46 verification passed outside the sandbox because sandboxed `pnpm` commands repeatedly hung and then failed with `fetch failed`: `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check`.
+- `pnpm run validate:content` passed with existing image warning-threshold notices plus the new `content/ro/words-x.json` / `ro-x-xilofon.webp` warning at `13,520 B`; this remains below the `20 KB` hard maximum.
+- Localhost route QA could not be completed because the expected existing dev server on `http://localhost:3000` was unavailable both inside and outside the sandbox; no alternate dev server or port was started.
+- Confirmed Batch 46 added no placeholders, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+- Recorded Batch 47 as the next slice coverage QA and next-prompt batch.
+- Completed Batch 45 image briefs and contact sheet on 2026-06-02.
+- Added `image-briefs-batch-45.md` with per-word image briefs for `kiwi`, `koala`, `xilofon`, `taxi`, `pix`, `boxă`, `mixer`, `walkie-talkie`, `cameră web`, `yo-yo`, `iac`, `quinoa`, `lampă`, `lună`, and `ceainic`.
+- Generated one ordered, unlabeled review contact sheet at `assets/image-sources/ro/batch-45/contact-sheet.png` using the built-in `image_gen` tool and the pixel-art, full-square, circle-safe constraints from `docs/image-pipeline.md`.
+- Confirmed Batch 45 stayed review-only with no production word records, cropped cells, optimized WebP assets, route/schema changes, placeholders, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Recorded the Batch 46 promotion prompt with the hard requirement to promote only human-accepted cells after review.
+- Completed Batch 44 first production-slice planning on 2026-06-02.
+- Added `production-slice-planning-batch-44.md` with source verification, canonical file/ID/path plans, route and validation impacts, coverage deltas, image brief direction, and a ready-to-copy Batch 45 prompt.
+- Recorded Batch 44 display-form decisions: use `cameră web` instead of `webcam` for the child-facing production row unless a later human decision explicitly prioritizes a `W` starts-with borrowed display; use `iac` instead of `yak` because `iac` is the stronger Romanian standard and `yak` is a variant/cross-reference.
+- Planned new rare-letter manifests for Batch 46 if the Batch 45 images are accepted: `content/ro/words-k.json`, `words-q.json`, `words-w.json`, `words-x.json`, and `words-y.json`, with enabled routes `k`, `q`, `w`, `x`, and `y`.
+- Planned requested-target impact if all `15` rows are later promoted with ready images: `Ă +4 contains`, `K +2 starts/+1 contains`, `Q +1 starts`, `W +1 starts/+2 contains`, `X +1 starts/+4 contains`, `Y +1 starts`, `CE +1 starts`, `L +2 starts/+3 contains`, `R +2 contains`, `T +1 starts/+1 contains`, and `B +1 starts/+1 contains`.
+- Confirmed Batch 44 stayed planning-only with no production word records, image assets, route/schema changes, placeholders, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Completed Batch 43 human vocabulary review on 2026-06-02.
+- Added `human-vocabulary-review-batch-43.md` with broad human approval of the Batch 42 candidate pool, source rechecks for borrowed rows, accepted strong/stretch/held-row decisions, missing `Ă`/`Â` starts-with decisions, rejected rows, a first approved production-slice queue of `15` words, and a ready-to-copy Batch 44 prompt.
+- Recorded that `webcam`, `walkie-talkie`, `yak`, `yo-yo`, `quinoa`, and `mixer` are human-approved for planning consideration, but Batch 44 must still verify standard Romanian display forms, especially `webcam` versus `cameră web`, `yak` versus `iac`, `yo-yo` hyphenation, `walkie-talkie` hyphenation, and whether `wombat` or `vombat` is defensible for any later `W` starts-with slice.
+- Recorded the first Batch 44 planning queue: `kiwi`, `koala`, `xilofon`, `taxi`, `pix`, `boxă`, `mixer`, `walkie-talkie`, `webcam` or `cameră web`, `yo-yo`, `yak` or `iac`, `quinoa`, `lampă`, `lună`, and `ceainic`.
+- Confirmed Batch 43 stayed review-only with no production word records, image assets, route/schema changes, placeholders, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Completed Batch 42 requested letter and sound expansion candidate worksheet on 2026-06-02.
+- Added `candidate-review-worksheet-batch-42-requested-letter-and-sound-expansion.md` with the confirmed batch sequence, fresh current coverage table, source URLs, strong child-known candidates, learnable stretch candidates, held candidates, rejected candidates, rare-letter summary, first-slice review notes, and a ready-to-copy Batch 43 prompt.
+- Recomputed current requested-target coverage from `content/ro/*.json`: the pack remains `367` approved words, `367` ready images, `0` approved placeholders, and `3` rejected audit-trail rows.
+- Confirmed the Batch 41 coverage snapshot still matches the canonical manifests for all requested targets.
+- Re-checked Romanian alphabet and rare-letter sources for `K`, `Q`, `W`, `X`, and `Y`, including dexonline and DOOM-related guidance.
+- Re-checked Romanian speech/logopedie sources for sound positions and differentiation involving `R`, `S`, `Ș`, `Ț`, `J`, `L`, `V`, `D`, `T`, `CE/CI`, `GE/GI`, `CHE/CHI`, and `GHE/GHI`, including Logorici, CJRAE, and CMBRAE materials.
+- Recorded that no strong production-ready starts-with candidates were found for `Ă` or `Â`, and that `Q`, `W`, and `Y` should remain human-reviewed, quality-limited rare-letter areas.
+- Kept Batch 42 worksheet-only with no production word records, image assets, route/schema changes, placeholders, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
 - Created the feature folder.
+- Completed Batch 41 requested letter and sound expansion planning on 2026-06-02.
+- Added `requested-letter-and-sound-expansion-batch-41.md` with the current coverage snapshot for all requested targets, recorded human decisions, rare-letter policy, target quantity policy, overlap guidance, source-check requirements, worksheet requirements, and the full Batch 41 through Batch 47 plus final QA sequence.
+- Added `next-vocabulary-expansion-prompt-batch-41.md` as the ready-to-copy prompt for a future agent to start from Batch 41 context and execute Batch 42 candidate worksheet work.
+- Recorded that `Ă`, `Â`, `K`, `Q`, `W`, `X`, and `Y` should behave like normal playable letters once implemented, including starts-with, contains-only, mixed mode, setup, play, exclusion filtering, and admin inventory.
+- Recorded that `Ă` and `Â` should use the existing `a-breve` / `a-circ` route tokens and `ro-a-breve-...` / `ro-a-circ-...` ID/image prefixes.
+- Recorded the human guidance to aim near `10` good additions per requested area where quality allows, use fewer for rare weak buckets, cap broad areas at roughly `20` to `25`, avoid duplicate/near-synonym padding, allow imageable actions, and include but not over-prioritize overlapping words.
+- Recorded that Batch 42 must re-check Romanian speech/logopedie references, especially for sound positions and differentiation involving `R`, `S`, `Ș`, `Ț`, `J`, `L`, `V`, `D`, `T`, `CE/CI`, `GE/GI`, `CHE/CHI`, and `GHE/GHI`.
+- Kept Batch 41 documentation-only with no production word records, image assets, route/schema changes, placeholders, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
 - Corrected the user-reported G/GHI vocabulary error on 2026-05-26 after online dexonline/DOOM checks (`https://dexonline.ro/intrare/chiuvet%C4%83/10192`, `https://dexonline.ro/definitie/ghimbir`): removed the incorrect approved `ro-g-ghiuveta` / `ghiuvetă` record and unused public image asset, preserved the existing correct `ro-c-chiuveta` / `chiuvetă` C/CHI record, added `ro-g-ghimbir` / `ghimbir` as the replacement G/GHI word, generated a child-safe ginger-root pixel-art image, refined it through a `128 px` pixel-art grid, and promoted `public/images/ro/g/ro-g-ghimbir.webp` as a `256 x 256 px` lossless WebP file below the warning threshold.
 - Updated the content-dependent gameplay compatibility fixture because replacing `ghiuvetă` with `ghimbir` intentionally reduces the derived `V` contains-only pool from `15` to `14` while preserving exact-size visible-subset countdown regression coverage.
 - Verification for the 2026-05-26 vocabulary correction passed: `pnpm run validate:content` passed with only pre-existing image warning-threshold notices; `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, and `git diff --check` passed; a production image sanity check found `367` approved words, `367` ready image refs, `367` public non-placeholder WebP files, `0` missing files, and `0` unused files. `pnpm run build` remains blocked locally by the known Next SWC darwin/arm64 code-signature failure before app compilation.
@@ -2400,11 +2676,47 @@ Implemented corrective changes:
 
 ## Next Batch
 
-There is no next approved Romanian image-generation batch beyond human-supplied corrective review. The current Romanian image completion scope remains at `367` approved words, `367` ready images, and `0` approved placeholders.
+The next approved Romanian vocabulary-expansion step is Batch 72: plan the next small production slice from the remaining already human-reviewed Batch 43 candidate pool.
 
-Remaining release verification steps:
+Ready-to-copy prompt:
 
-- Run `pnpm run build`.
-- Deploy or inspect the Vercel preview.
-- Verify deployed `/ro`, `/admin/words`, and representative `/ro/play/...` routes on mobile and desktop.
-- Complete final human visual review of the deployed production image pack.
+```txt
+You are continuing Word Wheel Romanian content expansion after Batch 71.
+
+Read first:
+
+1. AGENTS.md
+2. docs/agent-brief.md
+3. docs/spec.md
+4. docs/image-pipeline.md
+5. docs/app-development-program/features/romanian-content-expansion/candidate-review-worksheet-batch-42-requested-letter-and-sound-expansion.md
+6. docs/app-development-program/features/romanian-content-expansion/human-vocabulary-review-batch-43.md
+7. docs/app-development-program/features/romanian-content-expansion/production-slice-planning-batch-44.md
+8. docs/app-development-program/features/romanian-content-expansion/production-slice-planning-batch-48.md
+9. docs/app-development-program/features/romanian-content-expansion/production-slice-planning-batch-52.md
+10. docs/app-development-program/features/romanian-content-expansion/production-slice-planning-batch-56.md
+11. docs/app-development-program/features/romanian-content-expansion/production-slice-planning-batch-60.md
+12. docs/app-development-program/features/romanian-content-expansion/production-slice-planning-batch-64.md
+13. docs/app-development-program/features/romanian-content-expansion/production-slice-planning-batch-68.md
+14. docs/app-development-program/features/romanian-content-expansion/slice-coverage-qa-batch-71.md
+15. docs/app-development-program/features/romanian-content-expansion/status.md
+16. docs/status.md
+
+Goal:
+
+Execute Batch 72: plan the next small production slice from the remaining already human-reviewed Batch 43 candidate pool. Do not generate images or add production JSON records in this batch.
+
+Tasks:
+
+- Recompute the current canonical totals and requested-target coverage from `content/ro/*.json`.
+- Review remaining Batch 43 candidate rows after excluding already planned/promoted rows from Batches 44, 48, 52, 56, 60, 64, and 68.
+- Select up to `15` concrete, child-safe, imageable Romanian nouns that are defensible for production and improve underfilled monitored areas without forcing obscure rare-letter padding.
+- Before accepting any word whose current usage, form, child familiarity, safety, or source status is uncertain, do current source research and record the source.
+- For each selected row, record canonical file, stable ID, planned image path, normalized form, category, difficulty, source check, image brief direction, and expected starts/contains impact.
+- Defer weak rows with explicit reasons, especially near-duplicates, visually confusing concepts, obscure terms, or safety-awkward words.
+- Preserve existing decisions: do not force `Ă` or `Â` starts-with rows, do not pad `Q`, `W`, or `Y` with obscure words, keep `cameră web` in `C`, keep `iac` in `I`, do not reintroduce `webcam` or `yak`, and do not reopen `răchită` without explicit human decision.
+- Run `git diff --check`.
+- Update the feature status, global docs/status.md, and docs/next-image-batch-prompt.md with the planning result and the Batch 73 image-brief/contact-sheet prompt.
+
+Do not add placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+```

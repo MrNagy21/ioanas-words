@@ -91,6 +91,96 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-tz-telina",
+      "word": "țelină",
+      "display": "țelină",
+      "normalized": "telina",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/ț/ro-tz-telina.webp",
+      "imageStatus": "ready",
+      "alt": "O țelină cu frunze verzi.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-tz-tarc",
+      "word": "țarc",
+      "display": "țarc",
+      "normalized": "tarc",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/ț/ro-tz-tarc.webp",
+      "imageStatus": "ready",
+      "alt": "Un țarc de joacă simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-tz-tigla",
+      "word": "țiglă",
+      "display": "țiglă",
+      "normalized": "tigla",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/ț/ro-tz-tigla.webp",
+      "imageStatus": "ready",
+      "alt": "O țiglă roșie.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-tz-tambal",
+      "word": "țambal",
+      "display": "țambal",
+      "normalized": "tambal",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/ț/ro-tz-tambal.webp",
+      "imageStatus": "ready",
+      "alt": "Un țambal simplu.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-tz-tipar",
+      "word": "țipar",
+      "display": "țipar",
+      "normalized": "tipar",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/ț/ro-tz-tipar.webp",
+      "imageStatus": "ready",
+      "alt": "Un țipar prietenos.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

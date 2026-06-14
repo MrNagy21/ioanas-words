@@ -217,6 +217,186 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-l-lampa",
+      "word": "lampă",
+      "display": "lampă",
+      "normalized": "lampa",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-lampa.webp",
+      "imageStatus": "ready",
+      "alt": "O lampă de masă aprinsă ușor.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-luna",
+      "word": "lună",
+      "display": "lună",
+      "normalized": "luna",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/l/ro-l-luna.webp",
+      "imageStatus": "ready",
+      "alt": "Luna luminoasă pe cerul nopții.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lebada",
+      "word": "lebădă",
+      "display": "lebădă",
+      "normalized": "lebada",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/l/ro-l-lebada.webp",
+      "imageStatus": "ready",
+      "alt": "O lebădă albă pe apă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lopata",
+      "word": "lopată",
+      "display": "lopată",
+      "normalized": "lopata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-lopata.webp",
+      "imageStatus": "ready",
+      "alt": "O lopată de grădină.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lipici",
+      "word": "lipici",
+      "display": "lipici",
+      "normalized": "lipici",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/l/ro-l-lipici.webp",
+      "imageStatus": "ready",
+      "alt": "Un lipici pentru școală.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lupa",
+      "word": "lupă",
+      "display": "lupă",
+      "normalized": "lupa",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/l/ro-l-lupa.webp",
+      "imageStatus": "ready",
+      "alt": "O lupă cu mâner.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-leagan",
+      "word": "leagăn",
+      "display": "leagăn",
+      "normalized": "leagan",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/l/ro-l-leagan.webp",
+      "imageStatus": "ready",
+      "alt": "Un leagăn de joacă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-ladita",
+      "word": "lădiță",
+      "display": "lădiță",
+      "normalized": "ladita",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-ladita.webp",
+      "imageStatus": "ready",
+      "alt": "O lădiță de lemn.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-locomotiva",
+      "word": "locomotivă",
+      "display": "locomotivă",
+      "normalized": "locomotiva",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/l/ro-l-locomotiva.webp",
+      "imageStatus": "ready",
+      "alt": "O locomotivă colorată.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-laveta",
+      "word": "lavetă",
+      "display": "lavetă",
+      "normalized": "laveta",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-laveta.webp",
+      "imageStatus": "ready",
+      "alt": "O lavetă curată.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

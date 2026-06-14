@@ -163,6 +163,150 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-v-ventilator",
+      "word": "ventilator",
+      "display": "ventilator",
+      "normalized": "ventilator",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/v/ro-v-ventilator.webp",
+      "imageStatus": "ready",
+      "alt": "Un ventilator de casă cu pale albastre.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vopsea",
+      "word": "vopsea",
+      "display": "vopsea",
+      "normalized": "vopsea",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/v/ro-v-vopsea.webp",
+      "imageStatus": "ready",
+      "alt": "O cutie cu vopsea și o pensulă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-volan",
+      "word": "volan",
+      "display": "volan",
+      "normalized": "volan",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/v/ro-v-volan.webp",
+      "imageStatus": "ready",
+      "alt": "Un volan de mașină.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vesta",
+      "word": "vestă",
+      "display": "vestă",
+      "normalized": "vesta",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/v/ro-v-vesta.webp",
+      "imageStatus": "ready",
+      "alt": "O vestă portocalie fără mâneci.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vanata",
+      "word": "vânătă",
+      "display": "vânătă",
+      "normalized": "vanata",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/v/ro-v-vanata.webp",
+      "imageStatus": "ready",
+      "alt": "O vânătă mov cu codiță verde.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vierme",
+      "word": "vierme",
+      "display": "vierme",
+      "normalized": "vierme",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/v/ro-v-vierme.webp",
+      "imageStatus": "ready",
+      "alt": "Un vierme prietenos.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-visine",
+      "word": "vișine",
+      "display": "vișine",
+      "normalized": "visine",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/v/ro-v-visine.webp",
+      "imageStatus": "ready",
+      "alt": "Vișine roșii închise.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-viespe",
+      "word": "viespe",
+      "display": "viespe",
+      "normalized": "viespe",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/v/ro-v-viespe.webp",
+      "imageStatus": "ready",
+      "alt": "O viespe prietenoasă.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

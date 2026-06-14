@@ -1,110 +1,97 @@
 # Next Image Batch Prompt
 
-There is no additional approved image-generation scope after Romanian Content Expansion Batch 40. Batch 39 finalized the current Romanian image completion scope, and Batch 40 completed the first human-flagged A-C corrective image regeneration pass. Do not generate images, add vocabulary, or create another image batch without a separate human-approved production decision.
+Last updated: 2026-06-13
 
-The approved image-related path for future work is corrective review through `docs/app-development-program/features/romanian-content-expansion/corrective-image-audit-batch-40.md` when the human supplies a list of poor, unclear, or off-style ready images. Batch 40 corrective passes are complete through the human-approved Ș-T-Ț-U-Z list: the deterministic local-drawing replacement attempt was rejected and restored, later AI contact sheets were human-approved, and the accepted cells were promoted. Do not repeat the deterministic SVG-like/local drawing approach.
+The current Romanian production pack after Batch 74:
 
-Current finalized Romanian production pack:
-
-- Approved words: `367`.
-- Ready images: `367`.
+- Total Romanian records: `479`.
+- Approved words: `476`.
+- Ready images: `476`.
 - Approved placeholders: `0`.
 - Rejected audit-trail records: `ghicitoare`, `miez`, and `stinghie`.
-- Unresolved spoken note: `Capea` / `Kapia`; no current production word ID matches it.
+- New playable routes are enabled for `K`, `Q`, `W`, `X`, and `Y`.
+- `cameră web` remains in `C`, `iac` remains in `I`, and `webcam` / `yak` were not reintroduced.
+- `tacâmuri` is the promoted production row from Batch 66, not the earlier planned singular `tacâm`.
+- `răchită` was not promoted and should stay out unless the human explicitly reopens it.
+- `ghebe` and `ghioc` were not promoted after human review.
 
-Batch 39 confirmed the production JSON, public image assets, `/admin/words`, and representative gameplay routes all match the finalized pack counts. Batch 40 replaced human-flagged A-C, D-F, G-M, N-R, S, and Ș-T-Ț-U-Z ready images and kept the reused old casual-cap `caschetă` bitmap for `șapcă`. The public non-placeholder image tree should still contain exactly `367` WebP files referenced by approved ready records, with no missing or unused production image assets.
+Batch 74 completed the final strict point 2 top-up:
 
-## Remaining Release Verification Steps
+- Added `ghemuit` as a more usual true new `GHE` starts-with row.
+- Added `burghiu` as a `GHI` contains row.
+- Added both rows to `/admin/releases/2` for Release 2 QA.
+- Both Batch 74 assets are `256 x 256 px`, below `20 KB`, and below the `12 KB` warning threshold.
 
-Before release or deployment handoff:
+Current point 2 mixed coverage:
 
-1. Run `pnpm run build`.
-2. Deploy or inspect the Vercel preview.
-3. Verify deployed `/ro`, `/admin/words`, and representative `/ro/play/...` routes on mobile and desktop.
-4. Complete final human visual review of the deployed production image pack.
+- `ce`: `18`
+- `ci`: `20`
+- `ge`: `16`
+- `gi`: `16`
+- `che`: `16`
+- `chi`: `16`
+- `ghe`: `16`
+- `ghi`: `15`
 
-## Future Scope Rule
+All listed Romanian expansion requirements are satisfied for the current Release 2 candidate.
 
-Any future vocabulary, image, `Ă`/`Â` bucket, route/schema, speech-target metadata, admin editing, auth, database, billing, account, AI pronunciation, clinical-claim, or image-generation work needs a new explicit human-approved production scope before implementation.
+## Current Verification
 
-## Corrective Image Audit Rule
+Sandboxed `pnpm` checks hung before script output, then the required outside-sandbox retries passed:
 
-For each human-flagged bad image, agents must inspect the current image and compare it against the production reference set in `docs/image-pipeline.md` before generating anything. Record quality, style, 3D-ness, pixel construction, shadows, shape, subject size, background color, color/contrast, and thumbnail readability.
+- `pnpm run validate:content`
+- `pnpm run lint`
+- `pnpm exec tsc --noEmit --incremental false`
+- `pnpm run check:gameplay`
+- `pnpm run check:matching`
+- `pnpm run check:setup-storage`
+- `pnpm run build`
+- `git diff --check`
 
-If the object or Romanian word sense is uncertain, look up online images of the object before writing a regeneration direction. Use online references only to understand object shape and common visual features; do not copy external artwork. Record source URLs in the Batch 40 audit document.
+`pnpm run validate:content` reported only existing image warning-threshold notices outside the Batch 74 assets.
 
-Only after the audit has a clear per-word decision should a later image-generation batch create candidates, comparison sheets, optimized WebP assets, and content/status updates.
+In-app Browser QA loaded `/ro`, `/admin/releases/2`, `/ro/play/ghe`, and `/ro/play/ghi`. Outside-sandbox HTTP checks returned `200` for those routes plus `/images/ro/g/ro-g-ghemuit.webp` and `/images/ro/b/ro-b-burghiu.webp`.
 
-For corrective generation, use the earlier successful AI contact-sheet workflow: generate a small sheet with generous gutters and no labels, then stop and ask the human to review it before cropping or replacing anything. Use sheets of about `12` to `15` images so a bad style batch can be rejected early. After human approval, crop cells in fixed order, normalize the background, compare against high-quality references such as `cozonac`, `cățel`, `cadă`, `buchet`, `castravete`, `jachetă`, and `umbrelă`, then promote only accepted assets.
+## Next Approved Batch
 
-For smooth AI outputs, use the Batch 40 post-processing default unless the image clearly needs a different treatment: crop the accepted cell, resolve it through a refined `128 px` pixel-art grid, palette-limit to roughly `96` to `128` colors, nearest-neighbor upscale to `256 x 256 px`, and optimize as lossless WebP. Avoid `64 px`-style coarseness unless the human explicitly requests retro sprites.
+There is no approved next image-generation batch for the current requirement set. The next step is human QA on `/admin/releases/2`, then commit/release preparation if QA accepts the pack.
 
-After contact-sheet cropping, always verify that the final icon has a full square background or transparency across the entire `256 x 256 px` canvas. Reject or repair white gutters, side bars, corner blocks, cut-background patches, and rectangular panel artifacts before promotion.
+## Release QA Ready-To-Copy Prompt
 
-## Ready-To-Copy Prompt For Next Agent
-
-You are continuing Word Wheel image work after Romanian Content Expansion Batch 40. Do not generate or replace images unless the human has supplied a new explicit corrective scope.
+```txt
+You are continuing Word Wheel Romanian content expansion after Batch 74.
 
 Read first:
 
-1. `AGENTS.md`
-2. `docs/agent-brief.md`
-3. `docs/image-pipeline.md`
-4. `docs/app-development-program/features/romanian-content-expansion/corrective-image-audit-batch-40.md`
-5. `docs/app-development-program/features/romanian-content-expansion/status.md`
-6. `docs/status.md`
-
-Critical context:
-
-- The current pack has `367` approved words, `367` ready images, and `0` approved placeholders.
-- Batch 40 completed the human-flagged A-C corrective image list: `ro-a-acoperis`, `ro-a-alge`, `ro-a-ascutitoare`, `ro-a-ata`, `ro-b-branza`, `ro-b-barza`, `ro-b-buzunar`, `ro-c-ceapa`, `ro-c-ciorap`, `ro-c-cirese`, `ro-c-cap`, `ro-c-colaj`, `ro-c-cascheta`, and `ro-c-chiciura`.
-- Batch 40 also kept `ro-sh-sapca` as the reused old casual-cap `caschetă` bitmap.
-- The deterministic SVG-like/local drawing approach was rejected by the human as ugly, coarse, flat, and off-brand. Do not repeat that approach.
-- Batch 40's accepted corrective replacements came from an AI contact sheet, then were cropped in fixed order, processed through a refined `128 px` grid, palette-limited to `96` colors, nearest-upscaled to `256 x 256 px`, and optimized as lossless WebP.
-- The follow-up cleanup normalized full square backgrounds for the accepted A-C assets that looked cut after cropping; future crops must not leave contact-sheet gutters or partial background panels.
-- `ro-a-ascutitoare` still needs a human-reviewed object fix because the pencil points outward instead of into the sharpener.
-- `ro-b-bicicleta` still needs a human-reviewed quality/style improvement.
-- The A-C corrective set is marked done for now, but can still be improved in a later polish pass.
-- The D-F corrective scope is complete: `desen`, `duș`, `echer`, `echipament`, `față`, `frunză`, `fasole`, `frizerie`, and `frizură` were generated as one `3 x 3` AI contact sheet, accepted by the human, cropped in fixed order, background-normalized, and promoted as `256 x 256 px` lossless WebP assets.
-- The G-M corrective scope is complete: `gem`, `garaj`, `gemeni`, `ger`, `gheretă`, `gheruță`, `insulă`, `iaz`, `lac`, `melc`, `mușețel`, `mărțișor`, and `mazăre` were generated as one `13`-cell AI contact sheet, accepted by the human, cropped in fixed order, background-normalized into true square canvases, and promoted as optimized `256 x 256 px` lossless WebP assets. `mărțișor` was checked against online Romanian/tradition references before prompting.
-- The N-R corrective scope is complete: `nas`, `plajă`, `ploaie`, `prăjitură`, `păianjen`, `poză`, `pisicuță`, `raft`, `ramură`, `râu`, `roșie`, and `rotiță` were generated as one `12`-cell AI contact sheet; the first 11 were accepted, and `rotiță` used a second focused 4-cell variant sheet where the human selected the bottom-left small caster wheel.
-- The S corrective scope is complete for all approved S images except `soare`, `suc`, `săpun`, `scaun`, and `spaghete`, which the human marked acceptable. The promoted S replacements are circle-safe for wheel/admin circular display. Rejected `stinghie` remains untouched.
-- The Ș-T-Ț-U-Z corrective scope is complete: `șoricel`, `șosetă`, `șervețel`, `școală`, `tavă`, `telefon`, `tigru`, `tobă`, `tort`, `tricou`, `televizor`, `țestoasă`, `țurțure`, `ulei`, `zar`, `zid`, `zmeură`, and `zambilă` were generated as one `18`-cell AI contact sheet, human-accepted, cropped in fixed order, checked with circular-mask QA, and promoted as optimized `256 x 256 px` lossless WebP assets.
-- Future corrective prompt sheets should include the circular display constraint from `docs/image-pipeline.md`: every subject must fit comfortably inside the inscribed circle of the square cell so a circular UI mask clips only background.
-- Future corrective work needs a new human-flagged list and must stop for human review after the generated contact sheet.
+1. AGENTS.md
+2. docs/agent-brief.md
+3. docs/spec.md
+4. docs/image-pipeline.md
+5. docs/app-development-program/features/romanian-content-expansion/production-promotion-batch-74.md
+6. docs/app-development-program/features/romanian-content-expansion/status.md
+7. docs/status.md
 
 Goal:
 
-If the human has provided a new flagged image list, audit each image first, generate one small corrective candidate sheet with the earlier successful AI contact-sheet workflow, then stop for human review.
+Perform Release 2 QA and release preparation. Do not add new words or images unless the human explicitly reopens vocabulary/image work.
 
-Use this style target:
+Tasks:
 
-- realistic-cartoon pixel art, closer to `cozonac`, `cățel`, `cadă`, `buchet`, `castravete`, `jachetă`, `umbrelă`, and `scaun`;
-- polished, lightly dimensional, with cartoon-friendly colors but believable object forms;
-- visible refined pixel-art texture after post-processing, not flat vector art, emoji, blocky icon, or coarse 64 px sprite;
-- subject fills roughly `70%` to `85%` of the square with safe margins;
-- compose each subject so it fits inside the circular wheel/admin safe area; circular masks must clip only background, not the object;
-- pale warm off-white or soft sky-blue background only where useful;
-- simple, pack-consistent contact shadow when needed;
-- no text, letters, logos, brands, watermarks, copyrighted characters, clutter, scary expression, or confusing extra objects.
+- Recompute canonical Romanian content totals from `content/ro/*.json`.
+- Confirm `/admin/releases/1` is the committed baseline and `/admin/releases/2` is the dirty-tree additions list.
+- Confirm `/admin/releases/2` includes `burghiu`, `ghemuit`, `unghieră`, `pereche`, and `rechizite`.
+- Confirm `ghebe`, `ghioc`, and `răchită` were not promoted.
+- Confirm requested point 2 coverage: `ce`, `ci`, `ge`, `gi`, `che`, `chi`, `ghe`, and `ghi`.
+- Run `pnpm run validate:content`, `pnpm run lint`, `pnpm exec tsc --noEmit --incremental false`, `pnpm run check:gameplay`, `pnpm run check:matching`, `pnpm run check:setup-storage`, `pnpm run build`, and `git diff --check`.
+- Verify `http://localhost:3000` routes only if the expected dev server is running on port `3000`; if sandboxed localhost checks fail, retry outside the sandbox before marking the server unavailable. Do not start another server or use another port.
+- Review `git status --short` and clean transient local files only if the human asks.
+- Update docs with the QA result and release decision.
 
-Generate one contact sheet only:
+Do not add placeholders, route/schema changes, speech-target production metadata, database/auth/billing/admin features, AI pronunciation, or clinical claims.
+```
 
-- about `12` to `15` cells, or fewer if the human flagged fewer images;
-- generous gutters;
-- no labels or text inside the generated sheet;
-- square cells, one centered image per cell;
-- preserve the human-provided order exactly;
-- after the sheet is generated, stop and ask the human to review it before cropping, optimizing, editing JSON, or replacing production files.
+## Corrective Image Audit Rule
 
-After generating the contact sheet:
+Future corrective image work still needs a new human-flagged list. For each flagged image, inspect the current image and compare it against the production reference set in `docs/image-pipeline.md` before generating anything.
 
-1. Show the sheet to the human.
-2. Ask which cells are accepted, rejected, or need another pass.
-3. Do not crop or promote anything until the human responds.
-4. If approved, crop only accepted cells in the fixed order, normalize background, preserve the realistic-cartoon pixel-art quality, create a circular-mask preview and confirm subjects fit inside the inscribed circle, use the `128 px` grid / `96` to `128` color / nearest-upscale post-processing default if needed, optimize to `256 x 256 px` WebP, update only necessary alt text, and run:
-   - `pnpm run validate:content`
-   - `pnpm run lint`
-   - `pnpm exec tsc --noEmit --incremental false`
-   - `git diff --check`
-5. Update `corrective-image-audit-batch-40.md`, `docs/app-development-program/features/romanian-content-expansion/status.md`, `docs/status.md`, and this prompt.
+For corrective generation, use the earlier successful AI contact-sheet workflow: generate a small sheet with generous gutters and no labels, then stop and ask the human to review it before cropping or replacing anything. Future corrective prompt sheets should include the circular display constraint from `docs/image-pipeline.md`: every subject must fit comfortably inside the inscribed circle of the square cell so a circular UI mask clips only background.

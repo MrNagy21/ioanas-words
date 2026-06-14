@@ -150,6 +150,7 @@ Review checkpoint:
 - Derived starts-with, contains-only, and mixed pools update as expected.
 - Target sound position and therapy-target impact are recorded for every new word in the feature `status.md` or committed worksheet.
 - `/admin/words` shows the expected coverage changes when the dev server is available.
+- `/admin/releases`, `/admin/releases/1`, and `/admin/releases/2` are updated before commit/release preparation so `Release 1` represents the already committed baseline and `Release 2` lists only the dirty-tree approved words that need QA.
 
 Suggested verification:
 
@@ -1673,6 +1674,253 @@ Result:
 - Confirmed the `14` promoted A-C assets are `256 x 256 px` and between `7692 B` and `11120 B`, below the `12 KB` warning threshold and the `20 KB` hard maximum.
 - Updated only necessary alt text: `ro-a-alge` and `ro-b-buzunar`.
 - Updated `docs/image-pipeline.md` so future corrective prompts and post-processing can explicitly distinguish refined `128 px` pixel-art texture from both over-smooth AI output and coarse `64 px` sprite output.
+
+## Batch 41: Requested Letter And Sound Expansion Scope
+
+Status: Complete
+
+Plan the next production vocabulary expansion request without adding production words or images.
+
+Tasks:
+
+- Create a request-specific scope document for adding `Ă`, `Â`, `K`, `Q`, `W`, `X`, and `Y`, and for increasing coverage for `CE`, `CI`, `GE`, `GI`, `GHE`, `CHE`, `CHI`, `L`, `R`, `S`, `Ș`, `T`, `Ț`, `V`, `B`, `D`, and `J`.
+- Recompute the current approved coverage for all requested letters and sequence targets from canonical manifests.
+- Record the human decision that `Ă`, `Â`, `K`, `Q`, `W`, `X`, and `Y` should behave like normal playable letters once implemented, including starts-with, contains-only, and mixed modes.
+- Record the human-approved rare-letter policy: do not pad weak buckets with obscure vocabulary; add all genuinely child-friendly imageable words first, then allow up to about `5` standard Romanian, concrete, easily imageable learnable stretch words where needed.
+- Record the target quantity policy: aim close to `10` good additions per requested area where quality allows, fewer for weak buckets, and roughly `20` to `25` maximum for broad areas unless later scope changes.
+- Record the human guidance that overlapping words are allowed but should not be over-prioritized; include both simple non-overlapping words and useful overlapping words, and document overlap load.
+- Record the requirement that Batch 42 re-check Romanian speech/logopedie references, especially for sound position and contrast value.
+- Create a ready-to-copy prompt for Batch 42 candidate worksheet work.
+- Do not add production JSON, image assets, route/schema changes, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims.
+- Update this feature `status.md` and global `docs/status.md`.
+
+Review checkpoint:
+
+- The new scope document can be implemented by a future agent without the original conversation.
+- Critical decisions are recorded explicitly enough to avoid silent vocabulary padding.
+- The next batch is worksheet-first and cannot accidentally publish unreviewed child-facing words.
+
+Suggested verification:
+
+```txt
+git diff --check
+```
+
+Result:
+
+- Added `requested-letter-and-sound-expansion-batch-41.md`.
+- Added `next-vocabulary-expansion-prompt-batch-41.md`.
+- Confirmed the current pack remains `367` approved words, `367` ready images, and `0` approved placeholders.
+- Confirmed no production words, image assets, route/schema changes, speech-target metadata, admin editing, auth, database, billing, accounts, AI pronunciation, or clinical claims were added.
+
+## Batch 42: Candidate Worksheet For Requested Expansion
+
+Status: Complete
+
+Create a candidate worksheet from the Batch 41 scope before making production changes.
+
+Tasks:
+
+- Recompute current coverage from `content/ro/*.json`.
+- Research current Romanian orthography and usage for rare-letter candidates.
+- Re-check Romanian speech/logopedie references, prioritizing Romanian sources, for target sound position and differentiation value.
+- Generate candidates for all requested areas.
+- Deduplicate candidates against all approved Romanian words by ID, exact `word`, exact `display`, and `normalized` value.
+- Mark each candidate as child-known, learnable stretch, held, or rejected.
+- Record imageability, safety, speech target, sound position, syllable complexity, consonant clusters, contrast value, overlap load, and source notes.
+- Keep accepted candidates as worksheet-stage candidates only; do not add production records.
+
+Review checkpoint:
+
+- The worksheet favors common, concrete, child-known, imageable words.
+- Learnable stretch words are explicit and defensible.
+- Rare-letter buckets are quality-limited instead of padded.
+- Candidate overlap is visible to the human reviewer.
+
+Suggested verification:
+
+```txt
+git diff --check
+```
+
+Result:
+
+- Added `candidate-review-worksheet-batch-42-requested-letter-and-sound-expansion.md`.
+- Confirmed the Batch 41 through Batch 47 plus final QA sequence still matches the plan and status docs.
+- Recomputed current requested-target coverage from `content/ro/*.json` and confirmed the Batch 41 snapshot still matches the canonical manifests.
+- Re-checked Romanian rare-letter and speech/logopedie sources, and recorded source URLs in the worksheet.
+- Generated worksheet-only strong, stretch, held, and rejected candidate rows with duplicate, imageability, safety, speech-target, sound-position, syllable, contrast, and overlap notes.
+- Kept the batch free of production JSON records, image assets, route/schema changes, placeholders, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.
+
+## Batch 43: Human Vocabulary Review
+
+Status: Complete
+
+Use the Batch 42 worksheet as the source for human acceptance decisions.
+
+Tasks:
+
+- Ask the human to approve, reject, or revise candidate rows.
+- Escalate critical vocabulary decisions, especially rare-letter stretch words, child-safety concerns, ambiguous action imagery, and borrowed/foreign-looking terms.
+- Record decisions and rejection reasons.
+- Produce a small approved production-slice queue of about `15` words for the first implementation slice.
+- Do not add production JSON or images during the review batch unless the plan is deliberately updated before work starts.
+
+Review checkpoint:
+
+- Every future production word has a recorded human decision.
+- The first production slice is small enough for image generation and QA.
+
+Suggested verification:
+
+```txt
+git diff --check
+```
+
+Result:
+
+- Added `human-vocabulary-review-batch-43.md`.
+- Recorded broad human approval of the Batch 42 candidate pool and learnable stretch rows.
+- Recorded targeted approval for borrowed or foreign-looking rows such as `webcam`, `walkie-talkie`, `yak`, `yo-yo`, `quinoa`, and `mixer`, with Batch 44 source/form verification still required.
+- Confirmed no production-ready starts-with `Ă` or `Â` candidates should be forced.
+- Selected the first Batch 44 planning queue: `kiwi`, `koala`, `xilofon`, `taxi`, `pix`, `boxă`, `mixer`, `walkie-talkie`, `webcam` or `cameră web`, `yo-yo`, `yak` or `iac`, `quinoa`, `lampă`, `lună`, and `ceainic`.
+- Kept the batch free of production JSON records, image assets, route/schema changes, placeholders, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.
+
+## Batch 44: Production Slice Planning
+
+Status: Planned
+
+Plan the first small human-approved production slice after Batch 43 without yet publishing unreviewed child-facing content.
+
+Tasks:
+
+- Select about `15` words from the Batch 43 human-approved queue.
+- Record canonical word files, stable IDs, image paths, and route impact.
+- Identify any required new letter manifests, route aliases, loader imports, validation changes, or compatibility fixture updates.
+- Record starts-with, contains-only, mixed, speech-target, and overlap impact for the selected slice.
+- Prepare image brief directions for every selected word.
+- Do not generate images or add production rows in this batch unless the image gate is explicitly ready and documented.
+
+Review checkpoint:
+
+- The slice is small enough for one contact sheet and one verification pass.
+- Every selected word has a canonical implementation path and image plan.
+
+Suggested verification:
+
+```txt
+git diff --check
+```
+
+## Batch 45: Image Briefs And Contact Sheet
+
+Status: Planned
+
+Generate reviewed image candidates for the selected Batch 44 slice, without promotion.
+
+Tasks:
+
+- Write image briefs for every selected word.
+- Generate one small unlabeled contact sheet of about `12` to `15` cells.
+- Preserve the selected slice order exactly.
+- Stop for human image review before cropping, optimizing, editing JSON image fields, or replacing assets.
+- Follow the refined pixel-art, full-square-background, and circular-safe rules in `docs/image-pipeline.md`.
+- Compare candidate style against current references such as `cozonac`, `cățel`, `cadă`, `buchet`, `castravete`, `jachetă`, `umbrelă`, `scaun`, and `vacă`.
+
+Review checkpoint:
+
+- Every image candidate is child-safe, text-free, logo-free, brand-free, and conceptually clear.
+- The human has a clear accept/reject/retry decision point before production promotion.
+
+Suggested verification:
+
+```txt
+git diff --check
+```
+
+## Batch 46: Production Promotion And Verification
+
+Status: Planned
+
+Promote only human-accepted slice words and images.
+
+Tasks:
+
+- Crop accepted contact-sheet cells in fixed order.
+- Normalize backgrounds and check circular-mask safety.
+- Post-process through the established refined pixel-art workflow.
+- Optimize final assets to `256 x 256 px` lossless WebP.
+- Add or update canonical production JSON records.
+- Add or enable new letter buckets only when vocabulary, route convention, and image readiness path are clear.
+- Update route aliases, loaders, validation, or compatibility fixtures only where required.
+- Update only necessary alt text and image metadata.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+pnpm exec tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+Browser verification should use the existing local dev server at `http://localhost:3000`. If sandboxed localhost checks fail, retry outside the sandbox before concluding the server is unavailable.
+
+## Batch 47: Slice Coverage QA And Next Prompt
+
+Status: Planned
+
+Close out each production slice and prepare the next one.
+
+Tasks:
+
+- Recount affected starts-with, contains-only, and mixed pools.
+- Verify `/admin/words` and representative `/ro/play/<target>` routes when the local dev server is available.
+- Update this feature `status.md`.
+- Update global `docs/status.md`.
+- Update the next-agent prompt with either the next Batch 44 slice or the final QA batch.
+- Record deferred words and the reason for each deferral.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+pnpm exec tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+git diff --check
+```
+
+## Final QA Batch: Requested Expansion Closeout
+
+Status: Planned
+
+Run after all approved slices for the requested expansion are complete.
+
+Tasks:
+
+- Confirm final approved-word and ready-image totals.
+- Confirm no approved placeholders unless separately approved.
+- Confirm new playable letters and affected sequence targets behave in setup, play, exclusion filtering, and admin inventory.
+- Confirm no missing or unused production image assets.
+- Verify representative local routes and assets.
+- Update `docs/status.md`, feature `status.md`, and the next-agent prompt.
+- List any remaining release verification steps.
+
+Suggested verification:
+
+```txt
+pnpm run validate:content
+pnpm run lint
+pnpm exec tsc --noEmit --incremental false
+pnpm run check:gameplay
+pnpm run check:matching
+pnpm run build
+git diff --check
+```
 
 ## Exit Criteria
 

@@ -256,6 +256,13 @@ Expected agents/stages:
 
 Useful candidate sources may include Romanian lexical resources and frequency lists, but every final word must pass the child-friendly and imageability rules.
 
+Release review convention:
+
+- Treat the last committed code/content state as `Release 1` until the next release cut is committed.
+- Treat the current dirty work tree additions as `Release 2` while batches are still being prepared and reviewed.
+- When adding production words or preparing a commit/release cut, update `/admin/releases`, `/admin/releases/1`, and `/admin/releases/2` so Release 2 lists only the newly added approved words that need QA, with wheel links for affected routes.
+- After the release cut is committed, the committed state becomes the new reviewed baseline for the next development cycle.
+
 ## Storage Decision
 
 V1 preferred path:

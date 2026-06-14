@@ -434,6 +434,8 @@ Responsibilities:
 
 Human review is required before publishing substantial content batches. This is especially important because the app is for young children and automated filters can miss cultural or educational issues.
 
+Before a content commit or release cut, the read-only `/admin/releases` area should expose the release-review split used by the team: `Release 1` is the already committed and previously tested baseline at `/admin/releases/1`, and `Release 2` is the current dirty work tree additions at `/admin/releases/2`. Release 2 should list only newly added approved words so QA can review the images, details, and affected wheel routes without scanning the full inventory.
+
 ## Local State
 
 V1 state can live in React state and browser storage.

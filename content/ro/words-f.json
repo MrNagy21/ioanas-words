@@ -307,6 +307,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-f-fundita",
+      "word": "fundiță",
+      "display": "fundiță",
+      "normalized": "fundita",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/f/ro-f-fundita.webp",
+      "imageStatus": "ready",
+      "alt": "O fundiță colorată.",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

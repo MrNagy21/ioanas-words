@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CreatorCredit } from "@/components/creator-credit";
 import { WheelGame } from "@/components/wheel-game";
 import { WheelSetupScreen } from "@/components/wheel-setup-screen";
 import { getLetterRouteSegment } from "@/content/loaders";
@@ -82,6 +83,9 @@ export function WordWheelShell({
             practiceTargets={practiceTargets}
           />
         )}
+        <footer className="app-footer" aria-label="Creator credit">
+          <CreatorCredit className="app-creator-credit" locale={locale} />
+        </footer>
       </div>
     </main>
   );
