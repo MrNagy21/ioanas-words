@@ -469,6 +469,60 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-s-servieta",
+      "word": "servietă",
+      "display": "servietă",
+      "normalized": "servieta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/s/ro-s-servieta.webp",
+      "imageStatus": "ready",
+      "alt": "O servietă de școală",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-stea",
+      "word": "stea",
+      "display": "stea",
+      "normalized": "stea",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/s/ro-s-stea.webp",
+      "imageStatus": "ready",
+      "alt": "O stea galbenă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-s-saltea",
+      "word": "saltea",
+      "display": "saltea",
+      "normalized": "saltea",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/s/ro-s-saltea.webp",
+      "imageStatus": "ready",
+      "alt": "O saltea",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

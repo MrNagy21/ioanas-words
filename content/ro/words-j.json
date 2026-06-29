@@ -181,6 +181,114 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-j-jurnal",
+      "word": "jurnal",
+      "display": "jurnal",
+      "normalized": "jurnal",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/j/ro-j-jurnal.webp",
+      "imageStatus": "ready",
+      "alt": "Un jurnal simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jalon",
+      "word": "jalon",
+      "display": "jalon",
+      "normalized": "jalon",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/j/ro-j-jalon.webp",
+      "imageStatus": "ready",
+      "alt": "Un jalon de sport",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jambon",
+      "word": "jambon",
+      "display": "jambon",
+      "normalized": "jambon",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/j/ro-j-jambon.webp",
+      "imageStatus": "ready",
+      "alt": "Felii de jambon",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-joystick",
+      "word": "joystick",
+      "display": "joystick",
+      "normalized": "joystick",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/j/ro-j-joystick.webp",
+      "imageStatus": "ready",
+      "alt": "Un joystick simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jerseu",
+      "word": "jerseu",
+      "display": "jerseu",
+      "normalized": "jerseu",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/j/ro-j-jerseu.webp",
+      "imageStatus": "ready",
+      "alt": "Un jerseu colorat",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-j-jet",
+      "word": "jet",
+      "display": "jet",
+      "normalized": "jet",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/j/ro-j-jet.webp",
+      "imageStatus": "ready",
+      "alt": "Un jet de apă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

@@ -325,6 +325,168 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-f-farfurie",
+      "word": "farfurie",
+      "display": "farfurie",
+      "normalized": "farfurie",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/f/ro-f-farfurie.webp",
+      "imageStatus": "ready",
+      "alt": "O farfurie simplă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-fereastra",
+      "word": "fereastră",
+      "display": "fereastră",
+      "normalized": "fereastra",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/f/ro-f-fereastra.webp",
+      "imageStatus": "ready",
+      "alt": "O fereastră cu perdele",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-faina",
+      "word": "făină",
+      "display": "făină",
+      "normalized": "faina",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/f/ro-f-faina.webp",
+      "imageStatus": "ready",
+      "alt": "Un bol cu făină",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-ferma",
+      "word": "fermă",
+      "display": "fermă",
+      "normalized": "ferma",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/f/ro-f-ferma.webp",
+      "imageStatus": "ready",
+      "alt": "O fermă cu hambar",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-frate",
+      "word": "frate",
+      "display": "frate",
+      "normalized": "frate",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "family",
+      "image": "/images/ro/f/ro-f-frate.webp",
+      "imageStatus": "ready",
+      "alt": "Un frate zâmbitor",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-fotografie",
+      "word": "fotografie",
+      "display": "fotografie",
+      "normalized": "fotografie",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/f/ro-f-fotografie.webp",
+      "imageStatus": "ready",
+      "alt": "O fotografie într-o ramă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-foarfeca",
+      "word": "foarfecă",
+      "display": "foarfecă",
+      "normalized": "foarfeca",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/f/ro-f-foarfeca.webp",
+      "imageStatus": "ready",
+      "alt": "O foarfecă pentru hârtie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-fantana",
+      "word": "fântână",
+      "display": "fântână",
+      "normalized": "fantana",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/f/ro-f-fantana.webp",
+      "imageStatus": "ready",
+      "alt": "O fântână cu apă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-f-foca",
+      "word": "focă",
+      "display": "focă",
+      "normalized": "foca",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/f/ro-f-foca.webp",
+      "imageStatus": "ready",
+      "alt": "O focă prietenoasă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

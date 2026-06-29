@@ -91,6 +91,24 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-n-nava",
+      "word": "navă",
+      "display": "navă",
+      "normalized": "nava",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/n/ro-n-nava.webp",
+      "imageStatus": "ready",
+      "alt": "O navă mare pe apă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

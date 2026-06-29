@@ -127,6 +127,42 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-e-etaj",
+      "word": "etaj",
+      "display": "etaj",
+      "normalized": "etaj",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/e/ro-e-etaj.webp",
+      "imageStatus": "ready",
+      "alt": "Un etaj al unei clădiri",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-e-evantai",
+      "word": "evantai",
+      "display": "evantai",
+      "normalized": "evantai",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/e/ro-e-evantai.webp",
+      "imageStatus": "ready",
+      "alt": "Un evantai deschis",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

@@ -307,6 +307,168 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-v-valiza",
+      "word": "valiză",
+      "display": "valiză",
+      "normalized": "valiza",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/v/ro-v-valiza.webp",
+      "imageStatus": "ready",
+      "alt": "O valiză",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vrabie",
+      "word": "vrabie",
+      "display": "vrabie",
+      "normalized": "vrabie",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/v/ro-v-vrabie.webp",
+      "imageStatus": "ready",
+      "alt": "O vrabie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vulcan",
+      "word": "vulcan",
+      "display": "vulcan",
+      "normalized": "vulcan",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/v/ro-v-vulcan.webp",
+      "imageStatus": "ready",
+      "alt": "Un vulcan simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-val",
+      "word": "val",
+      "display": "val",
+      "normalized": "val",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/v/ro-v-val.webp",
+      "imageStatus": "ready",
+      "alt": "Un val albastru",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vasla",
+      "word": "vâslă",
+      "display": "vâslă",
+      "normalized": "vasla",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/v/ro-v-vasla.webp",
+      "imageStatus": "ready",
+      "alt": "O vâslă de lemn",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-velier",
+      "word": "velier",
+      "display": "velier",
+      "normalized": "velier",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/v/ro-v-velier.webp",
+      "imageStatus": "ready",
+      "alt": "Un velier cu pânze",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-violeta",
+      "word": "violetă",
+      "display": "violetă",
+      "normalized": "violeta",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/v/ro-v-violeta.webp",
+      "imageStatus": "ready",
+      "alt": "O violetă mov",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-vultur",
+      "word": "vultur",
+      "display": "vultur",
+      "normalized": "vultur",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/v/ro-v-vultur.webp",
+      "imageStatus": "ready",
+      "alt": "Un vultur cu aripile deschise",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-v-ventuza",
+      "word": "ventuză",
+      "display": "ventuză",
+      "normalized": "ventuza",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/v/ro-v-ventuza.webp",
+      "imageStatus": "ready",
+      "alt": "O ventuză simplă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

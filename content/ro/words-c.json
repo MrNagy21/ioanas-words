@@ -1243,6 +1243,114 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-c-coji",
+      "word": "coji",
+      "display": "coji",
+      "normalized": "coji",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/c/ro-c-coji.webp",
+      "imageStatus": "ready",
+      "alt": "Coji de fructe",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cartof",
+      "word": "cartof",
+      "display": "cartof",
+      "normalized": "cartof",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/c/ro-c-cartof.webp",
+      "imageStatus": "ready",
+      "alt": "Un cartof",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-coif",
+      "word": "coif",
+      "display": "coif",
+      "normalized": "coif",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/c/ro-c-coif.webp",
+      "imageStatus": "ready",
+      "alt": "Un coif de petrecere",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-ceafa",
+      "word": "ceafă",
+      "display": "ceafă",
+      "normalized": "ceafa",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/c/ro-c-ceafa.webp",
+      "imageStatus": "ready",
+      "alt": "Ceafa unui copil văzută din spate",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cufar",
+      "word": "cufăr",
+      "display": "cufăr",
+      "normalized": "cufar",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/c/ro-c-cufar.webp",
+      "imageStatus": "ready",
+      "alt": "Un cufăr de lemn",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-c-cosulet",
+      "word": "coșuleț",
+      "display": "coșuleț",
+      "normalized": "cosulet",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/c/ro-c-cosulet.webp",
+      "imageStatus": "ready",
+      "alt": "Un coșuleț mic",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

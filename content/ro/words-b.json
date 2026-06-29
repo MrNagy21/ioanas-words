@@ -631,6 +631,60 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-b-bujor",
+      "word": "bujor",
+      "display": "bujor",
+      "normalized": "bujor",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/b/ro-b-bujor.webp",
+      "imageStatus": "ready",
+      "alt": "Un bujor roz",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-bufnita",
+      "word": "bufniță",
+      "display": "bufniță",
+      "normalized": "bufnita",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/b/ro-b-bufnita.webp",
+      "imageStatus": "ready",
+      "alt": "O bufniță prietenoasă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-b-briosa",
+      "word": "brioșă",
+      "display": "brioșă",
+      "normalized": "briosa",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/b/ro-b-briosa.webp",
+      "imageStatus": "ready",
+      "alt": "O brioșă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

@@ -76,6 +76,9 @@ const wordKeys = new Set([
 const approvedPlaceholderImagePaths = new Set([
   "/images/ro/placeholders/generic-word-placeholder.webp",
 ]);
+const allowedDuplicateNormalizedWords = {
+  ro: new Map([["rama", new Set(["ramă", "râmă"])]]),
+};
 
 function addError(filePath, message) {
   errors.push(`${path.relative(repoRoot, filePath)}: ${message}`);
@@ -162,6 +165,23 @@ function foldRomanian(value) {
     .replace(/ț/g, "t")
     .replace(/ă/g, "a")
     .replace(/[âî]/g, "i");
+}
+
+function isAllowedDuplicateNormalizedWord(
+  locale,
+  normalized,
+  firstWord,
+  secondWord,
+) {
+  const allowedWords = allowedDuplicateNormalizedWords[locale]?.get(normalized);
+
+  if (!allowedWords) {
+    return false;
+  }
+
+  return [firstWord, secondWord].every((word) =>
+    allowedWords.has(word.toLocaleLowerCase("ro")),
+  );
 }
 
 function getWordIdBucketToken(locale, letterId) {
@@ -790,16 +810,26 @@ async function validateWordManifest(
     }
     globalWordIds.add(word.id);
 
-    const existingNormalizedWordId = globalNormalizedWords.get(
-      word.normalized,
-    );
-    if (existingNormalizedWordId && existingNormalizedWordId !== word.id) {
+    const existingNormalizedWord = globalNormalizedWords.get(word.normalized);
+    if (
+      existingNormalizedWord &&
+      existingNormalizedWord.id !== word.id &&
+      !isAllowedDuplicateNormalizedWord(
+        locale,
+        word.normalized,
+        existingNormalizedWord.word,
+        word.word,
+      )
+    ) {
       addError(
         filePath,
-        `${context}.normalized duplicates ${existingNormalizedWordId}`,
+        `${context}.normalized duplicates ${existingNormalizedWord.id}`,
       );
     }
-    globalNormalizedWords.set(word.normalized, word.id);
+    globalNormalizedWords.set(word.normalized, {
+      id: word.id,
+      word: word.word,
+    });
 
     for (const exactValue of new Set([
       word.word.toLocaleLowerCase("ro"),

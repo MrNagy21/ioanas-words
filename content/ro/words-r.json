@@ -397,6 +397,168 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-r-rama-cadru",
+      "word": "ramă",
+      "display": "ramă",
+      "normalized": "rama",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/r/ro-r-rama-cadru.webp",
+      "imageStatus": "ready",
+      "alt": "O ramă goală",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rama-vierme",
+      "word": "râmă",
+      "display": "râmă",
+      "normalized": "rama",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/r/ro-r-rama-vierme.webp",
+      "imageStatus": "ready",
+      "alt": "O râmă pe pământ",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-randunica",
+      "word": "rândunică",
+      "display": "rândunică",
+      "normalized": "randunica",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/r/ro-r-randunica.webp",
+      "imageStatus": "ready",
+      "alt": "O rândunică",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rechin",
+      "word": "rechin",
+      "display": "rechin",
+      "normalized": "rechin",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/r/ro-r-rechin.webp",
+      "imageStatus": "ready",
+      "alt": "Un rechin prietenos",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rigla",
+      "word": "riglă",
+      "display": "riglă",
+      "normalized": "rigla",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/r/ro-r-rigla.webp",
+      "imageStatus": "ready",
+      "alt": "O riglă de lemn",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rulota",
+      "word": "rulotă",
+      "display": "rulotă",
+      "normalized": "rulota",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/r/ro-r-rulota.webp",
+      "imageStatus": "ready",
+      "alt": "O rulotă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-rulada",
+      "word": "ruladă",
+      "display": "ruladă",
+      "normalized": "rulada",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/r/ro-r-rulada.webp",
+      "imageStatus": "ready",
+      "alt": "O ruladă cu cremă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-radio",
+      "word": "radio",
+      "display": "radio",
+      "normalized": "radio",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/r/ro-r-radio.webp",
+      "imageStatus": "ready",
+      "alt": "Un radio portabil",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-r-romb",
+      "word": "romb",
+      "display": "romb",
+      "normalized": "romb",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/r/ro-r-romb.webp",
+      "imageStatus": "ready",
+      "alt": "Un romb albastru",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

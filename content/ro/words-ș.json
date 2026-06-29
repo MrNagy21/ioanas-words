@@ -325,6 +325,168 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-sh-suvita",
+      "word": "șuviță",
+      "display": "șuviță",
+      "normalized": "suvita",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "body",
+      "image": "/images/ro/ș/ro-sh-suvita.webp",
+      "imageStatus": "ready",
+      "alt": "O șuviță de păr",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-sifonier",
+      "word": "șifonier",
+      "display": "șifonier",
+      "normalized": "sifonier",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/ș/ro-sh-sifonier.webp",
+      "imageStatus": "ready",
+      "alt": "Un șifonier",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-sunca",
+      "word": "șuncă",
+      "display": "șuncă",
+      "normalized": "sunca",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/ș/ro-sh-sunca.webp",
+      "imageStatus": "ready",
+      "alt": "Felii de șuncă pe o farfurie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-snitel",
+      "word": "șnițel",
+      "display": "șnițel",
+      "normalized": "snitel",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/ș/ro-sh-snitel.webp",
+      "imageStatus": "ready",
+      "alt": "Un șnițel pe o farfurie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-salupa",
+      "word": "șalupă",
+      "display": "șalupă",
+      "normalized": "salupa",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/ș/ro-sh-salupa.webp",
+      "imageStatus": "ready",
+      "alt": "O șalupă pe apă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-sah",
+      "word": "șah",
+      "display": "șah",
+      "normalized": "sah",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/ș/ro-sh-sah.webp",
+      "imageStatus": "ready",
+      "alt": "O tablă de șah cu piese",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-sevalet",
+      "word": "șevalet",
+      "display": "șevalet",
+      "normalized": "sevalet",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/ș/ro-sh-sevalet.webp",
+      "imageStatus": "ready",
+      "alt": "Un șevalet cu hârtie albă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-sofer",
+      "word": "șofer",
+      "display": "șofer",
+      "normalized": "sofer",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/ș/ro-sh-sofer.webp",
+      "imageStatus": "ready",
+      "alt": "Un șofer într-o mașină",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-sh-sotron",
+      "word": "șotron",
+      "display": "șotron",
+      "normalized": "sotron",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/ș/ro-sh-sotron.webp",
+      "imageStatus": "ready",
+      "alt": "Un șotron desenat pe jos",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

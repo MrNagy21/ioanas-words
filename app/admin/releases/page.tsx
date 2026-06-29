@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminReleasesPage() {
-  return <AdminReleasesContent selectedReleaseNumber="2" />;
+  return <AdminReleasesContent selectedReleaseNumber="3" />;
 }

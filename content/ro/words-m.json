@@ -469,6 +469,42 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-m-majoreta",
+      "word": "majoretă",
+      "display": "majoretă",
+      "normalized": "majoreta",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/m/ro-m-majoreta.webp",
+      "imageStatus": "ready",
+      "alt": "O majoretă cu baston",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-m-movila",
+      "word": "movilă",
+      "display": "movilă",
+      "normalized": "movila",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/m/ro-m-movila.webp",
+      "imageStatus": "ready",
+      "alt": "O movilă mică de pământ",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

@@ -333,8 +333,8 @@ const shMixedWords = getModePool(shWordPools, "starts-with-or-contains");
 
 assert.equal(
   dStartsWithWords.length,
-  15,
-  "Expected D starts-with mode to remain an exact-size pool for the reset-regression fixture",
+  25,
+  "Expected D starts-with mode to match the current reset-regression fixture pool",
 );
 assert.ok(
   sMixedWords.length > 15,
@@ -346,7 +346,7 @@ assert.ok(
 );
 assertVisibleSubsetCountdown({
   expectedRemainingWordCount: 1,
-  label: "D starts-with exact-size pool",
+  label: "D starts-with visible subset pool",
   removalCount: 14,
   targetWordCount: 15,
   words: dStartsWithWords,
@@ -367,12 +367,12 @@ assertVisibleSubsetCountdown({
 });
 
 const expectedPracticeTargetMixedCounts = {
-  ce: 18,
-  ci: 20,
-  ge: 16,
+  ce: 20,
+  ci: 21,
+  ge: 17,
   gi: 16,
-  che: 16,
-  chi: 16,
+  che: 17,
+  chi: 17,
   ghe: 16,
   ghi: 15,
 } as const;
@@ -434,7 +434,7 @@ const fStartsWithWordWithR =
 
 assert.equal(
   fStartsWithWithoutR.length,
-  7,
+  10,
   "Expected setup mode words to apply exclusions after inclusion mode",
 );
 assert.ok(
@@ -450,7 +450,7 @@ assert.equal(
     selectedWordIds: [],
     wordSelectionMode: "all",
   }),
-  7,
+  10,
   "Expected all-words availability to count the filtered eligible pool",
 );
 assert.deepEqual(
@@ -509,7 +509,7 @@ assert.equal(
   "Expected custom setup to fall back to all words when exclusions invalidate every selected word",
 );
 assert.deepEqual(resolvedInvalidCustomSetup.selectedWordIds, []);
-assert.equal(resolvedInvalidCustomSetup.wheelWordCount, 7);
+assert.equal(resolvedInvalidCustomSetup.wheelWordCount, 10);
 assert.equal(
   getWheelSetupEmptyStateKind({
     baseWordCount: fStartsWithWords.length,

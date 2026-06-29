@@ -325,6 +325,222 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-t-trifoi",
+      "word": "trifoi",
+      "display": "trifoi",
+      "normalized": "trifoi",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/t/ro-t-trifoi.webp",
+      "imageStatus": "ready",
+      "alt": "Un trifoi verde",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tus",
+      "word": "tuș",
+      "display": "tuș",
+      "normalized": "tus",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/t/ro-t-tus.webp",
+      "imageStatus": "ready",
+      "alt": "O sticluță cu tuș și o pensulă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-trotineta",
+      "word": "trotinetă",
+      "display": "trotinetă",
+      "normalized": "trotineta",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/t/ro-t-trotineta.webp",
+      "imageStatus": "ready",
+      "alt": "O trotinetă pentru copii",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-trusa",
+      "word": "trusă",
+      "display": "trusă",
+      "normalized": "trusa",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/t/ro-t-trusa.webp",
+      "imageStatus": "ready",
+      "alt": "O trusă de creioane",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tub",
+      "word": "tub",
+      "display": "tub",
+      "normalized": "tub",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/t/ro-t-tub.webp",
+      "imageStatus": "ready",
+      "alt": "Un tub de vopsea",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-turn",
+      "word": "turn",
+      "display": "turn",
+      "normalized": "turn",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/t/ro-t-turn.webp",
+      "imageStatus": "ready",
+      "alt": "Un turn simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tunel",
+      "word": "tunel",
+      "display": "tunel",
+      "normalized": "tunel",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/t/ro-t-tunel.webp",
+      "imageStatus": "ready",
+      "alt": "Un tunel cu drum",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-taitei",
+      "word": "tăiței",
+      "display": "tăiței",
+      "normalized": "taitei",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/t/ro-t-taitei.webp",
+      "imageStatus": "ready",
+      "alt": "Tăiței într-un bol",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tufis",
+      "word": "tufiș",
+      "display": "tufiș",
+      "normalized": "tufis",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/t/ro-t-tufis.webp",
+      "imageStatus": "ready",
+      "alt": "Un tufiș verde",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-telecomanda",
+      "word": "telecomandă",
+      "display": "telecomandă",
+      "normalized": "telecomanda",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/t/ro-t-telecomanda.webp",
+      "imageStatus": "ready",
+      "alt": "O telecomandă simplă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-termos",
+      "word": "termos",
+      "display": "termos",
+      "normalized": "termos",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/t/ro-t-termos.webp",
+      "imageStatus": "ready",
+      "alt": "Un termos",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-t-tricicleta",
+      "word": "tricicletă",
+      "display": "tricicletă",
+      "normalized": "tricicleta",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/t/ro-t-tricicleta.webp",
+      "imageStatus": "ready",
+      "alt": "O tricicletă pentru copii",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

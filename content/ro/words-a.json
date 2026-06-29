@@ -307,6 +307,42 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-a-ambalaj",
+      "word": "ambalaj",
+      "display": "ambalaj",
+      "normalized": "ambalaj",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/a/ro-a-ambalaj.webp",
+      "imageStatus": "ready",
+      "alt": "Un ambalaj simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-a-afine",
+      "word": "afine",
+      "display": "afine",
+      "normalized": "afine",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/a/ro-a-afine.webp",
+      "imageStatus": "ready",
+      "alt": "Afine albastre",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

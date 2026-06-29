@@ -739,6 +739,78 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-p-peisaj",
+      "word": "peisaj",
+      "display": "peisaj",
+      "normalized": "peisaj",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/p/ro-p-peisaj.webp",
+      "imageStatus": "ready",
+      "alt": "Un peisaj cu dealuri",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-prajitor",
+      "word": "prăjitor",
+      "display": "prăjitor",
+      "normalized": "prajitor",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/p/ro-p-prajitor.webp",
+      "imageStatus": "ready",
+      "alt": "Un prăjitor de pâine",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-pajiste",
+      "word": "pajiște",
+      "display": "pajiște",
+      "normalized": "pajiste",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/p/ro-p-pajiste.webp",
+      "imageStatus": "ready",
+      "alt": "O pajiște verde",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-p-puf",
+      "word": "puf",
+      "display": "puf",
+      "normalized": "puf",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/p/ro-p-puf.webp",
+      "imageStatus": "ready",
+      "alt": "Un puf moale de pană",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

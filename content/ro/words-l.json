@@ -397,6 +397,150 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-l-lemn",
+      "word": "lemn",
+      "display": "lemn",
+      "normalized": "lemn",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/l/ro-l-lemn.webp",
+      "imageStatus": "ready",
+      "alt": "O bucată de lemn",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lacat",
+      "word": "lacăt",
+      "display": "lacăt",
+      "normalized": "lacat",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-lacat.webp",
+      "imageStatus": "ready",
+      "alt": "Un lacăt",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-libelula",
+      "word": "libelulă",
+      "display": "libelulă",
+      "normalized": "libelula",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/l/ro-l-libelula.webp",
+      "imageStatus": "ready",
+      "alt": "O libelulă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lift",
+      "word": "lift",
+      "display": "lift",
+      "normalized": "lift",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-lift.webp",
+      "imageStatus": "ready",
+      "alt": "Un lift cu uși închise",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-leopard",
+      "word": "leopard",
+      "display": "leopard",
+      "normalized": "leopard",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/l/ro-l-leopard.webp",
+      "imageStatus": "ready",
+      "alt": "Un leopard blând",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lana",
+      "word": "lână",
+      "display": "lână",
+      "normalized": "lana",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-lana.webp",
+      "imageStatus": "ready",
+      "alt": "Un ghem de lână",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lan",
+      "word": "lan",
+      "display": "lan",
+      "normalized": "lan",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "nature",
+      "image": "/images/ro/l/ro-l-lan.webp",
+      "imageStatus": "ready",
+      "alt": "Un lan de grâu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-l-lampion",
+      "word": "lampion",
+      "display": "lampion",
+      "normalized": "lampion",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/l/ro-l-lampion.webp",
+      "imageStatus": "ready",
+      "alt": "Un lampion roșu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

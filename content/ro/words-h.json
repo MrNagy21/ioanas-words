@@ -55,6 +55,384 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "word": "hipopotam",
+      "display": "hipopotam",
+      "normalized": "hipopotam",
+      "id": "ro-h-hipopotam",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/h/ro-h-hipopotam.webp",
+      "imageStatus": "ready",
+      "alt": "Un hipopotam prietenos",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hârtie",
+      "display": "hârtie",
+      "normalized": "hartie",
+      "id": "ro-h-hartie",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/h/ro-h-hartie.webp",
+      "imageStatus": "ready",
+      "alt": "O foaie de hârtie albă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hotel",
+      "display": "hotel",
+      "normalized": "hotel",
+      "id": "ro-h-hotel",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/h/ro-h-hotel.webp",
+      "imageStatus": "ready",
+      "alt": "Un hotel simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "halat",
+      "display": "halat",
+      "normalized": "halat",
+      "id": "ro-h-halat",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/h/ro-h-halat.webp",
+      "imageStatus": "ready",
+      "alt": "Un halat de baie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "harpă",
+      "display": "harpă",
+      "normalized": "harpa",
+      "id": "ro-h-harpa",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/h/ro-h-harpa.webp",
+      "imageStatus": "ready",
+      "alt": "O harpă aurie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "horn",
+      "display": "horn",
+      "normalized": "horn",
+      "id": "ro-h-horn",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/h/ro-h-horn.webp",
+      "imageStatus": "ready",
+      "alt": "Un horn pe acoperiș",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hamster",
+      "display": "hamster",
+      "normalized": "hamster",
+      "id": "ro-h-hamster",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/h/ro-h-hamster.webp",
+      "imageStatus": "ready",
+      "alt": "Un hamster mic",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hambar",
+      "display": "hambar",
+      "normalized": "hambar",
+      "id": "ro-h-hambar",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/h/ro-h-hambar.webp",
+      "imageStatus": "ready",
+      "alt": "Un hambar roșu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "husă",
+      "display": "husă",
+      "normalized": "husa",
+      "id": "ro-h-husa",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/h/ro-h-husa.webp",
+      "imageStatus": "ready",
+      "alt": "O husă simplă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hol",
+      "display": "hol",
+      "normalized": "hol",
+      "id": "ro-h-hol",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/h/ro-h-hol.webp",
+      "imageStatus": "ready",
+      "alt": "Un hol luminos",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "horă",
+      "display": "horă",
+      "normalized": "hora",
+      "id": "ro-h-hora",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "people",
+      "image": "/images/ro/h/ro-h-hora.webp",
+      "imageStatus": "ready",
+      "alt": "Copii dansând horă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hochei",
+      "display": "hochei",
+      "normalized": "hochei",
+      "id": "ro-h-hochei",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/h/ro-h-hochei.webp",
+      "imageStatus": "ready",
+      "alt": "O crosă de hochei și un puc",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hublou",
+      "display": "hublou",
+      "normalized": "hublou",
+      "id": "ro-h-hublou",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/h/ro-h-hublou.webp",
+      "imageStatus": "ready",
+      "alt": "Un hublou rotund",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hamburger",
+      "display": "hamburger",
+      "normalized": "hamburger",
+      "id": "ro-h-hamburger",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/h/ro-h-hamburger.webp",
+      "imageStatus": "ready",
+      "alt": "Un hamburger simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hering",
+      "display": "hering",
+      "normalized": "hering",
+      "id": "ro-h-hering",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/h/ro-h-hering.webp",
+      "imageStatus": "ready",
+      "alt": "Un pește hering",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hamsie",
+      "display": "hamsie",
+      "normalized": "hamsie",
+      "id": "ro-h-hamsie",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/h/ro-h-hamsie.webp",
+      "imageStatus": "ready",
+      "alt": "O hamsie argintie",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hienă",
+      "display": "hienă",
+      "normalized": "hiena",
+      "id": "ro-h-hiena",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/h/ro-h-hiena.webp",
+      "imageStatus": "ready",
+      "alt": "O hienă prietenoasă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "homar",
+      "display": "homar",
+      "normalized": "homar",
+      "id": "ro-h-homar",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/h/ro-h-homar.webp",
+      "imageStatus": "ready",
+      "alt": "Un homar simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "ham",
+      "display": "ham",
+      "normalized": "ham",
+      "id": "ro-h-ham",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/h/ro-h-ham.webp",
+      "imageStatus": "ready",
+      "alt": "Un ham pentru câine",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hanorac",
+      "display": "hanorac",
+      "normalized": "hanorac",
+      "id": "ro-h-hanorac",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/h/ro-h-hanorac.webp",
+      "imageStatus": "ready",
+      "alt": "Un hanorac cu glugă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "word": "hidrant",
+      "display": "hidrant",
+      "normalized": "hidrant",
+      "id": "ro-h-hidrant",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/h/ro-h-hidrant.webp",
+      "imageStatus": "ready",
+      "alt": "Un hidrant roșu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }

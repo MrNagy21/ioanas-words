@@ -10,20 +10,20 @@ import type { ContentWord } from "@/content/types";
 
 const locale = "ro" as const;
 
-export type ReleaseNumber = "1" | "2";
+export type ReleaseNumber = "1" | "2" | "3";
 
-const releaseNumbers: readonly ReleaseNumber[] = ["1", "2"];
+const releaseNumbers: readonly ReleaseNumber[] = ["1", "2", "3"];
 
-const currentDirtyTreeRelease = {
+const committedRelease2 = {
   number: "2",
   id: "release-2",
   title: "Release 2",
   description:
-    "Current dirty work tree since the last committed baseline. Review these newly added words before the next commit/release cut.",
-  wordListLabel: "Added words only",
-  wordSectionTitle: "Release 2 Added Word Records",
-  wordSectionDescription: "dirty-tree records",
-  emptyText: "No dirty-tree words in this release",
+    "Committed Release 2 additions from HEAD. This release is frozen for comparison while Release 3 is prepared.",
+  wordListLabel: "Release 2 words",
+  wordSectionTitle: "Release 2 Word Records",
+  wordSectionDescription: "committed Release 2 records",
+  emptyText: "No Release 2 words",
   wordIds: [
     "ro-b-boxa",
     "ro-b-biberon",
@@ -137,6 +137,140 @@ const currentDirtyTreeRelease = {
   ],
 } as const;
 
+const currentDirtyTreeRelease = {
+  number: "3",
+  id: "release-3",
+  title: "Release 3",
+  description:
+    "Current uncommitted dirty work tree since the committed Release 2 baseline. Review these newly added words before the next commit/release cut.",
+  wordListLabel: "Added words only",
+  wordSectionTitle: "Release 3 Added Word Records",
+  wordSectionDescription: "dirty-tree records",
+  emptyText: "No dirty-tree words in this release",
+  wordIds: [
+    "ro-a-ambalaj",
+    "ro-a-afine",
+    "ro-b-bujor",
+    "ro-b-bufnita",
+    "ro-b-briosa",
+    "ro-c-coji",
+    "ro-c-cartof",
+    "ro-c-coif",
+    "ro-c-ceafa",
+    "ro-c-cufar",
+    "ro-c-cosulet",
+    "ro-d-drum",
+    "ro-d-dulceata",
+    "ro-d-dop",
+    "ro-d-dar",
+    "ro-d-drapel",
+    "ro-d-dalmatian",
+    "ro-d-disc",
+    "ro-d-diamant",
+    "ro-d-dunga",
+    "ro-d-drona",
+    "ro-e-etaj",
+    "ro-e-evantai",
+    "ro-f-farfurie",
+    "ro-f-fereastra",
+    "ro-f-faina",
+    "ro-f-ferma",
+    "ro-f-frate",
+    "ro-f-fotografie",
+    "ro-f-foarfeca",
+    "ro-f-fantana",
+    "ro-f-foca",
+    "ro-h-hipopotam",
+    "ro-h-hartie",
+    "ro-h-hotel",
+    "ro-h-halat",
+    "ro-h-harpa",
+    "ro-h-horn",
+    "ro-h-hamster",
+    "ro-h-hambar",
+    "ro-h-husa",
+    "ro-h-hol",
+    "ro-h-hora",
+    "ro-h-hochei",
+    "ro-h-hublou",
+    "ro-h-hamburger",
+    "ro-h-hering",
+    "ro-h-hamsie",
+    "ro-h-hiena",
+    "ro-h-homar",
+    "ro-h-ham",
+    "ro-h-hanorac",
+    "ro-h-hidrant",
+    "ro-j-jurnal",
+    "ro-j-jalon",
+    "ro-j-jambon",
+    "ro-j-joystick",
+    "ro-j-jerseu",
+    "ro-j-jet",
+    "ro-l-lemn",
+    "ro-l-lacat",
+    "ro-l-libelula",
+    "ro-l-lift",
+    "ro-l-leopard",
+    "ro-l-lana",
+    "ro-l-lan",
+    "ro-l-lampion",
+    "ro-m-majoreta",
+    "ro-m-movila",
+    "ro-n-nava",
+    "ro-p-peisaj",
+    "ro-p-prajitor",
+    "ro-p-pajiste",
+    "ro-p-puf",
+    "ro-r-rama-cadru",
+    "ro-r-rama-vierme",
+    "ro-r-randunica",
+    "ro-r-rechin",
+    "ro-r-rigla",
+    "ro-r-rulota",
+    "ro-r-rulada",
+    "ro-r-radio",
+    "ro-r-romb",
+    "ro-s-servieta",
+    "ro-s-stea",
+    "ro-s-saltea",
+    "ro-t-trifoi",
+    "ro-t-tus",
+    "ro-t-trotineta",
+    "ro-t-trusa",
+    "ro-t-tub",
+    "ro-t-turn",
+    "ro-t-tunel",
+    "ro-t-taitei",
+    "ro-t-tufis",
+    "ro-t-telecomanda",
+    "ro-t-termos",
+    "ro-t-tricicleta",
+    "ro-v-valiza",
+    "ro-v-vrabie",
+    "ro-v-vulcan",
+    "ro-v-val",
+    "ro-v-vasla",
+    "ro-v-velier",
+    "ro-v-violeta",
+    "ro-v-vultur",
+    "ro-v-ventuza",
+    "ro-sh-suvita",
+    "ro-sh-sifonier",
+    "ro-sh-sunca",
+    "ro-sh-snitel",
+    "ro-sh-salupa",
+    "ro-sh-sah",
+    "ro-sh-sevalet",
+    "ro-sh-sofer",
+    "ro-sh-sotron",
+    "ro-tz-tinta",
+    "ro-tz-tinuta",
+    "ro-tz-tesatura",
+    "ro-tz-tasnitoare",
+  ],
+} as const;
+
 const summaryLabels = [
   ["Words", "wordCount"],
   ["Ready images", "readyImages"],
@@ -173,9 +307,10 @@ export function AdminReleasesContent({
             <h1>Admin Releases</h1>
             <p className="admin-note">
               Read-only release structure for Romanian content QA. Release 1 is
-              the committed baseline, while Release 2 is the current dirty work
-              tree. Use the release pages to inspect either set with the same
-              admin review UI.
+              the original committed baseline, Release 2 is the committed
+              content release, and Release 3 is the current dirty work tree.
+              Use the release pages to inspect each set with the same admin
+              review UI.
             </p>
           </div>
           <div className="admin-header__actions">
@@ -195,7 +330,7 @@ export function AdminReleasesContent({
           <div className="admin-section-heading">
             <div>
               <h2 id="admin-release-summary-title">Release Structure</h2>
-              <p>Committed baseline plus current dirty-tree additions</p>
+              <p>Committed releases plus current dirty-tree additions</p>
             </div>
             <code className="admin-release-id">HEAD + dirty tree</code>
           </div>
@@ -393,19 +528,28 @@ type ReleaseSnapshot = Readonly<{
 
 function getReleaseSnapshots(): ReleaseSnapshot[] {
   const allApprovedWords = getApprovedWords(locale);
+  const release2Words = getReleaseWords(
+    committedRelease2.wordIds,
+    allApprovedWords,
+    committedRelease2.id,
+  );
   const dirtyTreeWords = getReleaseWords(
     currentDirtyTreeRelease.wordIds,
     allApprovedWords,
+    currentDirtyTreeRelease.id,
   );
-  const dirtyTreeWordIds = new Set<string>(currentDirtyTreeRelease.wordIds);
+  const nonBaselineWordIds = new Set<string>([
+    ...committedRelease2.wordIds,
+    ...currentDirtyTreeRelease.wordIds,
+  ]);
   const committedBaselineWords = allApprovedWords.filter(
-    (word) => !dirtyTreeWordIds.has(word.id),
+    (word) => !nonBaselineWordIds.has(word.id),
   );
 
   return [
     buildReleaseSnapshot({
       description:
-        "Already committed code and content, treated as the previously tested baseline.",
+        "Original committed baseline before Romanian content Release 2 additions.",
       emptyText: "No committed baseline words",
       id: "release-1",
       number: "1",
@@ -414,6 +558,17 @@ function getReleaseSnapshots(): ReleaseSnapshot[] {
       wordSectionDescription: "baseline records",
       wordSectionTitle: "Release 1 Word Records",
       words: committedBaselineWords,
+    }),
+    buildReleaseSnapshot({
+      description: committedRelease2.description,
+      emptyText: committedRelease2.emptyText,
+      id: committedRelease2.id,
+      number: committedRelease2.number,
+      title: committedRelease2.title,
+      wordListLabel: committedRelease2.wordListLabel,
+      wordSectionDescription: committedRelease2.wordSectionDescription,
+      wordSectionTitle: committedRelease2.wordSectionTitle,
+      words: release2Words,
     }),
     buildReleaseSnapshot({
       description: currentDirtyTreeRelease.description,
@@ -484,6 +639,7 @@ function getReleaseSummary(
 function getReleaseWords(
   wordIds: readonly string[],
   approvedWords: readonly ContentWord[],
+  releaseId: string,
 ): ContentWord[] {
   const wordsById = new Map(approvedWords.map((word) => [word.id, word]));
 
@@ -492,7 +648,7 @@ function getReleaseWords(
 
     if (!word) {
       throw new Error(
-        `Release ${currentDirtyTreeRelease.id} references missing word ${wordId}`,
+        `Release ${releaseId} references missing word ${wordId}`,
       );
     }
 

@@ -271,6 +271,186 @@
       ],
       "license": "app-owned",
       "status": "approved"
+    },
+    {
+      "id": "ro-d-drum",
+      "word": "drum",
+      "display": "drum",
+      "normalized": "drum",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "vehicle",
+      "image": "/images/ro/d/ro-d-drum.webp",
+      "imageStatus": "ready",
+      "alt": "Un drum simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dulceata",
+      "word": "dulceață",
+      "display": "dulceață",
+      "normalized": "dulceata",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "food",
+      "image": "/images/ro/d/ro-d-dulceata.webp",
+      "imageStatus": "ready",
+      "alt": "Un borcan cu dulceață",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dop",
+      "word": "dop",
+      "display": "dop",
+      "normalized": "dop",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/d/ro-d-dop.webp",
+      "imageStatus": "ready",
+      "alt": "Un dop de plută",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dar",
+      "word": "dar",
+      "display": "dar",
+      "normalized": "dar",
+      "partOfSpeech": "noun",
+      "difficulty": 1,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/d/ro-d-dar.webp",
+      "imageStatus": "ready",
+      "alt": "Un dar împachetat",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-drapel",
+      "word": "drapel",
+      "display": "drapel",
+      "normalized": "drapel",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "school",
+      "image": "/images/ro/d/ro-d-drapel.webp",
+      "imageStatus": "ready",
+      "alt": "Un drapel simplu",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dalmatian",
+      "word": "dalmațian",
+      "display": "dalmațian",
+      "normalized": "dalmatian",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "animal",
+      "image": "/images/ro/d/ro-d-dalmatian.webp",
+      "imageStatus": "ready",
+      "alt": "Un dalmațian prietenos",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-disc",
+      "word": "disc",
+      "display": "disc",
+      "normalized": "disc",
+      "partOfSpeech": "noun",
+      "difficulty": 2,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/d/ro-d-disc.webp",
+      "imageStatus": "ready",
+      "alt": "Un disc colorat",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-diamant",
+      "word": "diamant",
+      "display": "diamant",
+      "normalized": "diamant",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "household",
+      "image": "/images/ro/d/ro-d-diamant.webp",
+      "imageStatus": "ready",
+      "alt": "Un diamant strălucitor",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-dunga",
+      "word": "dungă",
+      "display": "dungă",
+      "normalized": "dunga",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "clothing",
+      "image": "/images/ro/d/ro-d-dunga.webp",
+      "imageStatus": "ready",
+      "alt": "O dungă pe o eșarfă",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
+    },
+    {
+      "id": "ro-d-drona",
+      "word": "dronă",
+      "display": "dronă",
+      "normalized": "drona",
+      "partOfSpeech": "noun",
+      "difficulty": 3,
+      "ageBand": "4-6",
+      "category": "toy",
+      "image": "/images/ro/d/ro-d-drona.webp",
+      "imageStatus": "ready",
+      "alt": "O dronă mică",
+      "source": [
+        "manual"
+      ],
+      "license": "app-owned",
+      "status": "approved"
     }
   ]
 }
