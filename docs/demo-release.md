@@ -2,17 +2,13 @@
 
 Date: 2026-09-12
 
-Release branch: `codex/demo-release-2026-09-12`
+Production demo: https://ioanas-words.vercel.app/ro
 
-App revision: `600ffca`, based on production revision `1713dfd`.
+Production revision tested: `850a54b53b69fd3c8f09a846360f032178c8f06a`, fast-forwarded to `main` with explicit user authorization. App changes are in `600ffca`; `850a54b` adds release documentation and route QA.
 
-Preview: https://ioanas-words-awqyfg7lx-mrnagy21s-projects.vercel.app
+GitHub production deployment `6412669605` reported success. Its immutable URL is https://ioanas-words-aulph4ugm-mrnagy21s-projects.vercel.app. Use the public demo URL above for testers.
 
-Vercel deployment ID: `Dug4pCzG1Et5F2DJVpy7rb18V1rN`.
-
-GitHub deployment ID: `6412527644`.
-
-Vercel reports a successful preview build for full revision `600ffca30f8242a10fc9a0cfc6261ba8f1c57e27`. The existing production deployment is unchanged. Anonymous browser access redirects to Vercel sign-in. This URL is therefore not yet ready for external testers without Vercel access or a shareable preview link.
+The earlier preview at https://ioanas-words-awqyfg7lx-mrnagy21s-projects.vercel.app built successfully but required Vercel sign-in. The user then authorized production deployment and production smoke testing. The production alias loads anonymously; no protection settings changed.
 
 ## Included changes
 
@@ -24,9 +20,19 @@ No production word manifests or image assets changed. Gameplay remains static, a
 
 Local content validation, lint, gameplay, matching, setup-storage checks, the component browser regression, and the production build pass. The close button was checked visually at `320×568` and preserves the selected word. Existing image-size warnings remain below the validator's hard limit.
 
-Deployed route and gameplay checks are waiting for preview access. The in-app browser reached Vercel sign-in, then GitHub sign-in, instead of the app. The user was asked to sign in or supply a Vercel-generated shareable preview link. No deployment-protection setting was changed.
+The final local component browser regression and all 82 local routes passed again before promotion. On production, `pnpm run check:demo-routes -- https://ioanas-words.vercel.app` passed all 82 public routes, covering home, every enabled setup/play route, content-review routes, and the icon. An invalid target returned HTTP 404.
 
-A reusable anonymous route smoke check is available as `pnpm run check:demo-routes -- <base-url>`. It verifies home, every enabled setup and play route, content-review pages, the icon, and an invalid target. It stops if protection redirects away from the app. It passed locally for all 82 public routes; an invalid target returned HTTP 404. Lint and TypeScript checking pass with this release script.
+The in-app browser verified the released Romanian title and completed these production checks on 2026-09-12:
+
+- D starts-with, 15 visible words from 25 eligible words. Normal-duration spins counted down exactly `15 → 14 → 13 → 12 → 11 → 10 → 9 → 8 → 7 → 6 → 5 → 4 → 3 → 2 → 1 → 0`. The 10 unused words did not refill the wheel.
+- Completion focused `Ai terminat roata!`. The card and actions fit at `320×568` and `568×320`. Replay restored exactly 15 words and wheel focus.
+- Resized the live round from `390×844` portrait to `844×390` landscape with two words left, then to `320×568` during the final result. The round remained intact. These are desktop viewport checks, not physical-device rotation results.
+- GHI exclusion G reduced 15 eligible words to zero and disabled progression with an explanation. Clearing exclusions restored progression.
+- GHI manual selection of only `dreptunghi` produced a one-word wheel, omitted replacement, preserved the word on result close, completed on removal, and replayed only `dreptunghi`.
+- Result focus started on Keep; Shift+Tab wrapped to Close, Tab returned to Keep, and Escape returned focus to the wheel. No browser console errors were captured during the gameplay checks.
+- Opened the production content-release review page and confirmed release summaries and word images rendered.
+
+No additional application changes were needed after the production smoke test.
 
 ## Physical-device checklist
 
@@ -51,6 +57,10 @@ Report the phone model, OS/browser version, portrait/landscape result, any clipp
 
 The user was asked which physical devices are available. No physical-device results have been supplied yet.
 
-## Resume deployed verification
+## Remaining verification
 
-After preview access is available, repeat the full release flow on the preview itself. Record the exact URL, app revision, route results, 15-to-zero countdown, completion/replay, one-word custom round, exclusions, keyboard navigation, and physical-device results here and in `docs/status.md`. The protected preview build is not a substitute for these checks. Use the checklist above for the physical-device handoff.
+The implementation and production smoke test are complete. Real iPhone Safari and Android Chrome checks remain pending, including rotation, browser toolbar changes, and the software keyboard. The user has not supplied device results. Do not describe desktop viewport tests as physical-device coverage.
+
+Ready-to-copy follow-up prompt:
+
+> Complete the physical-device checklist in docs/demo-release.md against https://ioanas-words.vercel.app/ro on a real iPhone with Safari and a real Android phone with Chrome. Record models, OS/browser versions, rotation and keyboard results in docs/status.md. Fix confirmed release issues without changing approved vocabulary or product scope.

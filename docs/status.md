@@ -4,9 +4,15 @@ Last updated: 2026-09-12
 
 ## Demo release preparation
 
-Status: Preview built; deployed QA waiting for preview access on 2026-09-12.
+Status: Production deployed and smoke-tested on 2026-09-12. Physical-device verification remains pending.
 
-Prepare a Vercel preview from the reviewed working tree, make focused UI improvements, repeat deployed gameplay and route checks, and coordinate physical iPhone Safari and Android Chrome verification. Preserve approved content and v1 scope. The repository is connected to Vercel through GitHub. The latest production deployment is the base revision `1713dfd`. The release adds an explicit result-close button, balanced narrow-phone actions, clearer disabled and hover states, less repeated setup text, and Romanian page metadata. Local lint, content validation, gameplay, matching, setup storage, browser regressions, and production build pass. Preview revision `600ffca` is built successfully on Vercel at `https://ioanas-words-awqyfg7lx-mrnagy21s-projects.vercel.app`. Deployed gameplay QA is waiting for access because the preview redirects to Vercel sign-in. The user was asked to sign in or provide a shareable preview link. Physical iPhone Safari and Android Chrome checks also await user results. The reusable `pnpm run check:demo-routes -- <base-url>` check passes for all 82 local public routes and the expected invalid-target 404. See `docs/demo-release.md` for deployment evidence, access limitations, and the device checklist.
+Public demo: https://ioanas-words.vercel.app/ro
+
+The user authorized production deployment after local verification. Release `850a54b53b69fd3c8f09a846360f032178c8f06a` was fast-forwarded to `main`; GitHub production deployment `6412669605` reported success. The public alias loads without sign-in. The earlier preview was protected, so deployed testing proceeded on production as requested.
+
+Final local browser regression and all 82 route checks passed before promotion. All 82 production routes passed too, including home, setup, play, and content review; an invalid target returned 404. In the production in-app browser, a normal-duration D round counted down from 15 to zero without refilling, completion focused its heading, and replay restored 15 words. A custom one-word GHI round completed and replayed exactly its selected word. Exclusions blocked zero-word setups and recovered when cleared. Close, keyboard focus wrapping, and Escape passed. Portrait/landscape viewport changes during the last two words and final result preserved the round; completion fitted 320×568 and 568×320. No gameplay console errors were captured.
+
+Approved vocabulary, images, and v1 scope are unchanged. Local content validation, lint, gameplay, matching, setup storage, browser regression, and production build had passed for the reviewed app changes. No additional application fixes were needed after production testing. Real iPhone Safari and Android Chrome testing, including physical rotation and browser keyboard/toolbar behavior, still awaits user results. See `docs/demo-release.md` for deployment evidence and the device checklist.
 
 ## Demo readiness review
 
@@ -16,7 +22,7 @@ Fixed same-target setup rehydration restarting gameplay, isolated state and spin
 
 Validation, lint, gameplay, matching, setup storage, production build with TypeScript, and the new component browser regression pass. The in-app browser completed a normal-duration 15-to-zero D round and replay, plus a one-word custom GHI round. Automated bounds and overlap checks cover six viewport sizes. All 82 generated public routes returned HTTP 200; an invalid target returned HTTP 404. The dev server is running on port 3000, started with the user's authorization. Graph tools were unavailable, so review evidence came from source, executable checks, and browser verification.
 
-See `docs/demo-readiness-review.md` for findings, test coverage, known limits, and the ready-to-copy demo release prompt. Remaining release work is Vercel preview verification and real iPhone Safari / Android Chrome checks.
+See `docs/demo-readiness-review.md` for findings, test coverage, known limits, and the ready-to-copy demo release prompt. Production verification is complete. Remaining release verification is real iPhone Safari / Android Chrome checks.
 
 ## Current Phase
 
