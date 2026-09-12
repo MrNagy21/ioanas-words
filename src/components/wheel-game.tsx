@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   type KeyboardEvent as ReactKeyboardEvent,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -127,6 +128,16 @@ const segmentColors = [
 ] as const;
 
 export function WheelGame({ content, locale }: WheelGameProps) {
+  return (
+    <WheelGameSession
+      content={content}
+      key={getTargetStorageKey(locale, content.target)}
+      locale={locale}
+    />
+  );
+}
+
+function WheelGameSession({ content, locale }: WheelGameProps) {
   const defaultMode = isPracticeTarget(content.target)
     ? "starts-with-or-contains"
     : DEFAULT_WORD_INCLUSION_MODE;
@@ -167,6 +178,9 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     [],
   );
   const prefersReducedMotion = usePrefersReducedMotion();
+  const [isHydrated, setIsHydrated] = useState(false);
+  const hasHydrated = useRef(false);
+  const completionRef = useRef<HTMLHeadingElement | null>(null);
   const spinTimer = useRef<number | null>(null);
   const wheelButtonRef = useRef<HTMLButtonElement | null>(null);
   const setupButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -210,8 +224,7 @@ export function WheelGame({ content, locale }: WheelGameProps) {
       excludedTargetKeys,
       wheelWordCount: targetWordCount,
       wordSelectionMode,
-      selectedWordIds:
-        wordSelectionMode === "custom" ? selectedWordIds : [],
+      selectedWordIds: wordSelectionMode === "custom" ? selectedWordIds : [],
     }),
     [
       excludedTargetKeys,
@@ -235,11 +248,6 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   const activeSetupSummary = formatActiveSetupSummary([
     matchingSavedSetup ? matchingSavedSetup.name : null,
     activeExclusionSummary,
-    wordSelectionMode === "custom"
-      ? `${selectedSetupTotalWordCount} ${getSelectedWordStatusLabel(
-          selectedSetupTotalWordCount,
-        )}`
-      : null,
   ]);
   const activeModeWords = useMemo(
     () =>
@@ -333,7 +341,13 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     availableWordCount: selectedSetupTotalWordCount,
     visibleWordCount: words.length,
   });
-  const isInteractionBlocked = isSpinning || isResultOpen || isSetupOpen;
+  const isInteractionBlocked =
+    !isHydrated || isSpinning || isResultOpen || isSetupOpen;
+  const returnFocusToGame = useCallback(() => {
+    window.requestAnimationFrame(() => {
+      (wheelButtonRef.current ?? completionRef.current)?.focus();
+    });
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -344,7 +358,15 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   }, []);
 
   useEffect(() => {
+    // A fresh server payload for the same target must not restart a live round.
+    // The keyed session above handles an actual target change.
+    if (hasHydrated.current) {
+      return;
+    }
+
     const hydrateTimer = window.setTimeout(() => {
+      hasHydrated.current = true;
+      setIsHydrated(true);
       setSavedSetups(getSavedWheelSetupsForTarget(targetStorageKey));
 
       const activeConfig = getActiveWheelSetup(targetStorageKey);
@@ -421,12 +443,8 @@ export function WheelGame({ content, locale }: WheelGameProps) {
   }, [activeWords, subsetKey, visibleWheelWordCount]);
 
   function spinWheel() {
-    if (!hasWords || isInteractionBlocked) {
+    if (!hasWords || isInteractionBlocked || spinTimer.current !== null) {
       return;
-    }
-
-    if (spinTimer.current !== null) {
-      window.clearTimeout(spinTimer.current);
     }
 
     const nextIndex = Math.floor(Math.random() * words.length);
@@ -458,9 +476,9 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     }, nextDuration);
   }
 
-  function closeResult() {
+  const closeResult = useCallback(() => {
     setIsResultOpen(false);
-  }
+  }, []);
 
   function closeSetup() {
     setIsSetupOpen(false);
@@ -704,10 +722,23 @@ export function WheelGame({ content, locale }: WheelGameProps) {
     setVisibleWordIdsBySubsetKey({});
     setSelectedWord(null);
     setIsResultOpen(false);
+    setRotation(0);
+    returnFocusToGame();
+  }
+
+  if (!isHydrated) {
+    return (
+      <section className="app-stage game-loading" role="status">
+        Pregătim roata...
+      </section>
+    );
   }
 
   return (
-    <section className="app-stage game-stage" aria-labelledby="game-title">
+    <section
+      className={`app-stage game-stage${hasWords ? "" : " game-stage--complete"}`}
+      aria-labelledby="game-title"
+    >
       <div className="game-topline">
         <Link className="quiet-link" href={`/${locale}`}>
           Schimbă alegerea
@@ -719,53 +750,141 @@ export function WheelGame({ content, locale }: WheelGameProps) {
 
       <div className="game-board">
         {hasWords ? (
-          <div className="wheel-wrap">
-            <div className="wheel-pointer" aria-hidden="true" />
-            <button
-              aria-label={
-                isSpinning
-                  ? "Roata se învârte"
-                  : `Învârte roata pentru ${targetKindLabel.toLocaleLowerCase(
-                      "ro",
-                    )} ${content.target.label}`
-              }
-              className="wheel-button"
-              disabled={!hasWords || isInteractionBlocked}
-              onClick={spinWheel}
-              ref={wheelButtonRef}
-              type="button"
-            >
-              <span className="wheel-frame">
-                <svg
-                  aria-hidden="true"
-                  className="word-wheel"
-                  viewBox="0 0 320 320"
-                >
-                  <g
-                    className="word-wheel__surface"
-                    style={{
-                      transform: `rotate(${rotation}deg)`,
-                      transitionDuration: isSpinning
-                        ? `${spinDurationMs}ms`
-                        : "0ms",
-                      transitionTimingFunction: SPIN_EASING,
-                    }}
+          <div className="wheel-slot">
+            <div className="wheel-wrap">
+              <div className="wheel-pointer" aria-hidden="true" />
+              <button
+                aria-label={
+                  isSpinning
+                    ? "Roata se învârte"
+                    : `Învârte roata pentru ${targetKindLabel.toLocaleLowerCase(
+                        "ro",
+                      )} ${content.target.label}`
+                }
+                className="wheel-button"
+                disabled={!hasWords || isInteractionBlocked}
+                onClick={spinWheel}
+                ref={wheelButtonRef}
+                type="button"
+              >
+                <span className="wheel-frame">
+                  <svg
+                    aria-hidden="true"
+                    className="word-wheel"
+                    viewBox="0 0 320 320"
                   >
-                    {segments.map((segment) => (
-                      <g className="word-wheel__segment" key={segment.word.id}>
-                        <path d={segment.path} fill={segment.color} />
-                      </g>
-                    ))}
-                    {segments.map((segment) => (
-                      <g
-                        className="word-wheel__image-layer"
-                        key={segment.word.id}
-                      >
+                    <g
+                      className="word-wheel__surface"
+                      style={{
+                        transform: `rotate(${rotation}deg)`,
+                        transitionDuration: isSpinning
+                          ? `${spinDurationMs}ms`
+                          : "0ms",
+                        transitionTimingFunction: SPIN_EASING,
+                      }}
+                    >
+                      {segments.map((segment) => (
+                        <g
+                          className="word-wheel__segment"
+                          key={segment.word.id}
+                        >
+                          <path d={segment.path} fill={segment.color} />
+                        </g>
+                      ))}
+                      {segments.map((segment) => (
+                        <g
+                          className="word-wheel__image-layer"
+                          key={segment.word.id}
+                        >
+                          <g
+                            className="word-wheel__upright"
+                            style={{
+                              transform: getUprightTransform(
+                                segment.imageSlot,
+                                rotation,
+                              ),
+                              transitionDuration: isSpinning
+                                ? `${spinDurationMs}ms`
+                                : "0ms",
+                              transitionTimingFunction: SPIN_EASING,
+                            }}
+                          >
+                            <circle
+                              className="word-wheel__image-slot"
+                              cx="0"
+                              cy="0"
+                              r={segment.imageSlotCircleRadius}
+                            />
+                            {hasReadyImage(segment.word) ? (
+                              <>
+                                <clipPath id={getImageClipId(segment.word)}>
+                                  <circle
+                                    cx="0"
+                                    cy="0"
+                                    r={segment.imageClipRadius}
+                                  />
+                                </clipPath>
+                                <image
+                                  className="word-wheel__image"
+                                  clipPath={`url(#${getImageClipId(segment.word)})`}
+                                  height={segment.imageSize}
+                                  href={segment.word.image}
+                                  preserveAspectRatio="xMidYMid meet"
+                                  width={segment.imageSize}
+                                  x={-segment.imageSize / 2}
+                                  y={-segment.imageSize / 2}
+                                />
+                              </>
+                            ) : (
+                              <text
+                                className="word-wheel__image-initial"
+                                dominantBaseline="middle"
+                                textAnchor="middle"
+                                style={{
+                                  fontSize: `${segment.initialFontSize}px`,
+                                }}
+                                x="0"
+                                y="1"
+                              >
+                                {getWordInitial(segment.word)}
+                              </text>
+                            )}
+                          </g>
+                        </g>
+                      ))}
+                    </g>
+                    <circle
+                      className="word-wheel__hub"
+                      cx="160"
+                      cy="160"
+                      r="43"
+                    />
+                    <text
+                      className="word-wheel__hub-label"
+                      dominantBaseline="middle"
+                      textAnchor="middle"
+                      x="160"
+                      y="162"
+                    >
+                      {content.target.label}
+                    </text>
+                    <g
+                      className="word-wheel__surface word-wheel__label-surface"
+                      style={{
+                        transform: `rotate(${rotation}deg)`,
+                        transitionDuration: isSpinning
+                          ? `${spinDurationMs}ms`
+                          : "0ms",
+                        transitionTimingFunction: SPIN_EASING,
+                      }}
+                    >
+                      {segments.map((segment) => (
                         <g
                           className="word-wheel__upright"
+                          key={`label-${segment.word.id}`}
                           style={{
                             transform: getUprightTransform(
-                              segment.imageSlot,
+                              segment.labelSlot,
                               rotation,
                             ),
                             transitionDuration: isSpinning
@@ -774,112 +893,30 @@ export function WheelGame({ content, locale }: WheelGameProps) {
                             transitionTimingFunction: SPIN_EASING,
                           }}
                         >
-                          <circle
-                            className="word-wheel__image-slot"
-                            cx="0"
-                            cy="0"
-                            r={segment.imageSlotCircleRadius}
-                          />
-                          {hasReadyImage(segment.word) ? (
-                            <>
-                              <clipPath id={getImageClipId(segment.word)}>
-                                <circle
-                                  cx="0"
-                                  cy="0"
-                                  r={segment.imageClipRadius}
-                                />
-                              </clipPath>
-                              <image
-                                className="word-wheel__image"
-                                clipPath={`url(#${getImageClipId(segment.word)})`}
-                                height={segment.imageSize}
-                                href={segment.word.image}
-                                preserveAspectRatio="xMidYMid meet"
-                                width={segment.imageSize}
-                                x={-segment.imageSize / 2}
-                                y={-segment.imageSize / 2}
-                              />
-                            </>
-                          ) : (
-                            <text
-                              className="word-wheel__image-initial"
-                              dominantBaseline="middle"
-                              textAnchor="middle"
-                              style={{
-                                fontSize: `${segment.initialFontSize}px`,
-                              }}
-                              x="0"
-                              y="1"
-                            >
-                              {getWordInitial(segment.word)}
-                            </text>
-                          )}
+                          <text
+                            className="word-wheel__label"
+                            dominantBaseline="middle"
+                            style={{
+                              fontSize: `${segment.labelFontSize}px`,
+                              strokeWidth: `${segment.labelStrokeWidth}px`,
+                            }}
+                            textAnchor="middle"
+                            x="0"
+                            y="0"
+                          >
+                            {segment.word.display}
+                          </text>
                         </g>
-                      </g>
-                    ))}
-                  </g>
-                  <circle
-                    className="word-wheel__hub"
-                    cx="160"
-                    cy="160"
-                    r="43"
-                  />
-                  <text
-                    className="word-wheel__hub-label"
-                    dominantBaseline="middle"
-                    textAnchor="middle"
-                    x="160"
-                    y="162"
-                  >
-                    {content.target.label}
-                  </text>
-                  <g
-                    className="word-wheel__surface word-wheel__label-surface"
-                    style={{
-                      transform: `rotate(${rotation}deg)`,
-                      transitionDuration: isSpinning
-                        ? `${spinDurationMs}ms`
-                        : "0ms",
-                      transitionTimingFunction: SPIN_EASING,
-                    }}
-                  >
-                    {segments.map((segment) => (
-                      <g
-                        className="word-wheel__upright"
-                        key={`label-${segment.word.id}`}
-                        style={{
-                          transform: getUprightTransform(
-                            segment.labelSlot,
-                            rotation,
-                          ),
-                          transitionDuration: isSpinning
-                            ? `${spinDurationMs}ms`
-                            : "0ms",
-                          transitionTimingFunction: SPIN_EASING,
-                        }}
-                      >
-                        <text
-                          className="word-wheel__label"
-                          dominantBaseline="middle"
-                          style={{
-                            fontSize: `${segment.labelFontSize}px`,
-                            strokeWidth: `${segment.labelStrokeWidth}px`,
-                          }}
-                          textAnchor="middle"
-                          x="0"
-                          y="0"
-                        >
-                          {segment.word.display}
-                        </text>
-                      </g>
-                    ))}
-                  </g>
-                </svg>
-              </span>
-            </button>
+                      ))}
+                    </g>
+                  </svg>
+                </span>
+              </button>
+            </div>
           </div>
         ) : (
           <EmptyWheelState
+            headingRef={completionRef}
             emptyStateKind={emptyStateKind ?? "no-content"}
             hasRemovedWords={removedWordCount > 0}
             locale={locale}
@@ -888,92 +925,97 @@ export function WheelGame({ content, locale }: WheelGameProps) {
           />
         )}
 
-        <div className="game-panel">
-          <p className="stage-label">
-            {targetKindLabel} {content.target.label}
-          </p>
-          <h2 id="game-title">
-            {hasWords ? "Învârte roata" : "Roata este goală"}
-          </h2>
-          <p className="mode-status">
-            <span className="mode-status__desktop">
-              {selectedModeOption.statusLabel} {content.target.label}
-            </span>
-            <span className="mode-status__mobile">
-              {content.target.label} · {selectedModeOption.shortStatusLabel}
-            </span>
-            <strong>{words.length}</strong>
-            <span>
-              {getWordCountLabel(words.length)} pe roată
-              {activeWords.length !== words.length
-                ? ` din ${activeWords.length}`
-                : ""}
-              {wordSelectionMode === "custom"
-                ? ` ${getSelectedWordStatusLabel(activeWords.length)}`
-                : selectedModeTotalWordCount !== activeWords.length
-                  ? ` disponibile`
-                  : ""}
-            </span>
-          </p>
-          {activeSetupSummary ? (
-            <p className="active-setup-status">
-              <span>Configurație</span>
-              <strong>{activeSetupSummary}</strong>
+        {hasWords ? (
+          <div className="game-panel">
+            <p className="stage-label">
+              {targetKindLabel} {content.target.label}
             </p>
-          ) : null}
-          <div className="spin-result" aria-live="polite">
-            {selectedWord ? (
-              <>
-                <span className="spin-result__label">
-                  {isResultOpen ? "A ieșit" : "Ultimul cuvânt"}
-                </span>
-                <strong>{selectedWord.display}</strong>
-              </>
-            ) : (
-              <span>
-                {isSpinning
-                  ? "Roata se învârte..."
-                  : "Apasă roata ca să alegem un cuvânt."}
+            <h2 id="game-title">
+              {hasWords ? "Învârte roata" : "Roata este goală"}
+            </h2>
+            <p className="mode-status">
+              <span className="mode-status__desktop">
+                {selectedModeOption.statusLabel} {content.target.label}
               </span>
-            )}
+              <span className="mode-status__mobile">
+                {content.target.label} · {selectedModeOption.shortStatusLabel}
+              </span>
+              <strong>{words.length}</strong>
+              <span>
+                {getWordCountLabel(words.length)} pe roată
+                {activeWords.length !== words.length
+                  ? ` din ${activeWords.length}`
+                  : ""}
+                {activeWords.length !== words.length
+                  ? wordSelectionMode === "custom"
+                    ? ` ${getSelectedWordStatusLabel(activeWords.length)}`
+                    : ` ${activeWords.length === 1 ? "disponibil" : "disponibile"}`
+                  : ""}
+              </span>
+            </p>
+            {activeSetupSummary ? (
+              <p className="active-setup-status">
+                <span>Configurație</span>
+                <strong>{activeSetupSummary}</strong>
+              </p>
+            ) : null}
+            <div className="spin-result" aria-live="polite">
+              {selectedWord ? (
+                <>
+                  <span className="spin-result__label">
+                    {isResultOpen ? "A ieșit" : "Ultimul cuvânt"}
+                  </span>
+                  <strong>{selectedWord.display}</strong>
+                </>
+              ) : (
+                <span>
+                  {isSpinning
+                    ? "Roata se învârte..."
+                    : "Apasă roata ca să alegem un cuvânt."}
+                </span>
+              )}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
 
-      <div className="game-actions" aria-label="Comenzi joc">
-        <Link
-          className="secondary-button"
-          href={isSpinning || isResultOpen ? "#" : setupHref}
-          onClick={(event) => {
-            if (isSpinning || isResultOpen) {
-              event.preventDefault();
-            }
-          }}
-        >
-          Setează
-        </Link>
-        <button
-          className="secondary-button"
-          disabled={removedWordCount === 0 || isInteractionBlocked}
-          onClick={resetCurrentLetter}
-          type="button"
-        >
-          Resetează
-        </button>
-        <button
-          className="spin-button"
-          disabled={!hasWords || isInteractionBlocked}
-          onClick={spinWheel}
-          type="button"
-        >
-          {isSpinning ? "Se învârte" : "Învârte"}
-        </button>
-      </div>
+      {hasWords ? (
+        <div className="game-actions" aria-label="Comenzi joc">
+          <Link
+            className="secondary-button"
+            aria-disabled={isInteractionBlocked}
+            href={setupHref}
+            onClick={(event) => {
+              if (isInteractionBlocked) {
+                event.preventDefault();
+              }
+            }}
+          >
+            Setează
+          </Link>
+          <button
+            className="secondary-button"
+            disabled={removedWordCount === 0 || isInteractionBlocked}
+            onClick={resetCurrentLetter}
+            type="button"
+          >
+            Resetează
+          </button>
+          <button
+            className="spin-button"
+            disabled={!hasWords || isInteractionBlocked}
+            onClick={spinWheel}
+            type="button"
+          >
+            {isSpinning ? "Se învârte" : "Învârte"}
+          </button>
+        </div>
+      ) : null}
 
       {selectedWord && isResultOpen ? (
         <ResultModal
           onClose={closeResult}
-          onReturnFocus={() => wheelButtonRef.current?.focus()}
+          onReturnFocus={returnFocusToGame}
           onRemove={removeSelectedWord}
           onReplace={replaceSelectedWord}
           replacementWordCount={replacementWords.length}
@@ -1033,8 +1075,6 @@ function ResultModal({
   const primaryActionRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const previouslyFocusedElement = document.activeElement;
-
     primaryActionRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -1049,11 +1089,7 @@ function ResultModal({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
 
-      if (previouslyFocusedElement instanceof HTMLElement) {
-        previouslyFocusedElement.focus();
-      } else {
-        onReturnFocus();
-      }
+      onReturnFocus();
     };
   }, [onClose, onReturnFocus]);
 
@@ -1124,7 +1160,7 @@ function ResultModal({
           </button>
           {replacementWordCount > 0 ? (
             <button
-              aria-label={`Înlocuiește cu un cuvânt aleatoriu. ${replacementWordCount} ${getWordCountLabel(replacementWordCount)} disponibile`}
+              aria-label={`Înlocuiește cu un cuvânt aleatoriu. ${replacementWordCount} ${getWordCountLabel(replacementWordCount)} ${replacementWordCount === 1 ? "disponibil" : "disponibile"}`}
               className="secondary-button"
               onClick={onReplace}
               type="button"
@@ -1133,6 +1169,22 @@ function ResultModal({
             </button>
           ) : null}
         </div>
+        <button
+          aria-label="Închide rezultatul"
+          className="result-modal__close"
+          onClick={onClose}
+          type="button"
+        >
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20">
+            <path
+              d="M5 5l10 10M15 5L5 15"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
       </section>
     </div>
   );
@@ -1746,41 +1798,53 @@ function SavedSetupsDialog({
 
 function EmptyWheelState({
   emptyStateKind,
+  headingRef,
   hasRemovedWords,
   locale,
   onReset,
   setupHref,
 }: Readonly<{
   emptyStateKind: WheelEmptyStateKind;
+  headingRef: React.RefObject<HTMLHeadingElement | null>;
   hasRemovedWords: boolean;
   locale: SupportedLocale;
   onReset: () => void;
   setupHref: string;
 }>) {
+  const isComplete = emptyStateKind === "all-removed";
+
   return (
     <div className="empty-wheel-state">
+      <div className="empty-wheel-state__mark" aria-hidden="true">
+        {isComplete ? "✓" : "?"}
+      </div>
+      <h2 id="game-title" ref={headingRef} tabIndex={-1}>
+        {isComplete ? "Ai terminat roata!" : "Nu sunt cuvinte aici"}
+      </h2>
       <p>
-        {emptyStateKind === "all-removed"
-          ? "Ai scos toate cuvintele din acest mod."
-          : "Nu sunt cuvinte aici."}
+        {isComplete
+          ? "Ai scos toate cuvintele de pe roată. Mai jucăm?"
+          : "Schimbă setările roții sau alege altă literă ori alt sunet."}
       </p>
-      <Link
-        className="spin-button"
-        href={setupHref}
-      >
-        Setează roata
-      </Link>
-      <button
-        className="secondary-button"
-        disabled={!hasRemovedWords}
-        onClick={onReset}
-        type="button"
-      >
-        Resetează roata
-      </button>
-      <Link className="secondary-button" href={`/${locale}`}>
-        Alege altceva
-      </Link>
+      <div className="empty-wheel-state__actions">
+        {hasRemovedWords ? (
+          <button className="spin-button" onClick={onReset} type="button">
+            Joacă din nou
+          </button>
+        ) : (
+          <Link className="spin-button" href={setupHref}>
+            Setează roata
+          </Link>
+        )}
+        <Link className="secondary-button" href={`/${locale}`}>
+          Alege altceva
+        </Link>
+      </div>
+      {hasRemovedWords ? (
+        <Link className="quiet-link" href={setupHref}>
+          Setează roata
+        </Link>
+      ) : null}
     </div>
   );
 }

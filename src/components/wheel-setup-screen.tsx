@@ -1202,7 +1202,8 @@ function SetupEditor({
                   </button>
                   <span>
                     {availableWordCount}{" "}
-                    {getWordCountLabel(availableWordCount)} disponibile
+                    {getWordCountLabel(availableWordCount)}{" "}
+                    {availableWordCount === 1 ? "disponibil" : "disponibile"}
                   </span>
                 </div>
               </section>

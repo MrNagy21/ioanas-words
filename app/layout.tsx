@@ -4,8 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   authors: [{ name: "Ioana Nagy", url: "https://www.ioananagy.eu/" }],
   creator: "Ioana Nagy",
-  title: "Word Wheel",
-  description: "A static-first Romanian vocabulary wheel for young children.",
+  title: "Roata cuvintelor | Word Wheel",
+  description:
+    "Alege o literă sau un sunet, învârte roata și descoperă cuvinte în limba română. Un joc de vocabular pentru copii.",
 };
 
 type RootLayoutProps = Readonly<{

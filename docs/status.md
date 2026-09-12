@@ -1,6 +1,22 @@
 # Word Wheel Status
 
-Last updated: 2026-06-29
+Last updated: 2026-09-12
+
+## Demo release preparation
+
+Status: In progress on 2026-09-12.
+
+Prepare a Vercel preview from the reviewed working tree, make focused UI improvements, repeat deployed gameplay and route checks, and coordinate physical iPhone Safari and Android Chrome verification. Preserve approved content and v1 scope. The repository is connected to Vercel through GitHub. The latest production deployment is the base revision `1713dfd`. The release adds an explicit result-close button, balanced narrow-phone actions, clearer disabled and hover states, less repeated setup text, and Romanian page metadata. Local lint, content validation, gameplay, matching, setup storage, browser regressions, and production build pass. A preview branch deployment is next.
+
+## Demo readiness review
+
+Status: Implementation and local browser QA complete on 2026-09-12.
+
+Fixed same-target setup rehydration restarting gameplay, isolated state and spin timers between targets, replaced the crowded empty-wheel screen with a completion card, restored keyboard focus after final removal and replay, and corrected wheel/result layouts on short screens. The small portrait home grid now fits all sound groups. Approved vocabulary and images are unchanged.
+
+Validation, lint, gameplay, matching, setup storage, production build with TypeScript, and the new component browser regression pass. The in-app browser completed a normal-duration 15-to-zero D round and replay, plus a one-word custom GHI round. Automated bounds and overlap checks cover six viewport sizes. All 82 generated public routes returned HTTP 200; an invalid target returned HTTP 404. The dev server is running on port 3000, started with the user's authorization. Graph tools were unavailable, so review evidence came from source, executable checks, and browser verification.
+
+See `docs/demo-readiness-review.md` for findings, test coverage, known limits, and the ready-to-copy demo release prompt. Remaining release work is Vercel preview verification and real iPhone Safari / Android Chrome checks.
 
 ## Current Phase
 
