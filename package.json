@@ -18,7 +18,8 @@
     "optimize:images": "node scripts/images/optimize-images.mjs",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
-    "check:wheel-browser": "node scripts/qa/check-wheel-browser.mjs"
+    "check:wheel-browser": "node scripts/qa/check-wheel-browser.mjs",
+    "check:demo-routes": "bun scripts/qa/check-demo-routes.ts"
   },
   "dependencies": {
     "next": "16.2.6",

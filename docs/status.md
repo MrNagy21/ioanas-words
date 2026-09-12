@@ -4,9 +4,9 @@ Last updated: 2026-09-12
 
 ## Demo release preparation
 
-Status: In progress on 2026-09-12.
+Status: Preview built; deployed QA waiting for preview access on 2026-09-12.
 
-Prepare a Vercel preview from the reviewed working tree, make focused UI improvements, repeat deployed gameplay and route checks, and coordinate physical iPhone Safari and Android Chrome verification. Preserve approved content and v1 scope. The repository is connected to Vercel through GitHub. The latest production deployment is the base revision `1713dfd`. The release adds an explicit result-close button, balanced narrow-phone actions, clearer disabled and hover states, less repeated setup text, and Romanian page metadata. Local lint, content validation, gameplay, matching, setup storage, browser regressions, and production build pass. A preview branch deployment is next.
+Prepare a Vercel preview from the reviewed working tree, make focused UI improvements, repeat deployed gameplay and route checks, and coordinate physical iPhone Safari and Android Chrome verification. Preserve approved content and v1 scope. The repository is connected to Vercel through GitHub. The latest production deployment is the base revision `1713dfd`. The release adds an explicit result-close button, balanced narrow-phone actions, clearer disabled and hover states, less repeated setup text, and Romanian page metadata. Local lint, content validation, gameplay, matching, setup storage, browser regressions, and production build pass. Preview revision `600ffca` is built successfully on Vercel at `https://ioanas-words-awqyfg7lx-mrnagy21s-projects.vercel.app`. Deployed gameplay QA is waiting for access because the preview redirects to Vercel sign-in. The user was asked to sign in or provide a shareable preview link. Physical iPhone Safari and Android Chrome checks also await user results. The reusable `pnpm run check:demo-routes -- <base-url>` check passes for all 82 local public routes and the expected invalid-target 404. See `docs/demo-release.md` for deployment evidence, access limitations, and the device checklist.
 
 ## Demo readiness review
 
