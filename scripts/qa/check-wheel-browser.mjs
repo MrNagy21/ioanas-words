@@ -92,7 +92,11 @@ try {
       count,
     );
   const spin = async () => {
-    await page.getByRole("button", { name: "Învârte", exact: true }).click();
+    if ((await page.locator(".word-wheel__label").count()) === 1) {
+      await page.locator(".wheel-button").click();
+    } else {
+      await page.getByRole("button", { name: "Învârte", exact: true }).click();
+    }
     await page.getByRole("dialog").waitFor();
   };
   await waitCount(15);
@@ -166,7 +170,48 @@ try {
 
   for (let count = 15; count > 0; count--) {
     const before = await labels();
+    if (count === 1) {
+      const placement = await page.evaluate(() => {
+        const wheel = document
+          .querySelector(".word-wheel")
+          .getBoundingClientRect();
+        const image = document
+          .querySelector(".word-wheel__image-slot")
+          .getBoundingClientRect();
+        const label = document
+          .querySelector(".word-wheel__label")
+          .getBoundingClientRect();
+        const center = (rect) => ({
+          x: rect.x + rect.width / 2,
+          y: rect.y + rect.height / 2,
+        });
+
+        return {
+          wheel: center(wheel),
+          image: center(image),
+          label: center(label),
+        };
+      });
+      assert.ok(
+        Math.abs(placement.image.x - placement.wheel.x) < 2 &&
+          placement.image.y < placement.wheel.y,
+        `Final image must rest at the top of the wheel: ${JSON.stringify(placement)}`,
+      );
+      assert.ok(
+        Math.abs(placement.label.x - placement.wheel.x) < 2 &&
+          placement.label.y < placement.wheel.y,
+        `Final label must rest at the top of the wheel: ${JSON.stringify(placement)}`,
+      );
+      await page.emulateMedia({ reducedMotion: "no-preference" });
+    }
     await spin();
+    if (count === 1) {
+      assert.equal(
+        await page.locator(".wheel-button").isDisabled(),
+        true,
+        "Final wheel must keep spinning after its result modal opens",
+      );
+    }
     const removed = await page.locator("#result-title").textContent();
     await page
       .getByRole("button", { name: "Scoate din roată", exact: true })
@@ -279,7 +324,7 @@ try {
   );
   assert.deepEqual(errors, [], "No browser runtime errors");
   console.log(
-    "Wheel browser checks passed: keep, Escape, focus trap, replace, 15→0 countdown, same-target rerenders, completion layouts, replay, target changes, timer cleanup, and result layouts.",
+    "Wheel browser checks passed: keep, Escape, focus trap, replace, final-word top alignment and spin continuity, 15→0 countdown, same-target rerenders, completion layouts, replay, target changes, timer cleanup, and result layouts.",
   );
 } finally {
   await browser?.close();

@@ -11,6 +11,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { celebrateWheelCompletion } from "@/components/wheel-completion-celebration";
 import type {
   ContentPracticeTarget,
   ContentWord,
@@ -82,6 +83,7 @@ const WHEEL_CENTER = 160;
 const WHEEL_RADIUS = 152;
 const SPIN_MIN_DURATION_MS = 5600;
 const SPIN_DURATION_VARIANCE_MS = 2200;
+const FINAL_WORD_RESULT_DELAY_MS = 500;
 const SPIN_EASING = "cubic-bezier(0.08, 0.82, 0.17, 1)";
 const REDUCED_MOTION_SPIN_MS = 120;
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
@@ -181,6 +183,9 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
   const [isHydrated, setIsHydrated] = useState(false);
   const hasHydrated = useRef(false);
   const completionRef = useRef<HTMLHeadingElement | null>(null);
+  const completionCelebrated = useRef(false);
+  const celebrationCleanup = useRef<(() => void) | null>(null);
+  const finalWordResultTimer = useRef<number | null>(null);
   const spinTimer = useRef<number | null>(null);
   const wheelButtonRef = useRef<HTMLButtonElement | null>(null);
   const setupButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -313,6 +318,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
   );
   const segments = useMemo(() => buildSegments(words), [words]);
   const hasWords = words.length > 0;
+  const isFinalWord = words.length === 1;
   const removedWordCount = removedWordIds.length;
   const draftAvailableWordCount = getAvailableWordCountForMode({
     content,
@@ -343,6 +349,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
   });
   const isInteractionBlocked =
     !isHydrated || isSpinning || isResultOpen || isSetupOpen;
+  const wheelRotation = isFinalWord && !isSpinning ? 0 : rotation;
   const returnFocusToGame = useCallback(() => {
     window.requestAnimationFrame(() => {
       (wheelButtonRef.current ?? completionRef.current)?.focus();
@@ -354,8 +361,18 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
       if (spinTimer.current !== null) {
         window.clearTimeout(spinTimer.current);
       }
+      if (finalWordResultTimer.current !== null) {
+        window.clearTimeout(finalWordResultTimer.current);
+      }
+      celebrationCleanup.current?.();
     };
   }, []);
+
+  useEffect(() => {
+    if (words.length > 0) {
+      completionCelebrated.current = false;
+    }
+  }, [words.length]);
 
   useEffect(() => {
     // A fresh server payload for the same target must not restart a live round.
@@ -442,25 +459,54 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     };
   }, [activeWords, subsetKey, visibleWheelWordCount]);
 
-  function spinWheel() {
-    if (!hasWords || isInteractionBlocked || spinTimer.current !== null) {
+  function openResultForWord(word: ContentWord) {
+    setSelectedWord(word);
+    setIsResultOpen(true);
+  }
+
+  function stopFinalWordSpin() {
+    if (!isFinalWord) {
       return;
     }
 
-    const nextIndex = Math.floor(Math.random() * words.length);
-    const segmentAngle = 360 / words.length;
-    const selectedCenter = nextIndex * segmentAngle + segmentAngle / 2;
-    const targetRotation = normalizeDegrees(360 - selectedCenter);
-    const currentRotation = normalizeDegrees(rotation);
-    const travelToTarget = normalizeDegrees(targetRotation - currentRotation);
-    const fullTurns = prefersReducedMotion
+    if (spinTimer.current !== null) {
+      window.clearTimeout(spinTimer.current);
+      spinTimer.current = null;
+    }
+    if (finalWordResultTimer.current !== null) {
+      window.clearTimeout(finalWordResultTimer.current);
+      finalWordResultTimer.current = null;
+    }
+    setIsSpinning(false);
+    setRotation(0);
+  }
+
+  function spinWheel() {
+    if (
+      !hasWords ||
+      isInteractionBlocked ||
+      spinTimer.current !== null ||
+      finalWordResultTimer.current !== null
+    ) {
+      return;
+    }
+
+    const nextIndex = isFinalWord
       ? 0
-      : 6 + Math.floor(Math.random() * 3);
-    const nextRotation = rotation + travelToTarget + fullTurns * 360;
+      : Math.floor(Math.random() * words.length);
+    const nextRotation = getSpinRotation({
+      rotation,
+      wordCount: words.length,
+      wordIndex: nextIndex,
+      prefersReducedMotion,
+    });
     const nextDuration = prefersReducedMotion
       ? REDUCED_MOTION_SPIN_MS
       : SPIN_MIN_DURATION_MS +
         Math.floor(Math.random() * SPIN_DURATION_VARIANCE_MS);
+    const resultDelay = isFinalWord
+      ? Math.min(FINAL_WORD_RESULT_DELAY_MS, nextDuration)
+      : nextDuration;
 
     setSelectedWord(null);
     setIsResultOpen(false);
@@ -469,11 +515,21 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     setRotation(nextRotation);
 
     spinTimer.current = window.setTimeout(() => {
-      setSelectedWord(words[nextIndex]);
-      setIsResultOpen(true);
       setIsSpinning(false);
+      if (isFinalWord) {
+        setRotation(0);
+      } else {
+        openResultForWord(words[nextIndex]);
+      }
       spinTimer.current = null;
     }, nextDuration);
+
+    if (isFinalWord) {
+      finalWordResultTimer.current = window.setTimeout(() => {
+        openResultForWord(words[0]);
+        finalWordResultTimer.current = null;
+      }, resultDelay);
+    }
   }
 
   const closeResult = useCallback(() => {
@@ -664,6 +720,11 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
       return;
     }
 
+    const isLastRemainingWord =
+      words.length === 1 && words[0]?.id === selectedWord.id;
+
+    stopFinalWordSpin();
+
     setRemovedWordIds((currentIds) =>
       currentIds.includes(selectedWord.id)
         ? currentIds
@@ -692,6 +753,12 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     });
     setSelectedWord(null);
     setIsResultOpen(false);
+
+    if (isLastRemainingWord && !completionCelebrated.current) {
+      completionCelebrated.current = true;
+      celebrationCleanup.current?.();
+      celebrationCleanup.current = celebrateWheelCompletion();
+    }
   }
 
   function replaceSelectedWord() {
@@ -704,6 +771,8 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     if (!replacementWord) {
       return;
     }
+
+    stopFinalWordSpin();
 
     const currentVisibleWordIds = words.map((word) => word.id);
 
@@ -776,7 +845,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
                     <g
                       className="word-wheel__surface"
                       style={{
-                        transform: `rotate(${rotation}deg)`,
+                        transform: `rotate(${wheelRotation}deg)`,
                         transitionDuration: isSpinning
                           ? `${spinDurationMs}ms`
                           : "0ms",
@@ -801,7 +870,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
                             style={{
                               transform: getUprightTransform(
                                 segment.imageSlot,
-                                rotation,
+                                wheelRotation,
                               ),
                               transitionDuration: isSpinning
                                 ? `${spinDurationMs}ms`
@@ -871,7 +940,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
                     <g
                       className="word-wheel__surface word-wheel__label-surface"
                       style={{
-                        transform: `rotate(${rotation}deg)`,
+                        transform: `rotate(${wheelRotation}deg)`,
                         transitionDuration: isSpinning
                           ? `${spinDurationMs}ms`
                           : "0ms",
@@ -885,7 +954,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
                           style={{
                             transform: getUprightTransform(
                               segment.labelSlot,
-                              rotation,
+                              wheelRotation,
                             ),
                             transitionDuration: isSpinning
                               ? `${spinDurationMs}ms`
@@ -1001,14 +1070,16 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
           >
             Resetează
           </button>
-          <button
-            className="spin-button"
-            disabled={!hasWords || isInteractionBlocked}
-            onClick={spinWheel}
-            type="button"
-          >
-            {isSpinning ? "Se învârte" : "Învârte"}
-          </button>
+          {!isFinalWord ? (
+            <button
+              className="spin-button"
+              disabled={!hasWords || isInteractionBlocked}
+              onClick={spinWheel}
+              type="button"
+            >
+              {isSpinning ? "Se învârte" : "Învârte"}
+            </button>
+          ) : null}
         </div>
       ) : null}
 
@@ -2074,6 +2145,7 @@ function buildSegments(words: readonly ContentWord[]): WheelSegment[] {
     const startAngle = index * segmentAngle;
     const endAngle = startAngle + segmentAngle;
     const centerAngle = startAngle + segmentAngle / 2;
+    const slotAngle = words.length === 1 ? 0 : centerAngle;
 
     return {
       word,
@@ -2090,7 +2162,7 @@ function buildSegments(words: readonly ContentWord[]): WheelSegment[] {
         WHEEL_CENTER,
         WHEEL_CENTER,
         layout.imageSlotRadius,
-        centerAngle,
+        slotAngle,
       ),
       imageClipRadius: layout.imageClipRadius,
       imageSize: layout.imageSize,
@@ -2101,7 +2173,7 @@ function buildSegments(words: readonly ContentWord[]): WheelSegment[] {
         WHEEL_CENTER,
         WHEEL_CENTER,
         layout.labelSlotRadius,
-        centerAngle,
+        slotAngle,
       ),
       labelStrokeWidth: layout.labelStrokeWidth,
     };
@@ -2204,6 +2276,29 @@ function polarToCartesian(
 
 function normalizeDegrees(degrees: number) {
   return ((degrees % 360) + 360) % 360;
+}
+
+function getSpinRotation({
+  prefersReducedMotion,
+  rotation,
+  wordCount,
+  wordIndex,
+}: Readonly<{
+  prefersReducedMotion: boolean;
+  rotation: number;
+  wordCount: number;
+  wordIndex: number;
+}>) {
+  const segmentAngle = 360 / wordCount;
+  const selectedCenter = wordIndex * segmentAngle + segmentAngle / 2;
+  const targetRotation = normalizeDegrees(360 - selectedCenter);
+  const currentRotation = normalizeDegrees(rotation);
+  const travelToTarget = normalizeDegrees(targetRotation - currentRotation);
+  const fullTurns = prefersReducedMotion
+    ? 0
+    : 6 + Math.floor(Math.random() * 3);
+
+  return rotation + travelToTarget + fullTurns * 360;
 }
 
 function getWordInitial(word: ContentWord) {

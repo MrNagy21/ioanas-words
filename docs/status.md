@@ -1,6 +1,6 @@
 # Word Wheel Status
 
-Last updated: 2026-09-12
+Last updated: 2026-09-19
 
 ## Demo release preparation
 
@@ -32,6 +32,8 @@ Overall status: Static Romanian starter content drives an interactive SVG wheel 
 
 ## Completed
 
+- Added a mobile-first `canvas-confetti` wheel-completion celebration on 2026-09-19. It uses a five-pop, full-screen sequence with viewport-aware particle counts, fires only from the successful final visible-word removal, resets its once-only guard when the wheel is populated again, respects reduced-motion preferences, and clears all pending burst timers on unmount. Lint, TypeScript, production build, and diff checks passed; localhost browser verification could not run because the expected port `3000` server was unavailable inside and outside the sandbox.
+- Added the final-word interaction on 2026-09-19. When one visible word remains, its image and label are fixed above the hub independently of inherited wheel rotation, the separate spin action is hidden, and clicking the wheel starts the standard full spin while opening the existing result modal after 500 ms without stopping the animation. Normal multi-word spins and the existing removal/completion flow remain unchanged. The browser regression now verifies the final resting geometry and continued spin state when the early modal appears.
 - Completed Romanian Content Expansion Batch 108 Slice 8 coverage QA and next-prompt preparation on 2026-06-29.
 - Added `docs/app-development-program/features/romanian-content-expansion/slice-coverage-qa-batch-108.md` with exact Batch 107 promotion checks, identity QA, image QA, current totals, `/admin/releases/3` count, verification results, localhost route QA, and the Batch 109 planning prompt.
 - Completed Romanian Content Expansion Batch 107 Slice 8 production promotion on 2026-06-29 after the human explicitly approved promoting both `ramă` and `râmă`.
