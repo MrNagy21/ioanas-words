@@ -1,6 +1,6 @@
 # Release audit and deployment
 
-The user authorized an Astra high code audit followed by deployment if ready on 2026-10-24. This extends the earlier local-only preparation instruction. Deployment preparation is in progress; no deployment is claimed yet.
+The user authorized an Astra high code audit followed by deployment if ready on 2026-10-24. This extends the earlier local-only preparation instruction. The reviewed code is deployed at [ioanas-words.vercel.app/ro/practice](https://ioanas-words.vercel.app/ro/practice). Code commit `779ac390838b22e3c959d25da3e4e3cef49ba378` was pushed to the existing production branch after Astra high approval and release checks.
 
 ## Independent audit
 
@@ -33,13 +33,30 @@ The repository-wide formatter flags 138 untouched baseline files. They are ident
 
 The existing public project is `ioanas-words.vercel.app`, connected to `MrNagy21/ioanas-words`, production branch `main`. Local and remote main started at `11bcf9bef617b820ac9c77e0be60ad048257a643`. Its last recorded GitHub deployment was successful and created by `vercel[bot]`. The GitHub account has push permission; branch protection is not enabled.
 
-Vercel CLI 65.2.0 was tried outside app dependencies. Its stored login was expired. No temporary site or alternative project was created. The intended deployment route is the existing GitHub integration after audit approval and final checks. Vercel documents that [pushes to the connected production branch update the production deployment](https://vercel.com/docs/git/vercel-for-github). No production settings or protection changes are needed.
+Vercel CLI 65.2.0 was tried outside app dependencies. Its stored login was expired. No temporary site or alternative project was created. The deployment used the existing GitHub integration after audit approval and final checks. Vercel documents that [pushes to the connected production branch update the production deployment](https://vercel.com/docs/git/vercel-for-github). No production settings or protection changes are needed.
+
+## Published release
+
+Vercel completed production deployment `7301888432` for code commit `779ac390838b22e3c959d25da3e4e3cef49ba378`. GitHub's Vercel status is success. Its immutable URL is [ioanas-words-5xgq01zia-mrnagy21s-projects.vercel.app](https://ioanas-words-5xgq01zia-mrnagy21s-projects.vercel.app); testers should use the public alias above. The previous known production revision was `11bcf9bef617b820ac9c77e0be60ad048257a643`.
+
+Public-origin checks pass:
+
+- HTTPS practice returns 200 with certificate verification result 0.
+- All 85 public routes pass; four invalid paths return Romanian/noindex recovery.
+- Full synthetic practice/backup journeys pass in headed Chrome 155 and WebKit 26.5, including IndexedDB persistence, ownership/recovery, observations and protected child/whole-app restore.
+- The full WebKit onboarding journey passes, including actual profile creation, exact starter words, retry, reload, Help and existing-round resume.
+- The WebKit setup journey passes with the labelled count, exclusions, optional saving, selected word count, phone/desktop/enlarged text, chooser and deletion states.
+- Chrome's normal-profile manifest and installability checks return no errors. Secure-context storage/locks/crypto are available.
+
+These probes ran against the public HTTPS origin, not localhost or the protected immutable deployment. The retained scripts replace only the local base URL and helper import paths outside the repository. Captures are in `/Users/darius/.t3/userdata/artifacts/word-wheel-2026-10-24/production/`; the installability result is `installability-production.json` in its parent folder. No actual child records, passwords or backups were uploaded.
+
+The deployed code is unchanged by the later documentation commit that records these results. Physical-device/pilot results are still required. This is a deployed pilot, not a claim that GP9 human acceptance is complete.
 
 ## Installation check
 
 The user requested installability before deployment. The manifest already has stable ID `/`, start URL `/ro/practice`, scope `/`, standalone display, Romanian names and valid 192/512px PNG icons. Root metadata includes the Apple touch icon and web-app-capable settings. No service worker or offline claim was added.
 
-Chrome 155 in a fresh normal persistent test profile reports empty manifest and installability error lists on localhost. The earlier incognito probe reported only `in-incognito`, so it is not used as the installability verdict. No OS-level app was installed by automation. Repeat the normal-profile check on the deployed HTTPS origin. Actual iPhone/Android installation remains unverified.
+Chrome 155 in a fresh normal persistent test profile reports empty manifest and installability error lists on localhost. The earlier incognito probe reported only `in-incognito`, so it is not used as the installability verdict. No OS-level app was installed by automation. The same normal-profile check also passes on the deployed HTTPS origin, with IndexedDB, Web Locks and Web Crypto available in a secure context. Actual iPhone/Android installation remains unverified.
 
 See [Chrome's install criteria](https://web.dev/articles/install-criteria), [Apple's home-screen web app instructions](https://support.apple.com/guide/iphone/open-as-web-app-iphea86e5236/ios) and the README installation steps. The browser decides whether and when to offer its install prompt.
 

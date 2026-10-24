@@ -4,15 +4,15 @@ Use this for your acceptance test after the local engineering QA. It lists the f
 
 ## Before you start
 
-Open [the app](http://localhost:3000/ro/practice) on this computer. Use synthetic profiles named Alex Test and Mara Test. Keep the existing browser data; there is no need to clear it. If you use existing records, make a protected whole-app backup before restore or deletion tests.
+Open [the public app](https://ioanas-words.vercel.app/ro/practice). The deployed code revision is `779ac39`. Local testing remains available at `http://localhost:3000/ro/practice`. Use synthetic profiles named Alex Test and Mara Test. Keep the existing browser data; there is no need to clear it. If you use existing records, make a protected whole-app backup before restore or deletion tests.
 
-For phones and other devices, connect Tailscale to the same tailnet and open [the private HTTPS candidate](https://dariuss-macbook-pro-2.tail1ee9b4.ts.net:9443/ro/practice). This route was enabled and certificate-checked on 2026-10-19. The app still runs on this computer; keep it awake and running during testing. HTTPS supports the secure context needed for saved profiles, locking and encryption. Each browser/origin starts with its own local records. The local LAN HTTP address is unsuitable for saved-mode checks. Record the actual URL and build you test; do not treat the older public demo as this candidate.
+The public app needs no Tailscale connection. Its records are separate from localhost/Tailscale; use a protected backup for an intentional transfer. To test the local build from phones instead, connect Tailscale to the same tailnet and open [the private HTTPS candidate](https://dariuss-macbook-pro-2.tail1ee9b4.ts.net:9443/ro/practice). This route was enabled and certificate-checked on 2026-10-19. The app still runs on this computer; keep it awake and running during testing. HTTPS supports the secure context needed for saved profiles, locking and encryption. Each browser/origin starts with its own local records. The local LAN HTTP address is unsuitable for saved-mode checks. Record the actual URL and build you test; do not treat the older public demo as this candidate.
 
 The app needs a connection to open. Offline cold launch is not supported. Sound mappings are waiting for Romanian review, so overall participation works but verified sound/position totals are unavailable. That message is expected, not a zero score.
 
 ## First walkthrough
 
-1. Open [the focused guide](https://dariuss-macbook-pro-2.tail1ee9b4.ts.net:9443/ro/practice?guide=1). It should show one task page at a time, without the profile dashboard underneath.
+1. Open [the focused guide](https://ioanas-words.vercel.app/ro/practice?guide=1). It should show one task page at a time, without the profile dashboard underneath.
 2. Continue from the welcome. Create Alex Test and choose an avatar. Go back once, then continue without creating a duplicate profile.
 3. Choose an optional sound. Review the actual pictures on the starter wheel and try changing the selection. Pending Romanian review is expected.
 4. Continue to the child handover, then start. The wheel must contain exactly the pictures you reviewed.
@@ -22,7 +22,7 @@ The app needs a connection to open. Offline cold launch is not supported. Sound 
 8. Add an adult pronunciation observation. Check that the rating alone adds no medal.
 9. Create Mara Test from profiles. Prepare and save a custom wheel, then reuse that saved wheel for Alex. Their histories must stay separate.
 10. Open **Ajutor**, go back and exit with **Merg la profiluri**. Existing records remain. Reopen Help while a round is active and confirm that it offers to resume that round.
-11. Try [the introduction](http://localhost:3000/ro/about?show=1) and demo. Demo activity must remain separate.
+11. Try [the introduction](https://ioanas-words.vercel.app/ro/about?show=1) and demo. Demo activity must remain separate.
 12. Download a protected child backup, then a whole-app backup. Run the restore checks below using test data.
 
 ## Features and expected behaviour
@@ -105,4 +105,4 @@ Screenshot / recording:
 
 For the therapist walkthrough, also note where setup needed coaching, whether the child understood the next-medal bar, whether effects distracted from practice, and whether rewards encouraged rushing. Record usefulness and friction without treating the session as a clinical efficacy test.
 
-Production release follows the phone/therapist results, reviewer gate and explicit deployment request. Local automated QA does not fill those human result boxes.
+The user authorized deployment after code audit; the pilot is live. Physical-phone/therapist acceptance and Romanian review remain open. Automated QA does not fill those human result boxes.

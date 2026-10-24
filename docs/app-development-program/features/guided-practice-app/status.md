@@ -4,9 +4,13 @@ Last updated: 2026-10-24.
 
 ## Current phase
 
-GP0–GP7 implementation is complete and locally verified. GP8 adds manifest/icons; offline caching is explicitly deferred. GP9 remains: human Romanian mapping review, physical-device checks and a therapist-led usability pilot. This is a local implementation, not a deployed or clinically validated release.
+GP0–GP7 implementation is complete and locally verified. GP8 adds manifest/icons; offline caching is explicitly deferred. GP9 remains: human Romanian mapping review, physical-device checks and a therapist-led usability pilot. The pilot is now deployed at [ioanas-words.vercel.app/ro/practice](https://ioanas-words.vercel.app/ro/practice). GP9 human acceptance and clinical validation are not complete.
 
 Open `/ro/about?show=1` for the introduction, `/ro/practice` for the adult workspace, `/ro/demo` for the isolated example, or `/ro` for anonymous play. The production server is running on port 3000 after `pnpm run build` and `pnpm run start --port 3000`.
+
+## Published pilot
+
+The [release audit](release-audit-2026-10-24.md) records Astra high's four findings, their corrections and final CODEDEPLOY: APPROVE. Reviewed code `779ac39` was deployed through the existing GitHub/Vercel connection. Public-origin full practice/backup tests pass in Chrome/WebKit; onboarding/setup, routes and normal-profile Chrome installability pass too. The app can be added to a home screen, but requires a connection to open. Actual device/therapist/Romanian review remains pending.
 
 ## Wheel setup refinement
 
@@ -18,7 +22,7 @@ The [2026-10-24 redesign](onboarding-redesign.md) replaces the rejected inline g
 
 ## Acceptance handoff
 
-The user requested agent-owned local QA before their tests. The [2026-10-18 QA report](production-qa-2026-10-18.md) records Next/ESLint config 16.4.2, Sharp 0.35.5, zero production audit advisories, one unpatched lint-only finding, Romanian 404 recovery and passing build/content/domain checks, all six browser suites, 85 public routes and four invalid-route cases. The [acceptance checklist](acceptance-test-checklist.md) lists features, expected behaviour and a results template. Current status is ready for acceptance testing; Romanian review, physical phones, therapist feedback and deployed-preview verification remain. No deployment was made.
+The user requested agent-owned local QA before their tests. The [2026-10-18 QA report](production-qa-2026-10-18.md) records Next/ESLint config 16.4.2, Sharp 0.35.5, zero production audit advisories, one unpatched lint-only finding, Romanian 404 recovery and passing build/content/domain checks, all six browser suites, 85 public routes and four invalid-route cases. The [acceptance checklist](acceptance-test-checklist.md) lists features, expected behaviour and a results template. This historical checkpoint was ready for local acceptance testing. The 2026-10-24 release above completes deployed-origin verification; Romanian review, physical phones and therapist feedback remain.
 
 ## Latest rendering checks
 
@@ -57,7 +61,7 @@ The UI/copy refinement is complete and locally tested. See [ui-refinement.md](ui
 | GP6 protected backups     | Complete; both scopes, bounded encryption/validation, preview and atomic replacement                              |
 | GP7 guided entry          | Complete; responsive introduction, isolated demo, returning-adult routing and restartable guide                   |
 | GP8 installation/offline  | Manifest/icons added. Physical installation unverified; offline caching explicitly deferred                       |
-| GP9 pilot/release         | Local browser QA complete; review/device/pilot gates outstanding; no deployment                                   |
+| GP9 pilot/release         | Local and public-origin QA complete; deployed pilot; review/device/pilot acceptance outstanding                   |
 
 ## Accepted decisions
 

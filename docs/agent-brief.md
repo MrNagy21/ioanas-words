@@ -16,6 +16,8 @@ The 2026-10-18 local candidate uses Next.js/matching ESLint config 16.4.2 and Sh
 
 On 2026-10-24, the user's iPhone feedback prompted a five-page task onboarding that creates/selects the child, optionally adds a sound, previews exact pictures and starts or resumes real play. The dashboard stays hidden during setup. See the [redesign report](app-development-program/features/guided-practice-app/onboarding-redesign.md). Final Chrome/WebKit onboarding checks pass; actual phone acceptance remains pending. Help or `/ro/practice?guide=1` reopens it without clearing records.
 
+The user explicitly authorized deployment after an Astra high code audit on 2026-10-24, then asked about installation. Four persistence blockers were fixed and independently cleared in round 3. Code `779ac39` is deployed at https://ioanas-words.vercel.app/ro/practice with passing public-origin browser/storage/backup/route/installability checks. See the [release audit](app-development-program/features/guided-practice-app/release-audit-2026-10-24.md). Home-screen installation is configured and Chrome installability passes; physical-device acceptance and Romanian/therapist review remain. Offline cold launch is still deferred.
+
 Continue with the [GP9 prompt](app-development-program/features/guided-practice-app/next-implementation-prompt.md). The user accepted the sidecar structure and will arrange Romanian review. Pilot slider labels, Standard 1/5/10/20 then every 20, Frequent 1/3/5/10 then every 10, progress bar and password-protected backups are accepted and implemented. Do not silently substitute character matching for reviewed sound credit.
 
 ## Project Summary

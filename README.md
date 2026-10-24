@@ -76,6 +76,7 @@ format, `256 x 256 px` dimensions, and byte-size limits.
 
 ## Guided practice pilot
 
+The pilot is live at [ioanas-words.vercel.app/ro/practice](https://ioanas-words.vercel.app/ro/practice).
 Open `/ro/about?show=1` for the introduction, `/ro/practice` for profiles,
 `/ro/demo` for the isolated demo or `/ro` for anonymous play. The local app
 uses port 3000. Stop a running server before a production build reuses `.next`,
@@ -141,10 +142,10 @@ to reopen it without clearing existing records. See the [onboarding report](docs
 for the new phone/desktop captures and test results. Start with
 [the feature checklist](docs/app-development-program/features/guided-practice-app/acceptance-test-checklist.md)
 and use the [QA report](docs/app-development-program/features/guided-practice-app/production-qa-2026-10-18.md)
-for actual automated results, dependency audit limits and screenshots. This candidate
-uses Next.js 16.4.2; production dependency audit is clean at the recorded date.
-Romanian sound review, real-phone/therapist results and a deployed-preview check
-remain outstanding. The earlier public demo has not been updated by this work.
+for the earlier local results. The [release audit](docs/app-development-program/features/guided-practice-app/release-audit-2026-10-24.md)
+records Astra high approval, persistence fixes, zero production/full dependency advisories
+and passing public-origin Chrome/WebKit journeys. Romanian sound review and
+real-phone/therapist acceptance remain outstanding. The existing public app now serves this pilot.
 
 ## Install on a device
 
