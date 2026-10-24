@@ -1,5 +1,11 @@
 # Word Wheel V1 Specification
 
+## Current scope amendment: 2026-10-16
+
+The user has agreed the [Guided Practice App specification](app-development-program/features/guided-practice-app/spec.md). It is the current source of truth for local profiles/goals, reusable adult configurations, goal preview, persistent participation history, adult-entered pronunciation-quality observations, rewards, backup/restore, public introduction/demo, and onboarding. The [implementation plan](app-development-program/features/guided-practice-app/plan.md) has GP0–GP7 implemented and locally verified. GP8 has manifest/icons with offline deferred; GP9 review/device/pilot gates remain. See the [implementation report](app-development-program/features/guided-practice-app/implementation-report.md).
+
+That package supersedes this original specification's no-landing-page and no-local-progress-screen restrictions, and replaces session-only tracking for the new profile-based mode. Browser-local records are permitted; public exercise content remains static, with no hosted database or account requirement. Normal child play remains viewport-contained, while adult management and introductory pages may scroll. The source and release history below remain useful for the existing wheel.
+
 ## Purpose
 
 Word Wheel is a mobile-first pronunciation and vocabulary exercise web app for young children. The first version teaches Romanian words by letting a child choose a starting letter, spin a wheel of words that begin with that letter, and react to the selected word with a large image and label.

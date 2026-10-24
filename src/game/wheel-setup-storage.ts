@@ -203,6 +203,33 @@ function parseWheelSetupStore(value: unknown): WheelSetupStore {
   };
 }
 
+// Migration must not use the legacy loader's forgiving empty-store fallback.
+export function parseWheelSetupStoreForMigration(value: unknown) {
+  if (
+    !isPlainObject(value) ||
+    !isSupportedSchemaVersion(value.schemaVersion) ||
+    !isPlainObject(value.activeConfigsByTargetKey) ||
+    !Array.isArray(value.savedSetups)
+  ) {
+    throw new Error(
+      "Configurațiile existente nu au un format acceptat. Datele au fost păstrate.",
+    );
+  }
+  const parsed = parseWheelSetupStore(value);
+  if (
+    parsed.savedSetups.length !== value.savedSetups.length ||
+    Object.keys(parsed.activeConfigsByTargetKey).length !==
+      Object.keys(value.activeConfigsByTargetKey).length ||
+    new Set(parsed.savedSetups.map((setup) => setup.id)).size !==
+      parsed.savedSetups.length
+  ) {
+    throw new Error(
+      "O configurație existentă nu poate fi citită. Datele au fost păstrate.",
+    );
+  }
+  return parsed;
+}
+
 function parseActiveConfigs(value: unknown) {
   if (!isPlainObject(value)) {
     return {};

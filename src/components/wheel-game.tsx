@@ -55,7 +55,19 @@ import type { SupportedLocale } from "@/i18n/locales";
 type WheelGameProps = Readonly<{
   locale: SupportedLocale;
   content: GameplayContent;
+  practice?: TrackedWheelControl;
+  temporary?: boolean;
 }>;
+
+export type TrackedWheelControl = {
+  words: ContentWord[];
+  childLabel: string;
+  progress: { current: number; next: number; previous: number };
+  onShown: (word: ContentWord) => Promise<void>;
+  onClose: (reason: "keep" | "remove") => Promise<void>;
+  onEnd: () => void;
+  onExit?: () => void;
+};
 
 type WheelSegment = Readonly<{
   word: ContentWord;
@@ -129,17 +141,36 @@ const segmentColors = [
   "#82d6a3",
 ] as const;
 
-export function WheelGame({ content, locale }: WheelGameProps) {
+export function WheelGame({
+  content,
+  locale,
+  practice,
+  temporary = false,
+}: WheelGameProps) {
   return (
     <WheelGameSession
       content={content}
-      key={getTargetStorageKey(locale, content.target)}
+      key={`${getTargetStorageKey(locale, content.target)}${temporary ? ":temporary" : ""}`}
       locale={locale}
+      practice={practice}
+      temporary={temporary}
     />
   );
 }
 
-function WheelGameSession({ content, locale }: WheelGameProps) {
+function WheelGameSession({
+  content,
+  locale,
+  practice,
+  temporary = false,
+}: WheelGameProps) {
+  const practiceRef = useRef(practice);
+  const practiceOperation = useRef(false);
+  const [practiceSaving, setPracticeSaving] = useState(false);
+  const [practiceError, setPracticeError] = useState<string | null>(null);
+  useEffect(() => {
+    practiceRef.current = practice;
+  }, [practice]);
   const defaultMode = isPracticeTarget(content.target)
     ? "starts-with-or-contains"
     : DEFAULT_WORD_INCLUSION_MODE;
@@ -307,7 +338,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     () => getWordsByVisibleIds(activeWords, visibleWordIds),
     [activeWords, visibleWordIds],
   );
-  const words = visibleWordsFromIds;
+  const words = practice?.words ?? visibleWordsFromIds;
   const replacementWords = useMemo(
     () =>
       getOffWheelWords({
@@ -348,7 +379,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     visibleWordCount: words.length,
   });
   const isInteractionBlocked =
-    !isHydrated || isSpinning || isResultOpen || isSetupOpen;
+    !isHydrated || isSpinning || isResultOpen || isSetupOpen || practiceSaving;
   const wheelRotation = isFinalWord && !isSpinning ? 0 : rotation;
   const returnFocusToGame = useCallback(() => {
     window.requestAnimationFrame(() => {
@@ -384,6 +415,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     const hydrateTimer = window.setTimeout(() => {
       hasHydrated.current = true;
       setIsHydrated(true);
+      if (practiceRef.current || temporary) return;
       setSavedSetups(getSavedWheelSetupsForTarget(targetStorageKey));
 
       const activeConfig = getActiveWheelSetup(targetStorageKey);
@@ -421,7 +453,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     return () => {
       window.clearTimeout(hydrateTimer);
     };
-  }, [content, locale, targetStorageKey]);
+  }, [content, locale, targetStorageKey, temporary]);
 
   useEffect(() => {
     const randomizeTimer = window.setTimeout(() => {
@@ -462,6 +494,23 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
   function openResultForWord(word: ContentWord) {
     setSelectedWord(word);
     setIsResultOpen(true);
+    if (practiceRef.current) {
+      practiceOperation.current = true;
+      setPracticeSaving(true);
+      void practiceRef.current
+        .onShown(word)
+        .catch((error) =>
+          setPracticeError(
+            error instanceof Error
+              ? error.message
+              : "Nu putem salva cuvântul. Încercați din nou.",
+          ),
+        )
+        .finally(() => {
+          practiceOperation.current = false;
+          setPracticeSaving(false);
+        });
+    }
   }
 
   function stopFinalWordSpin() {
@@ -533,6 +582,38 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
   }
 
   const closeResult = useCallback(() => {
+    if (practiceRef.current) {
+      if (practiceOperation.current) return;
+      practiceOperation.current = true;
+      setPracticeSaving(true);
+      setPracticeError(null);
+      void practiceRef.current
+        .onClose("keep")
+        .then(() => {
+          setIsResultOpen(false);
+          setIsSpinning(false);
+          if (spinTimer.current !== null) {
+            window.clearTimeout(spinTimer.current);
+            spinTimer.current = null;
+          }
+          if (finalWordResultTimer.current !== null) {
+            window.clearTimeout(finalWordResultTimer.current);
+            finalWordResultTimer.current = null;
+          }
+        })
+        .catch((error) =>
+          setPracticeError(
+            error instanceof Error
+              ? error.message
+              : "Salvarea nu a reușit. Încercați din nou.",
+          ),
+        )
+        .finally(() => {
+          practiceOperation.current = false;
+          setPracticeSaving(false);
+        });
+      return;
+    }
     setIsResultOpen(false);
   }, []);
 
@@ -652,7 +733,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
     setSelectedWord(null);
     setIsSetupOpen(false);
     setIsResultOpen(false);
-    saveActiveWheelSetup(targetStorageKey, nextConfig);
+    if (!temporary) saveActiveWheelSetup(targetStorageKey, nextConfig);
   }
 
   function loadSavedSetup(setup: SavedWheelSetup) {
@@ -676,6 +757,7 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
   }
 
   function saveDraftSetup(name: string) {
+    if (temporary) return;
     const trimmedName = name.trim();
 
     if (!trimmedName || draftAvailableWordCount === 0) {
@@ -711,12 +793,38 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
   }
 
   function deleteDraftSetup(setupId: string) {
+    if (temporary) return;
     deleteSavedWheelSetup(setupId);
     setSavedSetups(getSavedWheelSetupsForTarget(targetStorageKey));
   }
 
   function removeSelectedWord() {
     if (!selectedWord) {
+      return;
+    }
+    if (practiceRef.current) {
+      if (practiceOperation.current) return;
+      practiceOperation.current = true;
+      setPracticeSaving(true);
+      setPracticeError(null);
+      void practiceRef.current
+        .onClose("remove")
+        .then(() => {
+          stopFinalWordSpin();
+          setSelectedWord(null);
+          setIsResultOpen(false);
+        })
+        .catch((error) =>
+          setPracticeError(
+            error instanceof Error
+              ? error.message
+              : "Salvarea nu a reușit. Încercați din nou.",
+          ),
+        )
+        .finally(() => {
+          practiceOperation.current = false;
+          setPracticeSaving(false);
+        });
       return;
     }
 
@@ -809,9 +917,26 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
       aria-labelledby="game-title"
     >
       <div className="game-topline">
-        <Link className="quiet-link" href={`/${locale}`}>
-          Schimbă alegerea
-        </Link>
+        {practice ? (
+          <strong className="tracked-child-label">{practice.childLabel}</strong>
+        ) : (
+          <Link className="quiet-link" href={`/${locale}`}>
+            {temporary ? "Fără salvare · Schimbă" : "Schimbă alegerea"}
+          </Link>
+        )}
+        {practice && (
+          <div className="tracked-progress">
+            <label htmlFor="next-medal">
+              {practice.progress.current} / {practice.progress.next} ·
+              următoarea medalie
+            </label>
+            <progress
+              id="next-medal"
+              value={practice.progress.current - practice.progress.previous}
+              max={practice.progress.next - practice.progress.previous}
+            />
+          </div>
+        )}
         <div className="selected-letter" aria-label="Alegerea curentă">
           {content.target.label}
         </div>
@@ -1012,10 +1137,10 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
               <strong>{words.length}</strong>
               <span>
                 {getWordCountLabel(words.length)} pe roată
-                {activeWords.length !== words.length
+                {!practice && activeWords.length !== words.length
                   ? ` din ${activeWords.length}`
                   : ""}
-                {activeWords.length !== words.length
+                {!practice && activeWords.length !== words.length
                   ? wordSelectionMode === "custom"
                     ? ` ${getSelectedWordStatusLabel(activeWords.length)}`
                     : ` ${activeWords.length === 1 ? "disponibil" : "disponibile"}`
@@ -1050,26 +1175,39 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
 
       {hasWords ? (
         <div className="game-actions" aria-label="Comenzi joc">
-          <Link
-            className="secondary-button"
-            aria-disabled={isInteractionBlocked}
-            href={setupHref}
-            onClick={(event) => {
-              if (isInteractionBlocked) {
-                event.preventDefault();
-              }
-            }}
-          >
-            Setează
-          </Link>
-          <button
-            className="secondary-button"
-            disabled={removedWordCount === 0 || isInteractionBlocked}
-            onClick={resetCurrentLetter}
-            type="button"
-          >
-            Resetează
-          </button>
+          {practice ? (
+            <button
+              className="secondary-button"
+              disabled={isInteractionBlocked}
+              onClick={practice.onEnd}
+              type="button"
+            >
+              Încheie exersarea
+            </button>
+          ) : (
+            <>
+              <Link
+                className="secondary-button"
+                aria-disabled={isInteractionBlocked}
+                href={setupHref}
+                onClick={(event) => {
+                  if (isInteractionBlocked) {
+                    event.preventDefault();
+                  }
+                }}
+              >
+                Setează
+              </Link>
+              <button
+                className="secondary-button"
+                disabled={removedWordCount === 0 || isInteractionBlocked}
+                onClick={resetCurrentLetter}
+                type="button"
+              >
+                Resetează
+              </button>
+            </>
+          )}
           {!isFinalWord ? (
             <button
               className="spin-button"
@@ -1090,11 +1228,15 @@ function WheelGameSession({ content, locale }: WheelGameProps) {
           onRemove={removeSelectedWord}
           onReplace={replaceSelectedWord}
           replacementWordCount={replacementWords.length}
+          busy={practiceSaving}
+          savingError={practiceError}
+          hideReplace={!!practice}
+          onAbortPractice={practice?.onExit}
           word={selectedWord}
         />
       ) : null}
 
-      {isSetupOpen ? (
+      {isSetupOpen && !temporary ? (
         <SetupModal
           availableWordCount={draftAvailableWordCount}
           boundedWordCount={boundedDraftWordCount}
@@ -1134,6 +1276,10 @@ function ResultModal({
   onReplace,
   replacementWordCount,
   word,
+  busy = false,
+  savingError,
+  hideReplace = false,
+  onAbortPractice,
 }: Readonly<{
   onClose: () => void;
   onReturnFocus: () => void;
@@ -1141,13 +1287,18 @@ function ResultModal({
   onReplace: () => void;
   replacementWordCount: number;
   word: ContentWord;
+  busy?: boolean;
+  savingError?: string | null;
+  hideReplace?: boolean;
+  onAbortPractice?: () => void;
 }>) {
   const modalRef = useRef<HTMLElement | null>(null);
   const primaryActionRef = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    if (!busy) primaryActionRef.current?.focus();
+  }, [busy]);
 
   useEffect(() => {
-    primaryActionRef.current?.focus();
-
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
@@ -1217,19 +1368,39 @@ function ResultModal({
         </div>
         <p className="stage-label">Cuvântul ales</p>
         <h2 id="result-title">{word.display}</h2>
+        {savingError ? (
+          <p className="practice-result-error" role="alert">
+            {savingError} Apăsați din nou acțiunea pentru a reîncerca.
+          </p>
+        ) : null}
+        {savingError && onAbortPractice ? (
+          <button
+            className="secondary-button"
+            type="button"
+            onClick={onAbortPractice}
+          >
+            Înapoi la profil
+          </button>
+        ) : null}
         <div className="result-modal__actions" aria-label="Comenzi rezultat">
           <button
             className="spin-button"
             onClick={onClose}
             ref={primaryActionRef}
             type="button"
+            disabled={busy}
           >
             Păstrează
           </button>
-          <button className="secondary-button" onClick={onRemove} type="button">
+          <button
+            className="secondary-button"
+            onClick={onRemove}
+            type="button"
+            disabled={busy}
+          >
             Scoate din roată
           </button>
-          {replacementWordCount > 0 ? (
+          {!hideReplace && replacementWordCount > 0 ? (
             <button
               aria-label={`Înlocuiește cu un cuvânt aleatoriu. ${replacementWordCount} ${getWordCountLabel(replacementWordCount)} ${replacementWordCount === 1 ? "disponibil" : "disponibile"}`}
               className="secondary-button"
@@ -1242,6 +1413,7 @@ function ResultModal({
         </div>
         <button
           aria-label="Închide rezultatul"
+          disabled={busy}
           className="result-modal__close"
           onClick={onClose}
           type="button"

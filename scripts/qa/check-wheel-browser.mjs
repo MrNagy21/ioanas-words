@@ -1,16 +1,11 @@
+import { launchQABrowser } from "./browser-runtime.mjs";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { createRequire } from "node:module";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-const require = createRequire(import.meta.url);
-// Use a local Playwright install, or the desktop app's bundled package.
-const { chromium } = require(
-  process.env.WORD_WHEEL_PLAYWRIGHT_PATH || "playwright",
-);
 const repo = fileURLToPath(new URL("../../", import.meta.url));
 const output = await mkdtemp(path.join(tmpdir(), "word-wheel-qa-"));
 const errors = [];
@@ -53,7 +48,7 @@ try {
     path.join(output, "index.html"),
     `<!doctype html><html lang="ro"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${await readFile(path.join(repo, "app/globals.css"), "utf8")}</style><div id="root"></div><script>window.process = { env: {} };</script><script src="fixture.js"></script></html>`,
   );
-  browser = await chromium.launch({ headless: true, channel: "chrome" });
+  browser = await launchQABrowser();
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   page.on("pageerror", (error) => {

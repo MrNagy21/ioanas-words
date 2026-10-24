@@ -1,5 +1,11 @@
 # Roadmap
 
+## Active next work: guided practice app
+
+The product interview completed on 2026-10-16 moves the next app work to [Guided Practice App](features/guided-practice-app/spec.md). Follow its [GP0–GP9 plan](features/guided-practice-app/plan.md) and [status](features/guided-practice-app/status.md). Local profiles/goals, durable participation, reward/history/backup and guided entry are implemented. Continue GP9 mapping review, physical devices and therapist pilot. GP8 offline caching is deferred. The new public landing page and adult progress screens are explicit scope additions; hosted storage, accounts, billing, and AI scoring remain excluded.
+
+The content/inventory order below describes the earlier program, much of which is implemented. Retain it as content-architecture history, not the current next-task list. Reviewed goal-to-word/position mappings are part of the new plan; more vocabulary is not an automatic prerequisite.
+
 This roadmap supersedes the older "Future Batch: Expanded Content And Letter Inclusion Modes" ordering in spirit, without deleting the original plan history. The main change is that a public content inventory should come before the large Romanian content expansion.
 
 ## Recommended Order

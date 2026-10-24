@@ -2,6 +2,8 @@
 
 This package captures the agreed development trajectory after the Romanian pilot deployment. It is intended as the first place an agent should read when creating detailed specs for the next implementation batches.
 
+The active next program, agreed on 2026-10-16, is [Guided Practice App](features/guided-practice-app/spec.md). Its [plan](features/guided-practice-app/plan.md) and [status](features/guided-practice-app/status.md) take precedence over the original content-first ordering below. It adds the local adult/child app journey, rewards, backups, and onboarding around the existing game.
+
 The goal is to move from the current pilot to a scalable Romanian content and gameplay foundation without duplicating word records, breaking the static-first architecture, or adding v1 systems that are explicitly out of scope.
 
 ## Reading Order
@@ -31,6 +33,7 @@ Each feature folder should include:
 
 Current packages:
 
+- `features/guided-practice-app/` — active program, GP0–GP7 locally implemented; GP9 review/device/pilot gates remain.
 - `features/admin-words-inventory/`
 - `features/locale-wide-content-refactor/`
 - `features/gameplay-inclusion-mode-selector/`

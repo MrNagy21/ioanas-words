@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { WheelGame } from "@/components/wheel-game";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -45,10 +46,14 @@ import {
   type WheelWordSelectionMode,
 } from "@/game/wheel-setup-storage";
 import type { SupportedLocale } from "@/i18n/locales";
+import { acquireConfigurationLock } from "@/storage/session-lock";
+import { initializePracticeStoreWithConfigurationLockHeld } from "@/storage/practice-store";
 
 type WheelSetupScreenProps = Readonly<{
   locale: SupportedLocale;
   content: GameplayContent;
+  onPrepare?: (config: WheelSetupConfig) => void;
+  initialConfig?: WheelSetupConfig;
 }>;
 
 type SetupScreenMode = "chooser" | "editor";
@@ -97,7 +102,7 @@ const setupWizardSteps = [
     id: "finish",
     number: 4,
     label: "Final",
-    title: "Alege numărul",
+    title: "Pregătește roata",
   },
 ] as const satisfies readonly {
   id: SetupWizardStep;
@@ -106,18 +111,28 @@ const setupWizardSteps = [
   title: string;
 }[];
 
-export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
+export function WheelSetupScreen({
+  content,
+  locale,
+  onPrepare,
+  initialConfig,
+}: WheelSetupScreenProps) {
   const router = useRouter();
   const targetKindLabel = getTargetKindLabel(content.target);
   const targetLabel = content.target.label;
   const routeSegment = getTargetRouteSegment(locale, content.target);
   const playHref = `/${locale}/play/${routeSegment}`;
   const targetStorageKey = getTargetStorageKey(locale, content.target);
-  const defaultConfig = useMemo(
-    () => createDefaultWheelSetupConfig({ content, locale }),
-    [content, locale],
-  );
+  const isPracticeSetup = !!onPrepare;
+  const defaultConfig = useMemo(() => {
+    const config = createDefaultWheelSetupConfig({ content, locale });
+    return isPracticeSetup
+      ? { ...config, wheelWordCount: Math.min(8, config.wheelWordCount) }
+      : config;
+  }, [content, locale, isPracticeSetup]);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [storageError, setStorageError] = useState<string | null>(null);
+  const [temporaryPlay, setTemporaryPlay] = useState(false);
   const [screenMode, setScreenMode] = useState<SetupScreenMode>("editor");
   const [savedSetups, setSavedSetups] = useState<readonly SavedWheelSetup[]>(
     [],
@@ -132,6 +147,7 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
   });
   const [saveName, setSaveName] = useState("");
   const [saveFeedback, setSaveFeedback] = useState<SaveFeedback>(null);
+  const [writeError, setWriteError] = useState<string | null>(null);
   const [pendingDeleteSetup, setPendingDeleteSetup] =
     useState<SavedWheelSetup | null>(null);
   const modeWordCounts = useMemo(
@@ -206,52 +222,92 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
       !areSetupConfigsEqual(draftConfig, editorContext.originalConfig));
 
   useEffect(() => {
-    const hydrateTimer = window.setTimeout(() => {
-      const saved = getSavedWheelSetupsForTarget(targetStorageKey);
-      const activeConfig = getActiveWheelSetup(targetStorageKey);
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      const isFromPlay = urlSearchParams.get("from") === "play";
-      const activeDraft =
-        isFromPlay && activeConfig
-          ? resolveWheelSetupConfig({ config: activeConfig, content, locale })
-          : null;
-      const matchingSavedSetup = activeDraft
-        ? saved.find((setup) => areSetupConfigsEqual(setup.config, activeDraft))
-        : null;
-      const initialDraft = activeDraft ?? defaultConfig;
-      const initialEditorContext: SetupEditorContext = matchingSavedSetup
-        ? {
-            kind: "editing-saved",
-            setupId: matchingSavedSetup.id,
-            originalName: matchingSavedSetup.name,
-            originalConfig: resolveWheelSetupConfig({
-              config: matchingSavedSetup.config,
-              content,
-              locale,
-            }),
+    const controller = new AbortController();
+    let release: (() => void) | undefined;
+    let initializing = false;
+    let live = true;
+    void acquireConfigurationLock(controller.signal)
+      .then(async (acquired) => {
+        release = acquired.release;
+        if (!live) {
+          release();
+          return;
+        }
+        initializing = true;
+        try {
+          await initializePracticeStoreWithConfigurationLockHeld();
+        } finally {
+          initializing = false;
+          if (!live) {
+            release();
+            controller.abort();
           }
-        : activeDraft
-          ? { kind: "active", originalConfig: activeDraft }
-          : { kind: "new" };
+        }
+        if (!live) return;
+        const saved = getSavedWheelSetupsForTarget(targetStorageKey);
+        const activeConfig = getActiveWheelSetup(targetStorageKey);
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const isFromPlay =
+          !!initialConfig || urlSearchParams.get("from") === "play";
+        const activeDraft = initialConfig
+          ? resolveWheelSetupConfig({ config: initialConfig, content, locale })
+          : isFromPlay && activeConfig
+            ? resolveWheelSetupConfig({ config: activeConfig, content, locale })
+            : null;
+        const matchingSavedSetup = activeDraft
+          ? saved.find((setup) =>
+              areSetupConfigsEqual(setup.config, activeDraft),
+            )
+          : null;
+        const initialDraft = activeDraft ?? defaultConfig;
+        const initialEditorContext: SetupEditorContext = matchingSavedSetup
+          ? {
+              kind: "editing-saved",
+              setupId: matchingSavedSetup.id,
+              originalName: matchingSavedSetup.name,
+              originalConfig: resolveWheelSetupConfig({
+                config: matchingSavedSetup.config,
+                content,
+                locale,
+              }),
+            }
+          : activeDraft
+            ? { kind: "active", originalConfig: activeDraft }
+            : { kind: "new" };
 
-      setSavedSetups(saved);
-      setDraftConfig(initialDraft);
-      setEditorContext(initialEditorContext);
-      setSaveName(matchingSavedSetup?.name ?? "");
-      setSaveFeedback(null);
-      setScreenMode(!isFromPlay && saved.length > 0 ? "chooser" : "editor");
-      setSelectedChoice(
-        matchingSavedSetup
-          ? { kind: "saved", setupId: matchingSavedSetup.id }
-          : { kind: "default" },
-      );
-      setIsHydrated(true);
-    }, 0);
+        setSavedSetups(saved);
+        setDraftConfig(initialDraft);
+        setEditorContext(initialEditorContext);
+        setSaveName(matchingSavedSetup?.name ?? "");
+        setSaveFeedback(null);
+        setScreenMode(!isFromPlay && saved.length > 0 ? "chooser" : "editor");
+        setSelectedChoice(
+          matchingSavedSetup
+            ? { kind: "saved", setupId: matchingSavedSetup.id }
+            : { kind: "default" },
+        );
+        setIsHydrated(true);
+      })
+      .catch((error) => {
+        release?.();
+        if (live)
+          setStorageError(
+            error instanceof Error
+              ? error.message
+              : "Nu putem deschide roțile salvate.",
+          );
+      });
 
     return () => {
-      window.clearTimeout(hydrateTimer);
+      live = false;
+      // Aborting an acquired Web Lock releases it too. An in-flight read must
+      // settle before either release path can let another restore/edit enter.
+      if (!initializing) {
+        controller.abort();
+        release?.();
+      }
     };
-  }, [content, defaultConfig, locale, targetStorageKey]);
+  }, [content, defaultConfig, locale, targetStorageKey, initialConfig]);
 
   function refreshSavedSetups() {
     const saved = getSavedWheelSetupsForTarget(targetStorageKey);
@@ -270,8 +326,21 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
   function applyConfig(config: WheelSetupConfig) {
     const nextConfig = normalizeDraftConfig(config);
 
-    saveActiveWheelSetup(targetStorageKey, nextConfig);
+    try {
+      saveActiveWheelSetup(targetStorageKey, nextConfig);
+    } catch {
+      setWriteError(
+        "Nu am putut pregăti roata. Alegerile tale sunt păstrate aici. Verifică spațiul și permisiunile browserului, apoi apasă din nou Pornește roata.",
+      );
+      return false;
+    }
+    setWriteError(null);
+    if (onPrepare) {
+      onPrepare(nextConfig);
+      return true;
+    }
     router.push(playHref);
+    return true;
   }
 
   function startSelectedChoice() {
@@ -348,11 +417,18 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
       return;
     }
 
-    deleteSavedWheelSetup(pendingDeleteSetup.id);
-    setSaveFeedback(null);
-    setPendingDeleteSetup(null);
-    setSelectedChoice({ kind: "default" });
-    refreshSavedSetups();
+    try {
+      deleteSavedWheelSetup(pendingDeleteSetup.id);
+      setWriteError(null);
+      setSaveFeedback(null);
+      setPendingDeleteSetup(null);
+      setSelectedChoice({ kind: "default" });
+      refreshSavedSetups();
+    } catch {
+      setWriteError(
+        "Nu am putut șterge roata. Datele sunt păstrate. Verifică spațiul și permisiunile browserului, apoi încearcă din nou.",
+      );
+    }
   }
 
   function updateDraftMode(nextMode: WordInclusionMode) {
@@ -438,8 +514,7 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
       mode: draftConfig.mode,
       wordIds,
     });
-    const nextWordSelectionMode =
-      nextWordIds.length > 0 ? "custom" : "all";
+    const nextWordSelectionMode = nextWordIds.length > 0 ? "custom" : "all";
     const nextAvailableWordCount =
       nextWordSelectionMode === "custom"
         ? nextWordIds.length
@@ -490,109 +565,146 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
     action: "save-as-new" | "update-existing";
     startAfterSave?: boolean;
   }) {
-    const trimmedName = formatSavedSetupName(saveName);
+    setWriteError(null);
+    try {
+      const trimmedName = formatSavedSetupName(saveName);
 
-    if (!trimmedName || !canStart) {
-      return;
-    }
-
-    const config = normalizeDraftConfig(draftConfig);
-
-    setSaveName(trimmedName);
-
-    if (action === "update-existing") {
-      if (editorContext.kind !== "editing-saved") {
+      if (!trimmedName || !canStart) {
         return;
       }
 
-      if (
-        isSavedWheelSetupNameTaken({
-          excludeSetupId: editorContext.setupId,
+      const config = normalizeDraftConfig(draftConfig);
+
+      setSaveName(trimmedName);
+
+      if (action === "update-existing") {
+        if (editorContext.kind !== "editing-saved") {
+          return;
+        }
+
+        if (
+          isSavedWheelSetupNameTaken({
+            excludeSetupId: editorContext.setupId,
+            name: trimmedName,
+            targetKey: targetStorageKey,
+          })
+        ) {
+          setSaveFeedback({
+            kind: "error",
+            message: "Există deja o configurație cu acest nume.",
+          });
+          return;
+        }
+
+        const updatedSetup = updateSavedWheelSetup(editorContext.setupId, {
+          config,
+          name: trimmedName,
+        });
+
+        if (!updatedSetup) {
+          refreshSavedSetups();
+          setSaveFeedback({
+            kind: "error",
+            message: "Configurația salvată nu mai există.",
+          });
+          return;
+        }
+
+        setEditorContext({
+          kind: "editing-saved",
+          setupId: updatedSetup.id,
+          originalName: updatedSetup.name,
+          originalConfig: normalizeDraftConfig(updatedSetup.config),
+        });
+        setSelectedChoice({ kind: "saved", setupId: updatedSetup.id });
+        setSaveFeedback({
+          kind: "success",
+          message: "Modificările au fost salvate.",
+        });
+      } else {
+        if (
+          isSavedWheelSetupNameTaken({
+            name: trimmedName,
+            targetKey: targetStorageKey,
+          })
+        ) {
+          setSaveFeedback({
+            kind: "error",
+            message: "Există deja o configurație cu acest nume.",
+          });
+          return;
+        }
+
+        const savedSetup = createSavedWheelSetup({
+          config,
           name: trimmedName,
           targetKey: targetStorageKey,
-        })
-      ) {
-        setSaveFeedback({
-          kind: "error",
-          message: "Există deja o configurație cu acest nume.",
         });
-        return;
+
+        setEditorContext({
+          kind: "editing-saved",
+          setupId: savedSetup.id,
+          originalName: savedSetup.name,
+          originalConfig: normalizeDraftConfig(savedSetup.config),
+        });
+        setSelectedChoice({ kind: "saved", setupId: savedSetup.id });
+        setSaveFeedback({
+          kind: "success",
+          message: `Configurația „${savedSetup.name}” a fost salvată.`,
+        });
       }
 
-      const updatedSetup = updateSavedWheelSetup(editorContext.setupId, {
-        config,
-        name: trimmedName,
-      });
+      refreshSavedSetups();
 
-      if (!updatedSetup) {
-        refreshSavedSetups();
-        setSaveFeedback({
-          kind: "error",
-          message: "Configurația salvată nu mai există.",
-        });
-        return;
+      if (startAfterSave && !applyConfig(config)) {
+        setWriteError(
+          "Roata a fost salvată, dar nu am putut pregăti jocul. Verifică spațiul și permisiunile browserului, apoi apasă Pornește roata. Nu trebuie să o salvezi din nou.",
+        );
       }
-
-      setEditorContext({
-        kind: "editing-saved",
-        setupId: updatedSetup.id,
-        originalName: updatedSetup.name,
-        originalConfig: normalizeDraftConfig(updatedSetup.config),
-      });
-      setSelectedChoice({ kind: "saved", setupId: updatedSetup.id });
-      setSaveFeedback({
-        kind: "success",
-        message: "Modificările au fost salvate.",
-      });
-    } else {
-      if (
-        isSavedWheelSetupNameTaken({
-          name: trimmedName,
-          targetKey: targetStorageKey,
-        })
-      ) {
-        setSaveFeedback({
-          kind: "error",
-          message: "Există deja o configurație cu acest nume.",
-        });
-        return;
-      }
-
-      const savedSetup = createSavedWheelSetup({
-        config,
-        name: trimmedName,
-        targetKey: targetStorageKey,
-      });
-
-      setEditorContext({
-        kind: "editing-saved",
-        setupId: savedSetup.id,
-        originalName: savedSetup.name,
-        originalConfig: normalizeDraftConfig(savedSetup.config),
-      });
-      setSelectedChoice({ kind: "saved", setupId: savedSetup.id });
-      setSaveFeedback({
-        kind: "success",
-        message: `Configurația „${savedSetup.name}” a fost salvată.`,
-      });
-    }
-
-    refreshSavedSetups();
-
-    if (startAfterSave) {
-      applyConfig(config);
+    } catch {
+      const message =
+        "Nu am putut salva roata. Alegerile și numele rămân aici. Verifică spațiul și permisiunile browserului, apoi apasă din nou butonul de salvare.";
+      setWriteError(message);
+      setSaveFeedback({ kind: "error", message });
     }
   }
 
+  if (temporaryPlay)
+    return <WheelGame content={content} locale={locale} temporary />;
+  if (storageError)
+    return (
+      <section className="app-stage setup-storage-error" role="alert">
+        <h2>Nu putem deschide roțile salvate</h2>
+        <p>{storageError}</p>
+        <p>
+          Puteți folosi o roată de bază, fără profil și fără salvare. Datele și
+          roțile existente nu vor fi schimbate.
+        </p>
+        <button
+          className="spin-button"
+          type="button"
+          onClick={() => setTemporaryPlay(true)}
+        >
+          Joacă fără salvare
+        </button>
+        <a className="secondary-button" href={`/${locale}`}>
+          Înapoi la joc
+        </a>
+      </section>
+    );
   return (
     <section className="app-stage setup-stage" aria-labelledby="setup-title">
       <div className="setup-workspace">
         {screenMode === "chooser" ? (
           <ConfigurationChooser
+            writeError={writeError}
             defaultConfig={defaultConfig}
             isHydrated={isHydrated}
             onCreateNew={createNewSetup}
-            onDeleteSetup={setPendingDeleteSetup}
+            onDeleteSetup={(setup) => {
+              setWriteError(null);
+              setPendingDeleteSetup(setup);
+            }}
             onEditSelected={editSelectedChoice}
             onLoadSavedSetup={loadSavedSetup}
             onSelectChoice={setSelectedChoice}
@@ -605,6 +717,7 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
           />
         ) : (
           <SetupEditor
+            writeError={writeError}
             activeModeOption={activeModeOption}
             availableWordCount={availableWordCount}
             baseModeWordCounts={baseModeWordCounts}
@@ -648,6 +761,7 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
 
       {pendingDeleteSetup ? (
         <DeleteSetupConfirmation
+          writeError={writeError}
           onCancel={() => setPendingDeleteSetup(null)}
           onConfirm={confirmDeleteSetup}
           setup={pendingDeleteSetup}
@@ -658,6 +772,7 @@ export function WheelSetupScreen({ content, locale }: WheelSetupScreenProps) {
 }
 
 function ConfigurationChooser({
+  writeError,
   defaultConfig,
   isHydrated,
   onCreateNew,
@@ -669,9 +784,9 @@ function ConfigurationChooser({
   locale,
   savedSetups,
   selectedChoice,
-  targetKindLabel,
   targetLabel,
 }: Readonly<{
+  writeError: string | null;
   defaultConfig: WheelSetupConfig;
   isHydrated: boolean;
   onCreateNew: () => void;
@@ -691,10 +806,7 @@ function ConfigurationChooser({
   return (
     <section className="setup-chooser" aria-label="Configurații salvate">
       <div className="setup-page-title">
-        <p className="stage-label">
-          {targetKindLabel} {targetLabel}
-        </p>
-        <h2 id="setup-title">Configurații salvate</h2>
+        <h2 id="setup-title">Configurații salvate pentru {targetLabel}</h2>
       </div>
 
       <div className="setup-choice-list">
@@ -749,6 +861,11 @@ function ConfigurationChooser({
       </div>
 
       <div className="setup-chooser__actions" aria-label="Acțiuni configurare">
+        {writeError && (
+          <p className="setup-write-error" role="alert">
+            {writeError}
+          </p>
+        )}
         <button
           className="secondary-button setup-chooser__action setup-chooser__action--edit"
           onClick={onEditSelected}
@@ -781,6 +898,7 @@ function ConfigurationChooser({
 }
 
 function SetupEditor({
+  writeError,
   activeModeOption,
   availableWordCount,
   baseModeWordCounts,
@@ -810,10 +928,10 @@ function SetupEditor({
   saveName,
   saveFeedback,
   selectedWords,
-  targetKindLabel,
   targetLabel,
   words,
 }: Readonly<{
+  writeError: string | null;
   activeModeOption: ReturnType<typeof getModeOption>;
   availableWordCount: number;
   baseModeWordCounts: Record<WordInclusionMode, number>;
@@ -925,6 +1043,9 @@ function SetupEditor({
   useEffect(() => {
     cardBodyRef.current?.scrollTo({ left: 0, top: 0 });
   }, [activeStep]);
+  useEffect(() => {
+    if (writeError) cardBodyRef.current?.scrollTo({ left: 0, top: 0 });
+  }, [writeError]);
 
   function goToNextStep() {
     if (activeStep === "rules") {
@@ -959,10 +1080,7 @@ function SetupEditor({
   }
 
   function selectStep(step: SetupWizardStep) {
-    if (
-      isBlockedByExclusions &&
-      (step === "words" || step === "finish")
-    ) {
+    if (isBlockedByExclusions && (step === "words" || step === "finish")) {
       return;
     }
 
@@ -986,10 +1104,7 @@ function SetupEditor({
       <aside className="setup-wizard-rail" aria-label="Pași configurare">
         <div className="setup-wizard-rail__header">
           <div className="setup-page-title">
-            <p className="stage-label">
-              {targetKindLabel} {targetLabel}
-            </p>
-            <h2 id="setup-title">Setează roata</h2>
+            <h2 id="setup-title">Setează roata {targetLabel}</h2>
             <p className="setup-editor-context-label">{editorContextLabel}</p>
           </div>
           {onBackToChooser ? (
@@ -1033,10 +1148,14 @@ function SetupEditor({
         </div>
 
         <div className="setup-rail-summary" aria-label="Rezumat configurare">
-          <span>{activeModeOption.statusLabel} {targetLabel}</span>
+          <span>
+            {activeModeOption.statusLabel} {targetLabel}
+          </span>
           <strong>
             {canStart ? boundedWheelWordCount : countControlWordCount}{" "}
-            {getWordCountLabel(canStart ? boundedWheelWordCount : countControlWordCount)}
+            {getWordCountLabel(
+              canStart ? boundedWheelWordCount : countControlWordCount,
+            )}
           </strong>
           {exclusionSummary ? <span>{exclusionSummary}</span> : null}
           <span>{sourceSummary}</span>
@@ -1045,13 +1164,15 @@ function SetupEditor({
 
       <section className="setup-wizard-card" data-step={activeStep}>
         <header className="setup-wizard-card__header">
-          <p className="stage-label">
-            Pasul {activeStepDetails.number} din {setupWizardSteps.length}
-          </p>
           <h3>{activeStepDetails.title}</h3>
         </header>
 
         <div className="setup-wizard-card__body" ref={cardBodyRef}>
+          {writeError && (
+            <p className="setup-write-error" role="alert">
+              {writeError}
+            </p>
+          )}
           {activeStep === "rules" ? (
             <div className="setup-step-panel setup-step-panel--rules">
               <section className="setup-section" aria-label="Mod cuvinte">
@@ -1092,7 +1213,6 @@ function SetupEditor({
                   })}
                 </div>
               </section>
-
             </div>
           ) : null}
 
@@ -1111,7 +1231,11 @@ function SetupEditor({
 
           {activeStep === "words" ? (
             <div className="setup-step-panel setup-step-panel--words">
-              <div className="setup-source-tabs" role="group" aria-label="Sursă cuvinte">
+              <div
+                className="setup-source-tabs"
+                role="group"
+                aria-label="Sursă cuvinte"
+              >
                 <button
                   aria-pressed={draftConfig.wordSelectionMode === "all"}
                   data-active={
@@ -1173,12 +1297,26 @@ function SetupEditor({
 
           {activeStep === "finish" ? (
             <div className="setup-step-panel setup-step-panel--finish">
-              <section className="setup-section" aria-label="Număr de cuvinte pe roată">
-                <div className="setup-section-heading">
-                  <h4>Cuvinte pe roată</h4>
-                  <span>max {maxWheelWordCount}</span>
-                </div>
-                <div className="setup-count-card" role="group">
+              <section
+                className="setup-section"
+                aria-label="Număr de cuvinte pe roată"
+              >
+                <h4 id="setup-wheel-count-label">
+                  Câte cuvinte punem pe roată?
+                </h4>
+                <p className="setup-count-help" id="setup-wheel-count-help">
+                  {availableWordCount} {getWordCountLabel(availableWordCount)}{" "}
+                  {availableWordCount === 1 ? "disponibil" : "disponibile"}.
+                  {maxWheelWordCount > 0
+                    ? ` Poți pune până la ${maxWheelWordCount} pe roată.`
+                    : " Schimbă selecția pentru a putea porni."}
+                </p>
+                <div
+                  className="setup-count-control"
+                  role="group"
+                  aria-labelledby="setup-wheel-count-label"
+                  aria-describedby="setup-wheel-count-help"
+                >
                   <button
                     aria-label="Mai puține cuvinte pe roată"
                     disabled={countControlWordCount <= 1}
@@ -1187,9 +1325,24 @@ function SetupEditor({
                     }
                     type="button"
                   >
-                    -
+                    <svg
+                      aria-hidden="true"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
+                      <path d="M5 12h14" />
+                    </svg>
                   </button>
-                  <strong>{countControlWordCount}</strong>
+                  <output aria-live="polite" aria-atomic="true">
+                    <strong>{countControlWordCount}</strong>
+                    <span>
+                      {getWordCountLabel(countControlWordCount)} pe roată
+                    </span>
+                  </output>
                   <button
                     aria-label="Mai multe cuvinte pe roată"
                     disabled={countControlWordCount >= maxWheelWordCount}
@@ -1198,133 +1351,142 @@ function SetupEditor({
                     }
                     type="button"
                   >
-                    +
+                    <svg
+                      aria-hidden="true"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
+                      <path d="M5 12h14M12 5v14" />
+                    </svg>
                   </button>
-                  <span>
-                    {availableWordCount}{" "}
-                    {getWordCountLabel(availableWordCount)}{" "}
-                    {availableWordCount === 1 ? "disponibil" : "disponibile"}
-                  </span>
                 </div>
               </section>
 
-              <section className="setup-finish-summary" aria-label="Rezumat">
-                <div>
-                  <span>Mod</span>
-                  <strong>
-                    {activeModeOption.statusLabel} {targetLabel}
-                  </strong>
-                </div>
-                {exclusionSummary ? (
+              <section
+                className="setup-finish-overview"
+                aria-labelledby="setup-overview-title"
+              >
+                <h4 id="setup-overview-title">Pe scurt</h4>
+                <dl className="setup-finish-summary">
                   <div>
-                    <span>Evită</span>
-                    <strong>{exclusionSummary}</strong>
+                    <dt>Cuvinte</dt>
+                    <dd>
+                      {activeModeOption.statusLabel} {targetLabel}
+                    </dd>
                   </div>
-                ) : null}
-                <div>
-                  <span>Disponibile</span>
-                  <strong>{availableWordCount}</strong>
-                </div>
-                <div>
-                  <span>Sursă</span>
-                  <strong>{sourceSummary}</strong>
-                </div>
+                  {exclusionSummary ? (
+                    <div>
+                      <dt>Evităm</dt>
+                      <dd>{exclusionSummary}</dd>
+                    </div>
+                  ) : null}
+                  <div>
+                    <dt>Selecție</dt>
+                    <dd>{sourceSummary}</dd>
+                  </div>
+                </dl>
               </section>
 
-              <section className="setup-save-panel" aria-label="Salvare configurație">
-                <div className="setup-section-heading">
-                  <h4>Configurație</h4>
-                </div>
-                <div
-                  className="setup-edit-context"
-                  data-dirty={hasDraftChanges ? "true" : undefined}
-                >
-                  <strong>{editorContextLabel}</strong>
-                  <span>{editorContextStatus}</span>
-                </div>
-                <label
-                  className="setup-word-search"
-                  data-invalid={nameError ? "true" : undefined}
-                >
-                  <span>Nume configurație</span>
-                  <input
-                    aria-describedby="setup-save-name-help"
-                    aria-invalid={nameError ? "true" : undefined}
-                    autoComplete="off"
-                    onChange={(event) => onSetSaveName(event.target.value)}
-                    type="text"
-                    value={saveName}
-                  />
-                </label>
-                <p
-                  className="setup-save-help"
-                  data-invalid={nameError ? "true" : undefined}
-                  id="setup-save-name-help"
-                >
-                  {nameHint}
+              <details
+                className="setup-save-disclosure"
+                open={isEditingSavedSetup || undefined}
+              >
+                <summary>Salvează roata pentru altă dată</summary>
+                <p className="setup-count-help">
+                  Opțional. Poți porni roata și fără să o salvezi.
                 </p>
-                {saveFeedback ? (
-                  <p
-                    className="setup-save-feedback"
-                    data-kind={saveFeedback.kind}
-                    role={saveFeedback.kind === "error" ? "alert" : "status"}
+                <div className="setup-save-panel">
+                  <div
+                    className="setup-edit-context"
+                    data-dirty={hasDraftChanges ? "true" : undefined}
                   >
-                    {saveFeedback.message}
+                    <strong>{editorContextLabel}</strong>
+                    <span>{editorContextStatus}</span>
+                  </div>
+                  <label
+                    className="setup-word-search"
+                    data-invalid={nameError ? "true" : undefined}
+                  >
+                    <span>Nume configurație</span>
+                    <input
+                      aria-describedby="setup-save-name-help"
+                      aria-invalid={nameError ? "true" : undefined}
+                      autoComplete="off"
+                      onChange={(event) => onSetSaveName(event.target.value)}
+                      type="text"
+                      value={saveName}
+                    />
+                  </label>
+                  <p
+                    className="setup-save-help"
+                    data-invalid={nameError ? "true" : undefined}
+                    id="setup-save-name-help"
+                  >
+                    {nameHint}
                   </p>
-                ) : null}
-                <div className="setup-save-panel__actions">
-                  {isEditingSavedSetup ? (
-                    <>
-                      <button
-                        className="secondary-button"
-                        disabled={!canUpdateSavedSetup}
-                        onClick={() =>
-                          onSaveDraft({ action: "update-existing" })
-                        }
-                        type="button"
-                      >
-                        Salvează modificările
-                      </button>
-                      <button
-                        className="secondary-button"
-                        disabled={!canSaveAsNewSetup}
-                        onClick={() =>
-                          onSaveDraft({ action: "save-as-new" })
-                        }
-                        type="button"
-                      >
-                        Salvează ca nouă
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        className="secondary-button"
-                        disabled={!canSaveAsNewSetup}
-                        onClick={() =>
-                          onSaveDraft({ action: "save-as-new" })
-                        }
-                        type="button"
-                      >
-                        Salvează ca nouă
-                      </button>
-                      <button
-                        className="secondary-button"
-                        disabled={!canSaveAsNewSetup}
-                        onClick={() =>
-                          onSaveDraft({
-                            action: "save-as-new",
-                            startAfterSave: true,
-                          })
-                        }
-                        type="button"
-                      >
-                        Salvează și pornește
-                      </button>
-                    </>
-                  )}
+                  {saveFeedback ? (
+                    <p
+                      className="setup-save-feedback"
+                      data-kind={saveFeedback.kind}
+                      role={saveFeedback.kind === "error" ? "alert" : "status"}
+                    >
+                      {saveFeedback.message}
+                    </p>
+                  ) : null}
+                  <div className="setup-save-panel__actions">
+                    {isEditingSavedSetup ? (
+                      <>
+                        <button
+                          className="secondary-button"
+                          disabled={!canUpdateSavedSetup}
+                          onClick={() =>
+                            onSaveDraft({ action: "update-existing" })
+                          }
+                          type="button"
+                        >
+                          Salvează modificările
+                        </button>
+                        <button
+                          className="secondary-button"
+                          disabled={!canSaveAsNewSetup}
+                          onClick={() => onSaveDraft({ action: "save-as-new" })}
+                          type="button"
+                        >
+                          Salvează ca nouă
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="secondary-button"
+                          disabled={!canSaveAsNewSetup}
+                          onClick={() => onSaveDraft({ action: "save-as-new" })}
+                          type="button"
+                        >
+                          Salvează ca nouă
+                        </button>
+                        <button
+                          className="secondary-button"
+                          disabled={!canSaveAsNewSetup}
+                          onClick={() =>
+                            onSaveDraft({
+                              action: "save-as-new",
+                              startAfterSave: true,
+                            })
+                          }
+                          type="button"
+                        >
+                          Salvează și pornește
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
-              </section>
+              </details>
             </div>
           ) : null}
         </div>
@@ -1422,7 +1584,9 @@ function ExclusionStep({
 
       {emptyState === "all-excluded" ? (
         <section className="setup-exclusion-recovery" role="status">
-          <strong>Nu există cuvinte pentru {targetLabel} cu aceste excluderi.</strong>
+          <strong>
+            Nu există cuvinte pentru {targetLabel} cu aceste excluderi.
+          </strong>
           <span>Scoate o excludere sau schimbă regula.</span>
         </section>
       ) : null}
@@ -1551,7 +1715,6 @@ function WordPicker({
     >
       <div className="setup-word-picker__header">
         <div>
-          <p className="stage-label">Cuvinte</p>
           <h3>
             {selectedWordIds.length}{" "}
             {getSelectedWordStatusLabel(selectedWordIds.length)}
@@ -1640,24 +1803,32 @@ function AllWordsStep({
     <section className="setup-all-words" aria-label="Toate cuvintele">
       <div className="setup-all-words__hero">
         <div>
-          <p className="stage-label">Sursă</p>
           <h3>Toate cuvintele</h3>
         </div>
-        <strong>{count}</strong>
+        <p>
+          {count} {getWordCountLabel(count)}{" "}
+          {count === 1 ? "disponibil" : "disponibile"}
+        </p>
       </div>
       <p className="setup-muted">
-        Roata va folosi lista completă pentru {modeLabel.toLocaleLowerCase(
-          "ro-RO",
-        )}{" "}
-        {targetLabel}
-        {exclusionSummary ? `, ${exclusionSummary.toLocaleLowerCase("ro-RO")}` : ""}.
-        Poți continua sau poți alege manual cuvintele.
+        Alegem cuvintele de pe roată din lista pentru{" "}
+        {modeLabel.toLocaleLowerCase("ro-RO")} {targetLabel}
+        {exclusionSummary
+          ? `, ${exclusionSummary.toLocaleLowerCase("ro-RO")}`
+          : ""}
+        . La pasul următor alegi câte vor fi pe roată.
       </p>
       <div className="setup-preview-list" aria-label="Previzualizare cuvinte">
         {words.slice(0, 8).map((word) => (
           <span key={word.id}>
             {hasReadyImage(word) ? (
-              <Image alt="" height={28} src={word.image} unoptimized width={28} />
+              <Image
+                alt=""
+                height={28}
+                src={word.image}
+                unoptimized
+                width={28}
+              />
             ) : (
               <span aria-hidden="true">{getWordInitial(word)}</span>
             )}
@@ -1669,7 +1840,9 @@ function AllWordsStep({
   );
 }
 
-function SelectedWordTray({ words }: Readonly<{ words: readonly ContentWord[] }>) {
+function SelectedWordTray({
+  words,
+}: Readonly<{ words: readonly ContentWord[] }>) {
   if (words.length === 0) {
     return <p className="setup-muted">Nu ai ales încă niciun cuvânt.</p>;
   }
@@ -1685,10 +1858,12 @@ function SelectedWordTray({ words }: Readonly<{ words: readonly ContentWord[] }>
 }
 
 function DeleteSetupConfirmation({
+  writeError,
   onCancel,
   onConfirm,
   setup,
 }: Readonly<{
+  writeError: string | null;
   onCancel: () => void;
   onConfirm: () => void;
   setup: SavedWheelSetup;
@@ -1702,7 +1877,6 @@ function DeleteSetupConfirmation({
         role="dialog"
       >
         <div>
-          <p className="stage-label">Ștergere</p>
           <h2 id="delete-setup-title">Ștergi această configurație?</h2>
         </div>
         <strong className="delete-confirmation__name">{setup.name}</strong>
@@ -1710,6 +1884,11 @@ function DeleteSetupConfirmation({
           Se șterge doar configurația salvată în acest browser. Cuvintele și
           imaginile rămân neschimbate.
         </p>
+        {writeError && (
+          <p className="setup-write-error" role="alert">
+            {writeError}
+          </p>
+        )}
         <div className="setup-modal__actions">
           <button className="secondary-button" onClick={onCancel} type="button">
             Anulează

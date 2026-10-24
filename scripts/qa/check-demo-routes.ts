@@ -10,6 +10,9 @@ const targets = getGameplayRouteTargets("ro");
 const routes = [
   "/",
   "/ro",
+  "/ro/about",
+  "/ro/demo",
+  "/ro/practice",
   "/admin/words",
   "/admin/releases",
   "/admin/releases/1",
@@ -52,8 +55,25 @@ await checkRoute("/ro");
 for (let index = 0; index < routes.length; index += 4) {
   await Promise.all(routes.slice(index, index + 4).map(checkRoute));
 }
-const invalid = await fetch(new URL("/ro/play/not-a-target", base));
-assert.equal(invalid.status, 404, "Unknown targets must return HTTP 404");
+for (const route of [
+  "/ro/play/not-a-target",
+  "/ro/setup/not-a-target",
+  "/en/practice",
+  "/not-a-page",
+]) {
+  const invalid = await fetch(new URL(route, base), {
+    signal: AbortSignal.timeout(30_000),
+  });
+  assert.equal(invalid.status, 404, `${route}: expected HTTP 404`);
+  const html = await invalid.text();
+  assert.ok(
+    html.includes("Nu găsim pagina aceasta"),
+    `${route}: Romanian recovery screen`,
+  );
+  assert.match(html, /name="robots" content="noindex"/);
+  assert.ok(html.includes('href="/ro/practice"'));
+  assert.ok(html.includes('href="/ro"'));
+}
 console.log(
-  `${routes.length} public routes passed on ${base.origin}; unknown target returned 404.`,
+  `${routes.length} public routes passed on ${base.origin}; four invalid routes return Romanian 404 recovery.`,
 );

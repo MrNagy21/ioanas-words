@@ -14,16 +14,24 @@
     "check:matching": "bun src/content/matching.check.ts",
     "check:gameplay": "bun src/game/gameplay-compatibility.check.ts",
     "check:setup-storage": "bun src/game/wheel-setup-storage.check.ts",
-    "validate:content": "node scripts/content/validate-content.mjs",
+    "check:practice": "bun src/practice/model.check.ts",
+    "check:practice-browser": "node scripts/qa/check-practice-browser.mjs",
+    "check:practice-resilience": "node scripts/qa/check-practice-resilience.mjs",
+    "prepare:sound-review": "bun scripts/content/prepare-sound-review.ts",
+    "validate:sound-review": "bun scripts/content/validate-sound-review.ts",
+    "check:sound-review-tools": "bun scripts/content/sound-review-packet.check.ts",
+    "validate:content": "node scripts/content/validate-content.mjs && bun scripts/content/validate-sound-mapping.ts",
     "optimize:images": "node scripts/images/optimize-images.mjs",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "check:wheel-browser": "node scripts/qa/check-wheel-browser.mjs",
-    "check:demo-routes": "bun scripts/qa/check-demo-routes.ts"
+    "check:demo-routes": "bun scripts/qa/check-demo-routes.ts",
+    "check:onboarding-browser": "node scripts/qa/check-onboarding-browser.mjs",
+    "check:release-regressions": "node scripts/qa/check-release-regressions.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
-    "next": "16.2.6",
+    "next": "16.4.2",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
@@ -33,9 +41,9 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.4.2",
     "prettier": "3.8.3",
-    "sharp": "0.34.5",
+    "sharp": "0.35.5",
     "typescript": "6.0.3"
   }
 }

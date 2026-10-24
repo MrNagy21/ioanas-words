@@ -45,7 +45,9 @@ export function WordWheelShell({
     <main className="app-shell" aria-label="Roata cuvintelor">
       <div className="app-frame">
         <header
-          className={setupContent ? "app-header app-header--setup" : "app-header"}
+          className={
+            setupContent ? "app-header app-header--setup" : "app-header"
+          }
         >
           <div className="app-header__title">
             <p className="app-kicker">Word Wheel</p>
@@ -61,6 +63,11 @@ export function WordWheelShell({
             ) : null}
           </div>
           <div className="app-header__badges">
+            {!selectedContent && !setupContent ? (
+              <Link className="quiet-link" href={`/${locale}/practice`}>
+                Copiii mei
+              </Link>
+            ) : null}
             <div className="locale-badge" aria-label="Limba curentă">
               {locale.toUpperCase()}
             </div>

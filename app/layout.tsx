@@ -4,6 +4,12 @@ import "./globals.css";
 export const metadata: Metadata = {
   authors: [{ name: "Ioana Nagy", url: "https://www.ioananagy.eu/" }],
   creator: "Ioana Nagy",
+  appleWebApp: {
+    capable: true,
+    title: "Roata cuvintelor",
+    statusBarStyle: "default",
+  },
+  icons: { apple: "/icons/apple-touch-icon.png" },
   title: "Roata cuvintelor | Word Wheel",
   description:
     "Alege o literă sau un sunet, învârte roata și descoperă cuvinte în limba română. Un joc de vocabular pentru copii.",

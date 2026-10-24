@@ -1,5 +1,15 @@
 # Word Wheel Implementation Plan
 
+## Active next program: guided practice app
+
+As of 2026-10-16, follow [Guided Practice App GP0–GP9](app-development-program/features/guided-practice-app/plan.md), with its [specification](app-development-program/features/guided-practice-app/spec.md), [status](app-development-program/features/guided-practice-app/status.md), and [next-batch prompt](app-development-program/features/guided-practice-app/next-implementation-prompt.md).
+
+This adds the agreed adult/child app experience around the existing game. GP0–GP7 are implemented and locally verified. GP8 adds manifest/icons; offline caching is explicitly deferred. The next work is GP9: user-arranged sound review, physical-device checks and therapist pilot feedback. See the feature implementation report for local evidence.
+
+The 2026-10-24 [onboarding correction](app-development-program/features/guided-practice-app/onboarding-redesign.md) is implemented and locally checked. Next, collect user acceptance of its five-page setup on phones, then continue the remaining GP9 review/device/pilot gates.
+
+The original batches below are historical. Their old pending statuses do not override `docs/status.md` or mean the deployed app should be scaffolded again. The original optional PWA batch is now handled by GP0 feasibility and conditional GP8.
+
 This plan is organized into batches. Each batch should leave the app in a better, verifiable state.
 
 Before starting any batch, read `AGENTS.md`, `docs/agent-brief.md`, `docs/spec.md`, and `docs/status.md`. Update `docs/status.md` after each meaningful implementation step so another agent can resume without reading the conversation that created these docs.

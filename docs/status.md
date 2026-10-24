@@ -1,6 +1,84 @@
 # Word Wheel Status
 
-Last updated: 2026-09-19
+Last updated: 2026-10-24
+
+## Release audit and deployment preparation
+
+In progress 2026-10-24 at the user's explicit request. Astra high initially blocked deployment on four persistence defects. Profile draft revisions, canonical backup validation and setup write recovery are corrected; round 2 found a remaining initialization-lock cleanup race. The lifecycle correction and actual browser navigation regression now pass in Chrome/WebKit. Astra high round 3 returned CODEDEPLOY: APPROVE with all four findings resolved. Production and full dependency audits both report zero advisories today. See the [release audit](app-development-program/features/guided-practice-app/release-audit-2026-10-24.md). Preparing the existing GitHub-connected production deployment after audit approval.
+
+## Wheel setup clarity
+
+Completed locally 2026-10-24 after the user flagged the ambiguous highlighted count and nested cards. All four setup steps now use continuous sections; the final number explicitly names words on the wheel. Available words are separate, the summary is plain and saving is optional. Build/lint, focused Chrome/WebKit setup checks and both full practice/backup journeys pass. The finish reviewer confirmed the layout/count; remaining chooser/deletion eyebrows were removed and a fresh verdict returned `disposition: ship` for those fixes. See the [setup report](app-development-program/features/guided-practice-app/wheel-setup-clarity.md). The user has now authorized an Astra high code audit and deployment if release checks pass; that release work is in progress.
+
+## Focused onboarding redesign
+
+Completed locally 2026-10-24 after the user's physical-phone screenshot showed the inline guide competing with the empty dashboard. Five full-page tasks now do the setup: welcome, child, optional sound, exact picture wheel and play handover. Help and direct `?guide=1` entry reopen the flow; exit preserves records and existing rounds resume without replacement. Counting, mappings, rewards and schema 3 remain unchanged.
+
+Final build/TypeScript, lint and the new Chrome/WebKit onboarding suites pass. Practice/backup in both engines, WebKit resilience, domain checks and 85 routes plus four 404 cases also passed during this batch. The finish review found footer overlap; corrected recaptures earned `disposition: ship` for that scored fix only. See the [redesign report](app-development-program/features/guided-practice-app/onboarding-redesign.md) for evidence and the [updated feature checklist](app-development-program/features/guided-practice-app/acceptance-test-checklist.md) for the user test. The final build is running on port 3000 and Tailscale HTTPS returns 200. Physical-phone acceptance, therapist feedback and Romanian review remain pending.
+
+## Private device testing through Tailscale
+
+Enabled 2026-10-19 at the user's request: [https://dariuss-macbook-pro-2.tail1ee9b4.ts.net:9443](https://dariuss-macbook-pro-2.tail1ee9b4.ts.net:9443). Tailscale Serve proxies HTTPS port 9443 to the production app on local port 3000. The HTTPS practice route returns 200 with certificate verification passing. Existing Tailscale services on 443 and 8443 are unchanged. Devices must be connected to the same tailnet; no public Funnel or production deployment was added. Each browser/origin has separate local records. This enables physical-device testing but does not mark those checks complete.
+
+## GP9 recovery and pilot preparation
+
+Local production QA completed 2026-10-18 after the user requested agent-owned QA and a feature testing handoff. Updated Next.js/matching ESLint config to 16.4.2, Sharp to 0.35.5 and compatible transitive dependencies. Production audit fell from 31 advisories to zero; one unpatched lint-only braces advisory remains explicitly recorded. Added Romanian missing-page recovery with full-column phone actions. Data, mappings, encryption and reward rules are unchanged.
+
+Build/TypeScript, lint, content and domain/review-tool checks pass. All six Chrome/WebKit browser suites pass; the expanded full journeys were repeated after the final recovery layout change. All 85 public routes and four Romanian/noindex 404 cases pass. The former NoFallbackError did not recur in the observed updated-server probes. Screenshots and audit JSON are retained in the persistent artifact folder. See the [QA report](app-development-program/features/guided-practice-app/production-qa-2026-10-18.md) and [feature-by-feature acceptance checklist](app-development-program/features/guided-practice-app/acceptance-test-checklist.md).
+
+Ready for the user’s acceptance tests, not a deployed/fully approved release. The user confirmed that Romanian packets and physical-phone results have not returned. Those, therapist feedback and a secure deployed-preview smoke test remain GP9 gates. Port 3000 is running; no deployment was made.
+
+## Medal visibility investigation
+
+Completed 2026-10-17. Added screenshot-pixel checks during live confetti and after phone/desktop/landscape resizing. Visible Chrome and headless WebKit pass the full practice journey; WebKit resilience, build/TypeScript, lint and all 85 routes pass. Chrome 155 headless shows capture artifacts with the live canvas and is not claimed as passing visual evidence. CSS experiments were reverted; approved animation/layout remain. See [rendering evidence and repeat commands](app-development-program/features/guided-practice-app/medal-visibility-checks.md).
+
+The production server is restored on port 3000. A deliberate invalid-target request reproduces `NoFallbackError` in server output while correctly returning 404; the checked valid routes return 200 without new server errors. Final screenshots and rebuilt blank S/R reviewer packets are in a persistent user-data artifact folder; the earlier temporary ZIP was missing. Production mappings remain unchanged. Human review/device/pilot gates remain pending; no deployment was made.
+
+## Romanian reviewer handoff
+
+Completed preparation on 2026-10-16 after the user requested continued GP9 work and the T3 restart cancelled the local server. Added target-specific review-packet generation and read-only consistency checking, with regression checks for unknown/absence/positions, evidence, mixed targets, duplicate rows and stale catalogs. Ready-to-share S/R packets each contain all 596 approved IDs, with every decision unknown and approval false. See the [reviewer handoff](app-development-program/features/guided-practice-app/reviewer-handoff.md) for the archive, Romanian instructions and commands.
+
+Production mapping bytes are unchanged; no sound credits were enabled. Review-tool checks, content validation, TypeScript and lint pass. The restarted production server is running on port 3000; all 85 routes and the full Chrome practice/backup suite pass. Actual reviewer approval, physical-phone checks and therapist feedback remain GP9 gates. No app interface, dependency, content or deployment changed.
+
+## Medal and mobile button refinement
+
+Completed 2026-10-16 after the user rejected the flat medal copy and mobile button layout. Awards now say "Bravo, [name]!", explicitly announce the medal and show illustrated choices with a selected check. A full-width phone action saves the choice. Demo and saved awards share the responsive composition. Shared action buttons use an Animata-inspired rounded press treatment, narrow adult forms stack their actions and two-action game footers fill two columns.
+
+Production build, lint, domain checks, Chrome/WebKit full practice suites, WebKit touch/text/storage resilience and Chrome wheel regression pass. Medal controls fit five portrait/landscape/desktop layouts; the chosen design persists without extra credit. The [refinement report](app-development-program/features/guided-practice-app/medal-button-refinement.md) records screenshots and scope. Reward/data rules, dependencies and review gates are unchanged. The app remains local on port 3000.
+
+## Cross-browser pilot checks
+
+Completed 2026-10-16 after the user requested continued work. The browser QA scripts now support WebKit as well as Chrome. WebKit passes the full practice/backup journey, touch/text/storage resilience checks and existing wheel regression. The full practice journey also passes in Chrome, and lint passes. The [cross-browser report](app-development-program/features/guided-practice-app/cross-browser-checks.md) records engine versions, navigation-test corrections, screenshots and limits.
+
+Only the external test runtime gained a WebKit binary. No app code, dependencies, data contracts, mappings or deployment changed. Physical iPhone/Android, Romanian review and therapist pilot gates remain; the production server stays on port 3000.
+
+## Pilot resilience checks
+
+Completed 2026-10-16 after the user requested continued implementation/testing. Fixed narrow-screen 200% text overflow, actionable quota-error copy, accessible End-dialog naming and error/retry visibility. End errors are isolated so cancelling does not leave a stale warning in play. When profile storage/locking fails, setup now offers a temporary anonymous wheel that ignores saved settings and writes nothing to them.
+
+The [resilience report](app-development-program/features/guided-practice-app/resilience-checks.md) records the focused text-size/touch/failure matrix, evidence and limits. Build, lint, domain checks, content validation, existing wheel regression and 85 route checks pass. The new resilience suite verifies exactly-once retries and preserves a seeded configuration byte for byte in three blocked-storage scenarios. The final full practice/backup suite also passes on the production build.
+
+The production server remains on port 3000. No dependency, vocabulary, clinical mapping or deployment changed. Physical-device/assistive-technology checks and user-arranged Romanian review remain GP9 gates.
+
+## UI and Romanian copy refinement
+
+Completed 2026-10-16 after the user requested Impeccable refinement and warmer text. The selected child now has a focused mobile page with a visible play action, a clear return to the profile list, expandable sound settings, a compact activity summary and picture history. The guide, introduction, pre-play and backup text use plain Romanian. Accepted pronunciation anchors and all reward/counting/storage rules are preserved. Unknown sound review is shown as waiting rather than an apparent zero.
+
+Build, lint and the full practice browser suite pass, including actual long-name profile creation, mobile navigation, tablet overflow checks, prepared-wheel detours, observations and protected restore. All 85 routes pass. Final mobile/desktop screenshots and limits are in the [UI report](app-development-program/features/guided-practice-app/ui-refinement.md). The app remains local on port 3000; no deployment was made.
+
+The [pilot checklist](app-development-program/features/guided-practice-app/pilot-checklist.md) makes GP9 review/device/therapist tasks concrete. Romanian mappings and physical-device results remain outstanding. Structural source discovery used direct reads because the repository has no graph index.
+
+## Guided practice app implementation
+
+Local implementation and production-build browser QA completed on 2026-10-16. [Feature status](app-development-program/features/guided-practice-app/status.md) and [implementation report](app-development-program/features/guided-practice-app/implementation-report.md) record GP0–GP7, manifest/icons and the explicit offline deferral. The production server is running at `http://localhost:3000`; no deployment was made.
+
+Implemented: local child profiles/goals, shared wheel library, exact prepared-word preview, durable sessions, count-on-close and once-only pending-word recovery, exclusive tab ownership, activity/position statistics, adult pronunciation observations/corrections, medals, distinct explicit progress celebrations, password-protected whole-app/per-child backup and restore, public introduction, isolated demo and restartable guide. Standard medals are 1/5/10/20 then every 20; Frequent 1/3/5/10 then every 10; every counted word fills the next-medal bar. No XP or multipliers. Ratings do not change rewards.
+
+Fresh verification passed: content validation (13 existing image-size warnings), matching/gameplay/setup-storage/domain checks, lint, TypeScript/build, new practice browser suite, old wheel regression and all 85 public route checks. Tracked play was checked at 320×568, 390×844, 568×320, 844×390 and 1440×900; mobile/desktop screenshots and recordings were shown. The report gives evidence and limits. A dev-output conflict was resolved by stopping development and rebuilding/starting production on the same port.
+
+Remaining GP9 gates: user-arranged Romanian sound review (zero reviewed mappings; sound credits remain unknown), real iPhone Safari/Android Chrome checks and therapist pilot feedback. Manifest presence is not verified physical installation, and offline caching is deferred. No clinical validation is claimed. Current public vocabulary/images and dependencies are unchanged: 599 records, 596 approved/ready, zero approved placeholders.
+
+Continue with the [GP9 prompt](app-development-program/features/guided-practice-app/next-implementation-prompt.md), not scaffold Batch 0. The planning interview and accepted contracts are preserved in the feature package. The graph catalog has no index for this repository; structural evidence uses direct source reads, not graph coverage.
 
 ## Demo release preparation
 
@@ -24,7 +102,7 @@ Validation, lint, gameplay, matching, setup storage, production build with TypeS
 
 See `docs/demo-readiness-review.md` for findings, test coverage, known limits, and the ready-to-copy demo release prompt. Production verification is complete. Remaining release verification is real iPhone Safari / Android Chrome checks.
 
-## Current Phase
+## Earlier implementation baseline
 
 Phase: Batch 8 implementation complete; admin words inventory Batch 4 complete; admin release review route complete with Release 1/Release 2/Release 3 split; locale-wide content refactor complete; gameplay inclusion mode selector and large-pool setup selection complete; wheel setup UX redesign implementation complete; Romanian content expansion Batch 108 Slice 8 QA complete after `ramă`/`râmă` promotion; Wheel Setup Exclusion Filters saved setup editing UX overhaul complete; Wheel Visible Subset Reset Bug implementation and browser QA complete; Batch 5 partially complete
 
@@ -1550,7 +1628,13 @@ Note: use the nvm Node PATH when running local pnpm commands in automation. Some
     - Kept `Ă` and `Â` convention-only and proposed only a small exact-`Î` top-up.
     - Kept the batch free of production JSON records, image assets, route/schema changes, speech-target production metadata, admin editing, auth, database, billing, accounts, AI pronunciation, and clinical claims.
 
-## Next Task
+## Next task
+
+Continue Guided Practice App GP9 using the [ready-to-copy prompt](app-development-program/features/guided-practice-app/next-implementation-prompt.md). The current scope and verification requirements are recorded at the top of this file and in the linked feature package.
+
+### Historical content handoff
+
+The following handoff records an earlier content milestone. Its counts and proposed next batch are historical, not the current app-development instruction.
 
 Admin Words Inventory, Locale-Wide Content Refactor, Gameplay Inclusion Mode Selector, Wheel Setup UX Redesign, the mobile setup compression pass, Romanian Content Expansion Batches 40 through 69, and Wheel Setup Exclusion Filters Batch 4 are complete. The current Romanian production pack has `460` total records, `457` approved words, `457` ready images, `0` approved placeholders, and `3` rejected audit-trail rows. New playable routes for `K`, `Q`, `W`, `X`, and `Y` are enabled. Batch 66 promoted all accepted Batch 65 cells with the human-requested `tacâmuri` revision, Batch 67 completed slice coverage QA, Batch 68 planned the next review-only slice, and Batch 69 generated the contact sheet. The next approved Romanian content task is Batch 70: promote only human-accepted Batch 69 cells after review. Keep `cameră web` in `C`, keep `iac` in `I`, do not reintroduce `webcam` or `yak` without an explicit human decision, do not force `Ă` or `Â` starts-with rows, and do not pad rare buckets with obscure words.
 

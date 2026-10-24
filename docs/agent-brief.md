@@ -1,6 +1,22 @@
 # Agent Brief
 
-This file captures the project decisions agreed before implementation. Use it as the fast handoff for any agent starting work in this repository.
+This file captures the project decisions. Use it as the fast handoff for any agent starting work in this repository.
+
+## Active direction: guided practice app
+
+Updated 2026-10-16 after the product interview. The core game and public demo exist. The next work is [Guided Practice App](app-development-program/features/guided-practice-app/spec.md), following its [GP0–GP9 plan](app-development-program/features/guided-practice-app/plan.md). GP0–GP7 are implemented and locally tested; GP8 has manifest/icons with offline explicitly deferred. GP9 mapping review, physical devices and therapist pilot remain.
+
+The adult prepares the app and the child plays. Add local child profiles, selected goals, a shared adult wheel library, a goal-aware pre-play summary, durable sessions, history/statistics, adult-entered pronunciation-quality ratings, participation medals, explicit adult-triggered progress celebrations, and whole-app/individual-child backup. Add a public one-page introduction, isolated demo, and skippable/restartable onboarding. Installation/offline support is conditional on feasibility.
+
+Count practice on result closure, with once-only recovery of displayed pending words. Keep both keep/remove actions. Credit all reviewed matching active child goals, not just the wheel's target. Ratings do not measure independence and do not automatically change rewards. Position breakdowns are statistics only; no position medals or XP in the pilot.
+
+This agreement supersedes the original no-landing-page and no-local-progress-screen limitations below. The no-scroll rule applies to normal play; adult histories and the public introduction may scroll. Local browser records are allowed; no hosted database, accounts, billing, recording, AI pronunciation scoring, or clinical efficacy claims are added. Preserve anonymous general play and existing approved content.
+
+The 2026-10-18 local candidate uses Next.js/matching ESLint config 16.4.2 and Sharp 0.35.5 after dependency hardening. Local production QA is complete; use the [acceptance checklist](app-development-program/features/guided-practice-app/acceptance-test-checklist.md) and [QA report](app-development-program/features/guided-practice-app/production-qa-2026-10-18.md) for the user test. It is not deployed.
+
+On 2026-10-24, the user's iPhone feedback prompted a five-page task onboarding that creates/selects the child, optionally adds a sound, previews exact pictures and starts or resumes real play. The dashboard stays hidden during setup. See the [redesign report](app-development-program/features/guided-practice-app/onboarding-redesign.md). Final Chrome/WebKit onboarding checks pass; actual phone acceptance remains pending. Help or `/ro/practice?guide=1` reopens it without clearing records.
+
+Continue with the [GP9 prompt](app-development-program/features/guided-practice-app/next-implementation-prompt.md). The user accepted the sidecar structure and will arrange Romanian review. Pilot slider labels, Standard 1/5/10/20 then every 20, Frequent 1/3/5/10 then every 10, progress bar and password-protected backups are accepted and implemented. Do not silently substitute character matching for reviewed sound credit.
 
 ## Project Summary
 
@@ -8,7 +24,9 @@ Word Wheel is a mobile-first web app for young children to practice Romanian voc
 
 The first version is a simple exercise/game. It should be deployable on Vercel for free or very low cost, with no database required for gameplay.
 
-## First Version Scope
+## Original wheel scope
+
+The following records the deployed wheel's original scope. The active guided-practice agreement above extends it where explicitly stated.
 
 V1 must include:
 
@@ -303,16 +321,7 @@ Free anonymous gameplay must remain available.
 
 Follow `docs/plan.md`.
 
-Immediate next task is Batch 0:
-
-- scaffold Next.js App Router with TypeScript;
-- add linting/build scripts;
-- add baseline README;
-- confirm `pnpm run dev`;
-- confirm `pnpm run build`;
-- update `docs/status.md`.
-
-Do not jump directly to content generation before the app foundation and content validation path exist.
+The next task is Guided Practice App GP9, linked above. The original foundation batches are already implemented. Do not restart scaffolding or treat new vocabulary generation as a prerequisite for this app-development work.
 
 ## Status Discipline
 
