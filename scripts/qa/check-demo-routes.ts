@@ -13,6 +13,8 @@ const routes = [
   "/ro/about",
   "/ro/demo",
   "/ro/practice",
+  "/ro/termeni",
+  "/ro/confidentialitate",
   "/admin/words",
   "/admin/releases",
   "/admin/releases/1",
@@ -44,8 +46,8 @@ async function checkRoute(route: string) {
     await response.arrayBuffer();
   } else {
     assert.ok(
-      /<title>[^<]*Word Wheel<\/title>/.test(await response.text()),
-      `${route}: response is not the Word Wheel app`,
+      /<title>[^<]*Vorbini[^<]*<\/title>/.test(await response.text()),
+      `${route}: response is not the Vorbini app`,
     );
   }
 }

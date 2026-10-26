@@ -1,6 +1,6 @@
 # Vorbini: final legal-page proposal
 
-Prepared 26 October 2026 after the requested Astra review. The revised Romanian text is implemented in `src/legal/documents.ts`, with review notes kept separate from the policy body. This is the final proposal for this editing pass, not a statement that the privacy notice is complete for public release. No public deployment has been made.
+Prepared 26 October 2026 after the requested Astra review. The revised Romanian text is implemented in `src/legal/documents.ts`, with review notes kept separate from the policy body. This is the final proposal for this editing pass, not a statement that the privacy notice is complete for public release. The owner subsequently authorized deployment. Both pages are publicly available as visible, noindex drafts; their operational decisions below are still pending.
 
 ## Recommended package
 

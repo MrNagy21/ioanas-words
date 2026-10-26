@@ -4,7 +4,11 @@ Last updated: 2026-10-26
 
 ## Release 2026-10-26
 
-Deployment in progress at the user's explicit request. The release combines the approved child workspace, automatic wheel targets, focused profile settings, navigation, Vorbini identity, legal drafts and adult footer. Local domain/migration/encryption, onboarding, persistence-regression and profile-settings checks pass. Content validation and the production dependency audit pass. The full WebKit play and encrypted child/whole-app backup journey also passes. The candidate is ready for the main-branch push. Legal drafts, Romanian review and physical-device/therapist acceptance remain open. See [the release report](app-development-program/features/guided-practice-app/release-2026-10-26.md).
+Deployed at the user's explicit request to [Vorbini](https://ioanas-words.vercel.app/ro/practice). Application commit `9abdadb` includes the approved child workspace, automatic wheel targets, focused profile settings, navigation, Vorbini identity, legal drafts and adult footer. Vercel reports a successful production deployment.
+
+Local build/TypeScript, lint, content validation, production dependency audit and practice/migration/encryption checks pass. WebKit onboarding, persistence-regression, profile-settings and full play/backup suites pass. On the public HTTPS origin, all 87 routes, four Romanian 404s, the mobile/desktop footer suite, manifest/icons and full play/encrypted-backup journey pass. Fresh phone/desktop footer captures were inspected. See [the release report](app-development-program/features/guided-practice-app/release-2026-10-26.md) and [updated feature test checklist](app-development-program/features/guided-practice-app/acceptance-test-checklist.md).
+
+This release is complete. The terms and privacy pages remain visible, noindex drafts pending the recorded operational decisions. Physical-device/assistive-technology and therapist acceptance, plus Romanian mapping review, remain GP9 work. Installation still needs a connection to open. Public-origin records are separate from Tailscale; transfer them deliberately with a protected backup. Earlier sections below preserve the local checkpoints before this release.
 
 ## Adult footer
 
