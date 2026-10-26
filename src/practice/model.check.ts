@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import type { GameplayTarget } from "@/content/types";
 import {
   emptyPracticeState,
   decodePracticeState,
@@ -21,7 +22,11 @@ import {
   commitPendingTurn,
   endPracticeSession,
 } from "@/practice/sessions";
-import { getApprovedWords, getEnabledLetters } from "@/content/loaders";
+import {
+  getApprovedWords,
+  getEnabledLetters,
+  getEnabledPracticeTargets,
+} from "@/content/loaders";
 import {
   addPronunciationObservation,
   addProgressCelebration,
@@ -36,7 +41,11 @@ import {
   type SoundMapping,
 } from "@/content/sound-mapping";
 import mappingJson from "../../content/ro/sound-mapping.json";
-import { nextParticipationMilestone } from "@/practice/rewards";
+import {
+  nextParticipationMilestone,
+  goalParticipationCount,
+  participationProgress,
+} from "@/practice/rewards";
 
 const state = emptyPracticeState();
 saveProfile(state, { nickname: "  Alex   01 ", avatar: AVATAR_WORD_IDS[0] });
@@ -134,7 +143,11 @@ assert.equal(
   2,
   "Duplicate close must not remove a kept word",
 );
-assert.equal(state.awards.length, 1);
+assert.equal(
+  state.awards.length,
+  2,
+  "First close earns overall and wheel-target medals",
+);
 showPracticeWord(state, "session-test", "tab-1", words[0].id, "turn-2");
 claimSession(state, "session-test", "tab-2");
 claimSession(state, "session-test", "tab-2");
@@ -181,8 +194,8 @@ assert.equal(
 addProgressCelebration(state, child.id, goal.id);
 assert.equal(state.awards.length, awardCount + 1);
 assert.equal(state.awards.at(-1)?.source, "adult");
-assert.equal(nextParticipationMilestone(40), 60);
-assert.equal(nextParticipationMilestone(100), 120);
+assert.equal(nextParticipationMilestone(40), 50);
+assert.equal(nextParticipationMilestone(100), 110);
 assert.equal(nextParticipationMilestone(40, "frequent"), 50);
 
 beginPracticeSession(
@@ -224,7 +237,7 @@ for (let index = 1; index <= 10; index++) {
     saveGoal(state, child.id, goal.label, "frequent");
     assert.equal(
       goal.nextMedalAt,
-      5,
+      3,
       "Faster pace preserves the promised next medal",
     );
   }
@@ -389,4 +402,181 @@ assert.equal(
     .data.configurations[0].name.length,
   300,
   "Existing long configuration names remain valid",
+);
+
+// The selected wheel target is explicit practice intent, never phonetic evidence.
+const automatic = emptyPracticeState();
+saveProfile(automatic, {
+  nickname: "Target child",
+  avatar: AVATAR_WORD_IDS[0],
+});
+saveProfile(automatic, { nickname: "Other child", avatar: AVATAR_WORD_IDS[1] });
+const targetChild = automatic.profiles[0];
+const startTarget = (sessionId: string, chosen: GameplayTarget = target) =>
+  beginPracticeSession(
+    automatic,
+    targetChild.id,
+    chosen,
+    words,
+    config,
+    "Target wheel",
+    sessionId,
+  );
+assert.equal(targetChild.goals.length, 0);
+startTarget("auto-one");
+const autoGoal = targetChild.goals[0];
+assert.equal(autoGoal.label, "S");
+assert.equal(
+  targetChild.goals.length,
+  1,
+  "Starting the round adds its goal before the first spin",
+);
+assert.equal(
+  automatic.profiles[1].goals.length,
+  0,
+  "Shared targets never leak to another child",
+);
+assert.equal(automatic.turns.length, 0);
+assert.equal(
+  automatic.awards.length,
+  0,
+  "Starting alone never awards participation",
+);
+claimSession(automatic, "auto-one", "auto-owner");
+showPracticeWord(automatic, "auto-one", "auto-owner", words[0].id, "auto-turn");
+assert.equal(goalParticipationCount(automatic, targetChild.id, autoGoal.id), 0);
+assert.ok(
+  automatic.sessions[0].pending!.goals.every((g) => g.matched === null),
+);
+commitPendingTurn(automatic, "auto-one", "auto-owner", "keep", "auto-turn");
+commitPendingTurn(automatic, "auto-one", "auto-owner", "keep", "auto-turn");
+assert.equal(goalParticipationCount(automatic, targetChild.id, autoGoal.id), 1);
+assert.equal(
+  automatic.awards.length,
+  2,
+  "Unknown phonetics do not block the chosen-target medal",
+);
+assert.ok(automatic.turns[0].goals.every((g) => g.matched === null));
+// Verified and chosen-target attribution of the same word counts once for a medal.
+automatic.turns[0].goals = [
+  {
+    goalId: autoGoal.id,
+    label: autoGoal.label,
+    matched: true,
+    positions: ["initial"],
+    mappingVersion: "TEST-ONLY",
+  },
+];
+assert.equal(goalParticipationCount(automatic, targetChild.id, autoGoal.id), 1);
+endPracticeSession(automatic, "auto-one", "auto-owner");
+autoGoal.active = false;
+startTarget("auto-two");
+assert.equal(targetChild.goals.length, 1);
+assert.equal(targetChild.goals[0].id, autoGoal.id);
+assert.equal(
+  autoGoal.active,
+  true,
+  "Starting reactivates the existing goal and history",
+);
+claimSession(automatic, "auto-two", "recovered-owner");
+showPracticeWord(
+  automatic,
+  "auto-two",
+  "recovered-owner",
+  words[0].id,
+  "recovered-target-turn",
+);
+claimSession(automatic, "auto-two", "next-owner");
+claimSession(automatic, "auto-two", "next-owner");
+assert.equal(
+  goalParticipationCount(automatic, targetChild.id, autoGoal.id),
+  2,
+  "Interrupted target practice commits once",
+);
+endPracticeSession(automatic, "auto-two", "next-owner");
+const sequence = getEnabledPracticeTargets("ro").find(
+  (t) => t.label === "CHE",
+)!;
+startTarget("sequence", sequence);
+assert.equal(
+  targetChild.goals.at(-1)!.label,
+  "CHE",
+  "A letter group is one target, not three letter goals",
+);
+assert.equal(targetChild.goals.length, 2);
+validatePracticeState(automatic);
+const encryptedAuto = await encryptPracticeBackup(
+  createPracticeBackup(automatic, targetChild.id),
+  "automatic-target-test-password",
+);
+const restoredAuto = await decryptPracticeBackup(
+  encryptedAuto,
+  "automatic-target-test-password",
+);
+assert.deepEqual(
+  restoredAuto.data,
+  createPracticeBackup(automatic, targetChild.id).data,
+);
+const wrongGoal = structuredClone(automatic);
+wrongGoal.turns[0].practiceGoalId = targetChild.goals[1].id;
+assert.throws(
+  () => validatePracticeState(wrongGoal),
+  "A backup cannot credit the wrong target",
+);
+const wrongPending = structuredClone(automatic);
+wrongPending.sessions[0].practiceGoalId = "missing-goal";
+assert.throws(() => validatePracticeState(wrongPending));
+
+// Schema 3 history is preserved without inventing retrospective wheel-target credit.
+const old = { ...structuredClone(automatic), schemaVersion: 3 };
+for (const profile of old.profiles) delete profile.participationReward;
+for (const session of old.sessions) {
+  delete session.practiceGoalId;
+  if (session.pending) delete session.pending.practiceGoalId;
+}
+for (const turn of old.turns) delete turn.practiceGoalId;
+old.profiles[0].goals[0].nextMedalAt = 20;
+old.profiles[0].goals[0].pace = "standard";
+const migrated = decodePracticeState(old);
+assert.equal(migrated.schemaVersion, 4);
+assert.equal(migrated.profiles[0].goals[0].nextMedalAt, 20);
+assert.deepEqual(participationProgress(migrated, migrated.profiles[0]), {
+  current: 2,
+  previous: 1,
+  next: 5,
+});
+assert.equal(migrated.turns.filter((t) => t.practiceGoalId).length, 0);
+assert.deepEqual(migrated.awards, automatic.awards);
+assert.deepEqual(
+  decodePracticeState(structuredClone(migrated)),
+  migrated,
+  "Migration runs once",
+);
+// Legacy open rounds gain future target credit only, preserving the old closed turn.
+claimSession(migrated, "sequence", "legacy-owner");
+assert.ok(migrated.sessions.at(-1)!.practiceGoalId);
+for (let index = 0; index < 3; index++) {
+  showPracticeWord(
+    migrated,
+    "sequence",
+    "legacy-owner",
+    words[0].id,
+    `migrated-turn-${index}`,
+  );
+  commitPendingTurn(
+    migrated,
+    "sequence",
+    "legacy-owner",
+    "keep",
+    `migrated-turn-${index}`,
+  );
+}
+assert.deepEqual(participationProgress(migrated, migrated.profiles[0]), {
+  current: 5,
+  previous: 5,
+  next: 10,
+});
+validatePracticeState(migrated);
+console.log(
+  "Automatic target checks passed: start/reactivation, child isolation, sequence targets, no phonetic inference/double credit, recovery, protected backup, strict target references, schema-3 history and promised medal preservation.",
 );

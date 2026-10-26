@@ -1,5 +1,9 @@
 # Guided practice app specification
 
+## Current behavior amendment: 2026-10-26
+
+The [child-first workspace amendment](child-first-workspace.md) supersedes manual-goal prerequisites, selectable reward pace and the schema-3 ceiling. Starting adds or reactivates the selected child’s target. Closed words earn chosen-target participation credit separately from reviewed phonetic statistics. Existing history and the next promised reward are preserved.
+
 Status: Local implementation complete for GP0–GP7; GP8 manifest added, offline deferred; GP9 review and pilot release gates remain.
 Planning date: 2026-10-16.
 Implementation evidence: [implementation-report.md](implementation-report.md).

@@ -4,7 +4,11 @@ import {
   type WheelSetupConfig,
 } from "@/game/wheel-setup-storage";
 import type { ContentWord, GameplayTarget } from "@/content/types";
-import { nextParticipationMilestone } from "@/practice/rewards";
+import {
+  goalParticipationCount,
+  nextParticipationMilestone,
+  previousParticipationMilestone,
+} from "@/practice/rewards";
 
 export const AVATAR_WORD_IDS = [
   "ro-p-pisica",
@@ -26,9 +30,10 @@ export type ChildProfile = {
   createdAt: string;
   updatedAt: string;
   goals: PracticeGoal[];
+  participationReward?: { previous: number; next: number };
 };
 export type LocalPracticeState = {
-  schemaVersion: 3;
+  schemaVersion: 4;
   revision: number;
   profiles: ChildProfile[];
   configurations: SavedWheelSetup[];
@@ -63,11 +68,13 @@ export type PracticeSession = {
   createdAt: string;
   endedAt: string | null;
   ownerId: string | null;
+  practiceGoalId?: string;
   pending: {
     id: string;
     wordId: string;
     shownAt: string;
     goals: GoalAttribution[];
+    practiceGoalId?: string;
   } | null;
 };
 export type PracticeTurn = {
@@ -80,6 +87,7 @@ export type PracticeTurn = {
   closedAt: string;
   reason: "keep" | "remove" | "recovery";
   goals: GoalAttribution[];
+  practiceGoalId?: string;
 };
 export type PronunciationObservation = {
   id: string;
@@ -102,7 +110,7 @@ export type PracticeAward = {
 
 export function emptyPracticeState(): LocalPracticeState {
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     revision: 0,
     profiles: [],
     configurations: [],
@@ -163,7 +171,7 @@ export function saveGoal(
   state: LocalPracticeState,
   childId: string,
   label: string,
-  pace: PracticeGoal["pace"],
+  pace: PracticeGoal["pace"] = "frequent",
 ) {
   const profile = state.profiles.find((p) => p.id === childId);
   if (!profile) throw new Error("Profilul nu mai există.");
@@ -172,11 +180,7 @@ export function saveGoal(
     throw new Error("Alegeți o literă sau un grup de sunete.");
   const existing = profile.goals.find((g) => g.label === normalized);
   if (existing) {
-    const count = state.turns.filter(
-      (t) =>
-        t.childId === childId &&
-        t.goals.some((g) => g.goalId === existing.id && g.matched === true),
-    ).length;
+    const count = goalParticipationCount(state, childId, existing.id);
     existing.nextMedalAt ??= nextParticipationMilestone(count, existing.pace);
     existing.active = true;
     existing.pace = pace;
@@ -286,7 +290,7 @@ export function validatePracticeState(
   };
   if (
     !object(value) ||
-    value.schemaVersion !== 3 ||
+    value.schemaVersion !== 4 ||
     !Number.isSafeInteger(value.revision) ||
     (value.revision as number) < 0 ||
     !Array.isArray(value.profiles) ||
@@ -349,7 +353,19 @@ export function validatePracticeState(
         "createdAt",
         "updatedAt",
         "goals",
+        "participationReward",
       ])
+    )
+      return fail();
+    if (
+      p.participationReward !== undefined &&
+      (!object(p.participationReward) ||
+        !onlyKeys(p.participationReward, ["previous", "next"]) ||
+        !Number.isSafeInteger(p.participationReward.previous) ||
+        !Number.isSafeInteger(p.participationReward.next) ||
+        (p.participationReward.previous as number) < 0 ||
+        (p.participationReward.next as number) <=
+          (p.participationReward.previous as number))
     )
       return fail();
     for (const g of p.goals) {
@@ -413,7 +429,17 @@ export function validatePracticeState(
     Array.isArray(g.positions) &&
     g.positions.every((p) => ["initial", "medial", "final"].includes(p)) &&
     text(g.mappingVersion);
+  const practiceGoalValid = (id: unknown, childId: string, label: string) =>
+    text(id) &&
+    (value.profiles as ChildProfile[])
+      .find((p) => p.id === childId)
+      ?.goals.some((g) => g.id === id && g.label === label);
   for (const s of sessions) {
+    if (
+      s.practiceGoalId !== undefined &&
+      !practiceGoalValid(s.practiceGoalId, s.childId, s.target?.label)
+    )
+      return fail();
     if (
       !onlyKeys(s, [
         "id",
@@ -427,6 +453,7 @@ export function validatePracticeState(
         "endedAt",
         "ownerId",
         "pending",
+        "practiceGoalId",
       ])
     )
       return fail();
@@ -476,7 +503,9 @@ export function validatePracticeState(
         !s.remainingWordIds.includes(s.pending.wordId) ||
         !date(s.pending.shownAt) ||
         !Array.isArray(s.pending.goals) ||
-        !s.pending.goals.every(goalValid))
+        !s.pending.goals.every(goalValid) ||
+        (s.pending.practiceGoalId !== undefined &&
+          s.pending.practiceGoalId !== s.practiceGoalId))
     )
       return fail();
     if (s.endedAt && s.pending) return fail();
@@ -493,7 +522,9 @@ export function validatePracticeState(
       !date(t.closedAt) ||
       !["keep", "remove", "recovery"].includes(t.reason) ||
       !Array.isArray(t.goals) ||
-      !t.goals.every(goalValid)
+      !t.goals.every(goalValid) ||
+      (t.practiceGoalId !== undefined &&
+        t.practiceGoalId !== session.practiceGoalId)
     )
       return fail();
   }
@@ -597,6 +628,53 @@ export function decodePracticeState(value: unknown): LocalPracticeState {
         sound: false,
       },
     };
+  if (object(value) && value.schemaVersion === 3) {
+    // Preserve the next promised legacy medal. Historical turns keep their original meaning.
+    validatePracticeState({ ...value, schemaVersion: 4 });
+    const legacy = value as unknown as LocalPracticeState;
+    value = {
+      ...value,
+      schemaVersion: 4,
+      profiles:
+        Array.isArray(legacy.profiles) && Array.isArray(legacy.turns)
+          ? legacy.profiles.map((profile) => {
+              if (!object(profile) || !Array.isArray(profile.goals))
+                return profile;
+              const count = legacy.turns.filter(
+                (t) => t?.childId === profile.id,
+              ).length;
+              return {
+                ...profile,
+                participationReward: {
+                  previous: previousParticipationMilestone(count, "standard"),
+                  next: nextParticipationMilestone(count, "standard"),
+                },
+                goals: profile.goals.map((goal) =>
+                  object(goal)
+                    ? {
+                        ...goal,
+                        nextMedalAt:
+                          goal.nextMedalAt ??
+                          nextParticipationMilestone(
+                            legacy.turns.filter(
+                              (t) =>
+                                t?.childId === profile.id &&
+                                Array.isArray(t.goals) &&
+                                t.goals.some(
+                                  (g) =>
+                                    g?.goalId === goal.id && g.matched === true,
+                                ),
+                            ).length,
+                            goal.pace as PracticeGoal["pace"],
+                          ),
+                      }
+                    : goal,
+                ),
+              };
+            })
+          : legacy.profiles,
+    };
+  }
   validatePracticeState(value);
   return value;
 }

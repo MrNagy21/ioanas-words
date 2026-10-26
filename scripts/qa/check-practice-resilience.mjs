@@ -97,10 +97,29 @@ try {
   });
   await page.getByRole("button", { name: /Alex · test/ }).tap();
   await reflow(page, "Child activity");
-  await page.getByRole("button", { name: "Pronunție", exact: true }).tap();
+  await page
+    .locator(".task-row")
+    .filter({ has: page.getByText("Pronunție", { exact: true }) })
+    .tap();
   await reflow(page, "Pronunciation");
-  await page.locator(".practice-backups summary").tap();
+  await page
+    .getByRole("button", { name: "Înapoi la profil", exact: true })
+    .tap();
+  await page
+    .locator(".task-row")
+    .filter({ has: page.getByText("Setările profilului", { exact: true }) })
+    .tap();
+  await page
+    .locator(".task-row")
+    .filter({ has: page.getByText("Copie de siguranță", { exact: true }) })
+    .tap();
   await reflow(page, "Backups");
+  await page
+    .getByRole("button", { name: "Înapoi la profil", exact: true })
+    .tap();
+  await page
+    .getByRole("button", { name: "Înapoi la profil", exact: true })
+    .tap();
   await page
     .getByRole("button", { name: "Pregătește o roată", exact: true })
     .tap();
@@ -109,7 +128,7 @@ try {
   await page.getByRole("button", { name: "Pornește roata", exact: true }).tap();
   await reflow(page, "Prepared wheel");
   await page
-    .getByRole("button", { name: "Începe exersarea generală", exact: true })
+    .getByRole("button", { name: "Începe exersarea", exact: true })
     .tap();
   await page.getByRole("button", { name: "Învârte", exact: true }).tap();
   const result = page.getByRole("dialog");
@@ -153,9 +172,7 @@ try {
     (await page.locator("canvas").count()) === 0,
     "Reduced-motion reward does not run confetti",
   );
-  await page
-    .getByRole("button", { name: "Păstrează medalia", exact: true })
-    .tap();
+  await page.getByRole("button", { name: /^Păstrează.*medali/ }).tap();
   await page
     .getByRole("button", { name: "Încheie exersarea", exact: true })
     .tap();
@@ -193,7 +210,7 @@ try {
       ended: !!s.sessions[0].endedAt,
     };
   });
-  assert.deepEqual(afterRetry, { turns: 1, awards: 1, ended: true });
+  assert.deepEqual(afterRetry, { turns: 1, awards: 2, ended: true });
   assert.deepEqual(errors, []);
   for (const unavailable of ["indexedDB", "locks", "both-storage"]) {
     const blocked = await browser.newContext({

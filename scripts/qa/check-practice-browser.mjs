@@ -7,10 +7,31 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 const output = await mkdtemp(path.join(tmpdir(), "word-wheel-practice-"));
+function taskRow(page, title) {
+  return page
+    .locator(".task-row")
+    .filter({ has: page.getByText(title, { exact: true }) });
+}
+async function backToProfile(page) {
+  await page
+    .getByRole("button", { name: "Înapoi la profil", exact: true })
+    .click();
+}
 async function openSoundSettings(page) {
-  const toggle = page.getByRole("button", { name: /^Sunete de exersat/ });
-  if ((await toggle.getAttribute("aria-expanded")) !== "true")
-    await toggle.click();
+  await taskRow(page, "Sunete urmărite").click();
+}
+async function openBackups(page) {
+  await taskRow(page, "Setările profilului").click();
+  await taskRow(page, "Copie de siguranță").click();
+}
+async function addSound(page, label) {
+  await page
+    .getByRole("button", { name: "Adaugă un sunet", exact: true })
+    .click();
+  await page.getByRole("radio", { name: label, exact: true }).check();
+  await page
+    .getByRole("button", { name: `Adaugă ${label}`, exact: true })
+    .click();
 }
 let browser;
 try {
@@ -148,9 +169,8 @@ try {
   await page
     .getByRole("heading", { name: longNickname, exact: true })
     .waitFor();
-  await page
-    .getByRole("button", { name: "Editează profilul", exact: true })
-    .click();
+  await taskRow(page, "Setările profilului").click();
+  await taskRow(page, "Nume și personaj").click();
   const editedNickname = `${longNickname.slice(0, 30)} · editat`;
   await page.getByLabel("Numele din joc", { exact: true }).fill(editedNickname);
   await page.locator(".practice-avatar-picker input").nth(1).check();
@@ -158,7 +178,7 @@ try {
     .getByRole("button", { name: "Salvează profilul", exact: true })
     .click();
   await page
-    .getByRole("heading", { name: editedNickname, exact: true })
+    .getByRole("heading", { name: "Setările profilului", exact: true })
     .waitFor();
   await page.setViewportSize({ width: 320, height: 568 });
   assert.equal(
@@ -177,21 +197,23 @@ try {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.getByRole("button", { name: /Alex QA/ }).click();
   await openSoundSettings(page);
-  await page.getByLabel("Sunet sau grup").selectOption("Ș");
+  await addSound(page, "Ș");
+  await taskRow(page, "Ș").click();
+  assert.equal(await page.getByLabel("Ritmul recompenselor").count(), 0);
   await page
-    .getByRole("button", { name: "Salvează sunetul", exact: true })
+    .getByRole("button", { name: "Arhivează sunetul", exact: true })
     .click();
-  await page.getByRole("button", { name: "Arhivează", exact: true }).waitFor();
-  await page.getByLabel("Ritmul recompenselor").selectOption("frequent");
+  await taskRow(page, "Ș").click();
   await page
-    .getByRole("button", { name: "Salvează sunetul", exact: true })
+    .getByRole("button", { name: "Reactivează sunetul", exact: true })
     .click();
-  await page.getByText("Recompense frecvente", { exact: true }).waitFor();
-  await page.getByRole("button", { name: "Arhivează", exact: true }).click();
-  await page.getByRole("button", { name: "Reactivează", exact: true }).click();
-  await page.getByRole("button", { name: "Arhivează", exact: true }).waitFor();
+  await backToProfile(page);
+  await page.getByRole("button", { name: "Toți copiii", exact: true }).click();
   await page.getByRole("button", { name: /Mara QA/ }).click();
-  await page.getByText("Niciun sunet ales încă.", { exact: false }).waitFor();
+  await openSoundSettings(page);
+  await page
+    .getByText("Adăugați un sunet pentru a nota pronunția", { exact: false })
+    .waitFor();
   for (const [width, height] of [
     [390, 844],
     [320, 568],
@@ -209,11 +231,15 @@ try {
       `No horizontal overflow ${width}×${height}`,
     );
   }
+  await backToProfile(page);
+  await taskRow(page, "Setările profilului").click();
   await page
     .getByRole("button", { name: "Șterge profilul", exact: true })
     .click();
   await page.getByRole("button", { name: "Anulează", exact: true }).click();
-  await page.getByRole("heading", { name: "Mara QA", exact: true }).waitFor();
+  await page
+    .getByRole("heading", { name: "Setările profilului", exact: true })
+    .waitFor();
   await page
     .getByRole("button", { name: "Șterge profilul", exact: true })
     .click();
@@ -243,9 +269,7 @@ try {
     false,
     "Mobile child detail hides the profile list",
   );
-  await page
-    .getByRole("button", { name: "Schimbă copilul", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Toți copiii", exact: true }).click();
   await page.getByRole("button", { name: /Alex QA/ }).click();
   await prepareButton.click();
   await page.getByRole("button", { name: "S", exact: true }).click();
@@ -266,7 +290,7 @@ try {
     .locator(".practice-word-preview li")
     .allTextContents();
   await page
-    .getByRole("button", { name: "Editează sunetele", exact: true })
+    .getByRole("button", { name: "Înapoi la profil", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Revino la roata pregătită", exact: true })
@@ -274,10 +298,10 @@ try {
   assert.deepEqual(
     await page.locator(".practice-word-preview li").allTextContents(),
     prepared,
-    "Goal detour preserves the actual prepared wheel",
+    "Returning to the profile preserves the actual prepared wheel",
   );
   await page
-    .getByRole("button", { name: "Începe exersarea generală", exact: true })
+    .getByRole("button", { name: "Începe exersarea", exact: true })
     .click();
   await page.getByRole("button", { name: "Învârte", exact: true }).waitFor();
   const initialLabels = await page
@@ -425,10 +449,8 @@ try {
     await assertActionPainted(page, ".practice-medal-save", name, screenshot);
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  assert.deepEqual(await counts(), { turns: 1, awards: 1, pending: 0 });
-  await page
-    .getByRole("button", { name: "Păstrează medalia", exact: true })
-    .click();
+  assert.deepEqual(await counts(), { turns: 1, awards: 2, pending: 0 });
+  await page.getByRole("button", { name: /^Păstrează.*medali/ }).click();
   await page.getByRole("button", { name: "Învârte", exact: true }).waitFor();
   assert.equal(
     await page.evaluate(
@@ -449,7 +471,8 @@ try {
     ),
   );
   await page.reload();
-  await page.getByRole("button", { name: /Alex QA/ }).click();
+  // Reload now preserves the selected child's workspace.
+  await page.getByRole("heading", { name: "Alex QA", exact: true }).waitFor();
   await page
     .getByRole("button", { name: "Reia exersarea", exact: true })
     .click();
@@ -457,7 +480,7 @@ try {
   await page.addScriptTag({
     content: await readFile(path.join(output, "fixture.js"), "utf8"),
   });
-  assert.deepEqual(await counts(), { turns: 2, awards: 1, pending: 0 });
+  assert.deepEqual(await counts(), { turns: 2, awards: 2, pending: 0 });
   assert.deepEqual(
     await page.locator(".word-wheel__label").allTextContents(),
     initialLabels,
@@ -472,15 +495,16 @@ try {
     .click();
   await page.getByRole("button", { name: "Da, încheiem", exact: true }).click();
   await page.getByRole("heading", { name: /Exersare încheiată/ }).waitFor();
-  assert.deepEqual(await counts(), { turns: 2, awards: 1, pending: 0 });
+  assert.deepEqual(await counts(), { turns: 2, awards: 2, pending: 0 });
   await page
     .getByRole("button", { name: "Înapoi la profil", exact: true })
     .click();
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole("button", { name: "Pronunție", exact: true }).click();
+  await taskRow(page, "Pronunție").click();
+  await taskRow(page, "S").click();
   await page
-    .getByRole("button", { name: "4 · Aproape corect", exact: true })
-    .click();
+    .getByRole("radio", { name: "Aproape corect", exact: true })
+    .check();
   await page
     .getByRole("button", { name: "Salvează observația", exact: true })
     .click();
@@ -488,9 +512,10 @@ try {
     async () =>
       (await window.practiceQA.readPracticeState()).observations.length === 1,
   );
+  await taskRow(page, "S").click();
   await page
-    .getByRole("button", { name: "1 · Foarte dificil", exact: true })
-    .click();
+    .getByRole("radio", { name: "Foarte dificil", exact: true })
+    .check();
   await page
     .getByRole("button", { name: "Salvează observația", exact: true })
     .click();
@@ -500,17 +525,20 @@ try {
   );
   assert.equal(
     (await counts()).awards,
-    1,
+    2,
     "A lower rating cannot remove or create an award",
   );
+  await taskRow(page, "Sărbătorește un progres").click();
+  await page.getByRole("radio", { name: "S", exact: true }).check();
   await page
     .getByRole("button", { name: "La următoarea exersare", exact: true })
     .click();
   await page.waitForFunction(
     async () =>
-      (await window.practiceQA.readPracticeState()).awards.length === 2,
+      (await window.practiceQA.readPracticeState()).awards.length === 3,
   );
-  await page.locator(".practice-backups summary").click();
+  await backToProfile(page);
+  await openBackups(page);
   await page
     .getByLabel("Ce include copia", { exact: true })
     .selectOption({ label: "Doar Alex QA" });
@@ -536,13 +564,16 @@ try {
     1,
     "Legacy library is synchronized before export",
   );
-  await openSoundSettings(page);
-  await page.getByLabel("Sunet sau grup").selectOption("R");
   await page
-    .getByRole("button", { name: "Salvează sunetul", exact: true })
+    .getByRole("button", { name: "Setările profilului", exact: true })
     .click();
+  await backToProfile(page);
+  await openSoundSettings(page);
+  await addSound(page, "R");
+  await backToProfile(page);
+  await openBackups(page);
   await page
-    .getByLabel("Fișier Word Wheel", { exact: true })
+    .getByLabel("Fișier de siguranță (.wwbackup)", { exact: true })
     .setInputFiles(file);
   await page
     .getByLabel("Parola fișierului", { exact: true })
@@ -558,7 +589,7 @@ try {
           (p) => p.nickname === "Alex QA",
         ).goals.length,
     ),
-    2,
+    3,
   );
   await page
     .getByLabel("Parola fișierului", { exact: true })
@@ -591,7 +622,7 @@ try {
   );
   assert.equal(
     restored.profiles.find((p) => p.nickname === "Alex QA").goals.length,
-    1,
+    2,
   );
   assert.deepEqual(
     restored.profiles.find((p) => p.nickname === "Ion QA"),
@@ -600,7 +631,8 @@ try {
   assert.deepEqual(restored.configurations, original.configurations);
   assert.equal(restored.turns.length, 2);
   assert.equal(restored.observations.length, 2);
-  assert.equal(restored.awards.length, 2);
+  assert.equal(restored.awards.length, 3);
+  await taskRow(page, "Date și setări").click();
   await page
     .getByLabel("Ce include copia", { exact: true })
     .selectOption("all");
@@ -625,7 +657,7 @@ try {
     );
   });
   await page
-    .getByLabel("Fișier Word Wheel", { exact: true })
+    .getByLabel("Fișier de siguranță (.wwbackup)", { exact: true })
     .setInputFiles(allFile);
   await page
     .getByLabel("Parola fișierului", { exact: true })
@@ -659,7 +691,17 @@ try {
   assert.equal(allRestored.state.turns.length, 2);
   assert.equal(allRestored.legacy.savedSetups.length, 1);
   await page.setViewportSize({ width: 1440, height: 900 });
+  const returnToChildren = page.getByRole("button", {
+    name: "Toți copiii",
+    exact: true,
+  });
+  if (await returnToChildren.isVisible()) await returnToChildren.click();
+  await captureEvidence(page, "desktop-children-menu");
+  await page.setViewportSize({ width: 390, height: 844 });
+  await captureEvidence(page, "mobile-children-menu");
   await page.getByRole("button", { name: /Alex QA/ }).click();
+  await captureEvidence(page, "mobile-child-workspace");
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page
     .getByRole("heading", { name: "Alex QA", exact: true })
     .scrollIntoViewIfNeeded();
@@ -674,6 +716,13 @@ try {
   await page
     .getByRole("button", { name: "Merg la profiluri", exact: true })
     .click();
+  await page.locator(".onboarding-shell").waitFor({ state: "hidden" });
+  const toChildren = page.getByRole("button", {
+    name: "Toți copiii",
+    exact: true,
+  });
+  if (await toChildren.isVisible()) await toChildren.click();
+  await taskRow(page, "Date și setări").click();
   const sound = page.getByLabel("Sunet la sărbătoriri", { exact: true });
   assert.equal(
     await sound.isChecked(),
@@ -697,12 +746,13 @@ try {
   await page
     .getByRole("button", { name: "Merg la profiluri", exact: true })
     .click();
+  await page.locator(".onboarding-shell").waitFor({ state: "hidden" });
+  // Help returns to the current adult tool; use its parent navigation.
+  await page.getByRole("button", { name: "Toți copiii", exact: true }).click();
   const beforeDemo = await page.evaluate(async () =>
     JSON.stringify(await window.practiceQA.readPracticeState()),
   );
-  await page
-    .getByRole("link", { name: "Prezentare și explicații", exact: true })
-    .click();
+  await page.getByRole("link", { name: "Despre Vorbini", exact: true }).click();
   await page.getByRole("link", { name: "Încearcă jocul", exact: true }).click();
   await page.getByRole("button", { name: "Învârte", exact: true }).click();
   await page.getByRole("dialog").waitFor();

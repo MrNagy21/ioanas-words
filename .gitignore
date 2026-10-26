@@ -25,3 +25,6 @@ bun-debug.log*
 # OS/editor files
 .DS_Store
 *.swp
+
+# local design-review captures
+.impeccable/review/

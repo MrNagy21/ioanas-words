@@ -1,16 +1,14 @@
 "use client";
 
+import { ProfilePrivacyNotice } from "@/components/legal-links";
+import { Brand } from "@/components/brand";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Medal } from "./medal";
 import type { AvatarOption } from "./profile-workspace";
 import type { PreparedPractice } from "./prepare-practice";
-import {
-  saveGoal,
-  saveProfile,
-  type LocalPracticeState,
-} from "@/practice/model";
+import { saveProfile, type LocalPracticeState } from "@/practice/model";
 import type { ContentWord, GameplayTarget } from "@/content/types";
 import {
   buildPracticeContent,
@@ -20,13 +18,8 @@ import {
   createDefaultWheelSetupConfig,
   getModeWords,
 } from "@/game/wheel-setup";
-import { attributePracticeGoals } from "@/content/sound-mapping";
 
 const DRAFT_KEY = "word-wheel.onboarding.v2";
-const LABELS =
-  "A Ă Â B C D E F G H I Î J K L M N O P Q R S Ș T Ț U V W X Y Z CE CI GE GI CHE CHI GHE GHI".split(
-    " ",
-  );
 const COMMON = ["S", "Ș", "R", "L", "F", "V", "T", "Ț"];
 const PAGES = ["Bun venit", "Copil", "Sunet", "Cuvinte", "Joacă"];
 type Draft = {
@@ -244,13 +237,6 @@ export function PracticeOnboarding({
     const label = skip ? "" : goal;
     if (
       await onSave((d) => {
-        if (label)
-          saveGoal(
-            d,
-            child.id,
-            label,
-            child.goals.find((g) => g.label === label)?.pace ?? "standard",
-          );
         d.preferences.onboardingCompleted = false;
         d.preferences.onboardingStep = 3;
       }, "")
@@ -322,25 +308,6 @@ export function PracticeOnboarding({
         ? prepared
         : null
       : null;
-  const unknown =
-    wheel &&
-    child &&
-    wheel.words.some((w) =>
-      attributePracticeGoals(
-        w.id,
-        child.goals.filter((g) => g.active),
-      ).some((g) => g.matched === null),
-    );
-  const matchingGoals =
-    child?.goals
-      .filter(
-        (g) =>
-          g.active &&
-          wheel?.words.some(
-            (w) => attributePracticeGoals(w.id, [g])[0]?.matched === true,
-          ),
-      )
-      .map((g) => g.label) ?? [];
   const primary = [
     "Pregătim prima joacă",
     creating
@@ -363,7 +330,7 @@ export function PracticeOnboarding({
       <form className="onboarding-frame" onSubmit={submit}>
         <header className="onboarding-header">
           <span className="onboarding-brand">
-            Roata cuvintelor<span aria-hidden="true">.</span>
+            <Brand />
           </span>
           <button
             className="quiet-button"
@@ -462,7 +429,7 @@ export function PracticeOnboarding({
                   creating
                     ? "O poreclă și un animal preferat. Atât ne trebuie pentru primul profil."
                     : "Alege copilul pentru care pregătim roata.",
-                  "Alege un sunet la care vreți să lucrați. Poți adăuga altele mai târziu.",
+                  "Alege sunetul pentru prima roată. Îl vom urmări automat când începeți joaca.",
                   `Privește cuvintele de pe roata pentru ${child?.nickname ?? "copil"}.`,
                   `Roata pentru ${child?.nickname ?? "copil"} este pregătită. Voi dați ritmul, fără grabă.`,
                 ][page]
@@ -478,6 +445,7 @@ export function PracticeOnboarding({
             <fieldset className="onboarding-fields" disabled={busy}>
               {creating ? (
                 <>
+                  <ProfilePrivacyNotice />
                   <label className="onboarding-name">
                     Cum îi spunem în joc?
                     <input
@@ -594,9 +562,12 @@ export function PracticeOnboarding({
                   onChange={(e) => setGoal(e.target.value)}
                 >
                   <option value="">Alege din listă</option>
-                  {LABELS.filter((g) => !COMMON.includes(g)).map((g) => (
-                    <option key={g}>{g}</option>
-                  ))}
+                  {targets
+                    .map((t) => t.label)
+                    .filter((g) => !COMMON.includes(g))
+                    .map((g) => (
+                      <option key={g}>{g}</option>
+                    ))}
                 </select>
               </label>
               <button
@@ -674,26 +645,13 @@ export function PracticeOnboarding({
                   </span>
                 </li>
               </ol>
-              {matchingGoals.length > 0 && (
-                <p className="onboarding-small">
-                  Roata poate contribui la sunetele {matchingGoals.join(", ")},
-                  pentru cuvintele verificate.
-                </p>
-              )}
-              {!unknown &&
-                child.goals.some((g) => g.active) &&
-                !matchingGoals.length && (
-                  <p className="onboarding-small">
-                    Această roată contează pentru exersarea generală, fără
-                    cuvinte verificate pentru sunetele alese.
-                  </p>
-                )}
-              {unknown && (
-                <p className="onboarding-small">
-                  Numărăm cuvintele exersate. Totalurile pe sunete așteaptă
-                  verificarea listei.
-                </p>
-              )}
+              <p className="onboarding-small">
+                {active
+                  ? `Reluăm practica pentru ${active.target.label}`
+                  : `La pornire, urmărim automat ${wheel?.target.label}`}{" "}
+                pentru {child.nickname}. Fiecare cuvânt închis contează pentru
+                această țintă și pentru medaliile de participare.
+              </p>
               {active && (
                 <p className="onboarding-small">
                   Există deja o roată începută pentru acest copil. Reluăm acea

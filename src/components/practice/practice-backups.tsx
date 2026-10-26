@@ -16,11 +16,13 @@ import type { PracticeBackup } from "@/storage/practice-backup";
 export function PracticeBackups({
   state,
   onRestored,
+  initialScope,
 }: {
   state: LocalPracticeState;
   onRestored: () => void;
+  initialScope?: string;
 }) {
-  const [scope, setScope] = useState("all");
+  const [scope, setScope] = useState(initialScope ?? "all");
   const fileInput = useRef<HTMLInputElement>(null);
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
@@ -120,8 +122,8 @@ export function PracticeBackups({
     }
   }
   return (
-    <details className="practice-backups">
-      <summary>Copii de siguranță și restaurare</summary>
+    <section className="practice-backups task-page">
+      <h1 tabIndex={-1}>Date și copii de siguranță</h1>
       <p>
         Păstrați o copie a profilurilor și medaliilor, pentru orice
         eventualitate. O puteți folosi și ca să mutați datele pe alt dispozitiv.
@@ -191,7 +193,7 @@ export function PracticeBackups({
         <form className="practice-backup-form" onSubmit={openBackup}>
           <h2>Recuperează dintr-o copie</h2>
           <label>
-            Fișier Word Wheel
+            Fișier de siguranță (.wwbackup)
             <input
               type="file"
               ref={fileInput}
@@ -292,7 +294,7 @@ export function PracticeBackups({
           </div>
         </section>
       )}
-    </details>
+    </section>
   );
 }
 function message(reason: unknown) {

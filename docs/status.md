@@ -1,6 +1,60 @@
 # Word Wheel Status
 
-Last updated: 2026-10-24
+Last updated: 2026-10-26
+
+## Release 2026-10-26
+
+Deployment in progress at the user's explicit request. The release combines the approved child workspace, automatic wheel targets, focused profile settings, navigation, Vorbini identity, legal drafts and adult footer. Local domain/migration/encryption, onboarding, persistence-regression and profile-settings checks pass. Content validation and the production dependency audit pass. The full WebKit play and encrypted child/whole-app backup journey also passes. The candidate is ready for the main-branch push. Legal drafts, Romanian review and physical-device/therapist acceptance remain open. See [the release report](app-development-program/features/guided-practice-app/release-2026-10-26.md).
+
+## Adult footer
+
+Completed locally 2026-10-26. Replaced loose policy/credit links with the shared `AppFooter` on the introduction, child list, profile settings and legal pages. Phones use a two-column link grid beneath a compact brand area; desktop places brand and navigation side by side. Creator credit is grouped separately. About/contact/legal links have comfortable touch targets, current-page indication and keyboard focus. Document links from adult menus have new-tab icons and one explanatory note. Profile settings place the footer after deletion controls. Gameplay, onboarding, profile forms and focused tools have no new footer. Legal copy and draft status are unchanged.
+
+Production build/TypeScript, lint, scoped formatting and Impeccable's layout scan pass. `check:footer-browser` passes in WebKit 26.5 at 390px/1440px, 320px with 200% text and short landscape. It verifies touch targets, keyboard focus, page/current/new-tab links, settings continuity, footer absence in focused tasks/play, and preservation of the anonymous game's existing credit-strip layout. The first pass found a class-name collision with that strip; the shared footer now uses isolated `adult-footer` styles. The WebKit route sweep waits for prefetches to settle before navigation, avoiding cancellation errors. Final run reports no page errors. Phone settings/child-list and desktop introduction captures were inspected in `/Users/darius/.t3/userdata/artifacts/vorbini-footer-2026-10-26/`. Tailscale returns 200 with the new footer. No deployment.
+
+This footer refinement is complete. Remaining work is physical-phone acceptance and the legal release decisions in `docs/legal/final-proposal-2026-10-26.md`; this UI change does not resolve those operational facts.
+
+## Legal pages
+
+Updated 2026-10-26 after the user-requested independent Astra high review. The revised Romanian Terms and Privacy proposal is implemented at `/ro/termeni` and `/ro/confidentialitate`. Both remain explicitly marked draft and noindex. See `docs/legal/final-proposal-2026-10-26.md` for the concrete proposal, operational recommendations, sources and remaining release decisions; the independent findings are in `docs/legal/astra-review-2026-10-26.md`.
+
+Applied clearer participation/counting wording, adult authority including caregivers, professional responsibilities, browser/domain backup guidance, working Google/ANSPDCP links and the confirmed Gmail/support facts. Company identity/contact come from the user's input and recorded public company sources. The owner confirmed he accesses the inbox and support does not access child data. Introduction and adult workspace now link both pages; both profile-creation paths include a privacy notice with a labelled new-tab link to preserve unsaved inputs. Review notes sit separately below the text. No consent checkbox, cookie banner, child upload or analytics was added.
+
+A proposed 90-day post-resolution support retention rule awaits adoption. Actual Google/Vercel agreements, enabled logging and retention, recipient/transfer details and completion of the scoped role/lawful-basis assessment remain for release. A custom domain alone is not a drafting blocker. The final proposal is not a declaration of legal production readiness. Production build/TypeScript, full lint, scoped formatting and WebKit mobile/desktop checks pass. Tests cover 320px/200% text, links, both profile forms preserving drafts across a privacy tab, profile creation, visible settings links and Tailscale HTTPS. Verification and screenshot evidence for this editing pass are recorded in `docs/legal/release-notes.md`. No public deployment or legal-compliance certification.
+
+## Vorbini name
+
+Completed locally 2026-10-26. The user selected Vorbini. Visible wordmarks, accessible names, document titles, home-screen metadata and named icon URLs now use Vorbini. Logo artwork, plum buttons, storage identifiers, app manifest identity and child data are unchanged. Production build/TypeScript, lint, scoped formatting and the WebKit navigation suite pass. Tailscale returns the new document/Apple titles and manifest; all named icons return 200. Fresh mobile profile/setup and desktop introduction captures were inspected in `/Users/darius/.t3/userdata/artifacts/vorbini-branding-2026-10-26/`. The app is running on port 3000. No public deployment was made.
+
+## Button consistency and reopened naming
+
+Buttons completed locally 2026-10-26; naming awaits the user. The user retained the logo and visual identity, requested consistent main buttons, and reopened the name choice. Primary buttons now use logo plum; secondary hover stays lilac rather than falling back to legacy mint. Phone menu rows no longer retain desktop hover backgrounds after a tap. Warm reward accents and distinct destructive controls remain. Rostimo stays in the UI pending a replacement choice. Production build/TypeScript, scoped formatting and WebKit navigation checks pass. Chrome computed styles verify plum normal/hover and lilac secondary hover/disabled states. WebKit touch onboarding passes after waiting for hydration. Fresh phone profile/setup and desktop introduction captures were inspected under `/Users/darius/.t3/userdata/artifacts/word-wheel-plum-buttons-2026-10-26/`. No deployment was made.
+
+## Rostimo identity and navigation
+
+Approved 2026-10-26. The user selected Rostimo and confirmed the smiling speech-bubble logo, rounded lettering, warm cream background, plum navigation and apricot buttons. PRODUCT.md and DESIGN.md now record this identity. The final refinement matches browser chrome and installed-app theme to the cream page and declares light native controls. Existing uncommitted profile/settings work and browser-local records are preserved.
+
+Handoff verification rebuilt the latest changes and passed lint. Chrome 155 and WebKit 26.5 pass the new navigation checks: parent Back reuses history, browser Back/Forward works across profile/edit/backup/library screens, reload retains the selected menu, and navigation preserves fixture records byte for byte. WebKit also passes the focused profile-settings suite with narrow screens and enlarged text. The page-sweep test now waits for background prefetches before navigating away; its initial WebKit run reported cancelled requests, while the settled run passes with no page errors. The phone profile heading starts at 125px. Fresh captures confirm the setup logo, selected-state styling and demo branding. See the [branding report and screenshots](app-development-program/features/guided-practice-app/rostimo-branding.md).
+
+The approved final build is running on port 3000 and Tailscale HTTPS returns 200. Production build/TypeScript, lint, scoped formatting and the WebKit navigation suite pass again after the browser-theme refinement. The rendered Rostimo title, light color scheme and cream manifest/browser theme pass direct response checks. Fresh mobile/desktop captures were inspected. This branding update has not been publicly deployed; physical-device acceptance remains pending.
+
+The final WebKit onboarding suite also passes, including first play/medal and Help/resume. Its reload check now asserts the selected child remains open, matching the new navigation behavior. Scoped formatting and `git diff --check` pass.
+
+## Focused profile settings
+
+Implemented and locally verified 2026-10-26 after the user's phone feedback. The profile now has six described destinations, separate sound list/detail/picker screens, one native-radio pronunciation form, and dedicated activity, medals and settings screens. Profile settings lead to name/avatar editing and a protected backup screen initially scoped to that child. Counting, rewards, schema and reviewed sound attribution are unchanged by this extension. See the [report, screenshots and test checklist](app-development-program/features/guided-practice-app/profile-settings-surface.md).
+
+Production build/TypeScript, lint, practice domain checks and scoped formatting pass. `check:profile-settings` passes in headed Chrome 155 and WebKit 26.5, including keyboard controls, failed saves, archive/reactivation, unrated/zero/corrected observations, explicit adult medals, profile isolation and Back/Forward. WebKit full practice/protected backup, resilience, release regression, child-workspace and onboarding suites pass. A later targeted check found multi-letter picker overflow at 390px/200% text. The corrected grid grows with text; production build/TypeScript and both focused browser suites pass again, now checking each letter/group label for overflow. All eight original captures were refreshed, with an additional enlarged-text group capture; all nine were opened and validated. Documentation and the final full regression run are complete. The final reviewer scored the documentation, full regression run and enlarged-text fixes resolved and returned `disposition: ship` for those fixes only.
+
+Localhost and Tailscale HTTPS return 200. Opening still requires a connection; backups remain local. Physical devices, assistive technology, therapist feedback and user-arranged Romanian mapping review remain pending. No commit, push or deployment was made for this extension.
+
+## Child-first workspace and automatic targets
+
+Completed locally 2026-10-26. Copii opens a child list with compact statistics, then a focused profile on phones and desktop. Starting a round creates or reactivates that child's chosen wheel target; preparing or previewing creates no goal. Each closed word counts once toward that target, independently of reviewed phonetic presence/position. Schema 4 preserves historical attribution, earned medals and the next promised milestone while replacing selectable reward pace with 1, 3, 5, 10 and every 10. See the [approved amendment and final evidence](app-development-program/features/guided-practice-app/child-first-workspace.md).
+
+Final production build/TypeScript, lint, content validation, expanded practice/migration/backup checks, setup-storage, matching and gameplay pass. WebKit 26.5 passes full practice/protected restore, resilience, release regressions and onboarding. The new `pnpm run check:child-workspace` passes in headless WebKit 26.5 and headed Chrome 155, including mobile/desktop, 200% text and short landscape. All 85 public routes and four invalid-route 404s pass. The fresh finish review returned `disposition: ship` with all six captures valid and no material fixes, scoped to menu/profile/target-preview/onboarding continuity. This is not whole-app, clinical or physical-device acceptance.
+
+The production server runs on port 3000; [Tailscale HTTPS practice](https://dariuss-macbook-pro-2.tail1ee9b4.ts.net:9443/ro/practice) returns 200. Opening still requires a connection; protected backups remain local. Content validation retains existing image-size warnings and zero reviewed sound mappings. Physical iPhone/Android and assistive-technology checks, therapist feedback and user-arranged Romanian review remain. Source evidence uses direct reads because the graph catalog has no Word Wheel index. No commit or deployment was made for this update; the deployed 2026-10-24 pilot below is the previous version.
 
 ## Release audit and deployment preparation
 

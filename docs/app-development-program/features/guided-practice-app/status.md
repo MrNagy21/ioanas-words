@@ -1,6 +1,14 @@
 # Guided practice app status
 
-Last updated: 2026-10-24.
+2026-10-26: [Focused profile settings](profile-settings-surface.md) are implemented and locally verified. Six described profile destinations replace the long combined page. Sound selection and pronunciation use labelled native radios; activity, medals, observations, celebrations and settings open as separate tasks. Profile backup entry selects that child by default. Browser Back/Forward follows profile and pronunciation navigation, and choosing a child resets to its home. This extension changes no schema, counting, reward or reviewed-mapping contracts.
+
+Production build/TypeScript, lint, practice domain checks and scoped formatting pass. The new `check:profile-settings` passes in headed Chrome 155 and WebKit 26.5 at narrow phone, portrait, landscape and desktop sizes, including 200% text. WebKit full practice/protected restore, resilience, release regression, child-workspace and onboarding suites pass. A later targeted check found multi-letter picker overflow at 390px/200% text. The corrected grid grows with text; production build/TypeScript and both focused browser suites pass again with individual letter/group label overflow assertions. All eight original captures were refreshed, with an additional enlarged-text group capture; all nine were opened and validated. Documentation and the final full regression run are complete. The final reviewer scored the documentation, full regression run and enlarged-text fixes resolved and returned `disposition: ship` for those fixes only. No commit, push or deployment was made for this extension. Physical-device, assistive-technology, therapist and Romanian mapping acceptance remain pending.
+
+2026-10-26: [Child-first workspace and automatic target tracking](child-first-workspace.md) are complete locally. Schema 4 separates explicit wheel-target participation from reviewed sound/position credit and preserves history, earned medals and the next promised milestone. One visible schedule replaces selectable reward pace. No commit or deployment was made for this update; the published pilot below remains the previous version.
+
+Final build/TypeScript, lint, content, practice/migration/backup, setup-storage, matching and gameplay checks pass. WebKit 26.5 passes full practice/protected restore, resilience, release regressions and onboarding. The new `pnpm run check:child-workspace` passes in headless WebKit 26.5 and headed Chrome 155 at mobile/desktop sizes, 200% text and short landscape. All 85 public routes and four invalid-route 404s pass. A fresh finish review returned `disposition: ship`, accepted all six captures and requested no material fixes within the menu/profile/target-preview/onboarding scope. Physical-device, assistive-technology, therapist and Romanian mapping acceptance remain pending. The [amendment](child-first-workspace.md) records captures, test coverage and the next prompt.
+
+Last updated: 2026-10-26.
 
 ## Current phase
 

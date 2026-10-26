@@ -2,6 +2,8 @@
 
 This file captures the project decisions. Use it as the fast handoff for any agent starting work in this repository.
 
+The app is named **Vorbini**, selected by the user on 2026-10-26. Keep the smiling speech-bubble logo, rounded Nunito Sans, warm cream and plum/lilac buttons. See PRODUCT.md, DESIGN.md and the [branding report](app-development-program/features/guided-practice-app/rostimo-branding.md). Older Word Wheel references describe the same project; storage identifiers remain unchanged.
+
 ## Active direction: guided practice app
 
 Updated 2026-10-16 after the product interview. The core game and public demo exist. The next work is [Guided Practice App](app-development-program/features/guided-practice-app/spec.md), following its [GP0–GP9 plan](app-development-program/features/guided-practice-app/plan.md). GP0–GP7 are implemented and locally tested; GP8 has manifest/icons with offline explicitly deferred. GP9 mapping review, physical devices and therapist pilot remain.

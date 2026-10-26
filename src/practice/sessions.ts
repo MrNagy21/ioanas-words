@@ -4,6 +4,7 @@ import { awardCompletedParticipation } from "@/practice/rewards";
 import type { WheelSetupConfig } from "@/game/wheel-setup-storage";
 import {
   newLocalId,
+  saveGoal,
   type LocalPracticeState,
   type PracticeSession,
 } from "@/practice/model";
@@ -25,10 +26,15 @@ export function beginPracticeSession(
     );
   if (!words.length || words.length > 16)
     throw new Error("Alegeți între 1 și 16 cuvinte.");
+  saveGoal(state, childId, target.label);
+  const practiceGoalId = state.profiles
+    .find((p) => p.id === childId)!
+    .goals.find((g) => g.label === target.label)!.id;
   state.sessions.push({
     id,
     childId,
     title,
+    practiceGoalId,
     target: structuredClone(target),
     config: structuredClone(config),
     words: structuredClone(words),
@@ -65,6 +71,13 @@ export function claimSession(
   const session = state.sessions.find((s) => s.id === id);
   if (!session || session.endedAt)
     throw new Error("Exersarea nu mai este disponibilă.");
+  if (!session.practiceGoalId) {
+    // Adopting an old open round does not relabel its already-recorded turns.
+    saveGoal(state, session.childId, session.target.label);
+    session.practiceGoalId = state.profiles
+      .find((p) => p.id === session.childId)!
+      .goals.find((g) => g.label === session.target.label)!.id;
+  }
   session.ownerId = ownerId;
   if (session.pending) commitPendingTurn(state, id, ownerId, "recovery");
 }
@@ -89,6 +102,7 @@ export function showPracticeWord(
     wordId,
     shownAt: new Date().toISOString(),
     goals: attributePracticeGoals(wordId, profile.goals),
+    practiceGoalId: session.practiceGoalId,
   };
 }
 
@@ -119,6 +133,9 @@ export function commitPendingTurn(
       closedAt: now,
       reason,
       goals: structuredClone(pending.goals),
+      ...(pending.practiceGoalId
+        ? { practiceGoalId: pending.practiceGoalId }
+        : {}),
     });
   if (reason === "remove")
     session.remainingWordIds = session.remainingWordIds.filter(

@@ -1,5 +1,7 @@
 # Next batch: deployed pilot acceptance and Romanian review
 
+Current amendment: read [child-first-workspace.md](child-first-workspace.md) and the latest global status before continuing. It supersedes manual-goal setup, selectable reward pace and schema 3.
+
 Copy this prompt:
 
 ```text

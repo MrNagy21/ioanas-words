@@ -4,7 +4,7 @@ Use this for your acceptance test after the local engineering QA. It lists the f
 
 ## Before you start
 
-Open [the public app](https://ioanas-words.vercel.app/ro/practice). The deployed code revision is `779ac39`. Local testing remains available at `http://localhost:3000/ro/practice`. Use synthetic profiles named Alex Test and Mara Test. Keep the existing browser data; there is no need to clear it. If you use existing records, make a protected whole-app backup before restore or deletion tests.
+Open [the public app](https://ioanas-words.vercel.app/ro/practice). See the [2026-10-26 release report](release-2026-10-26.md) for the current revision and verification. Local testing remains available at `http://localhost:3000/ro/practice`. Use synthetic profiles named Alex Test and Mara Test. Keep the existing browser data; there is no need to clear it. If you use existing records, make a protected whole-app backup before restore or deletion tests.
 
 The public app needs no Tailscale connection. Its records are separate from localhost/Tailscale; use a protected backup for an intentional transfer. To test the local build from phones instead, connect Tailscale to the same tailnet and open [the private HTTPS candidate](https://dariuss-macbook-pro-2.tail1ee9b4.ts.net:9443/ro/practice). This route was enabled and certificate-checked on 2026-10-19. The app still runs on this computer; keep it awake and running during testing. HTTPS supports the secure context needed for saved profiles, locking and encryption. Each browser/origin starts with its own local records. The local LAN HTTP address is unsuitable for saved-mode checks. Record the actual URL and build you test; do not treat the older public demo as this candidate.
 
@@ -30,7 +30,7 @@ The app needs a connection to open. Offline cold launch is not supported. Sound 
 ### Entry, guidance and profiles
 
 - [ ] **E1 Introduction:** explanations and Start/Demo links are readable on phone and desktop. Demo activity never appears in a child profile.
-- [ ] **E2 Returning adult:** reopening `/` returns to the workspace when profiles exist. **Prezentare și explicații** still opens the introduction.
+- [ ] **E2 Returning adult:** reopening `/` returns to the workspace when profiles exist. **Despre Vorbini** still opens the introduction.
 - [ ] **E3 Guide:** welcome → child → optional sound → picture wheel → handover. Each page has one main action. Create/select a real child, go back, reload, skip the sound and exit with **Merg la profiluri**. Restart from **Ajutor**. The reviewed pictures enter real play; an existing round resumes. Profiles, wheels and history remain. On a phone, check the keyboard and footer text as well as the buttons.
 - [ ] **P1 Profiles:** create, edit a nickname/avatar and switch between two children. The correct nickname/avatar appears before play.
 - [ ] **P4 Two-tab editing:** open the same child's profile editor in two tabs. Save a changed avatar in one, then try saving the old form in the other. A conflict should retain the draft and preserve the newer avatar. Cancel/reopen before saving a fresh edit.
@@ -39,13 +39,13 @@ The app needs a connection to open. Offline cold launch is not supported. Sound 
 
 ### Goals and reusable wheels
 
-- [ ] **G1 Goals:** add a target, switch Standard/Frequent, archive and reactivate it. The chosen pace persists; already earned medals remain.
+- [ ] **G1 Goals:** add a target from the sound picker, archive it, then start a wheel for that target. Starting the round reactivates the existing goal and preserves its history. Preparing a wheel alone adds no goal. There is no reward-frequency setting.
 - [ ] **G2 Honest coverage:** pending Romanian review is clearly stated. Practice totals are available; unknown sound/position coverage is not presented as verified zero.
 - [ ] **W1 Setup:** choose a target, matching mode and words/exclusions through the four clean task pages. On Final, the number explicitly says how many words go on the wheel. Available words are a separate pool. Change the number with minus/plus and confirm the prepared preview contains that many words. Try starting without saving, then expand optional saving and save a named wheel.
 - [ ] **W2 Library:** save, reopen and edit a wheel. Reuse it for the other child. Editing a shared configuration does not rewrite an already active round.
-- [ ] **W3 Pre-play:** verify the child and exact prepared words. Visit goal settings and return; the selected words and exclusions remain.
+- [ ] **W3 Pre-play:** verify the child and exact prepared words. The chosen target is added or reactivated when the round starts; no prior goal setup is required.
 - [ ] **W5 Storage recovery:** if a post-initialization save/start fails, the draft and name stay available with readable retry guidance. A saved wheel followed by a failed start must be reported as saved, and retrying Start must not create another saved wheel.
-- [ ] **W4 No goals:** start general practice without a goal. It still earns overall participation.
+- [ ] **W4 No goals:** start with a child who has no goals. A targeted round adds its target automatically and earns overall and target participation.
 
 ### Play, counting and stopping
 
@@ -59,13 +59,20 @@ The app needs a connection to open. Offline cold launch is not supported. Sound 
 
 ### Rewards, activity and adult observations
 
-- [ ] **R1 Medals:** the overall first medal follows one closed word, then milestones 5, 10 and 20, then every 20. The bar fills per word. There is no timer, lost streak or speed bonus.
+- [ ] **R1 Medals:** the overall first medal follows one closed word, then milestones 3, 5 and 10, then every 10. Existing profiles retain their next promised medal before adopting the new schedule. The bar fills per word. There is no timer, lost streak or speed bonus.
 - [ ] **R2 Choice:** the award congratulates the child, names the milestone and saves the chosen medal illustration. Changing the drawing does not add credit.
 - [ ] **R3 Access:** the medal choices and save action remain reachable in portrait, short landscape and enlarged text. Reduced motion keeps a readable celebration.
 - [ ] **H1 Activity:** repeated versus different words, session summaries and picture history agree with your test turns. Switching children changes the history.
 - [ ] **O1 Ratings:** unrated differs from 0. Try the adult 0–5 pronunciation scale, save a dated observation and correct one. No automatic accuracy claim or reward change follows.
 - [ ] **O2 Adult celebration:** use **Sărbătorește acum**, then queue a separate celebration for next play. They belong to that child and are labelled as adult-observed progress.
 - [ ] **O3 Sound:** celebration sound starts off. Turn it on and off; the preference persists. Muting does not hide awards. Check actual audio on each device.
+
+### Navigation and footer
+
+- [ ] **N1 Profile menus:** open each of the six destinations. Back returns to its parent; browser Back/Forward follows the same journey. Reload preserves the selected child and screen.
+- [ ] **N2 Settings:** edit nickname/avatar from settings, cancel once, then save. Both routes return to settings. The child backup screen returns to settings before returning to the profile.
+- [ ] **N3 Footer:** introduction, child list, profile settings and policy pages have readable links on a phone. Terms and Privacy from adult menus open a separate tab and preserve the current task. Gameplay and focused forms have no adult footer.
+- [ ] **N4 Policies:** both policy pages remain visibly marked as drafts. Their operational release decisions are still pending.
 
 ### Backups, recovery and responsive use
 
@@ -84,8 +91,8 @@ The app needs a connection to open. Offline cold launch is not supported. Sound 
 Mark these **Blocked** until actual reviewed mappings are integrated. Do not substitute spelling matches.
 
 - **M1** The pre-play list reflects the exact reviewed matching subset and distinguishes unknown from reviewed absence.
-- **M2** One closed word can credit several selected matching goals once each, but only one overall turn. Unselected sounds receive no goal credit.
-- **M3** Beginning/middle/end statistics match reviewed positions. New or archived goals do not rewrite historical credits. Standard and Frequent per-goal schedules and the next promised medal survive pace changes.
+- **M2** Reviewed sound statistics may record several selected matching goals once each. Wheel-target participation remains separate and each closed word still adds only one overall turn.
+- **M3** Beginning/middle/end statistics match reviewed positions. New or archived goals do not rewrite historical credits. Previously earned medals and the next promised milestone remain intact after migration.
 
 ## Send back findings
 

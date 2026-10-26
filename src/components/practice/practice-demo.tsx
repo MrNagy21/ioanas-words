@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { Brand } from "@/components/brand";
 import { useRef, useState } from "react";
 import { WheelGame } from "@/components/wheel-game";
 import { MedalCelebration } from "@/components/practice/medal-celebration";
@@ -36,6 +37,7 @@ export function PracticeDemo({
     return (
       <main className="practice-shell">
         <div className="practice-preview practice-frame">
+          <Brand compact />
           <h1>Așa începe exersarea</h1>
           <p>
             În demonstrație ați închis {count} cuvinte. Datele dispar când
@@ -56,7 +58,9 @@ export function PracticeDemo({
     <main className="app-shell">
       <div className="app-frame">
         <header className="app-header">
-          <h1>Demonstrație</h1>
+          <h1 aria-label="Vorbini · Demonstrație">
+            <Brand compact />
+          </h1>
           <Link className="quiet-link" href="/ro/about?show=1">
             Ieși din demo
           </Link>

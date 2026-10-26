@@ -75,9 +75,7 @@ try {
   await page.goto("http://localhost:3000/ro/practice");
   await heading(/O roată mică/).waitFor();
   assert.equal(
-    await page
-      .getByRole("heading", { name: "Copiii mei", exact: true })
-      .count(),
+    await page.getByRole("heading", { name: "Copii", exact: true }).count(),
     0,
     "No competing dashboard during onboarding",
   );
@@ -162,6 +160,11 @@ try {
   let state = await snapshot();
   assert.equal(state.turns.length, 0);
   assert.equal(state.sessions.length, 0);
+  assert.equal(
+    state.profiles[0].goals.length,
+    0,
+    "Choosing or previewing a wheel does not add its target before start",
+  );
   assert.equal(state.awards.length, 0);
   await button("Să începem joaca").click();
   await button("Învârte").waitFor();
@@ -174,16 +177,21 @@ try {
   assert.equal(state.preferences.onboardingCompleted, true);
   assert.equal(state.sessions.length, 1);
   assert.equal(state.turns.length, 0);
-  assert.equal(state.profiles[0].goals[0].label, "R");
+  assert.equal(state.profiles[0].goals[0].label, "S");
   await button("Învârte").click();
   await page.getByRole("dialog").waitFor();
   await button("Păstrează").click();
   await heading("Bravo, Mara QA!").waitFor();
-  await button("Păstrează medalia").click();
+  await button(/^Păstrează.*medali/).click();
   await button("Învârte").waitFor();
   await page.waitForLoadState("networkidle", { timeout: 10000 });
   await page.reload();
-  await page.getByRole("button", { name: /Mara QA/ }).click();
+  await heading("Mara QA").waitFor();
+  assert.equal(
+    await heading("Copii").count(),
+    0,
+    "Reload after onboarding retains the selected child's profile",
+  );
   await inject();
   const existingId = (await snapshot()).sessions[0].id;
   await button("Ajutor").click();

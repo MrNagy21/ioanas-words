@@ -308,9 +308,9 @@ export function AdminReleasesContent({
             <p className="admin-note">
               Read-only release structure for Romanian content QA. Release 1 is
               the original committed baseline, Release 2 is the committed
-              content release, and Release 3 is the current dirty work tree.
-              Use the release pages to inspect each set with the same admin
-              review UI.
+              content release, and Release 3 is the current dirty work tree. Use
+              the release pages to inspect each set with the same admin review
+              UI.
             </p>
           </div>
           <div className="admin-header__actions">
@@ -339,9 +339,7 @@ export function AdminReleasesContent({
             {releaseSnapshots.map((release) => (
               <Link
                 aria-current={
-                  release.number === selectedRelease.number
-                    ? "page"
-                    : undefined
+                  release.number === selectedRelease.number ? "page" : undefined
                 }
                 className="admin-release-nav__link"
                 href={`/admin/releases/${release.number}`}
@@ -647,9 +645,7 @@ function getReleaseWords(
     const word = wordsById.get(wordId);
 
     if (!word) {
-      throw new Error(
-        `Release ${releaseId} references missing word ${wordId}`,
-      );
+      throw new Error(`Release ${releaseId} references missing word ${wordId}`);
     }
 
     return word;
@@ -657,7 +653,9 @@ function getReleaseWords(
 }
 
 function getAffectedLetterIds(words: readonly ContentWord[]): string[] {
-  return Array.from(new Set(words.map((word) => getLetterIdFromWordId(word.id))));
+  return Array.from(
+    new Set(words.map((word) => getLetterIdFromWordId(word.id))),
+  );
 }
 
 function getLetterIdFromWordId(wordId: string): string {

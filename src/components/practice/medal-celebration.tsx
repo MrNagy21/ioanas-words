@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Brand } from "@/components/brand";
 import { Medal } from "@/components/practice/medal";
 
 type MedalVariant = "star" | "flower" | "sun";
@@ -35,6 +36,9 @@ export function MedalCelebration({
     <main className="practice-shell practice-celebration-shell">
       <div className="practice-celebration" aria-busy={busy}>
         <div className="practice-celebration-content">
+          <div className="celebration-brand">
+            <Brand compact />
+          </div>
           <div className="practice-celebration-art">
             <Medal variant={variant} size={156} progress={progress} />
             <svg

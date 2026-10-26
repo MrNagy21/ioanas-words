@@ -114,7 +114,14 @@ try {
   await page.getByLabel("Numele din joc", { exact: true }).fill("Audit QA");
   await button("Salvează profilul").click();
   await inject(page);
-  await button("Editează profilul").click();
+  await page
+    .locator(".task-row")
+    .filter({ has: page.getByText("Setările profilului", { exact: true }) })
+    .click();
+  await page
+    .locator(".task-row")
+    .filter({ has: page.getByText("Nume și personaj", { exact: true }) })
+    .click();
   const other = await ui.newPage();
   await other.goto("http://localhost:3000/ro");
   await inject(other);
@@ -150,11 +157,15 @@ try {
   assert.equal(saved.avatar, avatar, "Other tab avatar cannot be overwritten");
   await captureEvidence(page, "release-stale-profile-mobile");
   await button("Anulează").click();
-  await button("Editează profilul").click();
+  await page
+    .locator(".task-row")
+    .filter({ has: page.getByText("Nume și personaj", { exact: true }) })
+    .click();
   await page
     .getByLabel("Numele din joc", { exact: true })
     .fill("Audit QA revised");
   await button("Salvează profilul").click();
+  await button("Înapoi la profil").click();
   await page
     .getByRole("heading", { name: "Audit QA revised", exact: true })
     .waitFor();

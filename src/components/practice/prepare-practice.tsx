@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { Brand } from "@/components/brand";
+import { BackButton } from "./back-button";
 import { useMemo, useState } from "react";
-import { attributePracticeGoals } from "@/content/sound-mapping";
 import { WheelSetupScreen } from "@/components/wheel-setup-screen";
 import {
   buildPracticeContent,
@@ -46,7 +47,10 @@ export function PreparePractice({
       <main className="app-shell">
         <div className="app-frame">
           <header className="app-header">
-            <h1>Roată pentru {child.nickname}</h1>
+            <div className="brand-task-title">
+              <Brand compact />
+              <h1>Roată pentru {child.nickname}</h1>
+            </div>
             <button
               className="quiet-button"
               type="button"
@@ -79,10 +83,11 @@ export function PreparePractice({
     <main className="practice-shell">
       <div className="practice-frame">
         <header className="practice-header">
-          <h1>Roată pentru {child.nickname}</h1>
-          <button className="secondary-button" onClick={onCancel} type="button">
-            Înapoi la profil
-          </button>
+          <div className="brand-task-title">
+            <Brand compact />
+            <h1>Roată pentru {child.nickname}</h1>
+          </div>
+          <BackButton onClick={onCancel}>Înapoi la profil</BackButton>
         </header>
         <div className="practice-intro">
           <h2>Ce exersăm astăzi?</h2>
@@ -114,7 +119,6 @@ export function PracticePreview({
   busy,
   error,
   onStart,
-  onEditGoals,
   onChangeWheel,
   onCancel,
 }: {
@@ -123,76 +127,40 @@ export function PracticePreview({
   busy: boolean;
   error: string | null;
   onStart: () => void;
-  onEditGoals: () => void;
   onChangeWheel: () => void;
   onCancel: () => void;
 }) {
-  const goals = child.goals.filter((g) => g.active);
-  const coverage = goals.map((goal) => {
-    const attributions = prepared.words.map(
-      (word) => attributePracticeGoals(word.id, [goal])[0],
-    );
-    return {
-      ...goal,
-      matched: attributions.filter((a) => a.matched === true).length,
-      unknown: attributions.filter((a) => a.matched === null).length,
-    };
-  });
-  const hasMatches = coverage.some((goal) => goal.matched > 0);
   return (
     <main className="practice-shell">
       <div className="practice-preview practice-frame">
-        <button type="button" className="quiet-button" onClick={onCancel}>
-          Înapoi la profil
-        </button>
+        <header className="practice-header">
+          <Brand compact />
+          <BackButton onClick={onCancel}>Înapoi la profil</BackButton>
+        </header>
         <h1>Roata lui {child.nickname} e gata</h1>
         <p>
           {prepared.words.length} cuvinte pe roata {prepared.target.label}. Fără
           grabă. După fiecare cuvânt, alegeți dacă rămâne pe roată.
         </p>
         <section className="practice-preview-goals">
-          <h2>Ce păstrăm în istoric</h2>
+          <h2>Exersăm {prepared.target.label}</h2>
           <p>
-            Când închideți imaginea unui cuvânt, îl adăugăm în istoricul lui{" "}
-            {child.nickname}. Dacă apare din nou, se numără din nou.
+            La pornire, adăugăm {prepared.target.label} la sunetele urmărite
+            pentru {child.nickname}. Fiecare cuvânt închis umple bara spre
+            următoarea medalie pentru această țintă.
           </p>
-          {goals.length ? (
-            <>
-              <ul>
-                {coverage.map((goal) => (
-                  <li key={goal.id}>
-                    <strong>{goal.label}</strong>
-                    {" · "}
-                    {goal.matched > 0
-                      ? `${goal.matched} cuvinte verificate cu acest sunet.`
-                      : goal.unknown === 0
-                        ? "Niciun cuvânt cu acest sunet pe roată."
-                        : "Verificarea sunetului este în așteptare."}
-                    {goal.unknown > 0 &&
-                      goal.matched > 0 &&
-                      ` Încă ${goal.unknown} cuvinte așteaptă verificarea.`}
-                  </li>
-                ))}
-              </ul>
-              <p>
-                {hasMatches
-                  ? "Un cuvânt poate conta pentru mai multe sunete alese, dacă prezența lor a fost verificată."
-                  : "Pentru această roată numărăm deocamdată cuvintele exersate, fără totaluri pe sunete. Puteți începe așa sau schimba alegerea."}
-              </p>
-            </>
-          ) : (
+          <p>
+            Dacă același cuvânt apare din nou, contează din nou. Medaliile
+            răsplătesc participarea.
+          </p>
+          <details className="practice-count-help">
+            <summary>Despre sunete și poziții</summary>
             <p>
-              Nu ați ales încă sunete de exersat. Puteți începe așa sau le
-              puteți adăuga acum.
+              Numărăm practica la roata {prepared.target.label}. Prezența
+              sunetelor în fiecare cuvânt și pozițiile lor se numără separat,
+              după verificarea listei.
             </p>
-          )}
-          <button
-            type="button"
-            className="secondary-button"
-            onClick={onEditGoals}
-          >
-            {goals.length ? "Editează sunetele" : "Alege sunetele"}
-          </button>
+          </details>
         </section>
         <h2>Cuvintele din această roată</h2>
         <ul className="practice-word-preview">
@@ -215,11 +183,7 @@ export function PracticePreview({
             type="button"
             onClick={onStart}
           >
-            {busy
-              ? "Se pregătește..."
-              : hasMatches
-                ? "Începe exersarea"
-                : "Începe exersarea generală"}
+            {busy ? "Se pregătește..." : "Începe exersarea"}
           </button>
           <button
             className="secondary-button"

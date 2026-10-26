@@ -1,7 +1,8 @@
+import { AppFooter } from "@/components/app-footer";
+import { Brand } from "@/components/brand";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CreatorCredit } from "@/components/creator-credit";
 import { ReturningAdult } from "@/components/practice/returning-adult";
 import { getApprovedWords } from "@/content/loaders";
 import { AVATAR_WORD_IDS } from "@/practice/model";
@@ -25,7 +26,7 @@ export default async function AboutPage({
       <div className="practice-frame">
         <header className="practice-header">
           <Link className="practice-brand" href="/ro/about?show=1">
-            Roata cuvintelor
+            <Brand />
           </Link>
           <Link className="quiet-link" href="/ro/practice">
             Deschide aplicația
@@ -128,9 +129,7 @@ export default async function AboutPage({
             Intră direct în joc, fără profil
           </Link>
         </section>
-        <footer className="practice-footer">
-          <CreatorCredit locale="ro" />
-        </footer>
+        <AppFooter currentPage="about" />
       </div>
     </main>
   );

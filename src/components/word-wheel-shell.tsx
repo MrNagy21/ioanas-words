@@ -1,3 +1,4 @@
+import { Brand } from "@/components/brand";
 import Link from "next/link";
 import { CreatorCredit } from "@/components/creator-credit";
 import { WheelGame } from "@/components/wheel-game";
@@ -42,7 +43,7 @@ export function WordWheelShell({
   const setupTargetLabel = setupContent?.target.label;
 
   return (
-    <main className="app-shell" aria-label="Roata cuvintelor">
+    <main className="app-shell" aria-label="Vorbini">
       <div className="app-frame">
         <header
           className={
@@ -50,8 +51,9 @@ export function WordWheelShell({
           }
         >
           <div className="app-header__title">
-            <p className="app-kicker">Word Wheel</p>
-            <h1>Roata cuvintelor</h1>
+            <h1 aria-label="Vorbini">
+              <Brand />
+            </h1>
             {setupContent ? (
               <Link
                 aria-label="Schimbă alegerea"
@@ -113,7 +115,6 @@ function LetterSelectionView({
     <section className="app-stage letter-stage" aria-labelledby="letter-title">
       <div className="letter-panel">
         <div className="stage-copy">
-          <p className="stage-label">Alege litera</p>
           <h2 id="letter-title">Alege sunetul</h2>
         </div>
 

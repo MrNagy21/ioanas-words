@@ -7,7 +7,7 @@ import {
 } from "../release-content";
 
 export const metadata: Metadata = {
-  title: "Admin Release | Word Wheel",
+  title: "Admin Release | Vorbini",
   description: "Read-only release-specific Romanian word review view.",
 };
 

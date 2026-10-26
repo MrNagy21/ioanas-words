@@ -27,7 +27,10 @@
     "check:wheel-browser": "node scripts/qa/check-wheel-browser.mjs",
     "check:demo-routes": "bun scripts/qa/check-demo-routes.ts",
     "check:onboarding-browser": "node scripts/qa/check-onboarding-browser.mjs",
-    "check:release-regressions": "node scripts/qa/check-release-regressions.mjs"
+    "check:release-regressions": "node scripts/qa/check-release-regressions.mjs",
+    "check:child-workspace": "node scripts/qa/check-child-workspace.mjs",
+    "check:profile-settings": "node scripts/qa/check-profile-settings.mjs",
+    "check:footer-browser": "node scripts/qa/check-footer-browser.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

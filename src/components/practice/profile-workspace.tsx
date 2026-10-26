@@ -1,19 +1,26 @@
 "use client";
 
+import { ProfilePrivacyNotice } from "@/components/legal-links";
+import { AppFooter } from "@/components/app-footer";
+import { Brand } from "@/components/brand";
 import Image from "next/image";
 import Link from "next/link";
+import { BackButton } from "./back-button";
+import {
+  pushPracticeLocation,
+  replacePracticeLocation,
+  returnToPracticeLocation,
+} from "./navigation";
 import {
   useCallback,
+  useMemo,
   useEffect,
   useRef,
   useState,
   type FormEvent,
 } from "react";
-import { CreatorCredit } from "@/components/creator-credit";
 import {
   AVATAR_WORD_IDS,
-  removeProfile,
-  saveGoal,
   saveProfile,
   newLocalId,
   type ChildProfile,
@@ -35,7 +42,7 @@ import {
   PracticePlayer,
   ParticipationCelebration,
 } from "@/components/practice/practice-player";
-import { PracticeProgress } from "@/components/practice/practice-progress";
+import { ProfilePanel, TaskRow } from "@/components/practice/profile-panel";
 import { PracticeBackups } from "@/components/practice/practice-backups";
 import {
   PracticeOnboarding,
@@ -55,10 +62,6 @@ export type AvatarOption = {
   label: string;
   alt: string;
 };
-const GOAL_LABELS =
-  "A Ă Â B C D E F G H I Î J K L M N O P Q R S Ș T Ț U V W X Y Z CE CI GE GI CHE CHI GHE GHI".split(
-    " ",
-  );
 
 export function ProfileWorkspace({
   avatars,
@@ -78,14 +81,18 @@ export function ProfileWorkspace({
   const [state, setState] = useState<LocalPracticeState | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [editor, setEditor] = useState<"new" | "edit" | null>(null);
-  const [confirmDelete, setConfirmDelete] = useState(false);
-  const [goalsOpen, setGoalsOpen] = useState(false);
+  const [utility, setUtility] = useState<"library" | "settings" | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
-  const heading = useRef<HTMLHeadingElement>(null);
   const pickerHeading = useRef<HTMLHeadingElement>(null);
   const selected = state?.profiles.find((p) => p.id === selectedId) ?? null;
+
+  useEffect(() => {
+    if (!utility) return;
+    document.querySelector<HTMLElement>(".practice-shell")?.scrollTo(0, 0);
+    document.querySelector<HTMLElement>(".task-page h1")?.focus();
+  }, [utility]);
 
   const refresh = useCallback(async () => {
     try {
@@ -148,14 +155,80 @@ export function ProfileWorkspace({
     }
   }
 
-  function select(id: string) {
-    setSelectedId(id);
-    setGoalsOpen(!state?.profiles.find((p) => p.id === id)?.goals.length);
-    setEditor(null);
-    setConfirmDelete(false);
+  function navigateWorkspace(
+    childId: string | null,
+    nextUtility: "library" | "settings" | null = null,
+    nextEditor: "new" | "edit" | null = null,
+    resetProfile = false,
+  ) {
+    pushPracticeLocation({
+      wordWheelWorkspace: { childId, utility: nextUtility, editor: nextEditor },
+      ...(resetProfile
+        ? { wordWheelProfile: childId ? { childId, screen: "home" } : null }
+        : {}),
+    });
+    setSelectedId(childId);
+    setUtility(nextUtility);
+    setEditor(nextEditor);
     setNotice("");
-    window.setTimeout(() => heading.current?.focus(), 0);
   }
+  function select(id: string) {
+    navigateWorkspace(id, null, null, true);
+  }
+  function returnToWorkspace(childId: string | null) {
+    returnToPracticeLocation(
+      (entry) =>
+        entry.wordWheelWorkspace?.childId === childId &&
+        !entry.wordWheelWorkspace.utility &&
+        !entry.wordWheelWorkspace.editor,
+      {
+        wordWheelWorkspace: { childId, utility: null, editor: null },
+        ...(childId ? {} : { wordWheelProfile: null }),
+      },
+    );
+  }
+  useEffect(() => {
+    if (!window.history.state?.wordWheelWorkspace)
+      replacePracticeLocation({
+        wordWheelWorkspace: { childId: null, utility: null, editor: null },
+      });
+    const pop = () => {
+      const workspace = window.history.state?.wordWheelWorkspace;
+      setSelectedId(workspace?.childId ?? null);
+      setUtility(workspace?.utility ?? null);
+      setEditor(workspace?.editor ?? null);
+      setNotice("");
+    };
+    pop();
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+  useEffect(() => {
+    document.querySelector<HTMLElement>(".practice-shell")?.scrollTo(0, 0);
+    if (!selectedId && !editor && !utility)
+      pickerHeading.current?.focus({ preventScroll: true });
+    else if (!editor && !utility)
+      document
+        .querySelector<HTMLElement>(
+          ".practice-columns:not([hidden]) .profile-panel h1",
+        )
+        ?.focus({ preventScroll: true });
+  }, [selectedId, editor, utility]);
+
+  const childSummaries = useMemo(() => {
+    const counts = new Map<string, { words: number; medals: number }>();
+    for (const child of state?.profiles ?? [])
+      counts.set(child.id, { words: 0, medals: 0 });
+    for (const turn of state?.turns ?? []) {
+      const item = counts.get(turn.childId);
+      if (item) item.words++;
+    }
+    for (const award of state?.awards ?? []) {
+      const item = counts.get(award.childId);
+      if (item) item.medals++;
+    }
+    return counts;
+  }, [state]);
 
   const celebratingChild = state?.profiles.find((p) => p.id === celebratingId);
   if (state && celebratingChild)
@@ -223,11 +296,6 @@ export function ProfileWorkspace({
           setPreparingId(prepared.childId);
           setPreviewOpen(false);
         }}
-        onEditGoals={() => {
-          select(prepared.childId);
-          setGoalsOpen(true);
-          setPreviewOpen(false);
-        }}
         onStart={() => {
           const id = newLocalId();
           void save((draft) => {
@@ -282,6 +350,10 @@ export function ProfileWorkspace({
           }, "").then((ok) => {
             if (ok) {
               closeGuide();
+              replacePracticeLocation({
+                wordWheelWorkspace: { childId, utility: null, editor: null },
+                wordWheelProfile: childId ? { childId, screen: "home" } : null,
+              });
               setSelectedId(childId);
               setEditor(null);
             }
@@ -293,6 +365,10 @@ export function ProfileWorkspace({
           }, "");
           if (ok) {
             closeGuide();
+            replacePracticeLocation({
+              wordWheelWorkspace: { childId, utility: null, editor: null },
+              wordWheelProfile: { childId, screen: "home" },
+            });
             setSelectedId(childId);
             setActiveSessionId(sessionId);
           }
@@ -315,6 +391,14 @@ export function ProfileWorkspace({
           }, "");
           if (ok) {
             closeGuide();
+            replacePracticeLocation({
+              wordWheelWorkspace: {
+                childId: wheel.childId,
+                utility: null,
+                editor: null,
+              },
+              wordWheelProfile: { childId: wheel.childId, screen: "home" },
+            });
             setSelectedId(wheel.childId);
             setActiveSessionId(id);
           }
@@ -325,11 +409,22 @@ export function ProfileWorkspace({
   }
 
   return (
-    <main className="practice-shell">
+    <main
+      className="practice-shell practice-workspace"
+      data-focused={!!selected || !!editor || !!utility}
+    >
       <div className="practice-frame">
         <header className="practice-header">
-          <Link href="/ro" className="practice-brand">
-            Roata cuvintelor
+          <Link
+            href="/ro/practice"
+            className="practice-brand"
+            aria-label="Vorbini · Toți copiii"
+            onClick={(event) => {
+              event.preventDefault();
+              returnToWorkspace(null);
+            }}
+          >
+            <Brand />
           </Link>
           <button
             className="quiet-button"
@@ -349,12 +444,15 @@ export function ProfileWorkspace({
             Joc fără profil
           </Link>
         </header>
-        <div className="practice-intro" hidden={!!selected && !editor}>
+        <div
+          className="practice-intro"
+          hidden={!!utility || !!selected || !!editor}
+        >
           <h1 ref={pickerHeading} tabIndex={-1}>
-            Copiii mei
+            Copii
           </h1>
           <p>
-            Cu cine exersăm astăzi? Alegeți un profil sau adăugați un copil.
+            Cu cine ne jucăm astăzi? Alegeți un copil ca să pregătiți o roată.
           </p>
         </div>
         {error && (
@@ -381,17 +479,14 @@ export function ProfileWorkspace({
           <div
             className="practice-columns"
             data-detail-open={!!selected || !!editor}
+            hidden={!!utility}
           >
             <aside className="practice-profiles" aria-label="Profiluri copii">
               <button
                 className="spin-button"
                 type="button"
                 disabled={busy}
-                onClick={() => {
-                  setEditor("new");
-                  setSelectedId(null);
-                  setConfirmDelete(false);
-                }}
+                onClick={() => navigateWorkspace(null, null, "new")}
               >
                 Adaugă un copil
               </button>
@@ -416,16 +511,38 @@ export function ProfileWorkspace({
                       <Avatar
                         option={avatars.find((a) => a.id === profile.avatar)}
                       />
-                      <span>
+                      <span className="practice-profile-copy">
                         <strong>{profile.nickname}</strong>
+                        <span className="practice-profile-totals">
+                          <span>
+                            {childSummaries.get(profile.id)?.words ?? 0}{" "}
+                            {childSummaries.get(profile.id)?.words === 1
+                              ? "cuvânt exersat"
+                              : "cuvinte exersate"}
+                          </span>
+                          <span>
+                            {childSummaries.get(profile.id)?.medals ?? 0}{" "}
+                            {childSummaries.get(profile.id)?.medals === 1
+                              ? "medalie"
+                              : "medalii"}
+                          </span>
+                        </span>
                         <small>
                           {profile.goals.filter((g) => g.active).length
-                            ? `Sunete: ${profile.goals
+                            ? `Urmărim: ${profile.goals
                                 .filter((g) => g.active)
                                 .map((g) => g.label)
                                 .join(", ")}`
-                            : "Exersare liberă"}
+                            : "Sunetele se adaugă când începeți o roată"}
                         </small>
+                        {state.sessions.some(
+                          (session) =>
+                            session.childId === profile.id && !session.endedAt,
+                        ) && (
+                          <small className="practice-resume-hint">
+                            O roată vă așteaptă · Reia exersarea
+                          </small>
+                        )}
                       </span>
                       <svg
                         className="practice-arrow"
@@ -450,30 +567,15 @@ export function ProfileWorkspace({
               </p>
             </aside>
             <section className="practice-detail" aria-label="Profilul selectat">
-              {(selected || editor) && (
-                <button
-                  className="quiet-button practice-change-child"
-                  type="button"
-                  onClick={() => {
-                    setSelectedId(null);
-                    setEditor(null);
-                    setConfirmDelete(false);
-                    window.setTimeout(() => pickerHeading.current?.focus(), 0);
-                  }}
+              {editor && (
+                <BackButton
+                  className="task-back"
+                  onClick={() =>
+                    returnToWorkspace(editor === "edit" ? selectedId : null)
+                  }
                 >
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    aria-hidden="true"
-                  >
-                    <path d="m14 6-6 6 6 6" />
-                  </svg>
-                  Schimbă copilul
-                </button>
+                  {editor === "edit" ? "Setările profilului" : "Toți copiii"}
+                </BackButton>
               )}
               {editor ? (
                 <ProfileEditor
@@ -482,7 +584,9 @@ export function ProfileWorkspace({
                   avatars={avatars}
                   busy={busy}
                   revision={state.revision}
-                  onCancel={() => setEditor(null)}
+                  onCancel={() =>
+                    returnToWorkspace(editor === "edit" ? selectedId : null)
+                  }
                   onSave={async (input, baseRevision) => {
                     const before = new Set(state.profiles.map((p) => p.id));
                     const ok = await save(
@@ -492,232 +596,53 @@ export function ProfileWorkspace({
                     );
                     if (ok) {
                       const current = await readPracticeState();
-                      setSelectedId(
-                        input.id ??
-                          current.profiles.find((p) => !before.has(p.id))?.id ??
-                          null,
-                      );
-                      setEditor(null);
-                      setGoalsOpen(!input.id);
+                      if (input.id) returnToWorkspace(input.id);
+                      else {
+                        const created = current.profiles.find(
+                          (p) => !before.has(p.id),
+                        );
+                        if (created) {
+                          replacePracticeLocation({
+                            wordWheelWorkspace: {
+                              childId: created.id,
+                              utility: null,
+                              editor: null,
+                            },
+                            wordWheelProfile: {
+                              childId: created.id,
+                              screen: "home",
+                            },
+                          });
+                          setSelectedId(created.id);
+                          setEditor(null);
+                          setUtility(null);
+                        }
+                      }
                     }
                   }}
                 />
               ) : selected ? (
-                <>
-                  <div className="practice-child-heading">
-                    <Avatar
-                      option={avatars.find((a) => a.id === selected.avatar)}
-                    />
-                    <div className="practice-child-name">
-                      <h1 tabIndex={-1} ref={heading}>
-                        {selected.nickname}
-                      </h1>
-                      <p>
-                        {selected.goals.filter((goal) => goal.active).length
-                          ? `Exersăm ${selected.goals
-                              .filter((goal) => goal.active)
-                              .map((goal) => goal.label)
-                              .join(", ")}`
-                          : "Un cuvânt, încă un pas înainte."}
-                      </p>
-                    </div>
-                    <div className="practice-start-area">
-                      {state.sessions.some(
-                        (s) => s.childId === selected.id && !s.endedAt,
-                      ) ? (
-                        <button
-                          type="button"
-                          className="spin-button"
-                          onClick={() =>
-                            setActiveSessionId(
-                              state.sessions.find(
-                                (s) => s.childId === selected.id && !s.endedAt,
-                              )!.id,
-                            )
-                          }
-                        >
-                          Reia exersarea
-                        </button>
-                      ) : (
-                        <button
-                          className="spin-button"
-                          type="button"
-                          onClick={() => setPreparingId(selected.id)}
-                        >
-                          Pregătește o roată
-                        </button>
-                      )}
-                      {prepared?.childId === selected.id && (
-                        <button
-                          type="button"
-                          className="secondary-button"
-                          onClick={() => setPreviewOpen(true)}
-                        >
-                          Revino la roata pregătită
-                        </button>
-                      )}
-                    </div>
-                    <button
-                      className="secondary-button"
-                      type="button"
-                      onClick={() => setEditor("edit")}
-                    >
-                      Editează profilul
-                    </button>
-                  </div>
-                  <section
-                    className="practice-goals"
-                    aria-labelledby="goals-title"
-                  >
-                    <button
-                      className="practice-goals-toggle"
-                      type="button"
-                      aria-expanded={goalsOpen}
-                      aria-controls="practice-goal-editor"
-                      onClick={() => setGoalsOpen(!goalsOpen)}
-                    >
-                      <span>
-                        <strong id="goals-title">Sunete de exersat</strong>
-                        <small>
-                          {selected.goals
-                            .filter((goal) => goal.active)
-                            .map((goal) => goal.label)
-                            .join(" · ") ||
-                            "Alegeți sunetele sau începeți fără ele"}
-                        </small>
-                      </span>
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="20"
-                        height="20"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        aria-hidden="true"
-                      >
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </button>
-                    <div id="practice-goal-editor" hidden={!goalsOpen}>
-                      <p>
-                        Alegeți sunetele pe care le exersați împreună. Le puteți
-                        schimba oricând.
-                      </p>
-                      <GoalEditor
-                        busy={busy}
-                        onSave={(label, pace) =>
-                          save(
-                            (draft) =>
-                              saveGoal(draft, selected.id, label, pace),
-                            "Sunet salvat.",
-                          )
-                        }
-                      />
-                      {selected.goals.length ? (
-                        <ul className="practice-goal-list">
-                          {selected.goals.map((goal) => (
-                            <li key={goal.id}>
-                              <strong>{goal.label}</strong>
-                              <span>
-                                {goal.active
-                                  ? goal.pace === "frequent"
-                                    ? "Recompense frecvente"
-                                    : "Ritm standard"
-                                  : "Arhivată"}
-                              </span>
-                              <button
-                                type="button"
-                                className="quiet-button"
-                                disabled={busy}
-                                onClick={() => {
-                                  void save(
-                                    (draft) => {
-                                      const item = draft.profiles
-                                        .find((p) => p.id === selected.id)
-                                        ?.goals.find((g) => g.id === goal.id);
-                                      if (item) item.active = !item.active;
-                                    },
-                                    goal.active
-                                      ? "Țintă arhivată."
-                                      : "Țintă reactivată.",
-                                  );
-                                }}
-                              >
-                                {goal.active ? "Arhivează" : "Reactivează"}
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p className="practice-empty-line">
-                          Niciun sunet ales încă. Puteți începe o roată și fără
-                          această alegere.
-                        </p>
-                      )}
-                      <p className="practice-review-note">
-                        Numărăm deja cuvintele exersate. Numărarea pe sunete și
-                        poziții va apărea după verificarea listei de cuvinte.
-                      </p>
-                    </div>
-                  </section>
-                  <PracticeProgress
-                    key={selected.id}
-                    state={state}
-                    child={selected}
-                    busy={busy}
-                    onSave={save}
-                    onCelebrateNow={() => setCelebratingId(selected.id)}
-                  />
-                  <div className="practice-delete-area">
-                    {confirmDelete ? (
-                      <div
-                        role="group"
-                        aria-label="Confirmă ștergerea profilului"
-                      >
-                        <p>
-                          Ștergeți profilul „{selected.nickname}”, sunetele
-                          alese, istoricul exersărilor, observațiile despre
-                          pronunție și medaliile sale? Celelalte profiluri și
-                          roțile salvate rămân.
-                        </p>
-                        <button
-                          className="practice-danger"
-                          type="button"
-                          disabled={busy}
-                          onClick={async () => {
-                            if (
-                              await save(
-                                (draft) => removeProfile(draft, selected.id),
-                                "Profil șters.",
-                              )
-                            ) {
-                              setSelectedId(null);
-                              setConfirmDelete(false);
-                            }
-                          }}
-                        >
-                          Da, șterge profilul
-                        </button>
-                        <button
-                          className="secondary-button"
-                          type="button"
-                          disabled={busy}
-                          onClick={() => setConfirmDelete(false)}
-                        >
-                          Anulează
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        className="quiet-button"
-                        onClick={() => setConfirmDelete(true)}
-                      >
-                        Șterge profilul
-                      </button>
-                    )}
-                  </div>
-                </>
+                <ProfilePanel
+                  key={selected.id}
+                  child={selected}
+                  state={state}
+                  avatars={avatars}
+                  busy={busy}
+                  onSave={save}
+                  onBack={() => returnToWorkspace(null)}
+                  onEdit={() => navigateWorkspace(selectedId, null, "edit")}
+                  onPrepare={() => setPreparingId(selected.id)}
+                  onResume={(id) => setActiveSessionId(id)}
+                  onPrepared={
+                    prepared?.childId === selected.id
+                      ? () => setPreviewOpen(true)
+                      : undefined
+                  }
+                  onLibrary={() => navigateWorkspace(selectedId, "library")}
+                  onBackup={() => navigateWorkspace(selectedId, "settings")}
+                  onCelebrateNow={() => setCelebratingId(selected.id)}
+                  onNavigate={() => setNotice("")}
+                />
               ) : (
                 <div className="practice-welcome">
                   <div className="practice-animal-line" aria-hidden="true">
@@ -735,11 +660,35 @@ export function ProfileWorkspace({
             </section>
           </div>
         )}
-        {state && (
-          <details className="practice-library">
-            <summary>
-              Roțile mele salvate · {state.configurations.length}
-            </summary>
+        {state && utility && (
+          <BackButton
+            className="task-back"
+            onClick={() => returnToWorkspace(selectedId)}
+          >
+            {selected
+              ? utility === "settings"
+                ? "Setările profilului"
+                : "Înapoi la profil"
+              : "Toți copiii"}
+          </BackButton>
+        )}
+        {state && !selected && !editor && !utility && (
+          <nav className="task-menu" aria-label="Instrumente pentru adult">
+            <TaskRow
+              title="Roțile mele"
+              description={`${state.configurations.length} configurații pentru orice copil`}
+              onClick={() => navigateWorkspace(null, "library")}
+            />
+            <TaskRow
+              title="Date și setări"
+              description="Copii de siguranță, restaurare și sunet"
+              onClick={() => navigateWorkspace(null, "settings")}
+            />
+          </nav>
+        )}
+        {state && utility === "library" && (
+          <section className="practice-library task-page">
+            <h1 tabIndex={-1}>Roțile mele salvate</h1>
             <p>Roțile pe care le pregătiți pot fi folosite cu orice copil.</p>
             {state.configurations.length ? (
               <ul>
@@ -799,47 +748,43 @@ export function ProfileWorkspace({
                 roata pentru a o folosi din nou, cu oricare dintre copii.
               </p>
             )}
-          </details>
+          </section>
         )}
-        {state && (
+        {state && utility === "settings" && (
           <PracticeBackups
+            initialScope={selected?.id}
             state={state}
             onRestored={() => {
+              setNotice("Copia a fost restaurată.");
               setSelectedId(null);
+              setUtility(null);
               setPrepared(null);
               setPreviewOpen(false);
               void refresh();
             }}
           />
         )}
-        <footer className="practice-footer">
-          {state && (
-            <label className="practice-sound-setting">
-              <input
-                type="checkbox"
-                checked={state.preferences?.sound ?? false}
-                disabled={busy}
-                onChange={(event) => {
-                  const sound = event.target.checked;
-                  if (sound) unlockCelebrationSound();
-                  void save(
-                    (draft) => {
-                      draft.preferences.sound = sound;
-                    },
-                    sound
-                      ? "Sunet activat pentru sărbătoriri."
-                      : "Sunet oprit.",
-                  );
-                }}
-              />
-              Sunet la sărbătoriri
-            </label>
-          )}
-          <Link className="quiet-link" href="/ro/about?show=1">
-            Prezentare și explicații
-          </Link>
-          <CreatorCredit locale="ro" />
-        </footer>
+        {state && utility === "settings" && (
+          <label className="practice-sound-setting">
+            <input
+              type="checkbox"
+              checked={state.preferences?.sound ?? false}
+              disabled={busy}
+              onChange={(event) => {
+                const sound = event.target.checked;
+                if (sound) unlockCelebrationSound();
+                void save(
+                  (draft) => {
+                    draft.preferences.sound = sound;
+                  },
+                  sound ? "Sunet activat pentru sărbătoriri." : "Sunet oprit.",
+                );
+              }}
+            />
+            Sunet la sărbătoriri
+          </label>
+        )}
+        {!selected && !editor && !utility && <AppFooter newTab />}
       </div>
     </main>
   );
@@ -901,6 +846,7 @@ function ProfileEditor({
           redeschide profilul pentru a vedea ultima versiune.
         </p>
       )}
+      {!profile && <ProfilePrivacyNotice />}
       <label htmlFor="child-nickname">Numele din joc</label>
       <input
         id="child-nickname"
@@ -951,48 +897,6 @@ function ProfileEditor({
           Anulează
         </button>
       </div>
-    </form>
-  );
-}
-
-function GoalEditor({
-  busy,
-  onSave,
-}: {
-  busy: boolean;
-  onSave: (label: string, pace: "frequent" | "standard") => Promise<boolean>;
-}) {
-  const [label, setLabel] = useState("S");
-  const [pace, setPace] = useState<"frequent" | "standard">("standard");
-  return (
-    <form
-      className="practice-goal-form"
-      onSubmit={(event) => {
-        event.preventDefault();
-        void onSave(label, pace);
-      }}
-    >
-      <label>
-        Sunet sau grup
-        <select value={label} onChange={(e) => setLabel(e.target.value)}>
-          {GOAL_LABELS.map((g) => (
-            <option key={g}>{g}</option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Ritmul recompenselor
-        <select
-          value={pace}
-          onChange={(e) => setPace(e.target.value as "frequent" | "standard")}
-        >
-          <option value="standard">Standard</option>
-          <option value="frequent">Frecvent</option>
-        </select>
-      </label>
-      <button className="secondary-button" disabled={busy} type="submit">
-        Salvează sunetul
-      </button>
     </form>
   );
 }

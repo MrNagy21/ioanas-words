@@ -1,8 +1,13 @@
-import type { LocalPracticeState, PracticeGoal } from "@/practice/model";
+import type {
+  ChildProfile,
+  LocalPracticeState,
+  PracticeGoal,
+  PracticeTurn,
+} from "@/practice/model";
 
 export function nextParticipationMilestone(
   total: number,
-  pace: PracticeGoal["pace"] = "standard",
+  pace: PracticeGoal["pace"] = "frequent",
 ) {
   const early = pace === "frequent" ? [1, 3, 5, 10] : [1, 5, 10, 20];
   return (
@@ -11,11 +16,68 @@ export function nextParticipationMilestone(
       (pace === "frequent" ? 10 : 20)
   );
 }
-export function previousParticipationMilestone(total: number) {
-  const next = nextParticipationMilestone(total);
-  return next <= 20
-    ? [0, 1, 5, 10].filter((n) => n <= total).at(-1)!
-    : next - 20;
+export function previousParticipationMilestone(
+  total: number,
+  pace: PracticeGoal["pace"] = "frequent",
+) {
+  const early = pace === "frequent" ? [0, 1, 3, 5, 10] : [0, 1, 5, 10, 20];
+  const step = pace === "frequent" ? 10 : 20;
+  return total < step
+    ? early.filter((n) => n <= total).at(-1)!
+    : Math.floor(total / step) * step;
+}
+
+export function turnCountsForGoal(turn: PracticeTurn, goalId: string) {
+  return (
+    turn.practiceGoalId === goalId ||
+    turn.goals.some((g) => g.goalId === goalId && g.matched === true)
+  );
+}
+
+export function goalParticipationCount(
+  state: LocalPracticeState,
+  childId: string,
+  goalId: string,
+) {
+  return state.turns.filter(
+    (t) => t.childId === childId && turnCountsForGoal(t, goalId),
+  ).length;
+}
+
+export function goalProgress(
+  state: LocalPracticeState,
+  childId: string,
+  goal: PracticeGoal,
+) {
+  const current = goalParticipationCount(state, childId, goal.id);
+  const prefix = `goal:v1:${childId}:${goal.id}:`;
+  const previous = state.awards.reduce((highest, award) => {
+    if (award.childId !== childId || !award.id.startsWith(prefix))
+      return highest;
+    const milestone = Number(award.id.slice(prefix.length));
+    return Number.isSafeInteger(milestone) && milestone <= current
+      ? Math.max(highest, milestone)
+      : highest;
+  }, 0);
+  return {
+    current,
+    previous,
+    next: goal.nextMedalAt ?? nextParticipationMilestone(current, goal.pace),
+  };
+}
+
+export function participationProgress(
+  state: LocalPracticeState,
+  child: ChildProfile,
+) {
+  const current = state.turns.filter((t) => t.childId === child.id).length;
+  return {
+    current,
+    ...(child.participationReward ?? {
+      next: nextParticipationMilestone(current),
+      previous: previousParticipationMilestone(current),
+    }),
+  };
 }
 
 export function awardCompletedParticipation(
@@ -26,8 +88,13 @@ export function awardCompletedParticipation(
 ) {
   const turns = state.turns.filter((t) => t.childId === childId);
   const total = turns.length;
-  const threshold = nextParticipationMilestone(total - 1);
-  if (total === threshold) {
+  const child = state.profiles.find((p) => p.id === childId)!;
+  child.participationReward ??= {
+    next: nextParticipationMilestone(total - 1),
+    previous: previousParticipationMilestone(total - 1),
+  };
+  const threshold = child.participationReward.next;
+  if (total >= threshold) {
     const id = `participation:v1:${childId}:${threshold}`;
     if (!state.awards.some((a) => a.id === id))
       state.awards.push({
@@ -42,14 +109,15 @@ export function awardCompletedParticipation(
         presented: false,
       });
   }
+  if (total >= threshold)
+    child.participationReward = {
+      previous: threshold,
+      next: nextParticipationMilestone(total),
+    };
   const turn = turns.find((t) => t.id === turnId);
-  const child = state.profiles.find((p) => p.id === childId)!;
-  for (const match of turn?.goals.filter((g) => g.matched === true) ?? []) {
-    const goal = child.goals.find((g) => g.id === match.goalId);
-    if (!goal) continue;
-    const count = turns.filter((t) =>
-      t.goals.some((g) => g.goalId === goal.id && g.matched === true),
-    ).length;
+  for (const goal of child.goals) {
+    if (!turn || !turnCountsForGoal(turn, goal.id)) continue;
+    const count = goalParticipationCount(state, childId, goal.id);
     goal.nextMedalAt ??= nextParticipationMilestone(count - 1, goal.pace);
     if (count >= goal.nextMedalAt) {
       const at = goal.nextMedalAt;
@@ -58,12 +126,16 @@ export function awardCompletedParticipation(
         state.awards.push({
           id,
           childId,
-          title: `${at} cuvinte cu ${goal.label}`,
+          title:
+            at === 1
+              ? `Primul cuvânt exersat pentru ${goal.label}`
+              : `${at} cuvinte exersate pentru ${goal.label}`,
           earnedAt: now,
           source: "participation",
           presented: false,
         });
-      goal.nextMedalAt = nextParticipationMilestone(count, goal.pace);
+      goal.pace = "frequent";
+      goal.nextMedalAt = nextParticipationMilestone(count);
     }
   }
 }

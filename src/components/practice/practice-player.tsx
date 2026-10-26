@@ -1,5 +1,6 @@
 "use client";
 
+import { Brand } from "@/components/brand";
 import { useEffect, useRef, useState } from "react";
 import { WheelGame } from "@/components/wheel-game";
 import { MedalCelebration } from "@/components/practice/medal-celebration";
@@ -24,10 +25,7 @@ import {
   subscribePracticeChanges,
 } from "@/storage/practice-store";
 import { acquireSessionLock } from "@/storage/session-lock";
-import {
-  nextParticipationMilestone,
-  previousParticipationMilestone,
-} from "@/practice/rewards";
+import { participationProgress } from "@/practice/rewards";
 import type { ContentWord } from "@/content/types";
 
 export function PracticePlayer({
@@ -247,7 +245,9 @@ export function PracticePlayer({
     <main className="app-shell">
       <div className="app-frame">
         <header className="app-header">
-          <h1>Roata cuvintelor</h1>
+          <h1 aria-label="Vorbini">
+            <Brand />
+          </h1>
         </header>
         {error && !ending && (
           <p role="alert" className="practice-result-error">
@@ -260,15 +260,7 @@ export function PracticePlayer({
           practice={{
             words: sessionWords(session),
             childLabel: child.nickname,
-            progress: {
-              current: state.turns.filter((t) => t.childId === child.id).length,
-              next: nextParticipationMilestone(
-                state.turns.filter((t) => t.childId === child.id).length,
-              ),
-              previous: previousParticipationMilestone(
-                state.turns.filter((t) => t.childId === child.id).length,
-              ),
-            },
+            progress: participationProgress(state, child),
             onShown: shown,
             onClose: close,
             onEnd: () => {

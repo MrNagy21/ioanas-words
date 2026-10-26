@@ -9,8 +9,8 @@ import {
 import { CreatorCredit } from "@/components/creator-credit";
 
 export const metadata: Metadata = {
-  title: "Admin Words | Word Wheel",
-  description: "Read-only Romanian word inventory summary for Word Wheel.",
+  title: "Admin Words | Vorbini",
+  description: "Read-only Romanian word inventory summary for Vorbini.",
 };
 
 const locale = "ro" as const;

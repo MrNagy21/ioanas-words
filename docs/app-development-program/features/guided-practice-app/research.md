@@ -1,5 +1,9 @@
 # Research and planning evidence
 
+## Reward simplification: 2026-10-26
+
+The child-first workspace removes the adult pace choice. Use 1, 3, 5, 10, then every 10 for new participation, preserving existing promised milestones before switching. This is a pilot design choice for small starter wheels, not an experimentally established optimum. Callaghan and Reich’s [preschool app experiment](https://bera-journals.onlinelibrary.wiley.com/doi/10.1111/bjet.13055) studied verbal feedback and gradual challenge with 240 children aged 4–5; it did not compare medal intervals or measure this app’s pronunciation outcomes. Therapist feedback should guide subsequent tuning. The previous two-pace decisions below remain historical.
+
 Reviewed during the product interview and planning on 2026-10-16. These sources inform engineering and design decisions. They do not validate Word Wheel as treatment or establish an optimal reward schedule for Romanian children aged 4 to 6.
 
 ## Reward design

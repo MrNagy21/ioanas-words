@@ -1,3 +1,4 @@
+import { Brand } from "@/components/brand";
 import Link from "next/link";
 import { CreatorCredit } from "@/components/creator-credit";
 
@@ -7,7 +8,7 @@ export default function NotFound() {
       <div className="recovery-frame">
         <header className="practice-header">
           <Link className="practice-brand" href="/ro/about?show=1">
-            Roata cuvintelor
+            <Brand />
           </Link>
         </header>
         <section className="recovery-content" aria-labelledby="recovery-title">
