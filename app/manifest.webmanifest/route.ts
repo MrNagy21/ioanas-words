@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
-export default function manifest(): MetadataRoute.Manifest {
+function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "Vorbini · Cuvinte prin joacă",
+    name: "Vorbini",
     short_name: "Vorbini",
     description:
       "Exersare ghidată în limba română, cu profiluri și participare salvate local.",
@@ -27,4 +27,14 @@ export default function manifest(): MetadataRoute.Manifest {
       },
     ],
   };
+}
+
+// A regular static route lets layout metadata version the manifest URL.
+// The file-convention manifest would override that explicit URL.
+export const dynamic = "force-static";
+
+export function GET() {
+  return Response.json(manifest(), {
+    headers: { "Content-Type": "application/manifest+json" },
+  });
 }

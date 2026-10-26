@@ -8,6 +8,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  applicationName: "Vorbini",
+  manifest: "/manifest.webmanifest?v=vorbini-20261026",
   authors: [{ name: "Ioana Nagy", url: "https://www.ioananagy.eu/" }],
   creator: "Ioana Nagy",
   appleWebApp: {

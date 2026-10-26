@@ -52,7 +52,17 @@ export function WordWheelShell({
         >
           <div className="app-header__title">
             <h1 aria-label="Vorbini">
-              <Brand />
+              {selectedContent ? (
+                <Brand />
+              ) : (
+                <Link
+                  href="/"
+                  className="app-home-link"
+                  aria-label="Vorbini · Acasă"
+                >
+                  <Brand />
+                </Link>
+              )}
             </h1>
             {setupContent ? (
               <Link

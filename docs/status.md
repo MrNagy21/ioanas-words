@@ -2,6 +2,10 @@
 
 Last updated: 2026-10-26
 
+## Logo home navigation and install name
+
+Implemented and locally verified 2026-10-26. The user reported that the logo on the anonymous sound picker could not take them home. The picker and adult setup headers now use a labelled home link; the existing home route shows the introduction for a new visitor and the child workspace for returning adults. Child play keeps its existing exit controls. The install manifest uses Vorbini for both names, alongside the Apple title and application-name metadata. A versioned manifest URL asks browsers to fetch the current branding without changing app identity, start URL or storage. Production build, scoped lint and WebKit mobile/desktop checks pass: first-visit and returning-adult routing, setup exit, keyboard focus and exact saved-record preservation. Both manifest names, Apple/application metadata, the versioned URL and stable app identity pass. Physical iPhone Add to Home Screen confirmation remains pending. Deployment is explicitly authorized for these app fixes only; the psychologist-site promotion remains a separate, unapproved draft.
+
 ## Release 2026-10-26
 
 Deployed at the user's explicit request to [Vorbini](https://ioanas-words.vercel.app/ro/practice). Application commit `9abdadb` includes the approved child workspace, automatic wheel targets, focused profile settings, navigation, Vorbini identity, legal drafts and adult footer. Vercel reports a successful production deployment.
