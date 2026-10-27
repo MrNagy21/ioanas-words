@@ -18,7 +18,13 @@ Astra independently checked keyboard sound activation, hidden-page cancellation,
 
 ## Deployment
 
-Authorized after the clear review. Deployment and live verification are pending at the time this candidate report is committed. Use the existing GitHub integration for `MrNagy21/ioanas-words`, production branch `main`. Keep the old domain accessible; moving origins requires protected backup/restore as recorded in [the migration notes](domain-move-2026-10-27.md).
+Application commit `44add0d79caa24c2d36058805636c626597bec8a` deployed through the existing GitHub integration for `MrNagy21/ioanas-words` at 15:54 UTC on 27 October 2026. GitHub deployment `7363373433` reports success. The public app is [cuvinte.ioananagy.eu](https://cuvinte.ioananagy.eu/ro); its immutable deployment is [ioanas-words-ko0oz8bdt-mrnagy21s-projects.vercel.app](https://ioanas-words-ko0oz8bdt-mrnagy21s-projects.vercel.app).
+
+All 88 public routes and four Romanian 404 cases pass over HTTPS. WebKit public checks pass adult footers/new tabs/contact routing at phone, desktop, short landscape and 200% text; ticks/reveal/confetti/mute and demo isolation; teal computed styles, versioned icons and stable manifest identity; legal draft status/noindex; last-word spiral, fade, replay and compact completion. The full public practice/backup journey passes, including rollback, pending-turn recovery, session ownership, encrypted child/full restore and shared-library preservation. No unexpected external or non-GET/HEAD app requests were recorded by that suite. All profiles used were synthetic in isolated browser contexts.
+
+Fresh public phone/desktop captures were inspected. Evidence is in `/Users/darius/.t3/userdata/artifacts/vorbini-live-release-2026-10-27/`. Public test copies change only the base origin and absolute helper imports, apart from the separate release smoke assertions. No child data was uploaded.
+
+No domain or redirect was changed. The proposed origin move still requires infrastructure access and protected backup/restore as recorded in [the migration notes](domain-move-2026-10-27.md).
 
 ## Remaining acceptance
 

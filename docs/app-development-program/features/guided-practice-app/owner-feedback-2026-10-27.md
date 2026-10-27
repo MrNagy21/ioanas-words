@@ -1,6 +1,6 @@
 # Owner feedback, 27 October 2026
 
-Implemented locally, including the user's follow-up on color, terms and additional sounds. No commit or deployment requested or performed.
+Implemented and deployed 2026-10-27 after the user requested an Astra review and deployment on a clear verdict. Astra returned APPROVE with zero actionable findings. See [the release and public verification report](owner-feedback-release-2026-10-27.md). The sections below retain the implementation evidence.
 
 ## Changes
 

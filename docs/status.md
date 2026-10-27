@@ -4,7 +4,7 @@ Last updated: 2026-10-27
 
 ## Astra review and owner-feedback release
 
-Astra completed the requested critical review on 2026-10-27 and returned APPROVE with zero actionable findings across the full pending diff and nine untracked files. Fresh release validation, practice/encrypted-backup tests, full WebKit practice regression, formatting and production dependency audit pass. The user authorized deployment after this clear verdict. Rollout and public verification are next; see the [release report](app-development-program/features/guided-practice-app/owner-feedback-release-2026-10-27.md). DNS migration remains separate.
+Astra completed the requested critical review on 2026-10-27 and returned APPROVE with zero actionable findings across the full pending diff and nine untracked files. Fresh release validation, practice/encrypted-backup tests, full WebKit practice regression, formatting and production dependency audit pass. The user authorized deployment after this clear verdict. Application commit `44add0d` is live at [cuvinte.ioananagy.eu](https://cuvinte.ioananagy.eu/ro), with successful deployment `7363373433`. All 88 public routes/four Romanian 404 cases, WebKit footer/audio/release checks and the full public practice/encrypted-backup journey pass. Fresh phone/desktop captures were inspected. See the [release report](app-development-program/features/guided-practice-app/owner-feedback-release-2026-10-27.md). DNS migration remains separate; the hostname has not changed.
 
 ## Proposed domain move
 
