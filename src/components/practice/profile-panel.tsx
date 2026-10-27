@@ -1,6 +1,5 @@
 "use client";
 
-import { AppFooter } from "@/components/app-footer";
 import Image from "next/image";
 import { BackButton } from "./back-button";
 import {
@@ -507,7 +506,6 @@ export function ProfilePanel({
               </button>
             )}
           </section>
-          <AppFooter newTab />
         </>
       )}
     </div>

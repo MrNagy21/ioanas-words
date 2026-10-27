@@ -1,3 +1,4 @@
+import { AppFooter } from "@/components/app-footer";
 import { Brand } from "@/components/brand";
 import Link from "next/link";
 import { CreatorCredit } from "@/components/creator-credit";
@@ -43,7 +44,10 @@ export function WordWheelShell({
   const setupTargetLabel = setupContent?.target.label;
 
   return (
-    <main className="app-shell" aria-label="Vorbini">
+    <main
+      className={`app-shell${selectedContent ? "" : " app-shell--adult"}`}
+      aria-label="Vorbini"
+    >
       <div className="app-frame">
         <header
           className={
@@ -77,7 +81,7 @@ export function WordWheelShell({
           <div className="app-header__badges">
             {!selectedContent && !setupContent ? (
               <Link className="quiet-link" href={`/${locale}/practice`}>
-                Copiii mei
+                Copii
               </Link>
             ) : null}
             <div className="locale-badge" aria-label="Limba curentă">
@@ -102,9 +106,13 @@ export function WordWheelShell({
             practiceTargets={practiceTargets}
           />
         )}
-        <footer className="app-footer" aria-label="Creator credit">
-          <CreatorCredit className="app-creator-credit" locale={locale} />
-        </footer>
+        {selectedContent ? (
+          <footer className="app-footer" aria-label="Creator credit">
+            <CreatorCredit className="app-creator-credit" locale={locale} />
+          </footer>
+        ) : (
+          <AppFooter newTab />
+        )}
       </div>
     </main>
   );

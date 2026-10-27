@@ -15,6 +15,7 @@ const routes = [
   "/ro/practice",
   "/ro/termeni",
   "/ro/confidentialitate",
+  "/ro/contact",
   "/admin/words",
   "/admin/releases",
   "/admin/releases/1",

@@ -1,5 +1,6 @@
 "use client";
 
+import { AppFooter } from "@/components/app-footer";
 import Image from "next/image";
 import { Brand } from "@/components/brand";
 import { BackButton } from "./back-button";
@@ -44,7 +45,7 @@ export function PreparePractice({
   );
   if (content && target)
     return (
-      <main className="app-shell">
+      <main className="app-shell app-shell--adult">
         <div className="app-frame">
           <header className="app-header">
             <div className="brand-task-title">
@@ -76,6 +77,7 @@ export function PreparePractice({
               })
             }
           />
+          <AppFooter newTab />
         </div>
       </main>
     );
@@ -108,6 +110,7 @@ export function PreparePractice({
             </button>
           ))}
         </div>
+        <AppFooter newTab />
       </div>
     </main>
   );
@@ -194,6 +197,7 @@ export function PracticePreview({
             Modifică roata
           </button>
         </div>
+        <AppFooter newTab />
       </div>
     </main>
   );

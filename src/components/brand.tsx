@@ -5,7 +5,7 @@ export function Brand({ compact = false }: { compact?: boolean }) {
       {/* A local SVG keeps the mark crisp at icon and wordmark sizes. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/brand/vorbini-mark.svg"
+        src="/brand/vorbini-mark.svg?v=teal-20261027"
         width="36"
         height="36"
         alt=""

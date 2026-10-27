@@ -4,8 +4,8 @@ import { Brand } from "@/components/brand";
 import { useEffect, useRef, useState } from "react";
 import { WheelGame } from "@/components/wheel-game";
 import { MedalCelebration } from "@/components/practice/medal-celebration";
-import { playCelebrationSound } from "@/components/practice/celebration-sound";
-import { celebrateWheelCompletion } from "@/components/wheel-completion-celebration";
+import { unlockGameSound, stopGameSounds } from "@/components/game-sound";
+import type { GameSoundControl } from "@/components/use-game-sound";
 import {
   claimSession,
   commitPendingTurn,
@@ -43,6 +43,32 @@ export function PracticePlayer({
   const [ending, setEnding] = useState(false);
   const [endError, setEndError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [soundSaving, setSoundSaving] = useState(false);
+  const soundControl: GameSoundControl = {
+    enabled: state.preferences.sound,
+    disabled: soundSaving,
+    onChange: async (enabled) => {
+      if (enabled) unlockGameSound();
+      else stopGameSounds();
+      setSoundSaving(true);
+      try {
+        const next = await mutatePracticeState((draft) => {
+          draft.preferences.sound = enabled;
+        });
+        setState((previous) =>
+          next.revision >= previous.revision ? next : previous,
+        );
+      } catch (reason) {
+        setError(
+          reason instanceof Error
+            ? reason.message
+            : "Nu putem salva preferința de sunet. Încercați din nou.",
+        );
+      } finally {
+        setSoundSaving(false);
+      }
+    },
+  };
   const lock = useRef<{ ownerId: string; release: () => void } | null>(null);
   const pending = useRef<{ word: ContentWord; turnId: string } | null>(null);
   const endDialog = useRef<HTMLDialogElement>(null);
@@ -212,7 +238,7 @@ export function PracticePlayer({
       <ParticipationCelebration
         awards={availableAwards}
         childName={child.nickname}
-        sound={state.preferences.sound}
+        soundControl={soundControl}
         busy={busy}
         error={error}
         onContinue={(variant) => {
@@ -255,6 +281,7 @@ export function PracticePlayer({
           </p>
         )}
         <WheelGame
+          soundControl={soundControl}
           content={buildPracticeContent(session.target, session.words)}
           locale="ro"
           practice={{
@@ -321,25 +348,22 @@ export function ParticipationCelebration({
   busy,
   error,
   onContinue,
-  sound = false,
+  soundControl,
 }: {
   awards: PracticeAward[];
   childName: string;
   busy: boolean;
   error: string | null;
   onContinue: (variant: "star" | "flower" | "sun") => void;
-  sound?: boolean;
+  soundControl?: GameSoundControl;
 }) {
   const progress = awards.some((award) => award.source === "adult");
   const [variant, setVariant] = useState<"star" | "flower" | "sun">(
     progress ? "sun" : "star",
   );
-  useEffect(() => {
-    if (sound) playCelebrationSound();
-    return celebrateWheelCompletion();
-  }, [sound]);
   return (
     <MedalCelebration
+      soundControl={soundControl}
       heading={`Bravo, ${childName}!`}
       awards={awards}
       message={

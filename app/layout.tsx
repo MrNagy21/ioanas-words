@@ -9,7 +9,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   applicationName: "Vorbini",
-  manifest: "/manifest.webmanifest?v=vorbini-20261026",
+  manifest: "/manifest.webmanifest?v=vorbini-teal-20261027",
   authors: [{ name: "Ioana Nagy", url: "https://www.ioananagy.eu/" }],
   creator: "Ioana Nagy",
   appleWebApp: {
@@ -17,7 +17,10 @@ export const metadata: Metadata = {
     title: "Vorbini",
     statusBarStyle: "default",
   },
-  icons: { icon: "/brand/vorbini-mark.svg", apple: "/icons/vorbini-apple.png" },
+  icons: {
+    icon: "/brand/vorbini-mark.svg?v=teal-20261027",
+    apple: "/icons/vorbini-apple.png?v=teal-20261027",
+  },
   title: "Vorbini · Cuvinte prin joacă",
   description:
     "Alege o literă sau un sunet, învârte roata și descoperă cuvinte în limba română. Un joc de vocabular pentru copii.",

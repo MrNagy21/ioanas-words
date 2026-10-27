@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Romanian speech therapists guiding children around ages 4 to 6. Parents use the same adult-prepared journey. These facts were confirmed in the product interview in this thread.
+Romanian speech therapists and psychologists guiding children around ages 4 to 6. Parents use the same adult-prepared journey. These facts were confirmed in the product interview in this thread.
 
 ## Product purpose
 
@@ -24,7 +24,7 @@ The agreed specification is docs/app-development-program/features/guided-practic
 
 ## Brand commitments
 
-Vorbini, selected by the user on 2026-10-26. Use the smiling speech-bubble logo, rounded Nunito Sans lettering, warm cream background, plum navigation and plum primary actions with lilac secondary buttons. Warm accents remain in illustrations and rewards. Keep the Romanian UI, Ioana Nagy creator credit and approved optimized picture assets. The repository and storage identifiers may retain Word Wheel for compatibility.
+Vorbini, selected by the user on 2026-10-26. Use the smiling speech-bubble logo, rounded Nunito Sans lettering, warm cream background, the owner’s teal navigation and primary actions with pale teal secondary buttons. The teal is `hsl(185 37% 33%)`, approximately `#356e73`, from ioananagy.eu, requested on 2026-10-27. Warm accents remain in illustrations and rewards. Keep the Romanian UI, Ioana Nagy creator credit and approved optimized picture assets. The repository and storage identifiers may retain Word Wheel for compatibility.
 
 ## Evidence on hand
 

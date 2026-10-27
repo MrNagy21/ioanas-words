@@ -24,23 +24,19 @@ export function LegalDocumentPage({ kind }: { kind: "terms" | "privacy" }) {
           <h1>{document.title}</h1>
           <p className="legal-summary">{document.summary}</p>
           <aside className="legal-draft" aria-label="Starea documentului">
-            <strong>Proiect pentru revizuire</strong>
-            <p>
-              Propunere revizuită la 26 octombrie 2026. Documentul nu este încă
-              versiunea finală.{" "}
-              <a href="#de-confirmat">
-                Detalii de confirmat înainte de publicare
-              </a>
-              .
-            </p>
+            <strong>Versiune în revizuire</strong>
+            <p>{document.statusNote}</p>
           </aside>
-          <nav className="legal-contents" aria-label="Cuprins">
-            {document.sections.map((section) => (
-              <a key={section.id} href={`#${section.id}`}>
-                {section.title}
-              </a>
-            ))}
-          </nav>
+          <details className="legal-contents">
+            <summary>În această pagină</summary>
+            <nav aria-label="Cuprins">
+              {document.sections.map((section) => (
+                <a key={section.id} href={`#${section.id}`}>
+                  {section.title}
+                </a>
+              ))}
+            </nav>
+          </details>
           {document.sections.map((section) => (
             <section
               key={section.id}
@@ -66,18 +62,6 @@ export function LegalDocumentPage({ kind }: { kind: "terms" | "privacy" }) {
               )}
             </section>
           ))}
-          <aside
-            id="de-confirmat"
-            className="legal-draft"
-            aria-labelledby="review-title"
-          >
-            <h2 id="review-title">De confirmat înainte de publicare</h2>
-            <ul>
-              {document.reviewNotes.map((note) => (
-                <li key={note}>{note}</li>
-              ))}
-            </ul>
-          </aside>
         </article>
         <AppFooter currentPage={kind} />
       </div>

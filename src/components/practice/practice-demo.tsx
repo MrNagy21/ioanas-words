@@ -1,4 +1,5 @@
 "use client";
+import { AppFooter } from "@/components/app-footer";
 import Link from "next/link";
 import { Brand } from "@/components/brand";
 import { useRef, useState } from "react";
@@ -18,6 +19,8 @@ export function PracticeDemo({
   words: ContentWord[];
   target: GameplayTarget;
 }) {
+  const [sound, setSound] = useState(false);
+  const soundControl = { enabled: sound, onChange: setSound };
   const [remaining, setRemaining] = useState(words);
   const [count, setCount] = useState(0);
   const [award, setAward] = useState(false);
@@ -26,6 +29,7 @@ export function PracticeDemo({
   if (award)
     return (
       <MedalCelebration
+        soundControl={soundControl}
         heading="Bravo! Prima medalie!"
         awards={[{ id: "demo", title: "Primul cuvânt exersat" }]}
         message="Așa sărbătorim exersarea! Medalia din demo nu se salvează într-un profil."
@@ -51,6 +55,7 @@ export function PracticeDemo({
               Înapoi la prezentare
             </Link>
           </div>
+          <AppFooter />
         </div>
       </main>
     );
@@ -66,6 +71,8 @@ export function PracticeDemo({
           </Link>
         </header>
         <WheelGame
+          soundControl={soundControl}
+          temporary
           content={buildPracticeContent(target, words)}
           locale="ro"
           practice={{

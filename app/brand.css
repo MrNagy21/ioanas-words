@@ -109,27 +109,27 @@
     U+2215, U+FEFF, U+FFFD;
 }
 
-/* Vorbini: a small collection of speaking badges, with quiet adult workspaces. */
+/* Primary teal matches ioananagy.eu: hsl(185 37% 33%). */
 :root {
   color-scheme: light;
-  --color-ink: #352b46;
-  --color-muted: #716879;
+  --color-ink: #1b2a37;
+  --color-muted: #506775;
   --color-page: #fcf8ef;
   --color-surface: #fffefa;
   --color-surface-warm: #fff0cc;
-  --color-line: #e2d9e6;
-  --color-teal: #8058a7;
-  --color-teal-dark: #603d88;
+  --color-line: #d5e1df;
+  --color-teal: #356e73;
+  --color-teal-dark: #295b60;
   --color-coral: #bd4935;
   --color-yellow: #edb849;
-  --color-blue: #68468f;
-  --brand-plum: #68468f;
-  --brand-plum-hover: #593879;
-  --brand-plum-edge: #493064;
-  --brand-lilac: #f0e9f7;
+  --color-blue: #356e73;
+  --brand-primary: #356e73;
+  --brand-primary-hover: #2d6065;
+  --brand-primary-edge: #224b4f;
+  --brand-soft: #e8f1ef;
   --brand-apricot: #f7dfc5;
   --radius: 14px;
-  --shadow-soft: 0 12px 36px rgb(53 43 70 / 9%);
+  --shadow-soft: 0 12px 36px rgb(27 42 55 / 9%);
 }
 body {
   font-family: "Nunito Sans", sans-serif;
@@ -140,12 +140,12 @@ textarea {
   font-family: inherit;
 }
 ::selection {
-  background: #e6d6f1;
-  color: #352b46;
+  background: #d3e7e5;
+  color: #1b2a37;
 }
 input,
 textarea {
-  caret-color: var(--brand-plum);
+  caret-color: var(--brand-primary);
 }
 a {
   text-underline-offset: 4px;
@@ -154,7 +154,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--brand-plum);
+  color: var(--brand-primary);
   white-space: nowrap;
   line-height: 1;
   vertical-align: middle;
@@ -187,11 +187,11 @@ a {
 .practice-workspace,
 .onboarding-shell {
   background: var(--color-page);
-  scrollbar-color: #b8a4c9 var(--color-page);
+  scrollbar-color: #92b8b6 var(--color-page);
 }
 .practice-shell :focus-visible,
 .onboarding-shell :focus-visible {
-  outline-color: var(--brand-plum);
+  outline-color: var(--brand-primary);
 }
 .practice-workspace {
   padding-top: max(12px, env(safe-area-inset-top));
@@ -250,7 +250,7 @@ a {
   border: 1px solid transparent;
   border-radius: 12px;
   padding: 8px 12px 8px 8px;
-  background: var(--brand-lilac);
+  background: var(--brand-soft);
   color: var(--color-teal-dark);
   font: inherit;
   font-size: 0.875rem;
@@ -265,13 +265,13 @@ a {
   overflow-wrap: anywhere;
 }
 .menu-back:hover {
-  background: #e6dbef;
+  background: #d8e9e6;
 }
 .menu-back:active {
   transform: translateY(1px);
 }
 .menu-back:focus-visible {
-  outline: 3px solid var(--brand-plum);
+  outline: 3px solid var(--brand-primary);
   outline-offset: 3px;
 }
 .menu-back:disabled {
@@ -304,7 +304,7 @@ a {
 .practice-detail p,
 .task-row-copy > span,
 .practice-profile-totals {
-  color: #665b71;
+  color: #50656a;
 }
 .task-start {
   margin-bottom: 16px;
@@ -321,15 +321,15 @@ a {
   font-weight: 800;
 }
 .task-row > svg {
-  color: var(--brand-plum);
+  color: var(--brand-primary);
 }
 .task-row:active {
-  background: var(--brand-lilac);
+  background: var(--brand-soft);
 }
 @media (hover: hover) {
   .task-row:hover,
   .practice-workspace .practice-profile:hover {
-    background: #f4edf7;
+    background: #eff6f3;
   }
 }
 @media (hover: none) {
@@ -339,7 +339,7 @@ a {
   }
 }
 .task-row-leading {
-  background: var(--brand-lilac);
+  background: var(--brand-soft);
   color: var(--color-teal-dark);
   border-radius: 12px;
 }
@@ -347,14 +347,14 @@ a {
   background: var(--color-page);
 }
 .task-segments button[aria-pressed="true"] {
-  background: var(--brand-lilac);
+  background: var(--brand-soft);
   border-radius: 10px 10px 0 0;
 }
 .sound-picker-grid label[data-selected="true"],
 .pronunciation-scale label[data-selected="true"],
 .practice-avatar-picker label:has(input:checked) {
-  background: var(--brand-lilac);
-  border-color: var(--brand-plum);
+  background: var(--brand-soft);
+  border-color: var(--brand-primary);
   color: var(--color-teal-dark);
 }
 .practice-form input,
@@ -362,7 +362,7 @@ a {
 .practice-backup-form input,
 .practice-backup-form select {
   border-radius: 12px;
-  border-color: #bcb0c6;
+  border-color: #9bb8b8;
   background-color: var(--color-surface);
 }
 .practice-workspace .practice-library,
@@ -385,25 +385,25 @@ a {
   font-weight: 900;
 }
 .spin-button {
-  --button-edge: var(--brand-plum-edge);
-  background: var(--brand-plum);
-  border-color: var(--brand-plum-edge);
-  box-shadow: 0 3px 0 var(--brand-plum-edge);
+  --button-edge: var(--brand-primary-edge);
+  background: var(--brand-primary);
+  border-color: var(--brand-primary-edge);
+  box-shadow: 0 3px 0 var(--brand-primary-edge);
 }
 .secondary-button {
-  --button-edge: #c8b4d9;
-  background: var(--brand-lilac);
+  --button-edge: #abc9c6;
+  background: var(--brand-soft);
   color: var(--color-teal-dark);
-  border-color: #c8b4d9;
-  box-shadow: 0 3px 0 #c8b4d9;
+  border-color: #abc9c6;
+  box-shadow: 0 3px 0 #abc9c6;
 }
 @media (hover: hover) {
   .spin-button:hover:not(:disabled) {
-    background: var(--brand-plum-hover);
+    background: var(--brand-primary-hover);
   }
   .secondary-button:not(:disabled):not([aria-disabled="true"]):hover,
   .result-modal__close:hover {
-    background: #e7dcef;
+    background: #d8e9e6;
   }
 }
 .spin-button:active:not(:disabled),
@@ -432,17 +432,17 @@ a {
 }
 .locale-badge,
 .selected-letter {
-  background: var(--brand-lilac);
-  border-color: #d9cce6;
+  background: var(--brand-soft);
+  border-color: #c3dad7;
   border-radius: 12px;
 }
 .letter-tile {
   background: var(--color-surface);
-  border-color: #d9cce6;
+  border-color: #c3dad7;
   color: var(--color-ink);
 }
 .letter-tile:hover {
-  background: var(--brand-lilac);
+  background: var(--brand-soft);
 }
 .setup-stage,
 .setup-footer {
@@ -451,16 +451,16 @@ a {
 .setup-step[aria-current="step"],
 .setup-step--active {
   color: var(--color-teal-dark);
-  background: var(--brand-lilac);
+  background: var(--brand-soft);
 }
 .onboarding-brand > span {
-  color: var(--brand-plum);
+  color: var(--brand-primary);
 }
 .onboarding-bars span[data-done="true"] {
-  background: var(--brand-plum);
+  background: var(--brand-primary);
 }
 .onboarding-bars span {
-  background: #e7dfea;
+  background: #dce7e4;
 }
 .onboarding-shell .onboarding-frame {
   padding-top: 16px;
@@ -484,7 +484,7 @@ a {
   letter-spacing: -0.035em;
 }
 .intro-word-board figure {
-  border-color: #dfd0e6;
+  border-color: #c3dad7;
   background: #f7efdf;
 }
 .practice-celebration {
@@ -561,7 +561,7 @@ a {
 .setup-wizard .setup-option-card[data-active="true"],
 .setup-count-option[data-active="true"],
 .setup-quick-filter[data-active="true"] {
-  background: var(--brand-lilac);
+  background: var(--brand-soft);
 }
 .brand-task-title {
   display: flex;
@@ -586,8 +586,8 @@ a {
   background: var(--color-page);
 }
 .practice-medal-choice[aria-pressed="true"] {
-  background: var(--brand-lilac);
-  border-color: var(--brand-plum);
+  background: var(--brand-soft);
+  border-color: var(--brand-primary);
 }
 @media (max-width: 640px) {
   .app-header--setup .app-header__title {
@@ -658,15 +658,6 @@ a {
   font-size: 1.3rem;
   line-height: 1.3;
 }
-.legal-draft ul {
-  margin: 12px 0 0;
-  padding-inline-start: 20px;
-}
-.legal-draft li {
-  margin-block: 12px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
 .profile-privacy-notice {
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -674,7 +665,7 @@ a {
   overflow-wrap: anywhere;
 }
 .profile-privacy-notice a {
-  color: var(--brand-plum);
+  color: var(--brand-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -724,7 +715,7 @@ a {
   min-height: 48px;
   padding-block: 12px;
   border-bottom: 1px solid var(--color-line);
-  color: var(--brand-plum);
+  color: var(--brand-primary);
   font-size: 0.9375rem;
   font-weight: 700;
   line-height: 1.5;
@@ -740,7 +731,7 @@ a {
   flex-shrink: 0;
 }
 .adult-footer a:focus-visible {
-  outline: 3px solid var(--brand-plum);
+  outline: 3px solid var(--brand-primary);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -763,7 +754,7 @@ a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--brand-plum);
+  color: var(--brand-primary);
 }
 .adult-footer-sr {
   position: absolute;
@@ -798,6 +789,91 @@ a {
   text-decoration: none;
 }
 .app-home-link:focus-visible {
-  outline: 3px solid var(--brand-plum, #68468f);
+  outline: 3px solid var(--brand-primary, #356e73);
   outline-offset: 4px;
+}
+
+/* Adult preparation can scroll to the information links without shrinking play. */
+.app-shell--adult {
+  display: block;
+  overflow-y: auto;
+}
+.app-shell--adult .app-frame {
+  height: auto;
+  min-height: 100%;
+  margin-inline: auto;
+  grid-template-rows: auto auto auto;
+  overflow: visible;
+}
+.app-shell--adult .letter-stage {
+  overflow: visible;
+  padding-top: 20px;
+}
+.app-shell--adult .letter-panel {
+  overflow: visible;
+}
+.app-shell--adult .setup-stage {
+  height: max(540px, min(680px, calc(100dvh - 80px)));
+  min-height: 0;
+}
+.app-shell--adult .adult-footer {
+  margin-inline: 18px;
+}
+.onboarding-frame > .adult-footer {
+  flex-shrink: 0;
+}
+.game-sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 6px;
+  min-height: 44px;
+  padding: 6px 8px;
+  font-size: 0.8125rem;
+}
+.game-sound-toggle svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.game-topline {
+  flex-wrap: wrap;
+}
+
+.app-shell--adult .setup-wizard-card__footer {
+  position: static;
+}
+.app-shell--adult .setup-wizard .setup-wizard-card__body {
+  padding-bottom: 16px;
+  scroll-padding-bottom: 16px;
+}
+
+.legal-contents summary {
+  min-height: 44px;
+  padding-block: 12px;
+  color: var(--brand-primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+.legal-contents nav {
+  display: grid;
+}
+.legal-shell h2 {
+  max-width: none;
+}
+
+.celebration-sound-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.celebration-sound-controls .celebration-brand {
+  margin-bottom: 0;
+}
+.celebration-sound-controls .game-sound-toggle {
+  min-height: 48px;
 }

@@ -1,7 +1,7 @@
 import { launchQABrowser } from "./browser-runtime.mjs";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -46,7 +46,7 @@ try {
   );
   await writeFile(
     path.join(output, "index.html"),
-    `<!doctype html><html lang="ro"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${await readFile(path.join(repo, "app/globals.css"), "utf8")}</style><div id="root"></div><script>window.process = { env: {} };</script><script src="fixture.js"></script></html>`,
+    `<!doctype html><html lang="ro"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${await readFile(path.join(repo, "app/globals.css"), "utf8")}\n${await readFile(path.join(repo, "app/brand.css"), "utf8")}</style><div id="root"></div><script>window.process = { env: {} };</script><script src="fixture.js"></script></html>`,
   );
   browser = await launchQABrowser();
   const context = await browser.newContext({ reducedMotion: "reduce" });
@@ -55,7 +55,7 @@ try {
     errors.push(error.message);
     console.error(error.message);
   });
-  await page.route("**/images/**", async (route) => {
+  await page.route(/\/(images|fonts|brand)\//, async (route) => {
     const pathname = decodeURIComponent(
       new URL(route.request().url()).pathname,
     );
@@ -198,13 +198,111 @@ try {
         `Final label must rest at the top of the wheel: ${JSON.stringify(placement)}`,
       );
       await page.emulateMedia({ reducedMotion: "no-preference" });
+      for (const [width, height] of [
+        [390, 844],
+        [1440, 900],
+      ]) {
+        await page.setViewportSize({ width, height });
+        await page.evaluate(() => {
+          window.finalReveal = null;
+          const observer = new MutationObserver(() => {
+            if (!document.querySelector('[role="dialog"]')) return;
+            const frame = document.querySelector(".wheel-frame");
+            const style = getComputedStyle(frame);
+            const matrix = new DOMMatrix(style.transform);
+            const animation = frame.getAnimations()[0];
+            window.finalReveal = {
+              scale: Math.hypot(matrix.a, matrix.b),
+              opacity: Number(style.opacity),
+              elapsed: animation.currentTime,
+              duration: animation.effect.getTiming().duration,
+            };
+            observer.disconnect();
+          });
+          observer.observe(document.body, {
+            subtree: true,
+            attributes: true,
+            childList: true,
+          });
+        });
+        await page.locator(".wheel-button").click();
+        await page.waitForFunction(() => {
+          const frame = document.querySelector(".wheel-frame");
+          const matrix = new DOMMatrix(getComputedStyle(frame).transform);
+          const scale = Math.hypot(matrix.a, matrix.b);
+          return scale < 0.8 && scale > 0.3 && Math.abs(matrix.b) > 0.05;
+        });
+        assert.equal(
+          await page.getByRole("dialog").count(),
+          0,
+          "Spiral precedes the popup",
+        );
+        if (process.env.WORD_WHEEL_QA_ARTIFACT_DIR) {
+          await mkdir(process.env.WORD_WHEEL_QA_ARTIFACT_DIR, {
+            recursive: true,
+          });
+          await page.screenshot({
+            path: path.join(
+              process.env.WORD_WHEEL_QA_ARTIFACT_DIR,
+              `${process.env.WORD_WHEEL_BROWSER || "chromium"}-final-word-spiral-${width}.png`,
+            ),
+            animations: "allow",
+          });
+        }
+        await page.getByRole("dialog").waitFor();
+        const reveal = await page.evaluate(() => window.finalReveal);
+        assert.ok(
+          reveal.scale > 0 &&
+            reveal.scale < 0.35 &&
+            reveal.opacity > 0 &&
+            reveal.elapsed < reveal.duration,
+          `Popup arrives just before disappearance: ${JSON.stringify(reveal)}`,
+        );
+        await page.waitForFunction(
+          () =>
+            getComputedStyle(document.querySelector(".wheel-frame")).opacity ===
+            "0",
+        );
+        assert.ok(
+          await page.getByRole("dialog").isVisible(),
+          "Result stays open after disappearance",
+        );
+        await page
+          .getByRole("button", { name: "Păstrează", exact: true })
+          .click();
+        assert.equal(
+          await page.locator(".wheel-wrap--final-exit").count(),
+          0,
+          "Keep restores the wheel",
+        );
+        assert.equal(
+          await page
+            .locator(".wheel-frame")
+            .evaluate((el) => getComputedStyle(el).opacity),
+          "1",
+        );
+        assert.deepEqual(await labels(), before);
+      }
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await spin();
+      assert.equal(
+        await page
+          .locator(".wheel-frame")
+          .evaluate((el) => getComputedStyle(el).transform),
+        "none",
+        "Reduced motion fades without shrinking or rotating",
+      );
+      await page.keyboard.press("Escape");
+      await page.getByRole("dialog").waitFor({ state: "hidden" });
+      assert.equal(await page.locator(".wheel-wrap--final-exit").count(), 0);
+      await page.emulateMedia({ reducedMotion: "no-preference" });
     }
     await spin();
     if (count === 1) {
       assert.equal(
         await page.locator(".wheel-button").isDisabled(),
         true,
-        "Final wheel must keep spinning after its result modal opens",
+        "Final wheel stays disabled while the result is open",
       );
     }
     const removed = await page.locator("#result-title").textContent();
@@ -262,7 +360,7 @@ try {
     );
     assert.ok(
       geometry.scroll <= geometry.client + 1,
-      `Completion card should not need scrolling at ${width}x${height}`,
+      `Completion card should not need scrolling at ${width}x${height}: ${JSON.stringify(geometry)}`,
     );
   }
   await page.getByRole("button", { name: "Joacă din nou" }).click();
@@ -319,7 +417,7 @@ try {
   );
   assert.deepEqual(errors, [], "No browser runtime errors");
   console.log(
-    "Wheel browser checks passed: keep, Escape, focus trap, replace, final-word top alignment and spin continuity, 15→0 countdown, same-target rerenders, completion layouts, replay, target changes, timer cleanup, and result layouts.",
+    "Wheel browser checks passed: keep, Escape, focus trap, replace, final-word spiral/reveal timing, keep/replay and reduced-motion fade, 15→0 countdown, same-target rerenders, completion layouts, replay, target changes, timer cleanup, and result layouts.",
   );
 } finally {
   await browser?.close();

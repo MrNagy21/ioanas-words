@@ -1,6 +1,34 @@
 # Word Wheel Status
 
-Last updated: 2026-10-26
+Last updated: 2026-10-27
+
+## Astra review and owner-feedback release
+
+Astra completed the requested critical review on 2026-10-27 and returned APPROVE with zero actionable findings across the full pending diff and nine untracked files. Fresh release validation, practice/encrypted-backup tests, full WebKit practice regression, formatting and production dependency audit pass. The user authorized deployment after this clear verdict. Rollout and public verification are next; see the [release report](app-development-program/features/guided-practice-app/owner-feedback-release-2026-10-27.md). DNS migration remains separate.
+
+## Proposed domain move
+
+Investigated 2026-10-27. The user proposed `vorbini.ioananagy.eu`. The current `cuvinte.ioananagy.eu` responds from Vercel; the new hostname has no DNS record. The [migration notes and next prompt](app-development-program/features/guided-practice-app/domain-move-2026-10-27.md) record the observed CNAME, configuration steps and protected backup/restore requirement. Keep the old origin available for export because child data does not automatically cross origins. No domain, redirect, public link or deployment has changed.
+
+## Last-word spiral
+
+Completed locally 2026-10-27. The last word now uses an 800ms shrinking spiral; its popup opens at 680ms before disappearance. Keep and Escape restore the wheel for replay. Reduced motion uses a 120ms fade. Counting and audio behavior are preserved, including allowing the reveal chime to finish. Compact completion spacing keeps controls visible at 320×568 and 568×320.
+
+Production build/TypeScript, lint, gameplay compatibility, Chrome/WebKit wheel regressions and WebKit audio checks pass. Tests cover intermediate rotation/shrink, popup timing, hiding/restoring the wheel, replay, reduced motion, completion, focus and timer cleanup. Localhost phone/desktop captures confirm the actual animation and popup; final compact completion checks pass. The mechanical detector reported only existing base-font/button-edge rules, recorded in the report. Evidence: `/Users/darius/.t3/userdata/artifacts/vorbini-final-spiral-2026-10-27/`. See the [owner-feedback report and next prompt](app-development-program/features/guided-practice-app/owner-feedback-2026-10-27.md). Production runs on port 3000. No deployment or commit. Physical-device acceptance remains open.
+
+## Teal identity, clearer legal pages and game sounds
+
+Completed locally 2026-10-27 after the owner's clarification. The psychologist site's confirmed teal `hsl(185 37% 33%)`, approximately `#356e73`, now covers the app and active logo/install assets. Word reveals and confetti have brief optional sounds alongside the slowing wheel ticks; one mute setting controls all effects. Profile play uses the existing saved preference, anonymous play remembers its device choice and the demo remains temporary. Legal pages now lead with useful information, have a compact contents list and keep internal publishing tasks in the legal docs. Draft status and actual policy uncertainties remain visible.
+
+Final production build/TypeScript, lint, scoped formatting, practice domain/migration/encryption checks and full WebKit practice/backup regression pass. Chrome 156 and WebKit 26.5 audio checks pass, including muted future reveals and wheel/medal transitions. WebKit footer, legal, 200% text, brand/manifest checks and phone/desktop visual inspection pass. The new celebration sound control was corrected to meet the existing 48px touch target; the final suite passes all five medal sizes. The Impeccable mechanical scan returned no findings. White on primary teal measures 5.79:1 contrast.
+
+See the [implementation report and next prompt](app-development-program/features/guided-practice-app/owner-feedback-2026-10-27.md) and [legal editorial review](legal/editorial-review-2026-10-27.md). Evidence is in `/Users/darius/.t3/userdata/artifacts/vorbini-teal-audio-2026-10-27/`. Local production runs on port 3000. No commit or deployment was made. Physical listening/device acceptance, actual legal operational decisions and GP9 review/pilot gates remain open.
+
+## Owner feedback follow-up
+
+Implemented locally 2026-10-27: optional wheel ticking/mute, “Copii” navigation, information links throughout adult preparation, an explanatory contact page, and explicit inclusion of psychologists. The initial pass left color and terms clarification open; the completed follow-up above supersedes that checkpoint. See the [implementation report and next prompt](app-development-program/features/guided-practice-app/owner-feedback-2026-10-27.md).
+
+Final Node 24 build/TypeScript, lint, gameplay checks, WebKit footer/onboarding/full practice and encrypted-backup journeys, Chrome/WebKit wheel audio and all 88 public routes/four Romanian 404 cases pass. Phone/desktop screenshots were inspected, including the corrected setup footer overlap. Physical listening/device acceptance remains pending. Local production runs on port 3000. No commit or deployment made; records, content and backup contracts are unchanged. Source discovery uses direct reads because this repository is absent from the graph catalog.
 
 ## Logo home navigation and install name
 

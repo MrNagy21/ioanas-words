@@ -1,9 +1,15 @@
 "use client";
 
+import {
+  useGameSound,
+  type GameSoundControl,
+} from "@/components/use-game-sound";
+import { GameSoundToggle } from "@/components/game-sound-toggle";
 import Image from "next/image";
 import Link from "next/link";
 import {
   type KeyboardEvent as ReactKeyboardEvent,
+  type CSSProperties,
   useCallback,
   useEffect,
   useMemo,
@@ -57,6 +63,7 @@ type WheelGameProps = Readonly<{
   content: GameplayContent;
   practice?: TrackedWheelControl;
   temporary?: boolean;
+  soundControl?: GameSoundControl;
 }>;
 
 export type TrackedWheelControl = {
@@ -95,7 +102,8 @@ const WHEEL_CENTER = 160;
 const WHEEL_RADIUS = 152;
 const SPIN_MIN_DURATION_MS = 5600;
 const SPIN_DURATION_VARIANCE_MS = 2200;
-const FINAL_WORD_RESULT_DELAY_MS = 500;
+const FINAL_WORD_SPIN_MS = 800;
+const FINAL_WORD_RESULT_FRACTION = 0.85;
 const SPIN_EASING = "cubic-bezier(0.08, 0.82, 0.17, 1)";
 const REDUCED_MOTION_SPIN_MS = 120;
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
@@ -146,6 +154,7 @@ export function WheelGame({
   locale,
   practice,
   temporary = false,
+  soundControl,
 }: WheelGameProps) {
   return (
     <WheelGameSession
@@ -154,6 +163,7 @@ export function WheelGame({
       locale={locale}
       practice={practice}
       temporary={temporary}
+      soundControl={soundControl}
     />
   );
 }
@@ -163,7 +173,12 @@ function WheelGameSession({
   locale,
   practice,
   temporary = false,
+  soundControl,
 }: WheelGameProps) {
+  const wheelSound = useGameSound({
+    control: soundControl,
+    persist: !temporary,
+  });
   const practiceRef = useRef(practice);
   const practiceOperation = useRef(false);
   const [practiceSaving, setPracticeSaving] = useState(false);
@@ -380,7 +395,8 @@ function WheelGameSession({
   });
   const isInteractionBlocked =
     !isHydrated || isSpinning || isResultOpen || isSetupOpen || practiceSaving;
-  const wheelRotation = isFinalWord && !isSpinning ? 0 : rotation;
+  const wheelRotation = isFinalWord ? 0 : rotation;
+  const isFinalWordExiting = isFinalWord && (isSpinning || isResultOpen);
   const returnFocusToGame = useCallback(() => {
     window.requestAnimationFrame(() => {
       (wheelButtonRef.current ?? completionRef.current)?.focus();
@@ -492,6 +508,7 @@ function WheelGameSession({
   }, [activeWords, subsetKey, visibleWheelWordCount]);
 
   function openResultForWord(word: ContentWord) {
+    wheelSound.reveal();
     setSelectedWord(word);
     setIsResultOpen(true);
     if (practiceRef.current) {
@@ -551,12 +568,15 @@ function WheelGameSession({
     });
     const nextDuration = prefersReducedMotion
       ? REDUCED_MOTION_SPIN_MS
-      : SPIN_MIN_DURATION_MS +
-        Math.floor(Math.random() * SPIN_DURATION_VARIANCE_MS);
+      : isFinalWord
+        ? FINAL_WORD_SPIN_MS
+        : SPIN_MIN_DURATION_MS +
+          Math.floor(Math.random() * SPIN_DURATION_VARIANCE_MS);
     const resultDelay = isFinalWord
-      ? Math.min(FINAL_WORD_RESULT_DELAY_MS, nextDuration)
+      ? Math.round(nextDuration * FINAL_WORD_RESULT_FRACTION)
       : nextDuration;
 
+    wheelSound.start(resultDelay);
     setSelectedWord(null);
     setIsResultOpen(false);
     setIsSpinning(true);
@@ -564,6 +584,7 @@ function WheelGameSession({
     setRotation(nextRotation);
 
     spinTimer.current = window.setTimeout(() => {
+      if (!isFinalWord) wheelSound.stop();
       setIsSpinning(false);
       if (isFinalWord) {
         setRotation(0);
@@ -575,6 +596,7 @@ function WheelGameSession({
 
     if (isFinalWord) {
       finalWordResultTimer.current = window.setTimeout(() => {
+        wheelSound.stop();
         openResultForWord(words[0]);
         finalWordResultTimer.current = null;
       }, resultDelay);
@@ -615,6 +637,15 @@ function WheelGameSession({
       return;
     }
     setIsResultOpen(false);
+    setIsSpinning(false);
+    if (spinTimer.current !== null) {
+      window.clearTimeout(spinTimer.current);
+      spinTimer.current = null;
+    }
+    if (finalWordResultTimer.current !== null) {
+      window.clearTimeout(finalWordResultTimer.current);
+      finalWordResultTimer.current = null;
+    }
   }, []);
 
   function closeSetup() {
@@ -865,6 +896,7 @@ function WheelGameSession({
     if (isLastRemainingWord && !completionCelebrated.current) {
       completionCelebrated.current = true;
       celebrationCleanup.current?.();
+      wheelSound.celebrate();
       celebrationCleanup.current = celebrateWheelCompletion();
     }
   }
@@ -937,6 +969,7 @@ function WheelGameSession({
             />
           </div>
         )}
+        <GameSoundToggle sound={wheelSound} />
         <div className="selected-letter" aria-label="Alegerea curentă">
           {content.target.label}
         </div>
@@ -945,7 +978,14 @@ function WheelGameSession({
       <div className="game-board">
         {hasWords ? (
           <div className="wheel-slot">
-            <div className="wheel-wrap">
+            <div
+              className={`wheel-wrap${isFinalWordExiting ? " wheel-wrap--final-exit" : ""}`}
+              style={
+                {
+                  "--final-word-duration": `${spinDurationMs}ms`,
+                } as CSSProperties
+              }
+            >
               <div className="wheel-pointer" aria-hidden="true" />
               <button
                 aria-label={

@@ -1,5 +1,6 @@
 "use client";
 
+import { AppFooter } from "@/components/app-footer";
 import { ProfilePrivacyNotice } from "@/components/legal-links";
 import { Brand } from "@/components/brand";
 import Image from "next/image";
@@ -695,6 +696,7 @@ export function PracticeOnboarding({
             </Link>
           )}
         </footer>
+        <AppFooter newTab />
       </form>
     </main>
   );

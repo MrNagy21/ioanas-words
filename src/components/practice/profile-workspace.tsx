@@ -48,7 +48,7 @@ import {
   PracticeOnboarding,
   clearOnboardingDraft,
 } from "@/components/practice/practice-onboarding";
-import { unlockCelebrationSound } from "@/components/practice/celebration-sound";
+import { unlockGameSound, stopGameSounds } from "@/components/game-sound";
 import { beginPracticeSession } from "@/practice/sessions";
 import { getTargetStorageKey, getTargetRouteSegment } from "@/game/wheel-setup";
 import {
@@ -129,10 +129,27 @@ export function ProfileWorkspace({
   }, [refresh]);
   useEffect(() => {
     if (!state?.preferences?.sound) return;
-    const unlock = () => unlockCelebrationSound();
+    const unlock = () => unlockGameSound();
     window.addEventListener("pointerdown", unlock, { once: true });
-    return () => window.removeEventListener("pointerdown", unlock);
+    window.addEventListener("keydown", unlock, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+    };
   }, [state?.preferences?.sound]);
+
+  async function changeSound(enabled: boolean) {
+    if (enabled) unlockGameSound();
+    else stopGameSounds();
+    await save(
+      (draft) => {
+        draft.preferences.sound = enabled;
+      },
+      enabled
+        ? "Sunete activate pentru roată, cuvinte și sărbătoriri."
+        : "Sunet oprit.",
+    );
+  }
 
   async function save(
     command: (draft: LocalPracticeState) => void,
@@ -238,7 +255,11 @@ export function ProfileWorkspace({
           (a) => a.childId === celebratingId && !a.presented,
         )}
         childName={celebratingChild.nickname}
-        sound={state.preferences.sound}
+        soundControl={{
+          enabled: state.preferences.sound,
+          onChange: changeSound,
+          disabled: busy,
+        }}
         busy={busy}
         error={error}
         onContinue={(variant) => {
@@ -771,20 +792,13 @@ export function ProfileWorkspace({
               checked={state.preferences?.sound ?? false}
               disabled={busy}
               onChange={(event) => {
-                const sound = event.target.checked;
-                if (sound) unlockCelebrationSound();
-                void save(
-                  (draft) => {
-                    draft.preferences.sound = sound;
-                  },
-                  sound ? "Sunet activat pentru sărbătoriri." : "Sunet oprit.",
-                );
+                void changeSound(event.target.checked);
               }}
             />
-            Sunet la sărbătoriri
+            Sunete pentru roată, cuvinte și sărbătoriri
           </label>
         )}
-        {!selected && !editor && !utility && <AppFooter newTab />}
+        <AppFooter newTab />
       </div>
     </main>
   );

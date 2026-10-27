@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import {
+  useGameSound,
+  type GameSoundControl,
+} from "@/components/use-game-sound";
+import { GameSoundToggle } from "@/components/game-sound-toggle";
+import { celebrateWheelCompletion } from "@/components/wheel-completion-celebration";
 import { Brand } from "@/components/brand";
 import { Medal } from "@/components/practice/medal";
 
@@ -17,6 +23,7 @@ export function MedalCelebration({
   continueLabel,
   busy = false,
   error,
+  soundControl,
 }: {
   heading: string;
   awards: { id: string; title: string }[];
@@ -28,7 +35,14 @@ export function MedalCelebration({
   continueLabel: string;
   busy?: boolean;
   error?: string | null;
+  soundControl?: GameSoundControl;
 }) {
+  const sound = useGameSound({ control: soundControl, persist: false });
+  useEffect(() => celebrateWheelCompletion(), []);
+  const { enabled, celebrate } = sound;
+  useEffect(() => {
+    if (enabled) return celebrate();
+  }, [enabled, celebrate]);
   const title = useRef<HTMLHeadingElement>(null);
   useEffect(() => title.current?.focus({ preventScroll: true }), []);
 
@@ -36,8 +50,11 @@ export function MedalCelebration({
     <main className="practice-shell practice-celebration-shell">
       <div className="practice-celebration" aria-busy={busy}>
         <div className="practice-celebration-content">
-          <div className="celebration-brand">
-            <Brand compact />
+          <div className="celebration-sound-controls">
+            <div className="celebration-brand">
+              <Brand compact />
+            </div>
+            <GameSoundToggle sound={sound} />
           </div>
           <div className="practice-celebration-art">
             <Medal variant={variant} size={156} progress={progress} />

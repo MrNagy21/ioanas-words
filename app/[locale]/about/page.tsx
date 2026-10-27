@@ -44,8 +44,8 @@ export default async function AboutPage({
               Copilul învârte roata, iar fiecare cuvânt îl apropie de o medalie.
             </p>
             <p>
-              Pentru momentele de exersare cu logopedul sau acasă, alături de un
-              părinte.
+              Pentru momentele de exersare cu logopedul, cu psihologul sau
+              acasă, alături de un părinte.
             </p>
             <div className="practice-form-actions">
               <Link className="spin-button" href="/ro/practice">

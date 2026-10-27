@@ -14,13 +14,13 @@ function manifest(): MetadataRoute.Manifest {
     theme_color: "#fcf8ef",
     icons: [
       {
-        src: "/icons/vorbini-192.png",
+        src: "/icons/vorbini-192.png?v=teal-20261027",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icons/vorbini-512.png",
+        src: "/icons/vorbini-512.png?v=teal-20261027",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",

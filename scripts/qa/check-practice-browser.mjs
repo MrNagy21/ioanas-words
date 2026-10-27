@@ -423,7 +423,7 @@ try {
           r.bottom <= height &&
           r.height >= 48,
       ),
-      `Medal choices/save fit ${width}×${height}`,
+      `Medal controls fit ${width}×${height}: ${JSON.stringify(controls)}`,
     );
   }
   await page.setViewportSize({ width: 390, height: 844 });
@@ -723,7 +723,9 @@ try {
   });
   if (await toChildren.isVisible()) await toChildren.click();
   await taskRow(page, "Date și setări").click();
-  const sound = page.getByLabel("Sunet la sărbătoriri", { exact: true });
+  const sound = page.getByLabel("Sunete pentru roată, cuvinte și sărbătoriri", {
+    exact: true,
+  });
   assert.equal(
     await sound.isChecked(),
     false,
@@ -752,7 +754,16 @@ try {
   const beforeDemo = await page.evaluate(async () =>
     JSON.stringify(await window.practiceQA.readPracticeState()),
   );
-  await page.getByRole("link", { name: "Despre Vorbini", exact: true }).click();
+  const aboutPopupPromise = page.waitForEvent("popup");
+  await page
+    .getByRole("link", { name: "Despre Vorbini (filă nouă)", exact: true })
+    .click();
+  const aboutPopup = await aboutPopupPromise;
+  await aboutPopup.waitForLoadState();
+  const aboutUrl = aboutPopup.url();
+  assert.ok(aboutUrl.endsWith("/ro/about?show=1"));
+  await aboutPopup.close();
+  await page.goto(aboutUrl);
   await page.getByRole("link", { name: "Încearcă jocul", exact: true }).click();
   await page.getByRole("button", { name: "Învârte", exact: true }).click();
   await page.getByRole("dialog").waitFor();

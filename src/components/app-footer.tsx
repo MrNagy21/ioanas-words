@@ -4,7 +4,7 @@ import { CreatorCredit } from "@/components/creator-credit";
 
 const pages = [
   { key: "about", label: "Despre Vorbini", href: "/ro/about?show=1" },
-  { key: "contact", label: "Contact", href: "mailto:darius@mrnagy.com" },
+  { key: "contact", label: "Contact", href: "/ro/contact" },
   { key: "terms", label: "Termeni de utilizare", href: "/ro/termeni" },
   { key: "privacy", label: "Confidențialitate", href: "/ro/confidentialitate" },
 ] as const;
@@ -14,7 +14,7 @@ export function AppFooter({
   currentPage,
 }: {
   newTab?: boolean;
-  currentPage?: "about" | "terms" | "privacy";
+  currentPage?: "about" | "contact" | "terms" | "privacy";
 }) {
   return (
     <footer className="adult-footer" aria-label="Informații despre Vorbini">
@@ -27,8 +27,7 @@ export function AppFooter({
         aria-label="Despre aplicație și informații legale"
       >
         {pages.map((page) => {
-          const opensTab =
-            newTab && (page.key === "terms" || page.key === "privacy");
+          const opensTab = newTab;
           return (
             <Link
               key={page.key}
@@ -62,7 +61,12 @@ export function AppFooter({
       </nav>
       <div className="adult-footer-credit">
         <CreatorCredit locale="ro" />
-        {newTab && <p>Documentele se deschid într-o filă nouă.</p>}
+        {newTab && (
+          <p>
+            Linkurile se deschid într-o filă nouă, ca să puteți continua de unde
+            ați rămas.
+          </p>
+        )}
       </div>
     </footer>
   );

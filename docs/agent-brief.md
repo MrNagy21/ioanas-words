@@ -2,7 +2,9 @@
 
 This file captures the project decisions. Use it as the fast handoff for any agent starting work in this repository.
 
-The app is named **Vorbini**, selected by the user on 2026-10-26. Keep the smiling speech-bubble logo, rounded Nunito Sans, warm cream and plum/lilac buttons. See PRODUCT.md, DESIGN.md and the [branding report](app-development-program/features/guided-practice-app/rostimo-branding.md). Older Word Wheel references describe the same project; storage identifiers remain unchanged.
+The app is named **Vorbini**, selected by the user on 2026-10-26. Keep the smiling speech-bubble logo, rounded Nunito Sans, warm cream and the owner’s teal `#356e73` with pale teal secondary buttons. See PRODUCT.md, DESIGN.md and the [branding report](app-development-program/features/guided-practice-app/rostimo-branding.md). Older Word Wheel references describe the same project; storage identifiers remain unchanged.
+
+Owner feedback on 2026-10-27 adds optional wheel ticking, the “Copii” label, information links across adult preparation, a contact page and psychologists in audience copy. The clarified follow-up applies ioananagy.eu’s teal to the interface and active logo/icons, adds word and confetti sounds under one mute control, and simplifies the legal draft presentation without inventing policy facts. See the [owner-feedback report](app-development-program/features/guided-practice-app/owner-feedback-2026-10-27.md). No new deployment was requested.
 
 ## Active direction: guided practice app
 

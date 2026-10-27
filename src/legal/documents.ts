@@ -2,7 +2,7 @@
 export type LegalDocument = {
   title: string;
   summary: string;
-  reviewNotes: string[];
+  statusNote: string;
   sections: {
     id: string;
     title: string;
@@ -22,32 +22,22 @@ export const legalDocuments: Record<"terms" | "privacy", LegalDocument> = {
   terms: {
     title: "Termeni de utilizare",
     summary:
-      "Ce oferă Vorbini și ce trebuie să știți când o folosiți împreună cu un copil.",
-    reviewNotes: [
-      "Propunere revizuită la 26 octombrie 2026. Data intrării în vigoare se stabilește la publicare, după încheierea verificărilor pentru lansare.",
-    ],
+      "Vorbini este un joc de cuvinte pregătit de un adult. Mai jos găsiți regulile de folosire, ce urmărește aplicația și cum păstrați profilurile copiilor.",
+    statusNote:
+      "Text actualizat la 27 octombrie 2026. Termenii sunt încă în revizuire și nu au o dată de intrare în vigoare.",
     sections: [
       {
-        id: "furnizor",
-        title: "Cine oferă aplicația",
-        contactEmail,
-        paragraphs: [
-          "Vorbini este oferită de Mr. Nagy Software Systems & Consulting S.R.L.",
-          ...providerDetails,
-        ],
-      },
-      {
         id: "utilizare",
-        title: "Un joc pregătit de adult",
+        title: "Cine poate folosi Vorbini",
         paragraphs: [
-          "Vorbini este un instrument pentru exersarea cuvintelor și a pronunției, destinat logopezilor și părinților din România. Adultul gestionează aplicația, pregătește activitatea și îl însoțește pe copil în timpul jocului. El alege exercițiile potrivite și face pauză atunci când copilul are nevoie.",
+          "Vorbini este un instrument pentru exersarea cuvintelor și a pronunției, destinat logopezilor, psihologilor și părinților din România. Adultul gestionează aplicația, pregătește activitatea și îl însoțește pe copil în timpul jocului. El alege exercițiile potrivite și face pauză atunci când copilul are nevoie.",
           "Creați și gestionați un profil numai dacă aveți dreptul să lucrați cu datele copilului, ca părinte, reprezentant legal, adult împuternicit sau profesionist. Dacă folosiți aplicația în cabinet, stabiliți cine poate vedea datele, cât timp le păstrați și ce informare oferiți familiei. Aceste responsabilități nu înlocuiesc obligațiile proprii ale furnizorului.",
           "Versiunea actuală poate fi folosită fără cont și fără plată. Dacă vom introduce servicii cu plată, prețul și condițiile lor vor fi prezentate separat, înainte de orice achiziție.",
         ],
       },
       {
         id: "limite",
-        title: "Exersarea nu este o evaluare clinică",
+        title: "Ce urmărește aplicația",
         paragraphs: [
           "Aplicația nu înregistrează vocea și nu stabilește dacă un cuvânt a fost pronunțat corect. Când închideți imaginea unui cuvânt într-o rundă cu profil, aplicația îl adaugă în istoricul de exersare. Medaliile automate răsplătesc participarea. Aprecierile despre pronunție sunt introduse de adult.",
           "Totalurile pentru sunetul ales al roții arată cât s-a exersat cu acea roată. Ele nu confirmă pronunția corectă sau prezența verificată a sunetului în fiecare cuvânt.",
@@ -56,7 +46,7 @@ export const legalDocuments: Record<"terms" | "privacy", LegalDocument> = {
       },
       {
         id: "date",
-        title: "Păstrați o copie a progresului",
+        title: "Profiluri și copii de siguranță",
         paragraphs: [
           "Profilurile și istoricul sunt păstrate în browserul și la adresa site-ului pe care le folosiți. Nu se transferă automat într-un alt browser, pe alt dispozitiv sau la o altă adresă a aplicației. Ștergerea datelor site-ului ori pierderea dispozitivului poate duce la pierderea istoricului. Înainte de o mutare, exportați o copie de siguranță cu parolă și restaurați-o la noua adresă sau pe noul dispozitiv.",
           "Descărcați periodic o copie de siguranță cu parolă. Păstrați fișierul și parola în siguranță. Nu putem recupera o parolă pierdută sau date locale pe care nu le primim. Pentru un copil, folosiți o poreclă sau un cod și oferiți acces doar persoanelor autorizate.",
@@ -79,11 +69,20 @@ export const legalDocuments: Record<"terms" | "privacy", LegalDocument> = {
         ],
       },
       {
+        id: "furnizor",
+        title: "Cine oferă aplicația",
+        contactEmail,
+        paragraphs: [
+          "Vorbini este oferită de Mr. Nagy Software Systems & Consulting S.R.L.",
+          ...providerDetails,
+        ],
+      },
+      {
         id: "modificari",
         title: "Modificări și întrebări",
         paragraphs: [
           "Versiunile noi ale termenilor vor avea o dată de intrare în vigoare. Vom comunica schimbările importante înainte să se aplice, atunci când legea o cere, și vom solicita un acord separat dacă este necesar. Modificările nu anulează drepturile deja dobândite.",
-          "Pentru întrebări sau reclamații, folosiți contactul furnizorului indicat la începutul paginii. Vă păstrați dreptul de a vă adresa autorităților și instanțelor competente potrivit legii.",
+          "Pentru întrebări sau reclamații, folosiți contactul furnizorului din secțiunea „Cine oferă aplicația”. Vă păstrați dreptul de a vă adresa autorităților și instanțelor competente potrivit legii.",
         ],
       },
     ],
@@ -92,20 +91,15 @@ export const legalDocuments: Record<"terms" | "privacy", LegalDocument> = {
     title: "Politica de confidențialitate",
     summary:
       "Ce rămâne pe dispozitiv, ce date sunt necesare pentru site și cum puteți controla informațiile.",
-    reviewNotes: [
-      "Propunere revizuită la 26 octombrie 2026. Publicarea așteaptă confirmarea următoarelor detalii și stabilirea datei de intrare în vigoare.",
-      "Găzduire: contractul Vercel aplicabil, jurnalele activate, durata de păstrare, destinatarii și garanțiile pentru transferuri internaționale. Documentația publică nu confirmă setările acestui proiect.",
-      "Suport: propunem ștergerea conversațiilor obișnuite în cel mult 90 de zile de la rezolvarea solicitării. Pentru obligații legale sau litigii se păstrează separat numai informațiile necesare, pe durata justificată. Regula trebuie adoptată și pusă în practică înainte de a fi prezentată ca politică în vigoare.",
-      "E-mail: trebuie confirmat tipul contului Google/Gmail, condițiile aplicabile și garanțiile pentru transferuri. Folosirea Gmail nu dovedește că există un acord Google Workspace.",
-      "Analiza temeiurilor juridice și a rolurilor pentru datele locale este documentată în propunerea de lansare și trebuie încheiată înainte de publicare.",
-    ],
+    statusNote:
+      "Text actualizat la 27 octombrie 2026. Detaliile despre păstrarea și transferul datelor de găzduire și e-mail sunt încă în curs de confirmare.",
     sections: [
       {
         id: "responsabil",
         title: "Cine răspunde de date",
         contactEmail,
         paragraphs: [
-          "Furnizorul aplicației Vorbini este Mr. Nagy Software Systems & Consulting S.R.L. Aplicația se adresează logopezilor și părinților din România, iar profilurile copiilor sunt gestionate de adulți.",
+          "Furnizorul aplicației Vorbini este Mr. Nagy Software Systems & Consulting S.R.L. Aplicația se adresează logopezilor, psihologilor și părinților din România, iar profilurile copiilor sunt gestionate de adulți.",
           ...providerDetails,
           "Compania este operator pentru datele tehnice folosite la administrarea și protejarea site-ului și pentru mesajele de suport pe care le primește.",
           "Dacă folosiți Vorbini printr-un cabinet, întrebați profesionistul cum gestionează informațiile copilului și cui vă puteți adresa. Prezenta pagină nu înlocuiește informarea cabinetului despre propria activitate.",
