@@ -2,6 +2,12 @@
 
 Last updated: 2026-10-27
 
+## Phone sound volume
+
+Implemented 2026-10-27 after the user confirmed iPhone/Safari sound works with Silent Mode off but is too quiet. Peak gains are now 0.07 for ticks and 0.06 for notes, about +6 dB. Gentle envelopes, opt-in mute and system Silent Mode behavior are preserved. Production build/TypeScript, scoped lint/formatting and WebKit audio regression pass. Astra reviewed the exact change and returned APPROVE with zero actionable findings; conservative three-note summed peak is 0.18. Publishing follows the existing reviewed-release authorization. Physical listening at the new level remains the next check.
+
+Next check: reload the deployed app on the iPhone, enable sound, turn Silent Mode off and compare ticking, word and confetti loudness at an ordinary media-volume setting. Confirm clarity and comfort before any further gain change.
+
 ## Astra review and owner-feedback release
 
 Astra completed the requested critical review on 2026-10-27 and returned APPROVE with zero actionable findings across the full pending diff and nine untracked files. Fresh release validation, practice/encrypted-backup tests, full WebKit practice regression, formatting and production dependency audit pass. The user authorized deployment after this clear verdict. Application commit `44add0d` is live at [cuvinte.ioananagy.eu](https://cuvinte.ioananagy.eu/ro), with successful deployment `7363373433`. All 88 public routes/four Romanian 404 cases, WebKit footer/audio/release checks and the full public practice/encrypted-backup journey pass. Fresh phone/desktop captures were inspected. See the [release report](app-development-program/features/guided-practice-app/owner-feedback-release-2026-10-27.md). DNS migration remains separate; the hostname has not changed.

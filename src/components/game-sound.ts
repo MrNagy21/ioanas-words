@@ -56,7 +56,7 @@ function play(notes: Note[]) {
         oscillator.frequency.exponentialRampToValueAtTime(400, at + 0.03);
       envelope.gain.setValueAtTime(0, at);
       envelope.gain.linearRampToValueAtTime(
-        note.tick ? 0.035 : 0.03,
+        note.tick ? 0.07 : 0.06,
         at + 0.003,
       );
       envelope.gain.exponentialRampToValueAtTime(0.0001, at + note.duration);
