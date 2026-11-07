@@ -1,6 +1,6 @@
-# Gameplay red-team review and release preparation
+# Gameplay red-team review and release
 
-The owner requested a thorough independent GPT-6.1 Sol review at Max effort, fixes for all findings and deployment of the new version. On 2026-11-07 the owner explicitly approved committing and pushing to `main`, which triggers the existing GitHub/Vercel production integration. Publishing and public verification are in progress.
+The owner requested a thorough independent GPT-6.1 Sol review at Max effort, fixes for all findings and deployment of the new version. On 2026-11-07 the owner explicitly approved committing and pushing to `main`, which triggers the existing GitHub/Vercel production integration. The application release is deployed and public verification passes.
 
 ## Independent review
 
@@ -36,7 +36,21 @@ The new five-finding regression passes in Chrome 156 and WebKit 27.2. Full pract
 
 Fix evidence is in `/Users/darius/.t3/userdata/artifacts/vorbini-red-team-fixes-2026-11-07/`. The original independent HOLD is not being relabelled as a second independent approval: the parent implemented the fixes and verified them through regressions. No additional reviewer was started for these focused corrections.
 
-Release gate: local checks and commit/push authorization are complete. Publish through the existing GitHub integration, verify the successful deployment's exact SHA and URL, then run public-origin routes, audio, five-finding recovery and protected-backup checks. Do not move the domain or clear browser records. The production candidate is running locally on port 3000; public release evidence must be recorded after deployment.
+## Deployment and public verification
+
+Application commit `9abdeffb6d6675fb3a8bae8537cd0f4c4ec4a9b2` was committed and pushed to `main` after explicit authorization. GitHub production deployment `7621026818` reports success at 12:17 UTC on 2026-11-07. The public app is [cuvinte.ioananagy.eu](https://cuvinte.ioananagy.eu/ro); the deployment URL returned by GitHub/Vercel is [ioanas-words-icalbjred-mrnagy21s-projects.vercel.app](https://ioanas-words-icalbjred-mrnagy21s-projects.vercel.app). Public QA targets the custom origin, not an assumed-accessible immutable URL. A subsequent documentation-only commit records this evidence without changing application code.
+
+Public HTTPS checks pass:
+
+- All 88 routes and four Romanian/noindex 404 cases.
+- The five-finding recovery suite in Chrome 156 and WebKit 27.2, including real two-tab lock/transaction ordering, hidden-spin cancellation, visible-word recovery, adult audio, busy-modal focus and frozen mode labels.
+- WebKit's sound suite: 45 repeated spins across three letters without document reload, context reuse/source cleanup, suspension/page-cache recovery, touch entry, mute, word/medal sounds and isolated demo.
+- Full practice/protected-backup journeys in headed Chrome and WebKit: rollback, exactly-once result counting/recovery, ownership, observations, encrypted per-child/full restore, shared-library preservation, manifest assets and the explicit cold-offline limit. Their request assertions report no unexpected external or non-GET/HEAD app requests.
+- A shared-browser public spin confirmed sound opted in, a running context, a displayed word and the new `aria-busy` attribute. The temporary incognito tab was closed afterward.
+
+All profiles and records were synthetic in isolated contexts. The recovery suite uses its existing `WORD_WHEEL_BASE_URL` setting. Generated copies of the unchanged sound/practice suites replace only the localhost origin and helper import paths; `run-public-qa.mjs` and those copies are retained alongside logs and captures at `/Users/darius/.t3/userdata/artifacts/vorbini-live-release-2026-11-07/`.
+
+No hostname, redirect, account, hosted database or child record was changed by publishing. The same production application remains available locally on port 3000. Maintenance implementation and release are complete; the remaining acceptance below is not a release-status claim.
 
 ## Remaining acceptance
 
@@ -45,5 +59,5 @@ Actual iPhone Safari/home-screen listening, Silent Mode, calls/Bluetooth/backgro
 ## Next prompt
 
 ```text
-Continue the reviewed Vorbini maintenance release in /Users/darius/mrNagySSC/ioana/word-wheel. Read AGENTS.md, docs/status.md, gameplay-red-team-2026-11-07.md and audio-reliability-2026-11-07.md. The owner authorized deployment after a Sol Max red-team review and explicitly approved committing/pushing main on 2026-11-07. Five findings have focused fixes and Chrome/WebKit regression evidence. Preserve all existing local records, content, schema, reward and protected-backup contracts. Complete any outstanding checks, inspect the exact pending diff, publish through the existing GitHub/Vercel integration, and record the actual deployment SHA, status and origin. Verify public routes, recovery, sound and protected backup in isolated synthetic browser contexts; never use actual child records for QA. Do not claim an independent re-approval or physical-phone acceptance that did not happen. Keep the current domain and GP9 Romanian/device/therapist gates unchanged. Update actual release evidence and the next acceptance prompt.
+Continue Vorbini GP9 acceptance in /Users/darius/mrNagySSC/ioana/word-wheel. Read AGENTS.md, docs/status.md, gameplay-red-team-2026-11-07.md and audio-reliability-2026-11-07.md. Application commit 9abdeff is deployed at https://cuvinte.ioananagy.eu/ro with successful GitHub deployment 7621026818 and public Chrome/WebKit recovery/protected-backup, WebKit sound and route checks. The five Sol Max review findings are fixed; do not restart the maintenance release or claim a second independent approval. Preserve local records, content, schema, reward and encrypted-backup contracts. Collect actual iPhone Safari/home-screen and Android results for Silent Mode, 50 normal spins, calls/background/Bluetooth recovery, installation and protected backup. Use the audio report's checklist and record model, OS/browser, origin and exact preceding action for failures. Continue user-arranged Romanian mapping review and therapist feedback without inventing phonetic credit. Keep online-required messaging and the current hostname. Do not clear actual child data or publish further changes without a new explicit request. Update the actual acceptance evidence and next prompt.
 ```
