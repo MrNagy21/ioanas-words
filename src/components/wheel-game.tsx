@@ -67,6 +67,7 @@ type WheelGameProps = Readonly<{
 }>;
 
 export type TrackedWheelControl = {
+  mode?: WordInclusionMode;
   words: ContentWord[];
   childLabel: string;
   progress: { current: number; next: number; previous: number };
@@ -250,7 +251,7 @@ function WheelGameSession({
       }),
     [content, excludedTargetKeys, locale],
   );
-  const selectedModeOption = getModeOption(selectedMode);
+  const selectedModeOption = getModeOption(practice?.mode ?? selectedMode);
   const selectedModeTotalWordCount = modeWordCounts[selectedMode];
   const selectedModeAllWords = useMemo(
     () =>
@@ -404,6 +405,27 @@ function WheelGameSession({
   }, []);
 
   useEffect(() => {
+    const cancelSpin = () => {
+      if (spinTimer.current === null && finalWordResultTimer.current === null)
+        return;
+      window.clearTimeout(spinTimer.current ?? undefined);
+      window.clearTimeout(finalWordResultTimer.current ?? undefined);
+      spinTimer.current = null;
+      finalWordResultTimer.current = null;
+      setIsSpinning(false);
+    };
+    const hide = () => {
+      if (document.hidden) cancelSpin();
+    };
+    document.addEventListener("visibilitychange", hide);
+    window.addEventListener("pagehide", cancelSpin);
+    return () => {
+      document.removeEventListener("visibilitychange", hide);
+      window.removeEventListener("pagehide", cancelSpin);
+    };
+  }, []);
+
+  useEffect(() => {
     return () => {
       if (spinTimer.current !== null) {
         window.clearTimeout(spinTimer.current);
@@ -508,6 +530,7 @@ function WheelGameSession({
   }, [activeWords, subsetKey, visibleWheelWordCount]);
 
   function openResultForWord(word: ContentWord) {
+    if (document.hidden) return;
     wheelSound.reveal();
     setSelectedWord(word);
     setIsResultOpen(true);
@@ -1335,63 +1358,65 @@ function ResultModal({
   const modalRef = useRef<HTMLElement | null>(null);
   const primaryActionRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
-    if (!busy) primaryActionRef.current?.focus();
+    if (busy) modalRef.current?.focus();
+    else primaryActionRef.current?.focus();
   }, [busy]);
 
   useEffect(() => {
+    const modal = modalRef.current;
+    if (!modal) return;
+    const focusable = () =>
+      modal.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+    const containFocus = (event: FocusEvent) => {
+      if (!modal.contains(event.target as Node))
+        (focusable()[0] ?? modal).focus();
+    };
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
         onClose();
       }
+      if (event.key !== "Tab") return;
+      const elements = focusable();
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+      if (!first) {
+        event.preventDefault();
+        modal!.focus();
+      } else if (
+        !modal!.contains(document.activeElement) ||
+        document.activeElement === modal ||
+        (event.shiftKey && document.activeElement === first) ||
+        (!event.shiftKey && document.activeElement === last)
+      ) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      }
     }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown, true);
+    document.addEventListener("focusin", containFocus, true);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-
-      onReturnFocus();
+      window.removeEventListener("keydown", handleKeyDown, true);
+      document.removeEventListener("focusin", containFocus, true);
     };
-  }, [onClose, onReturnFocus]);
+  }, [onClose]);
 
-  function trapFocus(event: ReactKeyboardEvent<HTMLElement>) {
-    if (event.key !== "Tab" || !modalRef.current) {
-      return;
-    }
-
-    const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    );
-
-    if (focusableElements.length === 0) {
-      return;
-    }
-
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
-
-    if (event.shiftKey && document.activeElement === firstElement) {
-      event.preventDefault();
-      lastElement.focus();
-      return;
-    }
-
-    if (!event.shiftKey && document.activeElement === lastElement) {
-      event.preventDefault();
-      firstElement.focus();
-    }
-  }
+  useEffect(() => () => onReturnFocus(), [onReturnFocus]);
 
   return (
     <div className="result-backdrop" role="presentation">
       <section
         aria-labelledby="result-title"
         aria-modal="true"
+        aria-busy={busy}
         className="result-modal"
-        onKeyDown={trapFocus}
         ref={modalRef}
         role="dialog"
+        tabIndex={-1}
       >
         <div className="result-image-slot">
           {hasReadyImage(word) ? (

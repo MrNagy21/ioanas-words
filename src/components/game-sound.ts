@@ -1,79 +1,204 @@
-/** Short synthesized effects. One context is unlocked by an explicit user gesture. */
-let audio: AudioContext | undefined;
+type SoundContext = {
+  context: AudioContext;
+  ready: Promise<boolean>;
+  cancelResume?: () => void;
+  wasRunning: boolean;
+};
+
+let audio: SoundContext | undefined;
 const active = new Set<() => void>();
 let listening = false;
 
+function setSessionType(type: "playback" | "auto") {
+  try {
+    const session = (
+      navigator as Navigator & { audioSession?: { type: string } }
+    ).audioSession;
+    if (session && session.type !== type) session.type = type;
+  } catch {}
+}
+
 export function stopGameSounds() {
+  const previous = audio;
+  audio = undefined;
   for (const cancel of [...active]) cancel();
+  previous?.cancelResume?.();
+  if (previous) {
+    previous.context.onstatechange = null;
+    try {
+      if (previous.context.state !== "closed")
+        void previous.context.close().catch(() => {});
+    } catch {}
+  }
+  setSessionType("auto");
+}
+
+function resumeSound(instance: SoundContext) {
+  const { context } = instance;
+  if (context.state === "running") {
+    instance.wasRunning = true;
+    return Promise.resolve(true);
+  }
+  if (instance.cancelResume) return instance.ready;
+  instance.ready = new Promise<boolean>((resolve) => {
+    let settled = false;
+    const timer = window.setTimeout(() => finish(false), 1000);
+    const finish = (ready: boolean) => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      instance.cancelResume = undefined;
+      instance.wasRunning = ready;
+      resolve(ready && audio === instance);
+      if (!ready && audio === instance) stopGameSounds();
+    };
+    instance.cancelResume = () => finish(false);
+    try {
+      void context.resume().then(
+        () => finish(context.state === "running"),
+        () => finish(false),
+      );
+    } catch {
+      finish(false);
+    }
+  });
+  return instance.ready;
 }
 
 export function unlockGameSound() {
+  if (document.hidden) return;
   try {
-    if (!audio || audio.state === "closed") audio = new AudioContext();
     if (!listening) {
       listening = true;
-      window.addEventListener("pagehide", () => {
-        stopGameSounds();
-        const previous = audio;
-        audio = undefined;
-        if (previous && previous.state !== "closed")
-          void previous.close().catch(() => {});
+      window.addEventListener("pagehide", stopGameSounds);
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stopGameSounds();
       });
     }
-    void audio.resume().catch(() => stopGameSounds());
+    if (
+      audio &&
+      (audio.context.state === "closed" ||
+        (audio.wasRunning && audio.context.state !== "running"))
+    )
+      stopGameSounds();
+    setSessionType("playback");
+    if (!audio) {
+      const AudioContextClass =
+        window.AudioContext ??
+        (window as Window & { webkitAudioContext?: typeof AudioContext })
+          .webkitAudioContext;
+      const context = new AudioContextClass();
+      const instance: SoundContext = {
+        context,
+        ready: Promise.resolve(false),
+        wasRunning: context.state === "running",
+      };
+      audio = instance;
+      context.onstatechange = () => {
+        if (audio !== instance) return;
+        if (context.state === "running") instance.wasRunning = true;
+        else if (instance.wasRunning || context.state === "closed")
+          stopGameSounds();
+      };
+    }
+    void resumeSound(audio);
   } catch {
-    // A missing API or autoplay restriction must never block the game.
+    stopGameSounds();
   }
 }
 
 type Note = { at: number; frequency: number; duration: number; tick?: boolean };
 function play(notes: Note[]) {
-  if (!audio || audio.state === "closed" || document.hidden) return () => {};
-  const context = audio;
-  const nodes: { oscillator: OscillatorNode; envelope: GainNode }[] = [];
+  if (!audio || document.hidden) return () => {};
+  const instance = audio;
+  const { context } = instance;
+  const requestedAt = performance.now();
+  type SoundNode = { oscillator: OscillatorNode; envelope?: GainNode };
+  const nodes = new Set<SoundNode>();
+  let monitor: number | undefined;
   let cancelled = false;
+  const release = (node: SoundNode) => {
+    nodes.delete(node);
+    node.oscillator.onended = null;
+    try {
+      node.oscillator.stop();
+    } catch {}
+    try {
+      node.oscillator.disconnect();
+    } catch {}
+    try {
+      node.envelope?.disconnect();
+    } catch {}
+  };
   const cancel = () => {
     if (cancelled) return;
     cancelled = true;
+    window.clearInterval(monitor);
     active.delete(cancel);
-    for (const { oscillator, envelope } of nodes) {
-      oscillator.stop();
-      oscillator.disconnect();
-      envelope.disconnect();
-    }
+    for (const node of nodes) release(node);
   };
   active.add(cancel);
-  try {
-    const origin = context.currentTime;
-    let remaining = notes.length;
-    for (const note of notes) {
-      const oscillator = context.createOscillator();
-      const envelope = context.createGain();
-      const at = origin + note.at;
-      oscillator.type = "sine";
-      oscillator.frequency.setValueAtTime(note.frequency, at);
-      if (note.tick)
-        oscillator.frequency.exponentialRampToValueAtTime(400, at + 0.03);
-      envelope.gain.setValueAtTime(0, at);
-      envelope.gain.linearRampToValueAtTime(
-        note.tick ? 0.07 : 0.06,
-        at + 0.003,
-      );
-      envelope.gain.exponentialRampToValueAtTime(0.0001, at + note.duration);
-      oscillator.connect(envelope);
-      envelope.connect(context.destination);
-      oscillator.start(at);
-      oscillator.stop(at + note.duration + 0.005);
-      nodes.push({ oscillator, envelope });
-      oscillator.onended = () => {
-        oscillator.disconnect();
-        envelope.disconnect();
-        if (--remaining === 0) active.delete(cancel);
-      };
+  const schedule = () => {
+    if (cancelled || audio !== instance || document.hidden) {
+      cancel();
+      return;
     }
-  } catch {
-    cancel();
-  }
+    try {
+      const elapsed = (performance.now() - requestedAt) / 1000;
+      const now = context.currentTime;
+      const origin = now - elapsed;
+      let endsAt = now;
+      for (const note of notes) {
+        const end = origin + note.at + note.duration;
+        if (end <= now) continue;
+        const oscillator = context.createOscillator();
+        const node: SoundNode = { oscillator };
+        nodes.add(node);
+        const envelope = context.createGain();
+        node.envelope = envelope;
+        const at = Math.max(now, origin + note.at);
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(note.frequency, at);
+        if (note.tick)
+          oscillator.frequency.exponentialRampToValueAtTime(400, end);
+        envelope.gain.setValueAtTime(0, at);
+        envelope.gain.linearRampToValueAtTime(
+          note.tick ? 0.07 : 0.06,
+          at + Math.min(0.003, (end - at) / 2),
+        );
+        envelope.gain.exponentialRampToValueAtTime(0.0001, end);
+        oscillator.connect(envelope);
+        envelope.connect(context.destination);
+        oscillator.onended = () => {
+          release(node);
+          if (nodes.size === 0) cancel();
+        };
+        oscillator.start(at);
+        oscillator.stop(end + 0.005);
+        endsAt = Math.max(endsAt, end + 0.005);
+      }
+      if (nodes.size === 0) {
+        cancel();
+        return;
+      }
+      let lastTime = context.currentTime;
+      let stalled = 0;
+      monitor = window.setInterval(() => {
+        const now = context.currentTime;
+        stalled = now > lastTime ? 0 : stalled + 1;
+        lastTime = now;
+        if (now > endsAt + 0.1) cancel();
+        else if (document.hidden || context.state !== "running" || stalled >= 2)
+          if (audio === instance) stopGameSounds();
+      }, 250);
+    } catch {
+      if (audio === instance) stopGameSounds();
+      else cancel();
+    }
+  };
+  if (context.state === "running") schedule();
+  else
+    void resumeSound(instance).then((ready) => (ready ? schedule() : cancel()));
   return cancel;
 }
 

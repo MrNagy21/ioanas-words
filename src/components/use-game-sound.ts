@@ -11,6 +11,7 @@ import {
   playCelebrationSound,
   playSpinSound,
   playWordSound,
+  stopGameSounds,
   unlockGameSound,
 } from "@/components/game-sound";
 
@@ -58,8 +59,21 @@ export function useGameSound({
   }, []);
   useEffect(() => {
     enabledRef.current = enabled;
-    if (!enabled) stop();
+    if (!enabled) {
+      stop();
+      stopGameSounds();
+    }
   }, [enabled, stop]);
+  useEffect(() => {
+    if (!enabled) return;
+    const unlock = () => unlockGameSound();
+    window.addEventListener("click", unlock, { capture: true });
+    window.addEventListener("keydown", unlock, { capture: true });
+    return () => {
+      window.removeEventListener("click", unlock, { capture: true });
+      window.removeEventListener("keydown", unlock, { capture: true });
+    };
+  }, [enabled]);
   useEffect(() => {
     const hide = () => {
       if (document.hidden) stop();
@@ -75,7 +89,10 @@ export function useGameSound({
     const next = !enabled;
     enabledRef.current = next;
     if (next) unlockGameSound();
-    else stop();
+    else {
+      stop();
+      stopGameSounds();
+    }
     if (control) {
       setPending(next);
       try {

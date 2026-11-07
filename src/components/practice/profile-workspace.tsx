@@ -130,11 +130,11 @@ export function ProfileWorkspace({
   useEffect(() => {
     if (!state?.preferences?.sound) return;
     const unlock = () => unlockGameSound();
-    window.addEventListener("pointerdown", unlock, { once: true });
-    window.addEventListener("keydown", unlock, { once: true });
+    window.addEventListener("click", unlock, { capture: true });
+    window.addEventListener("keydown", unlock, { capture: true });
     return () => {
-      window.removeEventListener("pointerdown", unlock);
-      window.removeEventListener("keydown", unlock);
+      window.removeEventListener("click", unlock, { capture: true });
+      window.removeEventListener("keydown", unlock, { capture: true });
     };
   }, [state?.preferences?.sound]);
 

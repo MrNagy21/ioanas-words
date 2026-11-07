@@ -115,7 +115,7 @@ try {
     .tap();
   await reflow(page, "Backups");
   await page
-    .getByRole("button", { name: "Înapoi la profil", exact: true })
+    .getByRole("button", { name: "Setările profilului", exact: true })
     .tap();
   await page
     .getByRole("button", { name: "Înapoi la profil", exact: true })
@@ -133,9 +133,9 @@ try {
   await page.getByRole("button", { name: "Învârte", exact: true }).tap();
   const result = page.getByRole("dialog");
   await result.waitFor();
-  await page
-    .getByRole("button", { name: "Păstrează", exact: true })
-    .waitFor({ state: "visible" });
+  await page.waitForFunction(
+    () => !document.querySelector(".result-modal .spin-button")?.disabled,
+  );
   await check(
     await page
       .getByRole("button", { name: "Păstrează", exact: true })

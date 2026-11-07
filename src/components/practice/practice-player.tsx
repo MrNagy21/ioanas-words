@@ -79,6 +79,7 @@ export function PracticePlayer({
     let live = true;
     const controller = new AbortController();
     let release: (() => void) | undefined;
+    let initializing = false;
     acquireSessionLock(sessionId, controller.signal)
       .then(async (acquired) => {
         release = acquired.release;
@@ -87,12 +88,23 @@ export function PracticePlayer({
           return;
         }
         lock.current = acquired;
-        const current = await mutatePracticeState((draft) =>
-          claimSession(draft, sessionId, acquired.ownerId),
-        );
-        if (live) {
-          setState(current);
-          setReady(true);
+        initializing = true;
+        try {
+          const current = await mutatePracticeState((draft) => {
+            if (!live)
+              throw new DOMException("Abandoned session", "AbortError");
+            claimSession(draft, sessionId, acquired.ownerId);
+          });
+          if (live) {
+            setState(current);
+            setReady(true);
+          }
+        } finally {
+          initializing = false;
+          if (!live) {
+            release();
+            controller.abort();
+          }
         }
       })
       .catch((reason) => {
@@ -106,8 +118,10 @@ export function PracticePlayer({
       });
     return () => {
       live = false;
-      controller.abort();
-      release?.();
+      if (!initializing) {
+        controller.abort();
+        release?.();
+      }
       lock.current = null;
     };
   }, [sessionId]);
@@ -285,6 +299,7 @@ export function PracticePlayer({
           content={buildPracticeContent(session.target, session.words)}
           locale="ro"
           practice={{
+            mode: session.config.mode,
             words: sessionWords(session),
             childLabel: child.nickname,
             progress: participationProgress(state, child),

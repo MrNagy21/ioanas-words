@@ -25,6 +25,8 @@
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "check:wheel-sound": "node scripts/qa/check-wheel-sound.mjs",
+    "check:game-sound": "bun src/components/game-sound.check.ts",
+    "check:gameplay-recovery": "node scripts/qa/check-gameplay-recovery.mjs",
     "check:wheel-browser": "node scripts/qa/check-wheel-browser.mjs",
     "check:demo-routes": "bun scripts/qa/check-demo-routes.ts",
     "check:onboarding-browser": "node scripts/qa/check-onboarding-browser.mjs",

@@ -5,6 +5,7 @@ const browser = await launchQABrowser();
 try {
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
+    hasTouch: true,
   });
   await context.addInitScript(() => {
     window.gameAudio = [];
@@ -12,8 +13,20 @@ try {
     window.AudioContext = class extends NativeAudioContext {
       constructor(...args) {
         super(...args);
-        const entry = { context: this, nodes: [] };
+        const entry = { context: this, nodes: [], gains: [] };
         window.gameAudio.push(entry);
+        const createGain = this.createGain.bind(this);
+        this.createGain = () => {
+          const gain = createGain();
+          const node = { disconnected: false };
+          entry.gains.push(node);
+          const disconnect = gain.disconnect.bind(gain);
+          gain.disconnect = () => {
+            node.disconnected = true;
+            disconnect();
+          };
+          return gain;
+        };
         const create = this.createOscillator.bind(this);
         this.createOscillator = () => {
           const oscillator = create();
@@ -22,6 +35,7 @@ try {
             frequencies: [],
             ended: false,
             cancelled: false,
+            disconnected: false,
           };
           entry.nodes.push(node);
           const frequency = oscillator.frequency.setValueAtTime.bind(
@@ -40,6 +54,11 @@ try {
           oscillator.stop = (when) => {
             if (!when) node.cancelled = true;
             stop(when);
+          };
+          const disconnect = oscillator.disconnect.bind(oscillator);
+          oscillator.disconnect = () => {
+            node.disconnected = true;
+            disconnect();
           };
           oscillator.addEventListener("ended", () => {
             node.ended = true;
@@ -74,8 +93,12 @@ try {
   await sound().waitFor();
   assert.equal(await sound().getAttribute("aria-pressed"), "false");
   assert.equal(await page.evaluate(() => window.gameAudio.length), 0);
-  await sound().click();
-  await spin().click();
+  await sound().tap();
+  assert.equal(
+    await page.evaluate(() => navigator.audioSession?.type ?? "playback"),
+    "playback",
+  );
+  await spin().tap();
   await page.waitForFunction(() => window.gameAudio.at(-1)?.nodes.length > 5);
   const timings = await page.evaluate(() =>
     window.gameAudio.at(-1).nodes.map((n) => n.start),
@@ -87,6 +110,10 @@ try {
   await captureEvidence(page, "game-sound-phone");
   await sound().click();
   await silence();
+  assert.equal(
+    await page.evaluate(() => navigator.audioSession?.type ?? "auto"),
+    "auto",
+  );
   await page.getByRole("dialog").waitFor();
   assert.equal(
     await played(880),
@@ -130,6 +157,95 @@ try {
     "Reduced motion retains the opted-in reveal sound",
   );
   await silence();
+
+  await page.getByRole("button", { name: "Păstrează", exact: true }).click();
+  const documentToken = await page.evaluate(() => {
+    window.audioDocumentToken = crypto.randomUUID();
+    return window.audioDocumentToken;
+  });
+  for (const letter of ["r", "m", "s"]) {
+    if (letter !== "r") {
+      await page
+        .getByRole("link", { name: "Schimbă alegerea", exact: true })
+        .click();
+      await page
+        .getByRole("link", {
+          name: `Litera ${letter.toUpperCase()}`,
+          exact: true,
+        })
+        .click();
+      await page.getByRole("button", { name: /Final/ }).click();
+      await page
+        .getByRole("button", { name: "Pornește roata", exact: true })
+        .click();
+      await sound().waitFor();
+    }
+    assert.equal(await sound().getAttribute("aria-pressed"), "true");
+    const before = await played(880);
+    for (let round = 0; round < 15; round++) {
+      await spin().click();
+      await page.getByRole("dialog").waitFor();
+      await silence();
+      await page
+        .getByRole("button", { name: "Păstrează", exact: true })
+        .click();
+    }
+    assert.equal(
+      await played(880),
+      before + 15,
+      `Every ${letter} spin has a chime`,
+    );
+  }
+  assert.equal(
+    await page.evaluate(() => window.audioDocumentToken),
+    documentToken,
+    "Letter changes use client navigation, not a page refresh",
+  );
+  assert.equal(
+    await page.evaluate(() => window.gameAudio.length),
+    1,
+    "Repeated spins and letter changes reuse one healthy context",
+  );
+  assert.equal(
+    await page.evaluate(() =>
+      window.gameAudio.every(
+        (entry) =>
+          entry.nodes.every((node) => node.disconnected) &&
+          entry.gains.every((node) => node.disconnected),
+      ),
+    ),
+    true,
+    "Every completed source and gain is disconnected",
+  );
+  await page.evaluate(() => window.gameAudio.at(-1).context.suspend());
+  await page.waitForFunction(
+    () => window.gameAudio.at(-1).context.state === "closed",
+  );
+  await spin().click();
+  await page.getByRole("dialog").waitFor();
+  await silence();
+  assert.equal(
+    await page.evaluate(() => window.gameAudio.length),
+    2,
+    "Suspended audio recovers on the next spin without refresh",
+  );
+  await page.getByRole("button", { name: "Păstrează", exact: true }).click();
+  await page.evaluate(() =>
+    window.dispatchEvent(
+      new PageTransitionEvent("pagehide", { persisted: true }),
+    ),
+  );
+  await page.waitForFunction(
+    () => window.gameAudio.at(-1).context.state === "closed",
+  );
+  await spin().click();
+  await page.getByRole("dialog").waitFor();
+  await silence();
+  assert.equal(
+    await page.evaluate(() => window.gameAudio.length),
+    3,
+    "Page-cache restoration recovers on the next gesture",
+  );
 
   // Demo sound must follow the wheel into the medal and back, without saved data writes.
   await page.goto("http://localhost:3000/ro/demo");
@@ -190,7 +306,7 @@ try {
     .waitFor();
   assert.deepEqual(errors, []);
   console.log(
-    "Game sound QA passed: slowing ticks, word chime, confetti chord, shared mute, reload, reduced motion, isolated demo and unsupported audio.",
+    "Game sound QA passed: slowing ticks, word/medal sounds, mute, 45 repeated spins across three letters, source cleanup, suspended/page-cache recovery, reload, reduced motion, isolated demo and unsupported audio.",
   );
 } finally {
   await browser.close();

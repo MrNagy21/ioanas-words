@@ -680,9 +680,12 @@ try {
       exact: true,
     })
     .click();
-  await page
-    .getByRole("button", { name: /Temporary QA/ })
-    .waitFor({ state: "hidden" });
+  await page.waitForFunction(
+    async () =>
+      !(await window.practiceQA.readPracticeState()).profiles.some(
+        (profile) => profile.nickname === "Temporary QA",
+      ),
+  );
   const allRestored = await page.evaluate(async () => ({
     state: await window.practiceQA.readPracticeState(),
     legacy: JSON.parse(localStorage.getItem("word-wheel.setup.v1")),

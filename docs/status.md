@@ -1,6 +1,24 @@
 # Word Wheel Status
 
-Last updated: 2026-10-27
+Last updated: 2026-11-07
+
+## Gameplay red-team review and release
+
+In progress 2026-11-07. The user requests an independent GPT-6.1 Sol review at Max effort, fixes for the findings and deployment of the new version. Review scope includes the pending audio changes and the wider anonymous/demo/profile gameplay, setup, results, counting, rewards, local storage, recovery and backup paths. Physical-device and clinical review limits remain explicit. Deployment is now authorized after findings are resolved and release checks pass; no domain move or unrelated feature expansion is authorized.
+
+The independent reviewer returned HOLD with five reproduced findings: an abandoned session claim releasing its lock before settlement, hidden-spin results receiving recovery credit, adult-celebration audio missing after pagehide, busy-result modal focus escaping, and a tracked-mode label ignoring the frozen session configuration. All five are fixed and pass the new `check:gameplay-recovery` suite in Chrome 156 and WebKit 27.2. The parent verified the fixes; no second independent approval is claimed. See the [review, corrections and release handoff](app-development-program/features/guided-practice-app/gameplay-red-team-2026-11-07.md).
+
+Final production build/TypeScript, lint, scoped formatting, content validation, practice/encryption, matching, setup-storage, gameplay and 100-round audio lifecycle checks pass. The production dependency audit has no known vulnerabilities. Both engines pass repeated-spin sound and wheel regressions. Headed Chrome and WebKit pass the full practice/protected-backup journey. WebKit resilience, release regressions and onboarding pass. All 88 public routes and four Romanian 404 cases pass locally. Existing content warnings and unknown phonetic mappings remain. The resilience Back locator, post-save focus wait and protected-restore completion wait were corrected; WebKit prefetches are settled before teardown without hiding runtime errors. Phone/desktop busy-modal captures were inspected. Fix evidence is in `/Users/darius/.t3/userdata/artifacts/vorbini-red-team-fixes-2026-11-07/`.
+
+The final application build runs on port 3000. No schema, vocabulary, image, historical record, reward threshold, dependency or backup contract changed. The user explicitly approved committing and pushing the fixes on 2026-11-07 and requested confirmation of deployment. Publishing through the existing GitHub integration is now in progress; record the exact successful deployment and public-origin smoke results before marking this release complete. Do not mark physical iPhone/Android, assistive-technology, Romanian or therapist gates complete.
+
+## Audio reliability and iPhone Silent Mode
+
+Completed locally 2026-11-07 after reports that sound stops after repeated spins or changing letters and returns after refreshing. Playback now waits for resume, drops expired effects, releases partial/ended sources and detects interrupted or frozen contexts. Hiding the page disposes audio; the next enabled click/tap or keyboard action recreates it without refresh. Touch unlock uses the completed click instead of touch `pointerdown`. Supported browsers request media playback so opted-in game sound can play during iPhone Silent Mode; app mute/off-by-default and the existing gains remain. This supersedes the older Silent Mode behavior below.
+
+Final Node 24 production build/TypeScript, lint, scoped formatting, gameplay and practice/encryption checks pass. New deterministic lifecycle tests cover 100 full-duration rounds and injected failures. Chrome 156 and WebKit 27.2 each pass 45 repeated spins across three letters without reload, context reuse/source cleanup, suspension/page-cache recovery, mute, touch entry, word/medal sounds and unsupported audio. WebKit full practice/protected backup and wheel/final-word regressions also pass. See the [findings, device checklist and next prompt](app-development-program/features/guided-practice-app/audio-reliability-2026-11-07.md). Logs and UI captures are in `/Users/darius/.t3/userdata/artifacts/vorbini-audio-2026-11-07/`.
+
+The affected physical phone has not been reproduced or listened to by the agent. Next: collect actual iPhone Safari/home-screen Silent Mode, 50 normal-spin, background/call/Bluetooth and Android results using the report. Unsupported audio-session implementations may still require Silent Mode off. No content, child records, rewards, backup contract or dependency changed. Production runs locally on port 3000. No commit or deployment was made; do not publish without a new explicit request. GP9 Romanian/therapist/device gates remain open.
 
 ## Phone sound volume
 
